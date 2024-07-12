@@ -14,14 +14,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.DilloSports"
         tools:targetApi="31">
+
         <activity
-<<<<<<< HEAD
-<<<<<<< HEAD
-            android:name=".RecuperaciondeContrasena"
-=======
             android:name=".inscribir_equipo"
->>>>>>> Thomas
-=======
+            android:exported="false"/>
+        <activity
             android:name=".Item_card_Torneos"
             android:exported="false" />
         <activity
@@ -34,18 +31,11 @@
             android:name=".Torneos"
             android:exported="false" />
         <activity
-=======
-<<<<<<< HEAD
             android:name=".mostrarJugadores"
             android:exported="false" />
         <activity
             android:name=".activityNuevosJugadores"
-=======
->>>>>>> master
-            android:name=".RecuperaciondeContrasena"
->>>>>>> master
->>>>>>> 2f45f412d815de226373950b3601c61e6f2b8993
-            android:exported="false" />
+            android:exported="false"/>
         <activity
             android:name=".MainActivity"
             android:exported="true">
