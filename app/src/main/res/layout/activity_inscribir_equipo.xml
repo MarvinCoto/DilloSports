@@ -9,65 +9,79 @@
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="209dp"
-        android:layout_height="46dp"
-        android:text="Inscribir equipo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Inscribir Equipo"
         android:textColor="#7D53F3"
-        android:textSize="30sp"
+        android:textSize="24sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.109" />
+        app:layout_constraintVertical_bias="0.123" />
 
     <EditText
         android:id="@+id/txtNombreEquipo"
-        android:layout_width="299dp"
-        android:layout_height="66dp"
+        android:layout_width="343dp"
+        android:layout_height="54dp"
+        android:background="@drawable/edittext_style1"
         android:ems="10"
+        android:hint="Nombre del Equipo"
         android:inputType="text"
-        android:text="Nombre"
+        android:paddingLeft="10dp"
+        android:textStyle="normal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.27" />
+        app:layout_constraintVertical_bias="0.223" />
 
     <EditText
         android:id="@+id/txtDescripcionEquipo"
-        android:layout_width="299dp"
-        android:layout_height="66dp"
+        android:layout_width="343dp"
+        android:layout_height="54dp"
+        android:background="@drawable/edittext_style1"
         android:ems="10"
+        android:hint="Descripcion del Equipo"
         android:inputType="text"
-        android:text="Descripcion"
+        android:paddingLeft="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.33" />
+
+    <EditText
+        android:id="@+id/txtUbicacionEquipo"
+        android:layout_width="343dp"
+        android:layout_height="54dp"
+        android:background="@drawable/edittext_style1"
+        android:ems="10"
+        android:hint="Ubicacion del Equipo"
+        android:inputType="text"
+        android:paddingLeft="10dp"
+        android:textStyle="normal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.435" />
+
+    <Button
+        android:id="@+id/btnInscribirEquipo"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#EAE3FF"
+        android:text="INSCRIBIR EQUIPO"
+        android:textColor="#000000"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.401" />
-
-    <EditText
-        android:id="@+id/txtUbicacionEquipo"
-        android:layout_width="299dp"
-        android:layout_height="66dp"
-        android:ems="10"
-        android:inputType="text"
-        android:text="Ubicacion"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.538" />
-
-    <Button
-        android:id="@+id/btnInscribirEquipo"
-        android:layout_width="242dp"
-        android:layout_height="54dp"
-        android:text="Inscribir equipo"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.785" />
+        app:layout_constraintVertical_bias="0.58"
+        app:strokeColor="#855EF2"
+        app:strokeWidth="2dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>
