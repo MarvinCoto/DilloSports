@@ -15,6 +15,7 @@
         android:theme="@style/Theme.DilloSports"
         tools:targetApi="31">
         <activity
+<<<<<<< HEAD
             android:name=".Item_card_Torneos"
             android:exported="false" />
         <activity
@@ -27,7 +28,16 @@
             android:name=".Torneos"
             android:exported="false" />
         <activity
+=======
+<<<<<<< HEAD
+            android:name=".mostrarJugadores"
+            android:exported="false" />
+        <activity
+            android:name=".activityNuevosJugadores"
+=======
+>>>>>>> master
             android:name=".RecuperaciondeContrasena"
+>>>>>>> master
             android:exported="false" />
         <activity
             android:name=".MainActivity"
