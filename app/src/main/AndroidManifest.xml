@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -14,6 +14,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.DilloSports"
         tools:targetApi="31">
+        <activity
+            android:name=".Crear_Torneo"
+            android:exported="false" />
+        <activity
+            android:name=".Torneos"
+            android:exported="false" />
         <activity
             android:name=".RecuperaciondeContrasena"
             android:exported="false" />
