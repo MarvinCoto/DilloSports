@@ -38,7 +38,7 @@ class activityNuevosJugadores : AppCompatActivity() {
         val btnGuardar = findViewById<Button>(R.id.btnGuardar)
 
 
-        
+
         fun obtenerJugadores(): List<tbJugadores>
         {
 
