@@ -7,10 +7,13 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import modelos.ClaseConexion
+import modelos.tbJugadores
 import java.util.UUID
 
 class activityNuevosJugadores : AppCompatActivity() {
@@ -33,6 +36,43 @@ class activityNuevosJugadores : AppCompatActivity() {
         val txtPosicion = findViewById<TextView>(R.id.txtPosicion)
         val txtEstado = findViewById<TextView>(R.id.txtEstado)
         val btnGuardar = findViewById<Button>(R.id.btnGuardar)
+
+
+        
+        fun obtenerJugadores(): List<tbJugadores>
+        {
+
+            val objConexion = ClaseConexion().cadenaConexion()
+
+            val statement = objConexion?.createStatement()
+            val resultSet = statement?.executeQuery("SELECT * FROM tbJugadores")!!
+
+            val listaJugadores = mutableListOf<tbJugadores>()
+            while (resultSet.next()) {
+                val uuid = resultSet.getString("uuid")
+                val Nombre_Jugador = resultSet.getString("Nombre_Jugador ")
+                val Apellido = resultSet.getString("Apellido_Jugador")
+                val FNacimiento = resultSet.getInt("FNacimiento_Jugador")
+                val EdadJugador = resultSet.getInt("Edad_Jugador")
+                val Telefono = resultSet.getInt("Telefono_Jugador")
+                val NumJugador = resultSet.getInt("Numero_Jugador")
+                val Posicion = resultSet.getString("Posicion_Jugador")
+                val Estado = resultSet.getString("Posicion_Jugador")
+
+                val valoresJuntos = tbJugadores(uuid, Nombre_Jugador, Apellido, FNacimiento, EdadJugador, Telefono, NumJugador,Posicion, Estado)
+                listaJugadores.add(valoresJuntos)
+
+            }
+
+            return listaJugadores
+
+        }
+
+        //Le asigno un adaptador al RecyclerView
+
+
+
+
 
         btnGuardar.setOnClickListener {
             CoroutineScope(Dispatchers.IO).launch {
