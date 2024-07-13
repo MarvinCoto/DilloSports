@@ -376,7 +376,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="12dp"
                 android:fontFamily="@font/jaldi_bold"
-                android:text="OR"
+                android:text="¿Ya tienes cuenta?"
                 android:textSize="18sp"
                 app:layout_constraintBottom_toTopOf="@+id/btnIrALogin"
                 app:layout_constraintEnd_toEndOf="parent"
