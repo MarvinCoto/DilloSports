@@ -7,13 +7,10 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import modelos.ClaseConexion
-import modelos.tbJugadores
 import java.util.UUID
 
 class activityNuevosJugadores : AppCompatActivity() {
@@ -27,70 +24,31 @@ class activityNuevosJugadores : AppCompatActivity() {
             insets
         }
 
-        val txtNombre = findViewById<TextView>(R.id.txtNombre)
-        val txtApellido = findViewById<TextView>(R.id.txtApellido)
-        val txtFNacimiento = findViewById<TextView>(R.id. txtFNacimiento)
-        val txtEdad = findViewById<TextView>(R.id. txtEdad)
-        val txtTelefono = findViewById<TextView>(R.id. txtTelefono)
+        val txtNombreJugador = findViewById<TextView>(R.id.txtNombreJugador)
+        val txtApellidoJugador = findViewById<TextView>(R.id.txtApellidoJugador)
+        val txtEdadJugador = findViewById<TextView>(R.id. txtEdadJugadores)
+        val txtTelefonoJugador = findViewById<TextView>(R.id. txtTelefonoJugador)
         val txtNumJugador = findViewById<TextView>(R.id.txtNumJugador)
-        val txtPosicion = findViewById<TextView>(R.id.txtPosicion)
+        val txtPosicionJugador = findViewById<TextView>(R.id.txtPosicionJugador)
+        val txtFecha = findViewById<TextView>(R.id.txtFecha)
         val txtEstado = findViewById<TextView>(R.id.txtEstado)
-        val btnGuardar = findViewById<Button>(R.id.btnGuardar)
+        val btnInscribirJugador = findViewById<Button>(R.id.btnInscribirJugador)
 
-
-
-        fun obtenerJugadores(): List<tbJugadores>
-        {
-
-            val objConexion = ClaseConexion().cadenaConexion()
-
-            val statement = objConexion?.createStatement()
-            val resultSet = statement?.executeQuery("SELECT * FROM tbJugadores")!!
-
-            val listaJugadores = mutableListOf<tbJugadores>()
-            while (resultSet.next()) {
-                val uuid = resultSet.getString("uuid")
-                val Nombre_Jugador = resultSet.getString("Nombre_Jugador ")
-                val Apellido = resultSet.getString("Apellido_Jugador")
-                val FNacimiento = resultSet.getInt("FNacimiento_Jugador")
-                val EdadJugador = resultSet.getInt("Edad_Jugador")
-                val Telefono = resultSet.getInt("Telefono_Jugador")
-                val NumJugador = resultSet.getInt("Numero_Jugador")
-                val Posicion = resultSet.getString("Posicion_Jugador")
-                val Estado = resultSet.getString("Posicion_Jugador")
-
-                val valoresJuntos = tbJugadores(uuid, Nombre_Jugador, Apellido, FNacimiento, EdadJugador, Telefono, NumJugador,Posicion, Estado)
-                listaJugadores.add(valoresJuntos)
-
-            }
-
-            return listaJugadores
-
-        }
-
-        //Le asigno un adaptador al RecyclerView
-
-
-
-
-
-        btnGuardar.setOnClickListener {
+        btnInscribirJugador.setOnClickListener {
             CoroutineScope(Dispatchers.IO).launch {
                 val objConexion = ClaseConexion().cadenaConexion()
 
                 val addJugadores = objConexion?.prepareStatement("insert into tbJugadores (UUID_Jugador, Nombre_Jugador, Apellido_Jugador, FNacimiento_Jugador, Edad_Jugador, Telefono_Jugador, Numero_Jugador, Posicion_Jugador, Estado_Jugador) values (?,?,?,?,?,?,?,?,?)")!!
-
                 addJugadores.setString(1, UUID.randomUUID().toString())
-                addJugadores.setString(2, txtNombre.text.toString())
-                addJugadores.setString(3, txtApellido.text.toString())
-                addJugadores.setInt(4, txtFNacimiento.text.toString().toInt())
-                addJugadores.setInt(5, txtEdad.text.toString().toInt())
-                addJugadores.setInt(5, txtTelefono.text.toString().toInt())
-                addJugadores.setInt(6, txtNumJugador.text.toString().toInt())
-                addJugadores.setString(7, txtPosicion.text.toString())
-                addJugadores.setString(8, txtEstado.text.toString())
+                addJugadores.setString(2, txtNombreJugador.text.toString())
+                addJugadores.setString(3, txtApellidoJugador.text.toString())
+                addJugadores.setString(4, txtFecha.text.toString())
+                addJugadores.setInt(5, txtEdadJugador.text.toString().toInt())
+                addJugadores.setString(6, txtTelefonoJugador.text.toString())
+                addJugadores.setInt(7, txtNumJugador.text.toString().toInt())
+                addJugadores.setString(8, txtPosicionJugador.text.toString())
+                addJugadores.setString(9, txtEstado.text.toString())
                 addJugadores.executeUpdate()
-
 
             }
         }

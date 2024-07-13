@@ -7,59 +7,60 @@
     android:layout_height="match_parent"
     tools:context=".activityNuevosJugadores">
 
+
     <TextView
         android:id="@+id/textView6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="112dp"
-        android:layout_marginTop="88dp"
+        android:layout_marginTop="16dp"
         android:text="Inscribir Jugador"
         android:textColor="#855EF2"
         android:textSize="24sp"
         android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-
     <EditText
-        android:id="@+id/txtEdad"
+        android:id="@+id/txtEdadJugadores"
         android:layout_width="343dp"
         android:layout_height="54dp"
-        android:layout_marginStart="32dp"
         android:layout_marginTop="16dp"
         android:background="@drawable/edittext_style1"
         android:ems="10"
         android:hint="Edad del Jugador"
         android:inputType="number"
         android:paddingLeft="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtApellido" />
+        app:layout_constraintTop_toBottomOf="@+id/txtApellidoJugador" />
 
     <EditText
-        android:id="@+id/txtPosicion"
+        android:id="@+id/txtPosicionJugador"
         android:layout_width="343dp"
         android:layout_height="54dp"
-        android:layout_marginStart="32dp"
         android:layout_marginTop="16dp"
         android:background="@drawable/edittext_style1"
         android:ems="10"
         android:hint="Posición de Juego"
         android:inputType="text"
         android:paddingLeft="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtNumJugador" />
 
     <EditText
-        android:id="@+id/txtNombre"
+        android:id="@+id/txtNombreJugador"
         android:layout_width="343dp"
         android:layout_height="54dp"
-        android:layout_marginStart="32dp"
         android:layout_marginTop="32dp"
         android:background="@drawable/edittext_style1"
         android:ems="10"
         android:hint="Nombre del Jugador"
         android:inputType="text"
         android:paddingLeft="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView6" />
 
@@ -67,59 +68,84 @@
         android:id="@+id/txtNumJugador"
         android:layout_width="343dp"
         android:layout_height="54dp"
-        android:layout_marginStart="32dp"
         android:layout_marginTop="16dp"
         android:background="@drawable/edittext_style1"
         android:ems="10"
         android:hint="Número de Camiseta"
         android:inputType="number"
         android:paddingLeft="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtTelefono" />
+        app:layout_constraintTop_toBottomOf="@+id/txtTelefonoJugador" />
 
     <Button
-        android:id="@+id/btnGuardar"
+        android:id="@+id/btnInscribirJugador"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="52dp"
         android:layout_marginTop="36dp"
         android:backgroundTint="#EAE3FF"
         android:text="INSCRIBIR JUGADOR"
         android:textColor="#000000"
         android:textStyle="bold"
-        app:strokeColor="#855EF2"
-        app:strokeWidth="2dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtPosicion" />
+        app:layout_constraintTop_toBottomOf="@+id/txtPosicionJugador"
+        app:strokeColor="#855EF2"
+        app:strokeWidth="2dp" />
 
     <EditText
-        android:id="@+id/txtTelefono"
+        android:id="@+id/txtTelefonoJugador"
         android:layout_width="343dp"
         android:layout_height="54dp"
-        android:layout_marginStart="32dp"
         android:layout_marginTop="16dp"
         android:background="@drawable/edittext_style1"
         android:ems="10"
         android:hint="Número de Teléfono"
         android:inputType="phone"
         android:paddingLeft="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtEdad" />
+        app:layout_constraintTop_toBottomOf="@+id/txtEdadJugadores" />
 
     <EditText
-        android:id="@+id/txtApellido"
+        android:id="@+id/txtApellidoJugador"
         android:layout_width="343dp"
         android:layout_height="54dp"
-        android:layout_marginStart="32dp"
         android:layout_marginTop="16dp"
         android:background="@drawable/edittext_style1"
         android:ems="10"
         android:hint="Apellido del Jugador"
         android:inputType="text"
         android:paddingLeft="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtNombre" />
+        app:layout_constraintTop_toBottomOf="@+id/txtNombreJugador" />
 
+    <EditText
+        android:id="@+id/txtFecha"
+        android:layout_width="343dp"
+        android:layout_height="54dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/edittext_style1"
+        android:ems="10"
+        android:hint="Fecha"
+        android:inputType="text"
+        android:paddingLeft="10dp"
+        app:layout_constraintBottom_toTopOf="@+id/txtEstado"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/txtEstado"
+        android:layout_width="343dp"
+        android:layout_height="54dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/edittext_style1"
+        android:ems="10"
+        android:hint="Estado"
+        android:inputType="text"
+        android:paddingLeft="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

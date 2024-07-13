@@ -33,7 +33,7 @@
                 android:textSize="20sp"/>
 
             <TextView
-                android:id="@+id/txtPosicion"
+                android:id="@+id/txtPosicionJugador"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Posicion"
