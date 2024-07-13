@@ -72,8 +72,8 @@
         android:text="CREAR TORNEO"
         android:textColor="#000000"
         android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtUbicacionTorneo"
         app:strokeColor="#855EF2"
-        app:strokeWidth="2dp" />
+        app:strokeWidth="2dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtUbicacionTorneo"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

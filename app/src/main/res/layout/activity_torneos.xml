@@ -32,7 +32,7 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rcvTorneos"
-        android:layout_width="410dp"
+        android:layout_width="match_parent"
         android:layout_height="419dp"
         android:layout_marginTop="64dp"
         app:layout_constraintStart_toStartOf="parent"
