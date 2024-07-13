@@ -19,6 +19,15 @@
             android:name=".inscribir_equipo"
             android:exported="false"/>
         <activity
+<<<<<<< HEAD
+=======
+            android:name=".itemCardJugadores"
+            android:exported="false" />
+        <activity
+            android:name=".qwertyuiopsf"
+            android:exported="false" />
+        <activity
+>>>>>>> Alan
             android:name=".Item_card_Torneos"
             android:exported="false" />
         <activity
@@ -35,7 +44,14 @@
             android:exported="false" />
         <activity
             android:name=".activityNuevosJugadores"
+<<<<<<< HEAD
             android:exported="false"/>
+=======
+            android:exported="true" />
+        <activity
+            android:name=".RecuperaciondeContrasena"
+            android:exported="false" />
+>>>>>>> Alan
         <activity
             android:name=".MainActivity"
             android:exported="true">
