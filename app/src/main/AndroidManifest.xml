@@ -15,6 +15,9 @@
         android:theme="@style/Theme.DilloSports"
         tools:targetApi="31">
         <activity
+            android:name=".VerJugadores"
+            android:exported="false" />
+        <activity
             android:name=".item_card_equipos"
             android:exported="false" />
         <activity
@@ -46,10 +49,7 @@
             android:exported="false" />
         <activity
             android:name=".mostrarJugadores"
-            android:exported="false" />
-        <activity
-            android:name=".activityNuevosJugadores"
-            android:exported="true" >
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -57,10 +57,11 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".activityNuevosJugadores"
+            android:exported="false"></activity>
+        <activity
             android:name=".MainActivity"
-            android:exported="true">
-
-        </activity>
+            android:exported="true"></activity>
 
         <meta-data
             android:name="preloaded_fonts"

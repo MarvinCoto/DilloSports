@@ -1,8 +1,10 @@
 package marvin.coto.dillosports
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -10,6 +12,7 @@ import androidx.core.view.WindowInsetsCompat
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import modelos.ClaseConexion
 import java.util.UUID
 
@@ -30,8 +33,8 @@ class activityNuevosJugadores : AppCompatActivity() {
         val txtTelefonoJugador = findViewById<TextView>(R.id. txtTelefonoJugador)
         val txtNumJugador = findViewById<TextView>(R.id.txtNumJugador)
         val txtPosicionJugador = findViewById<TextView>(R.id.txtPosicionJugador)
-        val txtFecha = findViewById<TextView>(R.id.txtFecha)
-        val txtEstado = findViewById<TextView>(R.id.txtEstado)
+        val txtFechaJugador = findViewById<TextView>(R.id.txtFechaJugador)
+        val txtEstadoJugador = findViewById<TextView>(R.id.txtEstadoJugador)
         val btnInscribirJugador = findViewById<Button>(R.id.btnInscribirJugador)
 
         btnInscribirJugador.setOnClickListener {
@@ -42,15 +45,28 @@ class activityNuevosJugadores : AppCompatActivity() {
                 addJugadores.setString(1, UUID.randomUUID().toString())
                 addJugadores.setString(2, txtNombreJugador.text.toString())
                 addJugadores.setString(3, txtApellidoJugador.text.toString())
-                addJugadores.setString(4, txtFecha.text.toString())
+                addJugadores.setString(4, txtFechaJugador.text.toString())
                 addJugadores.setInt(5, txtEdadJugador.text.toString().toInt())
                 addJugadores.setString(6, txtTelefonoJugador.text.toString())
                 addJugadores.setInt(7, txtNumJugador.text.toString().toInt())
                 addJugadores.setString(8, txtPosicionJugador.text.toString())
-                addJugadores.setString(9, txtEstado.text.toString())
+                addJugadores.setString(9, txtEstadoJugador.text.toString())
                 addJugadores.executeUpdate()
 
+                withContext(Dispatchers.Main){
+                    Toast.makeText(this@activityNuevosJugadores, "Jugador Inscrito", Toast.LENGTH_SHORT).show()
+                    txtNombreJugador.setText("")
+                    txtApellidoJugador.setText("")
+                    txtEdadJugador.setText("")
+                    txtTelefonoJugador.setText("")
+                    txtNumJugador.setText("")
+                    txtPosicionJugador.setText("")
+                    txtFechaJugador.setText("")
+                    txtEstadoJugador.setText("")
+                }
             }
+            val intent: Intent = Intent(this, mostrarJugadores::class.java)
+            startActivity(intent)
         }
 
 

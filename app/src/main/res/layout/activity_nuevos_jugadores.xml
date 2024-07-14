@@ -82,14 +82,15 @@
         android:id="@+id/btnInscribirJugador"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="20dp"
         android:backgroundTint="#EAE3FF"
         android:text="INSCRIBIR JUGADOR"
         android:textColor="#000000"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtPosicionJugador"
+        app:layout_constraintTop_toBottomOf="@+id/txtEstadoJugador"
         app:strokeColor="#855EF2"
         app:strokeWidth="2dp" />
 
@@ -122,30 +123,32 @@
         app:layout_constraintTop_toBottomOf="@+id/txtNombreJugador" />
 
     <EditText
-        android:id="@+id/txtFecha"
+        android:id="@+id/txtFechaJugador"
         android:layout_width="343dp"
         android:layout_height="54dp"
         android:layout_marginTop="16dp"
         android:background="@drawable/edittext_style1"
         android:ems="10"
-        android:hint="Fecha"
+        android:hint="Fecha del Jugador"
         android:inputType="text"
         android:paddingLeft="10dp"
-        app:layout_constraintBottom_toTopOf="@+id/txtEstado"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtPosicionJugador" />
 
     <EditText
-        android:id="@+id/txtEstado"
+        android:id="@+id/txtEstadoJugador"
         android:layout_width="343dp"
         android:layout_height="54dp"
         android:layout_marginTop="16dp"
         android:background="@drawable/edittext_style1"
         android:ems="10"
-        android:hint="Estado"
+        android:hint="Estado del Jugador"
         android:inputType="text"
         android:paddingLeft="10dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtFechaJugador" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
