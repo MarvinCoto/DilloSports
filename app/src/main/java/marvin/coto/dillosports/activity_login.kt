@@ -1,5 +1,6 @@
 package marvin.coto.dillosports
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
@@ -95,9 +96,12 @@ class activity_login : AppCompatActivity() {
                     txtAlturaRegistro.setText("")
                     txtPesoRegistro.setText("")
                 }
-
             }
+        }
 
+        btnIrALogin.setOnClickListener{
+            val pantallaLogin = Intent(this, activity_iniciar_sesion::class.java)
+            startActivity(pantallaLogin)
         }
 
     }

@@ -44,24 +44,24 @@
         android:text="PART OF YOUR LIFE"
         android:textColor="#6517F0"
         android:textSize="25sp"
-        app:layout_constraintBottom_toTopOf="@+id/button3"
+        app:layout_constraintBottom_toTopOf="@+id/btnIrAlRegistroBienvenida"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/btnIrAlRegistroBienvenida"
         android:layout_width="309dp"
         android:layout_height="53dp"
         android:layout_marginBottom="15dp"
         android:backgroundTint="@color/black"
         android:text="CREAR CUENTA NUEVA"
         app:cornerRadius="10dp"
-        app:layout_constraintBottom_toTopOf="@+id/button4"
+        app:layout_constraintBottom_toTopOf="@+id/btnIrAIniciarSesionBienvenida"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/button4"
+        android:id="@+id/btnIrAIniciarSesionBienvenida"
         android:layout_width="309dp"
         android:layout_height="53dp"
         android:layout_marginBottom="64dp"

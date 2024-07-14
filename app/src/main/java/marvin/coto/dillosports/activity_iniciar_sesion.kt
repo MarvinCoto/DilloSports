@@ -35,7 +35,7 @@ class activity_iniciar_sesion : AppCompatActivity() {
 
         fun hashSHA256(contraseniaEscrita: String): String {
             val bytes = MessageDigest.getInstance("SHA-256").digest(contraseniaEscrita.toByteArray())
-            return bytes.joinToString("") {"%0.2x".format(it)}
+            return bytes.joinToString("") {"%02x".format(it)}
         }
 
         btnIniciarSesion.setOnClickListener {
@@ -63,14 +63,13 @@ class activity_iniciar_sesion : AppCompatActivity() {
                         Toast.makeText(this@activity_iniciar_sesion, "Usuario o contraseña incorrectos", Toast.LENGTH_SHORT).show()
                     }
                 }
-
             }
         }
 
-
-
-
-
+        btnIrAlRegistro.setOnClickListener{
+            val pantallaRegistro = Intent(this, activity_login::class.java)
+            startActivity((pantallaRegistro))
+        }
 
     }
 }

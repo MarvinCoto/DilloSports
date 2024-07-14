@@ -105,7 +105,8 @@
                 android:layout_marginBottom="20dp"
                 android:background="@drawable/estilo_textos"
                 app:layout_constraintBottom_toTopOf="@+id/constraintLayout2"
-                tools:layout_editor_absoluteX="33dp">
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent">
 
                 <EditText
                     android:id="@+id/txtApellidoRegistro"
