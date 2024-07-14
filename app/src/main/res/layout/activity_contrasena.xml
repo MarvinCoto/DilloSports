@@ -27,7 +27,7 @@
         tools:layout_editor_absoluteY="250dp">
 
         <TextView
-            android:id="@+id/textView5"
+            android:id="@+id/txtNuevo"
             android:layout_width="315dp"
             android:layout_height="32dp"
             android:background="@android:color/transparent"
@@ -49,7 +49,7 @@
         tools:layout_editor_absoluteY="326dp">
 
         <TextView
-            android:id="@+id/textView5"
+            android:id="@+id/txtNuevo"
             android:layout_width="315dp"
             android:layout_height="32dp"
             android:background="@android:color/transparent"
