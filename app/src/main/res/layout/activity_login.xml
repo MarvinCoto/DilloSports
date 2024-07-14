@@ -23,7 +23,7 @@
                 android:id="@+id/btnIrALogin"
                 android:layout_width="243dp"
                 android:layout_height="47dp"
-                android:layout_marginTop="925dp"
+                android:layout_marginTop="950dp"
                 android:layout_marginBottom="36dp"
                 android:backgroundTint="@android:color/system_on_secondary_container_dark"
                 android:fontFamily="@font/jaldi_bold"
@@ -79,7 +79,7 @@
                 app:layout_constraintStart_toStartOf="parent">
 
                 <EditText
-                    android:id="@+id/txtNombreUsuario"
+                    android:id="@+id/txtNombreRegistro"
                     android:layout_width="315dp"
                     android:layout_height="30dp"
                     android:layout_marginStart="15dp"
@@ -108,7 +108,7 @@
                 tools:layout_editor_absoluteX="33dp">
 
                 <EditText
-                    android:id="@+id/txtApellidoUsuario"
+                    android:id="@+id/txtApellidoRegistro"
                     android:layout_width="315dp"
                     android:layout_height="30dp"
                     android:layout_marginStart="12dp"
@@ -130,15 +130,15 @@
                 android:id="@+id/constraintLayout2"
                 android:layout_width="344dp"
                 android:layout_height="43dp"
-                android:layout_marginBottom="28dp"
+                android:layout_marginBottom="18dp"
                 android:background="@drawable/estilo_textos"
-                app:layout_constraintBottom_toTopOf="@+id/constraintLayout3"
+                app:layout_constraintBottom_toTopOf="@+id/constraintLayout13"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.492"
                 app:layout_constraintStart_toStartOf="parent">
 
                 <EditText
-                    android:id="@+id/txtUsername"
+                    android:id="@+id/txtUsernameRegistro"
                     android:layout_width="315dp"
                     android:layout_height="30dp"
                     android:layout_marginStart="17dp"
@@ -167,7 +167,7 @@
                 app:layout_constraintStart_toStartOf="parent">
 
                 <EditText
-                    android:id="@+id/txtCorreoUsuario"
+                    android:id="@+id/txtCorreoRegistro"
                     android:layout_width="322dp"
                     android:layout_height="28dp"
                     android:layout_marginTop="7dp"
@@ -191,7 +191,7 @@
                 app:layout_constraintStart_toStartOf="parent">
 
                 <EditText
-                    android:id="@+id/txtTelefonoUsuario"
+                    android:id="@+id/txtTelefonoRegistro"
                     android:layout_width="315dp"
                     android:layout_height="32dp"
                     android:layout_marginStart="13dp"
@@ -222,7 +222,7 @@
                 app:layout_constraintStart_toStartOf="parent">
 
                 <EditText
-                    android:id="@+id/txtGeneroUsuario"
+                    android:id="@+id/txtGeneroRegistro"
                     android:layout_width="315dp"
                     android:layout_height="32dp"
                     android:layout_marginStart="12dp"
@@ -252,7 +252,7 @@
                 app:layout_constraintStart_toStartOf="parent">
 
                 <EditText
-                    android:id="@+id/txtNacimientoUsuario"
+                    android:id="@+id/txtNacimientoRegistro"
                     android:layout_width="315dp"
                     android:layout_height="32dp"
                     android:layout_marginStart="14dp"
@@ -280,7 +280,7 @@
                 app:layout_constraintStart_toStartOf="parent">
 
                 <EditText
-                    android:id="@+id/txtEdadUsuario"
+                    android:id="@+id/txtEdadRegistro"
                     android:layout_width="315dp"
                     android:layout_height="32dp"
                     android:layout_marginStart="13dp"
@@ -308,7 +308,7 @@
                 app:layout_constraintStart_toStartOf="parent">
 
                 <EditText
-                    android:id="@+id/txtAlturaUsuario"
+                    android:id="@+id/txtAlturaRegistro"
                     android:layout_width="315dp"
                     android:layout_height="32dp"
                     android:layout_marginStart="12dp"
@@ -330,14 +330,15 @@
                 android:id="@+id/constraintLayout10"
                 android:layout_width="344dp"
                 android:layout_height="43dp"
-                android:layout_marginBottom="41dp"
+                android:layout_marginBottom="22dp"
                 android:background="@drawable/estilo_textos"
                 app:layout_constraintBottom_toTopOf="@+id/btnCrearCuenta"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.492"
                 app:layout_constraintStart_toStartOf="parent">
 
                 <EditText
-                    android:id="@+id/txtPesoUsuario"
+                    android:id="@+id/txtPesoRegistro"
                     android:layout_width="315dp"
                     android:layout_height="32dp"
                     android:layout_marginStart="13dp"
@@ -381,6 +382,34 @@
                 app:layout_constraintBottom_toTopOf="@+id/btnIrALogin"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraintLayout13"
+                android:layout_width="344dp"
+                android:layout_height="43dp"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/estilo_textos"
+                app:layout_constraintBottom_toTopOf="@+id/constraintLayout3"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent">
+
+                <EditText
+                    android:id="@+id/txtContraseniaRegistro"
+                    android:layout_width="315dp"
+                    android:layout_height="32dp"
+                    android:layout_marginStart="14dp"
+                    android:layout_marginTop="6dp"
+                    android:layout_marginEnd="15dp"
+                    android:layout_marginBottom="5dp"
+                    android:background="@android:color/transparent"
+                    android:ems="10"
+                    android:hint="Contraseña"
+                    android:inputType="textPassword"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

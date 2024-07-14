@@ -47,7 +47,7 @@
         app:layout_constraintStart_toStartOf="parent">
 
         <EditText
-            android:id="@+id/editTextTextEmailAddress"
+            android:id="@+id/txtCorreoUsuario"
             android:layout_width="315dp"
             android:layout_height="32dp"
             android:layout_marginStart="13dp"
@@ -75,7 +75,7 @@
         tools:layout_editor_absoluteY="202dp">
 
         <EditText
-            android:id="@+id/editTextTextPassword"
+            android:id="@+id/txtContraseniaUsuario"
             android:layout_width="315dp"
             android:layout_height="32dp"
             android:layout_marginStart="13dp"
@@ -93,7 +93,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/btnIniciarSesion"
         android:layout_width="243dp"
         android:layout_height="47dp"
         android:layout_marginBottom="20dp"
@@ -109,7 +109,7 @@
         app:strokeWidth="2dp" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/btnIrAlRegistro"
         android:layout_width="243dp"
         android:layout_height="47dp"
         android:layout_marginTop="12dp"
