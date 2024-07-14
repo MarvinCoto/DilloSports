@@ -59,7 +59,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <Button
-        android:id="@+id/btnActualizar"
+        android:id="@+id/btnConfirmar"
         android:layout_width="162dp"
         android:layout_height="67dp"
         android:backgroundTint="#673AB7"
