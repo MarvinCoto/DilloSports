@@ -15,8 +15,11 @@
         android:theme="@style/Theme.DilloSports"
         tools:targetApi="31">
         <activity
+            android:name=".ActivityRecuContrasena"
+            android:exported="false" />
+        <activity
             android:name=".inscribir_equipo"
-            android:exported="false"/>
+            android:exported="false" />
         <activity
             android:name=".itemCardJugadores"
             android:exported="false" />
@@ -40,7 +43,7 @@
             android:exported="false" />
         <activity
             android:name=".activityNuevosJugadores"
-            android:exported="false"/>
+            android:exported="false" />
         <activity
             android:name=".MainActivity"
             android:exported="true">
