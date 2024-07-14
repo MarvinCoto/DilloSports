@@ -15,14 +15,32 @@
         android:theme="@style/Theme.DilloSports"
         tools:targetApi="31">
         <activity
-            android:name=".activity_iniciar_sesion"
+            android:name=".inscribir_equipo"
+            android:exported="false"/>
+        <activity
+            android:name=".itemCardJugadores"
             android:exported="false" />
         <activity
-            android:name=".activity_bienvenida"
+            android:name=".qwertyuiopsf"
             android:exported="false" />
         <activity
-            android:name=".activity_login"
+            android:name=".Item_card_Torneos"
             android:exported="false" />
+        <activity
+            android:name=".Ver_Torneo"
+            android:exported="false" />
+        <activity
+            android:name=".Crear_Torneo"
+            android:exported="false" />
+        <activity
+            android:name=".Torneos"
+            android:exported="false" />
+        <activity
+            android:name=".mostrarJugadores"
+            android:exported="false" />
+        <activity
+            android:name=".activityNuevosJugadores"
+            android:exported="false"/>
         <activity
             android:name=".MainActivity"
             android:exported="true">

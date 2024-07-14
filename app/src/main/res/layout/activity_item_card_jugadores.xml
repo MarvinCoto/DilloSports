@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+
+    android:id="@+id/cardViewJugadores"
+    android:layout_margin="16dp">
+
+    <LinearLayout
+        android:background="@drawable/card_torneos_style_1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/imgCardJugadores"
+            android:layout_width="125dp"
+            android:layout_height="125dp"
+            android:layout_marginEnd="10dp"
+            android:background="@drawable/edittext_style1" />
+
+        <LinearLayout
+            android:layout_width="165dp"
+            android:layout_height="125dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/nombreJugador"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="NOMBRE"
+                android:textSize="20sp"/>
+
+            <TextView
+                android:id="@+id/txtPosicion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Posicion"
+                android:textSize="15sp"/>
+
+            <TextView
+                android:id="@+id/txtNumeroCamisa"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="NumerodeCamiseta"
+                android:textSize="15sp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="80dp"
+                android:layout_height="62dp"
+                android:orientation="vertical"
+                android:padding="12dp">
+
+                <ImageView
+                    android:id="@+id/imgEditarJugador"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:srcCompat="@drawable/vector_asset_editar_1" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="80dp"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:padding="12dp">
+
+                <ImageView
+                    android:id="@+id/imgEliminarJugador"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:srcCompat="@drawable/vector_asset_eliminar_1" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>
