@@ -13,39 +13,28 @@
         android:layout_height="wrap_content"
         android:text="Recuperacion de contraseña"
         android:textSize="24sp"
-        tools:layout_editor_absoluteX="54dp"
-        tools:layout_editor_absoluteY="48dp" />
+        app:layout_constraintBottom_toTopOf="@+id/constraintLayout6"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout6"
         android:layout_width="344dp"
         android:layout_height="43dp"
         android:background="@drawable/edittext_style1"
         tools:layout_editor_absoluteX="34dp"
-        tools:layout_editor_absoluteY="107dp">
+        tools:layout_editor_absoluteY="250dp">
 
         <TextView
             android:id="@+id/textView5"
             android:layout_width="315dp"
             android:layout_height="32dp"
             android:background="@android:color/transparent"
-            android:hint="Correo Electronico"
-            tools:layout_editor_absoluteX="10dp"
+            android:hint="Nueva Contraseña"
+            tools:layout_editor_absoluteX="9dp"
             tools:layout_editor_absoluteY="5dp" />
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <Button
-        android:id="@+id/btnConfirmar"
-        android:layout_width="162dp"
-        android:layout_height="67dp"
-        android:layout_marginBottom="492dp"
-        android:backgroundTint="#673AB7"
-        android:text="Enviar Codigo"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout5"
@@ -55,40 +44,26 @@
         android:layout_marginEnd="34dp"
         android:background="@drawable/edittext_style1"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="344dp">
+        tools:layout_editor_absoluteY="326dp">
 
-        <EditText
-            android:id="@+id/editTextNumber"
+        <TextView
+            android:id="@+id/textView5"
             android:layout_width="315dp"
             android:layout_height="32dp"
-            android:layout_marginStart="12dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="6dp"
-            android:ems="10"
-            android:inputType="number"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:background="@android:color/transparent"
+            android:hint="Confirmar Contraseña"
+            tools:layout_editor_absoluteX="9dp"
+            tools:layout_editor_absoluteY="5dp" />
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <TextView
-        android:id="@+id/textView6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Ingresar codigo enviado"
-        android:textSize="24sp"
-        tools:layout_editor_absoluteX="77dp"
-        tools:layout_editor_absoluteY="291dp" />
 
     <Button
         android:id="@+id/btnActualizar"
         android:layout_width="162dp"
         android:layout_height="67dp"
         android:backgroundTint="#673AB7"
-        android:text="Confirmar Codigo"
+        android:text="Actualizar Contraseña"
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -96,7 +71,7 @@
         app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout5"
-        app:layout_constraintVertical_bias="0.086" />
+        app:layout_constraintVertical_bias="0.169" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -15,6 +15,9 @@
         android:theme="@style/Theme.DilloSports"
         tools:targetApi="31">
         <activity
+            android:name=".activityContrasena"
+            android:exported="false" />
+        <activity
             android:name=".ActivityRecuContrasena"
             android:exported="false" />
         <activity
