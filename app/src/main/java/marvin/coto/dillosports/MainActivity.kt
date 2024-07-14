@@ -1,6 +1,8 @@
 package marvin.coto.dillosports
 
+import android.content.Intent
 import android.os.Bundle
+import android.widget.Button
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -16,5 +18,13 @@ class MainActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
+        val btnIrABienvenida = findViewById<Button>(R.id.btnIrABienvenida)
+
+        btnIrABienvenida.setOnClickListener{
+            val pantallaBienvenida = Intent(this, activity_bienvenida::class.java)
+            startActivity(pantallaBienvenida)
+        }
+
     }
 }
