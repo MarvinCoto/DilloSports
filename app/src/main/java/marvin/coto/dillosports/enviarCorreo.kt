@@ -3,6 +3,7 @@ package marvin.coto.dillosports
 import androidx.recyclerview.widget.RecyclerView.LayoutManager.Properties
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import javax.mail.Authenticator
 import javax.mail.Message
 import javax.mail.MessagingException
 import javax.mail.PasswordAuthentication
@@ -20,7 +21,8 @@ suspend fun enviarCorreo(receptor: String, asunto: String, mensaje: String) = wi
             put("mail.smtp.auth", "true")
             put("mail.smtp.port", "465")
 
-     val session = Session.getInstance(props, object : javax.mail.Authenticator() {
+
+        val session = Session.getInstance(props, object : Authenticator() {
          override fun getPasswordAuthentication(): PasswordAuthentication {
              return PasswordAuthentication("ptc2024enigma@gmail.com", "kzmt kcvb jfaq wmkm")
          }
