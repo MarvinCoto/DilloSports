@@ -15,55 +15,95 @@
         android:theme="@style/Theme.DilloSports"
         tools:targetApi="31">
         <activity
-            android:name=".VerJugadores"
+            android:name=".Perfil"
             android:exported="false" />
+
         <activity
-            android:name=".item_card_equipos"
+            android:name=".ItemCardArbitro"
             android:exported="false" />
+
         <activity
-            android:name=".VerEquipo"
-            android:exported="false" />
-        <activity
-            android:name=".Equipos"
-            android:exported="false" />
-        <activity
-            android:name=".inscribir_equipo"
-            android:exported="false" />
-        <activity
-            android:name=".itemCardJugadores"
-            android:exported="false" />
-        <activity
-            android:name=".qwertyuiopsf"
-            android:exported="false" />
-        <activity
-            android:name=".Item_card_Torneos"
-            android:exported="false" />
-        <activity
-            android:name=".Ver_Torneo"
-            android:exported="false" />
-        <activity
-            android:name=".Crear_Torneo"
-            android:exported="false" />
-        <activity
-            android:name=".Torneos"
-            android:exported="false" />
-        <activity
-            android:name=".mostrarJugadores"
-            android:exported="false">
-        </activity>
-        <activity
-            android:name=".activityNuevosJugadores"
-            android:exported="false">
-        </activity>
-        <activity
-            android:name=".MainActivity"
-            android:exported="true">
+            android:name=".Splash_Screen"
+            android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".Home"
+            android:exported="false" />
+
+        <activity
+            android:name=".VerArbitro"
+            android:exported="false" />
+
+        <activity
+            android:name=".InscribirArbitro"
+            android:exported="false" />
+
+        <activity
+            android:name=".Arbitros"
+            android:exported="false" />
+
+        <activity
+            android:name=".VerJugadores"
+            android:exported="false" />
+
+        <activity
+            android:name=".item_card_equipos"
+            android:exported="false" />
+
+        <activity
+            android:name=".VerEquipo"
+            android:exported="false" />
+
+        <activity
+            android:name=".Equipos"
+            android:exported="false" />
+
+        <activity
+            android:name=".inscribir_equipo"
+            android:exported="false" />
+
+        <activity
+            android:name=".itemCardJugadores"
+            android:exported="false" />
+
+        <activity
+            android:name=".qwertyuiopsf"
+            android:exported="false" />
+
+        <activity
+            android:name=".Item_card_Torneos"
+            android:exported="false" />
+
+        <activity
+            android:name=".Ver_Torneo"
+            android:exported="false" />
+
+        <activity
+            android:name=".Crear_Torneo"
+            android:exported="false" />
+
+        <activity
+            android:name=".Torneos"
+            android:exported="false" />
+
+        <activity
+            android:name=".mostrarJugadores"
+            android:exported="false" />
+
+        <activity
+            android:name=".activityNuevosJugadores"
+            android:exported="false" />
+
+        <activity
+            android:name=".MainActivity"
+            android:exported="true" />
+
 
         <meta-data
             android:name="preloaded_fonts"
