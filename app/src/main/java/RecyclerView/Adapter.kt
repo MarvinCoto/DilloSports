@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.RecyclerView
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import marvin.coto.dillosports.R
 import marvin.coto.dillosports.VerJugadores
 import modelos.ClaseConexion
@@ -37,11 +36,6 @@ class Adapter(var Datos: List<tbJugadores>): RecyclerView.Adapter<ViewHolder>() 
         }
         Datos = listaDatos.toList()
         notifyItemRemoved(posicion)
-        notifyDataSetChanged()
-    }
-
-    fun actualizarPantalla(nuevalista: List<tbJugadores>){
-        Datos = nuevalista
         notifyDataSetChanged()
     }
 
@@ -99,7 +93,6 @@ class Adapter(var Datos: List<tbJugadores>): RecyclerView.Adapter<ViewHolder>() 
             dialog.show()
         }
 
-        //Todavia no funciona
         holder.imgEditarJugador.setOnClickListener {
             val context = holder.itemView.context
             val builder = AlertDialog.Builder(context)
@@ -145,13 +138,29 @@ class Adapter(var Datos: List<tbJugadores>): RecyclerView.Adapter<ViewHolder>() 
             builder.setView(layout)
 
             builder.setPositiveButton("Guardar"){
-                dialog, which -> editarDatos(item.Nombre_Jugador, item.Apellido_Jugador, item.FNacimiento_Jugador, item.Edad_Jugador, item.Telefono_Jugador, item.Numero_Jugador, item.Posicion_Jugador, item.Estado_Jugador, item.UUID_Jugador)
+                dialog, which -> editarDatos(txtNuevoNombre.text.toString(), txtNuevoApellido.text.toString(), txtNuevaFechaNacimiento.text.toString(), txtNuevaEdad.text.toString().toInt(), txtNuevoTelefono.text.toString(), txtNuevoNumeroCamiseta.text.toString().toInt(), txtNuevaPosicion.text.toString(), txtNuevoEstado.text.toString(), item.UUID_Jugador)
             }
             builder.setNegativeButton("Cancelar"){
                 dialog, wich -> dialog.dismiss()
             }
             val dialog = builder.create()
             dialog.show()
+        }
+
+        holder.itemView.setOnClickListener {
+            val context = holder.itemView.context
+
+            val pantallaVer = Intent(context, VerJugadores::class.java)
+            pantallaVer.putExtra("UUID_Jugador", item.UUID_Jugador)
+            pantallaVer.putExtra("NombreJugador", item.Nombre_Jugador)
+            pantallaVer.putExtra("ApellidoJugador", item.Apellido_Jugador)
+            pantallaVer.putExtra("FNacimientoJugador", item.FNacimiento_Jugador)
+            pantallaVer.putExtra("EdadJugador", item.Edad_Jugador)
+            pantallaVer.putExtra("TelefonoJugador", item.Telefono_Jugador)
+            pantallaVer.putExtra("NumeroJugador", item.Numero_Jugador)
+            pantallaVer.putExtra("PosicionJugador", item.Posicion_Jugador)
+            pantallaVer.putExtra("EstadoJugador", item.Estado_Jugador)
+            context.startActivity(pantallaVer)
         }
 
     }

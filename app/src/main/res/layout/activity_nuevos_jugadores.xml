@@ -54,7 +54,7 @@
         android:id="@+id/txtNombreJugador"
         android:layout_width="343dp"
         android:layout_height="54dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="20dp"
         android:background="@drawable/edittext_style1"
         android:ems="10"
         android:hint="Nombre del Jugador"
@@ -82,7 +82,7 @@
         android:id="@+id/btnInscribirJugador"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="52dp"
         android:backgroundTint="#EAE3FF"
         android:text="INSCRIBIR JUGADOR"
         android:textColor="#000000"
@@ -149,6 +149,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtFechaJugador" />
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

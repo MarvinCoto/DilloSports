@@ -4,6 +4,7 @@ import RecyclerView.Adapter
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
+import android.widget.ImageView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -27,10 +28,15 @@ class mostrarJugadores : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+        val imgAtras = findViewById<ImageView>(R.id.imgAtras5)
+        imgAtras.setOnClickListener {
+            val intent = Intent(this, VerEquipo::class.java)
+            startActivity(intent)
+        }
 
         val btnVerCrearJugador = findViewById<Button>(R.id.btnVerCrearJugador)
         btnVerCrearJugador.setOnClickListener {
-            val intent: Intent = Intent(this, activityNuevosJugadores::class.java)
+            val intent = Intent(this, activityNuevosJugadores::class.java)
             startActivity(intent)
         }
 
