@@ -11,118 +11,58 @@
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         android:fontFamily="@font/jaldi_bold"
         android:text="Iniciar Sesión"
         android:textColor="#6517F0"
         android:textSize="34sp"
-        app:layout_constraintBottom_toTopOf="@+id/textView5"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textView5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="37dp"
         android:text="ES COMO QUE SI NUNCA TE HAYAS IDO"
         android:textColor="#B4A7CC"
         android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/constraintLayout11"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.47"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout11"
-        android:layout_width="344dp"
-        android:layout_height="43dp"
-        android:layout_marginBottom="26dp"
-        android:background="@drawable/estilo_textos"
-        app:layout_constraintBottom_toTopOf="@+id/constraintLayout12"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.477"
-        app:layout_constraintStart_toStartOf="parent">
-
-        <EditText
-            android:id="@+id/txtCorreoUsuario"
-            android:layout_width="315dp"
-            android:layout_height="32dp"
-            android:layout_marginStart="13dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="6dp"
-            android:background="@android:color/transparent"
-            android:ems="10"
-            android:hint="Correo electrónico"
-            android:inputType="textEmailAddress"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout12"
-        android:layout_width="344dp"
-        android:layout_height="43dp"
-        android:layout_marginBottom="38dp"
-        android:background="@drawable/estilo_textos"
-        app:layout_constraintBottom_toTopOf="@+id/btnIniciarSesion"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.492"
-        app:layout_constraintStart_toStartOf="parent">
-
-        <EditText
-            android:id="@+id/txtContraseniaUsuario"
-            android:layout_width="315dp"
-            android:layout_height="32dp"
-            android:layout_marginStart="13dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="6dp"
-            android:background="@android:color/transparent"
-            android:ems="10"
-            android:hint="Contraseña"
-            android:inputType="textPassword"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
     <Button
         android:id="@+id/btnIniciarSesion"
         android:layout_width="243dp"
-        android:layout_height="47dp"
-        android:layout_marginBottom="20dp"
-        android:backgroundTint="@color/white"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:backgroundTint="#FFFF"
         android:fontFamily="@font/jaldi_bold"
         android:text="INGRESAR"
-        android:textColor="@color/black"
-        app:layout_constraintBottom_toTopOf="@+id/textView7"
+        android:textColor="#000000"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="parent"
-        app:strokeColor="#6517F0"
+        app:layout_constraintTop_toBottomOf="@+id/txtContraseniaUsuario"
+        app:strokeColor="#855EF2"
         app:strokeWidth="2dp" />
 
     <Button
         android:id="@+id/btnIrAlRegistro"
         android:layout_width="243dp"
-        android:layout_height="47dp"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="292dp"
-        android:backgroundTint="@android:color/system_on_secondary_container_dark"
+        android:backgroundTint="#EAE3FF"
         android:fontFamily="@font/jaldi_bold"
         android:text="CREAR MI CUENTA"
-        android:textColor="@color/black"
-        android:textSize="14sp"
+        android:textColor="#000000"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:strokeColor="#6517F0"
+        app:strokeColor="#855EF2"
         app:strokeWidth="2dp" />
 
     <TextView
@@ -137,5 +77,33 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/txtCorreoUsuario"
+        android:layout_width="343dp"
+        android:layout_height="54dp"
+        android:layout_marginTop="28dp"
+        android:background="@drawable/edittext_style1"
+        android:ems="10"
+        android:hint="Correo electrónico"
+        android:inputType="textEmailAddress"
+        android:paddingLeft="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView5" />
+
+    <EditText
+        android:id="@+id/txtContraseniaUsuario"
+        android:layout_width="343dp"
+        android:layout_height="54dp"
+        android:layout_marginTop="28dp"
+        android:background="@drawable/edittext_style1"
+        android:ems="10"
+        android:hint="Contraseña"
+        android:inputType="textPassword"
+        android:paddingLeft="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtCorreoUsuario" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

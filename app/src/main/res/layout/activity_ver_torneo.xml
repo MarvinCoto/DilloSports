@@ -148,7 +148,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
             android:layout_marginEnd="16dp"
-            android:text="Deporte:"
+            android:text="Estado del torneo:"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageView3" />
@@ -169,7 +169,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:layout_marginEnd="16dp"
-            android:text="Estado del Torneo:"
+            android:text="Deporte:"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textViewDeporteTorneo" />

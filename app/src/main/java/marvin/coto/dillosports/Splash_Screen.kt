@@ -15,7 +15,7 @@ class Splash_Screen : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         GlobalScope.launch(Dispatchers.Main){
             delay(1500)
-            startActivity(Intent(this@Splash_Screen, Home::class.java))
+            startActivity(Intent(this@Splash_Screen, activity_bienvenida::class.java))
             finish()
         }
 

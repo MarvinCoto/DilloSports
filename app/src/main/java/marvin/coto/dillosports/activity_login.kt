@@ -67,7 +67,7 @@ class activity_login : AppCompatActivity() {
 
                 //Creo una variable que contenga el PrepareStatement
                 val crearUsuario =
-                    objConexion?.prepareStatement("INSERT INTO tbUsuarios(UUID_Usuario, Nombre_Usuario, Apellido_Usuario, User_name, Contrasena_Usuario, Correo_Usuario, Telefono_Usuario, Genero_Usuario, FNacimiento_Usuario, Edad_Usuario, Altura_Usuario, Peso_Usuario) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)")!!
+                    objConexion?.prepareStatement("INSERT INTO tbUsuarios1(UUID_Usuario, Nombre_Usuario, Apellido_Usuario, User_name, Contrasena_Usuario, Correo_Usuario, Telefono_Usuario, Genero_Usuario, FNacimiento_Usuario, Edad_Usuario, Altura_Usuario, Peso_Usuario) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)")!!
                 crearUsuario.setString(1, UUID.randomUUID().toString())
                 crearUsuario.setString(2, txtNombreRegistro.text.toString())
                 crearUsuario.setString(3, txtApellidoRegistro.text.toString())
@@ -97,6 +97,8 @@ class activity_login : AppCompatActivity() {
                     txtPesoRegistro.setText("")
                 }
             }
+            val intent = Intent(this, Home::class.java)
+            startActivity(intent)
         }
 
         btnIrALogin.setOnClickListener{

@@ -19,12 +19,9 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
-        val btnIrABienvenida = findViewById<Button>(R.id.btnIrABienvenida)
 
-        btnIrABienvenida.setOnClickListener{
-            val pantallaBienvenida = Intent(this, activity_bienvenida::class.java)
-            startActivity(pantallaBienvenida)
-        }
+
+
 
     }
 }
