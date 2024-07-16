@@ -14,7 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.DilloSports"
         tools:targetApi="31" >
-        
+
     <activity
         android:name=".activity_bienvenida"
         android:exported="false" />
