@@ -7,147 +7,149 @@
     android:layout_height="match_parent"
     tools:context=".activityNuevosJugadores">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="414dp"
-        android:layout_height="183dp"
-        android:layout_marginBottom="20dp"
-        android:background="@drawable/rectangle"
-        app:layout_constraintBottom_toTopOf="@+id/txtNombre"
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Inscribir Jugador"
+        android:textColor="#855EF2"
+        android:textSize="24sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0">
-
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="INSCRIBIR NUEVO JUGADOR "
-            android:textColor="#F8F8F8"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.502"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.795" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/txtEdad"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="24dp"
+        android:id="@+id/txtEdadJugadores"
+        android:layout_width="343dp"
+        android:layout_height="54dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/edittext_style1"
         android:ems="10"
-        android:hint="Edad Jugador "
+        android:hint="Edad del Jugador"
         android:inputType="number"
-        app:layout_constraintBottom_toTopOf="@+id/txtTelefono"
+        android:paddingLeft="10dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.149"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtApellidoJugador" />
 
     <EditText
-        android:id="@+id/txtFNacimiento"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="24dp"
+        android:id="@+id/txtPosicionJugador"
+        android:layout_width="343dp"
+        android:layout_height="54dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/edittext_style1"
         android:ems="10"
-        android:hint="Fecha de nacimiento"
-        android:inputType="number"
-        app:layout_constraintBottom_toTopOf="@+id/txtEdad"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.149"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <EditText
-        android:id="@+id/txtPosicion"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
-        android:ems="10"
-        android:hint="Posicion "
+        android:hint="Posición de Juego"
         android:inputType="text"
-        app:layout_constraintBottom_toTopOf="@+id/txtEstado"
+        android:paddingLeft="10dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.149"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtNumJugador" />
 
     <EditText
-        android:id="@+id/txtNombre"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="24dp"
+        android:id="@+id/txtNombreJugador"
+        android:layout_width="343dp"
+        android:layout_height="54dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/edittext_style1"
         android:ems="10"
-        android:hint="Nombres "
+        android:hint="Nombre del Jugador"
         android:inputType="text"
-        app:layout_constraintBottom_toTopOf="@+id/txtApellido"
+        android:paddingLeft="10dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.144"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView6" />
 
     <EditText
         android:id="@+id/txtNumJugador"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
+        android:layout_width="343dp"
+        android:layout_height="54dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/edittext_style1"
         android:ems="10"
-        android:hint="Numero de camiseta "
+        android:hint="Número de Camiseta"
         android:inputType="number"
-        app:layout_constraintBottom_toTopOf="@+id/txtPosicion"
+        android:paddingLeft="10dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.144"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtTelefonoJugador" />
 
     <Button
-        android:id="@+id/btnGuardar"
-        android:layout_width="wrap_content"
+        android:id="@+id/btnInscribirJugador"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="28dp"
-        android:text="Guardar "
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="52dp"
+        android:backgroundTint="#EAE3FF"
+        android:text="INSCRIBIR JUGADOR"
+        android:textColor="#000000"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.506"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtEstadoJugador"
+        app:strokeColor="#855EF2"
+        app:strokeWidth="2dp" />
 
     <EditText
-        android:id="@+id/txtTelefono"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="24dp"
+        android:id="@+id/txtTelefonoJugador"
+        android:layout_width="343dp"
+        android:layout_height="54dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/edittext_style1"
         android:ems="10"
-        android:hint="Telefono"
-        android:inputType="number"
-        app:layout_constraintBottom_toTopOf="@+id/txtNumJugador"
+        android:hint="Número de Teléfono"
+        android:inputType="phone"
+        android:paddingLeft="10dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.144"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtEdadJugadores" />
 
     <EditText
-        android:id="@+id/txtApellido"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
+        android:id="@+id/txtApellidoJugador"
+        android:layout_width="343dp"
+        android:layout_height="54dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/edittext_style1"
         android:ems="10"
-        android:hint="Apellido"
+        android:hint="Apellido del Jugador"
         android:inputType="text"
-        app:layout_constraintBottom_toTopOf="@+id/txtFNacimiento"
+        android:paddingLeft="10dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.144"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtNombreJugador" />
 
     <EditText
-        android:id="@+id/txtEstado"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
+        android:id="@+id/txtFechaJugador"
+        android:layout_width="343dp"
+        android:layout_height="54dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/edittext_style1"
         android:ems="10"
-        android:hint="Estado "
+        android:hint="Fecha del Jugador"
         android:inputType="text"
-        app:layout_constraintBottom_toTopOf="@+id/btnGuardar"
+        android:paddingLeft="10dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.144"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtPosicionJugador" />
+
+    <EditText
+        android:id="@+id/txtEstadoJugador"
+        android:layout_width="343dp"
+        android:layout_height="54dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/edittext_style1"
+        android:ems="10"
+        android:hint="Estado del Jugador"
+        android:inputType="text"
+        android:paddingLeft="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtFechaJugador" />
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

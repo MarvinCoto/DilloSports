@@ -20,21 +20,22 @@
             android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="124dp"
             android:layout_marginTop="88dp"
             android:text="MIS TORNEOS"
-            android:textColor="#FFFFFF"
+            android:textColor="#855EF2"
             android:textSize="24sp"
             android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rcvTorneos"
-        android:layout_width="410dp"
+        android:layout_width="match_parent"
         android:layout_height="419dp"
         android:layout_marginTop="64dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
 
@@ -56,61 +57,56 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="276dp"
         android:layout_height="57dp"
-        android:layout_marginStart="64dp"
         android:layout_marginBottom="24dp"
         android:background="@drawable/menu_style"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/constraintLayout4"
+        <ImageView
+            android:id="@+id/imgHomeT"
             android:layout_width="38dp"
             android:layout_height="38dp"
-            android:layout_marginStart="7dp"
-            android:background="@drawable/vector_asset_home_1"
+            android:layout_marginStart="10dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.842"
+            app:srcCompat="@drawable/vector_asset_home_1" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/constraintLayout10"
+        <ImageView
+            android:id="@+id/imgTorneoH"
             android:layout_width="38dp"
             android:layout_height="38dp"
-            android:layout_marginEnd="7dp"
-            android:background="@drawable/vector_asset_perfil_1"
+            android:layout_marginStart="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/imgHomeT"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.526"
+            app:srcCompat="@drawable/vector_asset_torneos_2" />
+
+        <ImageView
+            android:layout_width="38dp"
+            android:layout_height="38dp"
+            android:layout_marginStart="30dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/imgPerfilT"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/imgTorneoH"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.526"
+            app:srcCompat="@drawable/vector_asset_resultados_1" />
+
+        <ImageView
+            android:id="@+id/imgPerfilT"
+            android:layout_width="38dp"
+            android:layout_height="38dp"
+            android:layout_marginEnd="10dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/constraintLayout9"
-            android:layout_width="38dp"
-            android:layout_height="38dp"
-            android:background="@drawable/vector_asset_resultados_1"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/constraintLayout10"
-            app:layout_constraintStart_toEndOf="@+id/constraintLayout8"
-            app:layout_constraintTop_toTopOf="parent">
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/constraintLayout8"
-            android:layout_width="38dp"
-            android:layout_height="38dp"
-            android:layout_marginStart="24dp"
-            android:background="@drawable/vector_asset_calendar_1"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/constraintLayout4"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.526">
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
+            app:layout_constraintVertical_bias="0.526"
+            app:srcCompat="@drawable/vector_asset_perfil_1" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

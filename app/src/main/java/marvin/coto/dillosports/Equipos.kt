@@ -1,0 +1,81 @@
+package marvin.coto.dillosports
+
+import RecyclerView.AdapterEqui
+import RecyclerView.AdapterTorn
+import android.content.Intent
+import android.os.Bundle
+import android.widget.Button
+import android.widget.ImageView
+import androidx.activity.enableEdgeToEdge
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import modelos.ClaseConexion
+import modelos.tbEquipos
+import modelos.tbTorneos
+
+class Equipos : AppCompatActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
+        setContentView(R.layout.activity_equipos)
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
+            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
+            insets
+        }
+        val imgTorneoB = findViewById<ImageView>(R.id.imgTorneoB)
+        imgTorneoB.setOnClickListener {
+            val intent = Intent(this, Ver_Torneo::class.java)
+            startActivity(intent)
+        }
+
+        val imgArbitroB = findViewById<ImageView>(R.id.imgArbitroB)
+        imgArbitroB.setOnClickListener {
+            val intent = Intent(this, Arbitros::class.java)
+            startActivity(intent)
+        }
+
+        val btnVerCrearEquipo = findViewById<Button>(R.id.btnVerCrearEquipo)
+        btnVerCrearEquipo.setOnClickListener {
+            val intent: Intent = Intent(this, inscribir_equipo::class.java)
+            startActivity(intent)
+        }
+
+        val rcvEquipos = findViewById<RecyclerView>(R.id.rcvEquipos)
+        rcvEquipos.layoutManager = LinearLayoutManager(this)
+
+        fun obtenerEquipos(): List<tbEquipos> {
+            val objConexion = ClaseConexion().cadenaConexion()
+
+            val statement = objConexion?.createStatement()
+            val resultSet = statement?.executeQuery("SELECT * FROM tbEquipos")!!
+            val listaEquipos = mutableListOf<tbEquipos>()
+
+            while(resultSet.next()){
+                val UUID_Equipo = resultSet.getString("UUID_Equipo")
+                val Nombre_Equipo = resultSet.getString("Nombre_Equipo")
+                val Descripcion_Equipo = resultSet.getString("Descripcion_Equipo")
+                val Ubicacion_Equipo = resultSet.getString("Ubicacion_Equipo")
+                val Estado_Equipo = resultSet.getString("Estado_Equipo")
+
+                val valoresJuntos = tbEquipos(UUID_Equipo, Nombre_Equipo, Descripcion_Equipo, Ubicacion_Equipo, Estado_Equipo)
+                listaEquipos.add(valoresJuntos)
+            }
+            return listaEquipos
+        }
+        CoroutineScope(Dispatchers.IO).launch {
+            val equiposBD = obtenerEquipos()
+            withContext(Dispatchers.Main){
+                val adapter = AdapterEqui(equiposBD)
+                rcvEquipos.adapter = adapter
+            }
+        }
+    }
+}
