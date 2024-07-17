@@ -3,6 +3,7 @@ package marvin.coto.dillosports
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
+import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
@@ -28,14 +29,92 @@ class Crear_Torneo : AppCompatActivity() {
             insets
         }
 
-        val txtNombreTorneo = findViewById<TextView>(R.id.txtNombreTorneo)
-        val txtDescripcionTorneo = findViewById<TextView>(R.id.txtDescripcionTorneo)
-        val txtUbicacionTorneo = findViewById<TextView>(R.id.txtUbicacionTorneo)
-        val txtTipoDeporte = findViewById<TextView>(R.id.txtTipoDeporte)
-        val txtEstadoTorneo = findViewById<TextView>(R.id.txtEstadoTorneo)
+        val txtNombreTorneo = findViewById<EditText>(R.id.txtNombreTorneo)
+        val txtDescripcionTorneo = findViewById<EditText>(R.id.txtDescripcionTorneo)
+        val txtUbicacionTorneo = findViewById<EditText>(R.id.txtUbicacionTorneo)
+        val txtTipoDeporte = findViewById<EditText>(R.id.txtTipoDeporte)
+        val txtEstadoTorneo = findViewById<EditText>(R.id.txtEstadoTorneo)
         val btnCrearTorneo = findViewById<Button>(R.id.btnCrearTorneo)
 
         btnCrearTorneo.setOnClickListener {
+
+            // Guardo en una variable los valores que escribió el usuario
+
+            val nombre = txtNombreTorneo.text.toString()
+            val descripcion = txtDescripcionTorneo.text.toString()
+            val ubicacion = txtUbicacionTorneo.text.toString()
+            val tipoDeporte = txtTipoDeporte.text.toString()
+            val estado = txtEstadoTorneo.text.toString()
+
+
+            // Variable para verificar si hay errores
+            //La inicializamos en false
+            var hayErrores = false
+
+            if (nombre.isEmpty()) {
+                txtNombreTorneo.error = "El nombre es obligatorio"
+                hayErrores = true
+            }
+            else {
+                txtNombreTorneo.error = null
+            }
+
+
+            if (descripcion.isEmpty()) {
+                txtDescripcionTorneo.error = "La descripción es obligatorio"
+                hayErrores = true
+            }
+            else {
+                txtDescripcionTorneo.error = null
+            }
+
+            if (ubicacion.isEmpty()) {
+                txtUbicacionTorneo.error = "La ubicación es obligatorio"
+                hayErrores = true
+            }
+            else {
+                txtUbicacionTorneo.error = null
+            }
+
+            if (tipoDeporte.isEmpty()) {
+                txtTipoDeporte.error = "El deporte es obligatorio"
+                hayErrores = true
+            }
+            else {
+                txtTipoDeporte.error = null
+            }
+
+            if (estado.isEmpty()) {
+                txtEstadoTorneo.error = "El estado del torneo es obligatorio"
+                hayErrores = true
+            }
+            else {
+                txtEstadoTorneo.error = null
+            }
+
+
+            //Funcion para limpiar campos
+            fun limpiarCampos(){
+                txtNombreTorneo.text.clear()
+                txtDescripcionTorneo.text.clear()
+                txtUbicacionTorneo.text.clear()
+                txtTipoDeporte.text.clear()
+                txtEstadoTorneo.text.clear()
+            }
+
+            //Funcion para guardar datos
+            fun guardarTorneos(
+                nombre: String,
+                descripcion: String,
+                ubicacion: String,
+                tipoDeporte: String,
+                estado: String
+            )
+            {
+
+
+
+
                 CoroutineScope(Dispatchers.IO).launch {
                     val objConexion = ClaseConexion().cadenaConexion()
 
@@ -57,8 +136,19 @@ class Crear_Torneo : AppCompatActivity() {
                         txtEstadoTorneo.setText("")
                     }
                 }
+
                 val intent: Intent = Intent(this, Torneos::class.java)
                 startActivity(intent)
+
+                if (hayErrores) {
+                    Toast.makeText(this@Crear_Torneo, "Datos ingresados incorrectamente", Toast.LENGTH_SHORT).show()
+                } else {
+                    // Si todas las validaciones son correctas, procede a guardar los datos
+                    guardarTorneos(nombre, descripcion, ubicacion, tipoDeporte, estado)
+                    limpiarCampos()
+                }
+
+            }
 
         }
     }

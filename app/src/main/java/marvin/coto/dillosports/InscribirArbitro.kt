@@ -3,6 +3,7 @@ package marvin.coto.dillosports
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
+import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -27,17 +28,81 @@ class InscribirArbitro : AppCompatActivity() {
             insets
         }
 
-        val txtNombreArbitro = findViewById<TextView>(R.id.txtNombreArbitro)
-        val txtApellidoArbitro = findViewById<TextView>(R.id.txtApellidoArbitro)
-        val txtEdadArbitro = findViewById<TextView>(R.id.txtEdadArbitro)
-        val txtTelefonoArbitro = findViewById<TextView>(R.id.txtTelefonoArbitro)
+        val txtNombreArbitro = findViewById<EditText>(R.id.txtNombreArbitro)
+        val txtApellidoArbitro = findViewById<EditText>(R.id.txtApellidoArbitro)
+        val txtEdadArbitro = findViewById<EditText>(R.id.txtEdadArbitro)
+        val txtTelefonoArbitro = findViewById<EditText>(R.id.txtTelefonoArbitro)
         val btnInscribirArbitro = findViewById<Button>(R.id.btnInscribirArbitro)
 
         btnInscribirArbitro.setOnClickListener {
+
+            //Guardo en una variable los valores que escribió el usuario
+
+            val nombre = txtNombreArbitro.text.toString()
+            val apellido = txtApellidoArbitro.text.toString()
+            val edad = txtEdadArbitro.text.toString()
+            val telefono = txtTelefonoArbitro.text.toString()
+
+            // Variable para verificar si hay errores
+            //La inicializamos en false
+
+            var hayErrores = false
+
+            //Valido que los campos no estén vacíos
+
+            if (nombre.isEmpty()) {
+                txtNombreArbitro.error = "El nombre es obligatorio"
+                hayErrores = true
+            }
+            else {
+                txtApellidoArbitro.error = null
+            }
+
+            if (apellido.isEmpty()) {
+                txtApellidoArbitro.error = "El apellido es obligatorio"
+                hayErrores = true
+            } else {
+                txtApellidoArbitro.error = null
+            }
+
+            if (edad.isEmpty()) {
+                txtEdadArbitro.error = "La edad es obligatorio"
+                hayErrores = true
+            } else {
+                txtEdadArbitro.error = null
+            }
+
+            if (telefono.isEmpty()) {
+                txtTelefonoArbitro.error = "El teléfono es obligatorio"
+                hayErrores = true
+            } else {
+                txtTelefonoArbitro.error = null
+            }
+
+
+            //Funcion para limpiar campos
+            fun limpiarCampos() {
+                txtNombreArbitro.text.clear()
+                txtApellidoArbitro.text.clear()
+                txtEdadArbitro.text.clear()
+                txtTelefonoArbitro.text.clear()
+
+            }
+
+
+            //Funcion para guardar datos
+            fun guardarArbitro(
+                nombre: String,
+                apellido: String,
+                edad: Int,
+                telefono: String
+            )
+            {
+
             CoroutineScope(Dispatchers.IO).launch {
                 val objConexion = ClaseConexion().cadenaConexion()
 
-                val addArbitro = objConexion?.prepareStatement("insert into tbArbitros1 (UUID_Arbitro, Nombre_Arbitro, Apellido_Arbitro, Edad_Arbitro, Telefono_Arbitro) values (?,?,?,?,?)")!!
+                val addArbitro = objConexion?.prepareStatement("insert into tbArbitros (UUID_Arbitro, Nombre_Arbitro, Apellido_Arbitro, Edad_Arbitro, Telefono_Arbitro) values (?,?,?,?,?)")!!
                 addArbitro.setString(1, UUID.randomUUID().toString())
                 addArbitro.setString(2, txtNombreArbitro.text.toString())
                 addArbitro.setString(3, txtApellidoArbitro.text.toString())
@@ -53,8 +118,20 @@ class InscribirArbitro : AppCompatActivity() {
                     txtTelefonoArbitro.setText("")
                 }
             }
+
+
             val intent: Intent = Intent(this, Arbitros::class.java)
             startActivity(intent)
+
+                if (hayErrores) {
+                    Toast.makeText(this@InscribirArbitro, "Datos ingresados incorrectamente", Toast.LENGTH_SHORT).show()
+                } else {
+                    // Si todas las validaciones son correctas, procede a guardar los datos
+                    guardarArbitro(nombre, apellido, edad.toInt(), telefono)
+                    limpiarCampos()
+                }
+
+            }
         }
     }
 }

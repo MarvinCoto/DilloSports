@@ -4,6 +4,7 @@ import android.app.DatePickerDialog
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
+import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -31,17 +32,119 @@ class activityNuevosJugadores : AppCompatActivity() {
         }
 
 
-        val txtNombreJugador = findViewById<TextView>(R.id.txtNombreJugador)
-        val txtApellidoJugador = findViewById<TextView>(R.id.txtApellidoJugador)
-        val txtEdadJugador = findViewById<TextView>(R.id. txtEdadJugadores)
-        val txtTelefonoJugador = findViewById<TextView>(R.id. txtTelefonoJugador)
-        val txtNumJugador = findViewById<TextView>(R.id.txtNumJugador)
-        val txtPosicionJugador = findViewById<TextView>(R.id.txtPosicionJugador)
-        val txtFechaJugador = findViewById<TextView>(R.id.txtFechaJugador)
-        val txtEstadoJugador = findViewById<TextView>(R.id.txtEstadoJugador)
+        val txtNombreJugador = findViewById<EditText>(R.id.txtNombreJugador)
+        val txtApellidoJugador = findViewById<EditText>(R.id.txtApellidoJugador)
+        val txtEdadJugador = findViewById<EditText>(R.id. txtEdadJugadores)
+        val txtTelefonoJugador = findViewById<EditText>(R.id. txtTelefonoJugador)
+        val txtNumJugador = findViewById<EditText>(R.id.txtNumJugador)
+        val txtPosicionJugador = findViewById<EditText>(R.id.txtPosicionJugador)
+        val txtFechaJugador = findViewById<EditText>(R.id.txtFechaJugador)
+        val txtEstadoJugador = findViewById<EditText>(R.id.txtEstadoJugador)
         val btnInscribirJugador = findViewById<Button>(R.id.btnInscribirJugador)
 
         btnInscribirJugador.setOnClickListener {
+
+            // Guardo en una variable los valores que escribió el usuario
+
+            val nombre = txtNombreJugador.text.toString()
+            val apellido = txtApellidoJugador.text.toString()
+            val edad = txtEdadJugador.text.toString()
+            val telefono = txtTelefonoJugador.text.toString()
+            val numJugador = txtNumJugador.text.toString()
+            val posicion = txtPosicionJugador.text.toString()
+            val fecha = txtFechaJugador.text.toString()
+            val estado = txtEstadoJugador.text.toString()
+
+
+            // Variable para verificar si hay errores
+            //La inicializamos en false
+            var hayErrores = false
+
+            if (nombre.isEmpty()) {
+                txtNombreJugador.error = "El nombre es obligatorio"
+                hayErrores = true
+            } else {
+                txtNombreJugador.error = null
+            }
+
+            if (apellido.isEmpty()) {
+                txtApellidoJugador.error = "El apellido es obligatorio"
+                hayErrores = true
+            } else {
+                txtApellidoJugador.error = null
+            }
+
+            if (edad.isEmpty()) {
+                txtEdadJugador.error = "La edad es obligatorio"
+                hayErrores = true
+            } else {
+                txtEdadJugador.error = null
+            }
+
+            if (telefono.isEmpty()) {
+                txtTelefonoJugador.error = "El teléfono es obligatorio"
+                hayErrores = true
+            } else {
+                txtTelefonoJugador.error = null
+            }
+
+            if (numJugador.isEmpty()) {
+                txtNumJugador.error = "El número de camiseta es obligatorio"
+                hayErrores = true
+            } else {
+                txtNumJugador.error = null
+            }
+
+            if (posicion.isEmpty()) {
+                txtPosicionJugador.error = "La posición de juego es obligatorio"
+                hayErrores = true
+            } else {
+                txtPosicionJugador.error = null
+            }
+
+            if (fecha.isEmpty()) {
+                txtFechaJugador.error = "La fecha es obligatoria es obligatorio"
+                hayErrores = true
+            } else {
+                txtFechaJugador.error = null
+            }
+
+            if (estado.isEmpty()) {
+                txtEstadoJugador.error = "El estado del jugador es obligatorio"
+                hayErrores = true
+            } else {
+                txtEstadoJugador.error = null
+            }
+
+
+            //Funcion para limpiar campos
+
+            fun limpiarCampos () {
+
+                txtNombreJugador.text.toString()
+                txtApellidoJugador.text.toString()
+                txtEdadJugador.text.toString()
+                txtTelefonoJugador.text.toString()
+                txtNumJugador.text.toString()
+                txtPosicionJugador.text.toString()
+                txtFechaJugador.text.toString()
+                txtEstadoJugador.text.toString()
+
+            }
+
+            fun inscribirJugador (
+                nombre: String,
+                apellido: String,
+                edad: Int,
+                telefono: String,
+                numJugador: Int,
+                posicion: String,
+                fecha: String,
+                estado: String
+            )
+            {
+
+
             CoroutineScope(Dispatchers.IO).launch {
                 val objConexion = ClaseConexion().cadenaConexion()
 
@@ -71,6 +174,16 @@ class activityNuevosJugadores : AppCompatActivity() {
             }
             val intent: Intent = Intent(this, mostrarJugadores::class.java)
             startActivity(intent)
+
+                if (hayErrores) {
+                    Toast.makeText(this@activityNuevosJugadores, "Datos ingresados incorrectamente", Toast.LENGTH_SHORT).show()
+                } else {
+                    // Si todas las validaciones son correctas, procede a guardar los datos
+                    inscribirJugador(nombre, apellido, edad.toInt(), telefono, numJugador.toInt(), posicion, fecha, estado)
+                    limpiarCampos()
+                }
+
+            }
         }
 
 

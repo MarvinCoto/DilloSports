@@ -3,6 +3,7 @@ package marvin.coto.dillosports
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
+import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -27,13 +28,81 @@ class inscribir_equipo : AppCompatActivity() {
             insets
         }
 
-        val txtNombreEquipo = findViewById<TextView>(R.id.txtNombreEquipo)
-        val txtDescripcionEquipo = findViewById<TextView>(R.id.txtDescripcionEquipo)
-        val txtUbicacionEquipo = findViewById<TextView>(R.id.txtUbicacionEquipo)
-        val txtEstadoEquipo = findViewById<TextView>(R.id.txtEstadoEquipo)
+        val txtNombreEquipo = findViewById<EditText>(R.id.txtNombreEquipo)
+        val txtDescripcionEquipo = findViewById<EditText>(R.id.txtDescripcionEquipo)
+        val txtUbicacionEquipo = findViewById<EditText>(R.id.txtUbicacionEquipo)
+        val txtEstadoEquipo = findViewById<EditText>(R.id.txtEstadoEquipo)
         val btnInscribirEquipo = findViewById<Button>(R.id.btnInscribirEquipo)
 
         btnInscribirEquipo.setOnClickListener {
+
+            // Guardo en una variable los valores que escribió el usuario
+            val nombre = txtNombreEquipo.text.toString()
+            val descripcion = txtDescripcionEquipo.text.toString()
+            val ubicacion = txtUbicacionEquipo.text.toString()
+            val estado = txtEstadoEquipo.text.toString()
+
+
+            // Variable para verificar si hay errores
+            //La inicializamos en false
+            var hayErrores = false
+
+            //1-
+            // Validar que los campos no estén vacíos
+
+            if (nombre.isEmpty()) {
+                txtNombreEquipo.error = "El nombre es obligatorio"
+                hayErrores = true
+            }
+            else {
+                txtNombreEquipo.error = null
+            }
+
+            if (descripcion.isEmpty()) {
+                txtDescripcionEquipo.error = "La descripción es obligatorio"
+                hayErrores = true
+            }
+            else {
+                txtDescripcionEquipo.error = null
+            }
+
+            if (ubicacion.isEmpty()) {
+                txtUbicacionEquipo.error = "La ubicación es obligatorio"
+                hayErrores = true
+            }
+            else {
+                txtUbicacionEquipo.error = null
+            }
+
+            if (estado.isEmpty()) {
+                txtEstadoEquipo.error = "El estado es obligatorio"
+                hayErrores = true
+            }
+            else {
+                txtEstadoEquipo.error = null
+            }
+
+
+            //Funcion para limpiar campos
+            fun limpiarCampos() {
+                txtNombreEquipo.text.clear()
+                txtDescripcionEquipo.text.clear()
+                txtUbicacionEquipo.text.clear()
+                txtEstadoEquipo.text.clear()
+            }
+
+
+            //Funcion para guardar datos
+            fun guardarEquipos(
+                nombre : String,
+                descripcion: String,
+                ubicacion: String,
+                estado: String
+            )
+            {
+
+
+
             CoroutineScope(Dispatchers.IO).launch {
                 val objConexion = ClaseConexion().cadenaConexion()
 
@@ -55,6 +124,16 @@ class inscribir_equipo : AppCompatActivity() {
             }
             val intent: Intent = Intent(this, Equipos::class.java)
             startActivity(intent)
+
+                if (hayErrores) {
+                    Toast.makeText(this@inscribir_equipo, "Datos ingresados incorrectamente", Toast.LENGTH_SHORT).show()
+                } else {
+                    // Si todas las validaciones son correctas, procede a guardar los datos
+                    guardarEquipos(nombre, descripcion, ubicacion, estado)
+                    limpiarCampos()
+                }
+
+            }
         }
     }
 }

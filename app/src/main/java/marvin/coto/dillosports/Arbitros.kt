@@ -52,7 +52,7 @@ class Arbitros : AppCompatActivity() {
             val objConexion = ClaseConexion().cadenaConexion()
 
             val statement = objConexion?.createStatement()
-            val resultSet = statement?.executeQuery("SELECT * FROM tbArbitros1")!!
+            val resultSet = statement?.executeQuery("SELECT * FROM tbArbitros")!!
             val listaArbitros = mutableListOf<tbArbitros>()
 
             while(resultSet.next()){
