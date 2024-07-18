@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+
+    android:id="@+id/cardViewArbitro"
+    android:layout_margin="16dp">
+
+    <LinearLayout
+        android:background="@drawable/card_torneos_style_1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/imgCard"
+            android:background="@drawable/perfil"
+            android:layout_width="125dp"
+            android:layout_height="125dp"
+            android:layout_marginEnd="10dp" />
+
+        <LinearLayout
+            android:layout_width="165dp"
+            android:layout_height="125dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/txtNombreArbitro"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="TEXT"
+                android:textSize="24sp"/>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="80dp"
+                android:layout_height="62dp"
+                android:orientation="vertical"
+                android:padding="12dp">
+
+                <ImageView
+                    android:id="@+id/imgEditarArbitro"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:srcCompat="@drawable/vector_asset_editar_1" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="80dp"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:padding="12dp">
+
+                <ImageView
+                    android:id="@+id/imgEliminarArbitro"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:srcCompat="@drawable/vector_asset_eliminar_1" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

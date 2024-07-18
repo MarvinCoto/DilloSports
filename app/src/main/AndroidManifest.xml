@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools" >
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -13,6 +13,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.DilloSports"
+<<<<<<< HEAD
         tools:targetApi="31">
         <activity
             android:name=".activityContrasena"
@@ -52,14 +53,116 @@
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+=======
+        tools:targetApi="31" >
+>>>>>>> master
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+    <activity
+        android:name=".activity_bienvenida"
+        android:exported="false" />
 
-        <meta-data
-            android:name="preloaded_fonts"
-            android:resource="@array/preloaded_fonts" />
+    <activity
+        android:name=".activity_iniciar_sesion"
+        android:exported="false" />
+
+    <activity
+        android:name=".activity_login"
+        android:exported="false" />
+
+    <activity
+        android:name=".Perfil"
+        android:exported="false" />
+
+    <activity
+        android:name=".ItemCardArbitro"
+        android:exported="false" />
+
+    <activity
+        android:name=".Splash_Screen"
+        android:exported="true" >
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
+    </activity>
+
+    <activity
+        android:name=".Home"
+        android:exported="false" />
+
+    <activity
+        android:name=".VerArbitro"
+        android:exported="false" />
+
+    <activity
+        android:name=".InscribirArbitro"
+        android:exported="false" />
+
+    <activity
+        android:name=".Arbitros"
+        android:exported="false" />
+
+    <activity
+        android:name=".VerJugadores"
+        android:exported="false" />
+
+    <activity
+        android:name=".item_card_equipos"
+        android:exported="false" />
+
+    <activity
+        android:name=".VerEquipo"
+        android:exported="false" />
+
+    <activity
+        android:name=".Equipos"
+        android:exported="false" />
+
+    <activity
+        android:name=".inscribir_equipo"
+        android:exported="false" />
+
+    <activity
+        android:name=".itemCardJugadores"
+        android:exported="false" />
+
+    <activity
+        android:name=".qwertyuiopsf"
+        android:exported="false" />
+
+    <activity
+        android:name=".Item_card_Torneos"
+        android:exported="false" />
+
+    <activity
+        android:name=".Ver_Torneo"
+        android:exported="false" />
+
+    <activity
+        android:name=".Crear_Torneo"
+        android:exported="false" />
+
+    <activity
+        android:name=".Torneos"
+        android:exported="false" />
+
+    <activity
+        android:name=".mostrarJugadores"
+        android:exported="false" />
+
+    <activity
+        android:name=".activityNuevosJugadores"
+        android:exported="false" />
+
+    <activity
+        android:name=".MainActivity"
+        android:exported="true" />
+
+
+    <meta-data
+        android:name="preloaded_fonts"
+        android:resource="@array/preloaded_fonts" />
     </application>
 
 </manifest>

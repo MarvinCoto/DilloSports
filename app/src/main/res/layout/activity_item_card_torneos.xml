@@ -15,10 +15,10 @@
 
         <ImageView
             android:id="@+id/imgCard"
-            android:background="@drawable/edittext_style1"
             android:layout_width="125dp"
             android:layout_height="125dp"
-            android:layout_marginEnd="10dp" />
+            android:layout_marginEnd="10dp"
+            android:background="@drawable/trofeo" />
 
         <LinearLayout
             android:layout_width="165dp"
@@ -26,14 +26,14 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/title1"
+                android:id="@+id/txtNombresTorneos"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="TEXT"
                 android:textSize="20sp"/>
 
             <TextView
-                android:id="@+id/txtUbicacion"
+                android:id="@+id/txtUbicacionesTorneos"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Ubicacion"
@@ -53,7 +53,7 @@
                 android:padding="12dp">
 
                 <ImageView
-                    android:id="@+id/imgEditar"
+                    android:id="@+id/imgEditarTorneos"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     app:srcCompat="@drawable/vector_asset_editar_1" />
@@ -66,7 +66,7 @@
                 android:padding="12dp">
 
                 <ImageView
-                    android:id="@+id/imgEliminar"
+                    android:id="@+id/imgEliminarTorneos"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     app:srcCompat="@drawable/vector_asset_eliminar_1" />

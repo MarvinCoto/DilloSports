@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Arbitros">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="276dp"
+        android:layout_height="57dp"
+        android:layout_marginBottom="24dp"
+        android:background="@drawable/menu_style"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <ImageView
+            android:id="@+id/imageView18"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_marginEnd="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/vector_asset_arbitro_2" />
+
+        <ImageView
+            android:id="@+id/imgTorneosC"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_marginStart="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/vector_asset_torneos_1" />
+
+        <ImageView
+            android:id="@+id/imgEquiposC"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/imageView18"
+            app:layout_constraintStart_toEndOf="@+id/imgTorneosC"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/vector_asset_equipos_1" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout12"
+        android:layout_width="411dp"
+        android:layout_height="160dp"
+        android:background="@drawable/navbar_style1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/textView8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="88dp"
+            android:text="ARBITROS"
+            android:textColor="#855EF2"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <Button
+        android:id="@+id/btnVerCrearArbitros"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:backgroundTint="#EAE3FF"
+        android:text="INSCRIBIR ARBITRO"
+        android:textColor="#000000"
+        android:textStyle="bold"
+        app:strokeColor="#855EF2"
+        app:strokeWidth="2dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout12" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rcvArbitros"
+        android:layout_width="match_parent"
+        android:layout_height="419dp"
+        android:layout_marginTop="64dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout12" />
+</androidx.constraintlayout.widget.ConstraintLayout>

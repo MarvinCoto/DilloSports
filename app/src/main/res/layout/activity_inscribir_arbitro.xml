@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".InscribirArbitro">
+
+    <TextView
+        android:id="@+id/textView10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="88dp"
+        android:textColor="#855EF2"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:text="Inscribir Arbitro"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/txtNombreArbitro"
+        android:layout_width="343dp"
+        android:layout_height="54dp"
+        android:layout_marginTop="32dp"
+        android:background="@drawable/edittext_style1"
+        android:ems="10"
+        android:hint="Nombre del Arbitro"
+        android:inputType="text"
+        android:paddingLeft="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView10" />
+
+    <EditText
+        android:id="@+id/txtApellidoArbitro"
+        android:layout_width="343dp"
+        android:layout_height="54dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/edittext_style1"
+        android:ems="10"
+        android:hint="Apellido del Arbitro"
+        android:inputType="text"
+        android:paddingLeft="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtNombreArbitro" />
+
+    <EditText
+        android:id="@+id/txtEdadArbitro"
+        android:layout_width="343dp"
+        android:layout_height="54dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/edittext_style1"
+        android:ems="10"
+        android:hint="Edad del Arbitro"
+        android:inputType="number"
+        android:paddingLeft="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtApellidoArbitro" />
+
+    <EditText
+        android:id="@+id/txtTelefonoArbitro"
+        android:layout_width="343dp"
+        android:layout_height="54dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/edittext_style1"
+        android:ems="10"
+        android:hint="Telefono del Arbitro"
+        android:inputType="phone"
+        android:paddingLeft="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtEdadArbitro" />
+
+    <Button
+        android:id="@+id/btnInscribirArbitro"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="44dp"
+        android:backgroundTint="#EAE3FF"
+        android:text="INSCRIBIR ARBITRO"
+        android:textColor="#000000"
+        android:textStyle="bold"
+        app:strokeColor="#855EF2"
+        app:strokeWidth="2dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtTelefonoArbitro" />
+</androidx.constraintlayout.widget.ConstraintLayout>
