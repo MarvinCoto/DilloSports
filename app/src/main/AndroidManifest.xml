@@ -13,50 +13,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.DilloSports"
-<<<<<<< HEAD
         tools:targetApi="31">
-        <activity
-            android:name=".activityContrasena"
-            android:exported="false" />
-        <activity
-            android:name=".ActivityRecuContrasena"
-            android:exported="false" />
-        <activity
-            android:name=".inscribir_equipo"
-            android:exported="false" />
-        <activity
-            android:name=".itemCardJugadores"
-            android:exported="false" />
-        <activity
-            android:name=".qwertyuiopsf"
-            android:exported="false" />
-        <activity
-            android:name=".Item_card_Torneos"
-            android:exported="false" />
-        <activity
-            android:name=".Ver_Torneo"
-            android:exported="false" />
-        <activity
-            android:name=".Crear_Torneo"
-            android:exported="false" />
-        <activity
-            android:name=".Torneos"
-            android:exported="false" />
-        <activity
-            android:name=".mostrarJugadores"
-            android:exported="false" />
-        <activity
-            android:name=".activityNuevosJugadores"
-            android:exported="false" />
-        <activity
-            android:name=".MainActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-=======
-        tools:targetApi="31" >
->>>>>>> master
-
     <activity
         android:name=".activity_bienvenida"
         android:exported="false" />
@@ -162,7 +119,7 @@
 
     <meta-data
         android:name="preloaded_fonts"
-        android:resource="@array/preloaded_fonts" />
+        android:resource="@array/preloaded_fonts"/>
     </application>
 
 </manifest>
