@@ -51,7 +51,7 @@ class activity_iniciar_sesion : AppCompatActivity() {
                 val contraseniaEncriptada = hashSHA256(txtContraseniaUsuario.text.toString())
 
                 //2- Creo la variable qu tenga un PrepareStatement
-                val comprobarUsuario = objConexion?.prepareStatement("SELECT * FROM tbUsuarios WHERE Correo_Usuario = ? AND Contrasena_Usuario = ?")!!
+                val comprobarUsuario = objConexion?.prepareStatement("SELECT * FROM tbUsuarios1 WHERE Correo_Usuario = ? AND Contrasena_Usuario = ?")!!
                 comprobarUsuario.setString(1, txtCorreoUsuario.text.toString())
                 comprobarUsuario.setString(2, contraseniaEncriptada)
                 val resultado = comprobarUsuario.executeQuery()

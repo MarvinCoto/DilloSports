@@ -82,58 +82,33 @@ class inscribir_equipo : AppCompatActivity() {
                 txtEstadoEquipo.error = null
             }
 
-
-            //Funcion para limpiar campos
-            fun limpiarCampos() {
-                txtNombreEquipo.text.clear()
-                txtDescripcionEquipo.text.clear()
-                txtUbicacionEquipo.text.clear()
-                txtEstadoEquipo.text.clear()
-            }
-
-
-            //Funcion para guardar datos
-            fun guardarEquipos(
-                nombre : String,
-                descripcion: String,
-                ubicacion: String,
-                estado: String
-            )
-            {
-
-
-
-            CoroutineScope(Dispatchers.IO).launch {
-                val objConexion = ClaseConexion().cadenaConexion()
-
-                val addEquipo = objConexion?.prepareStatement("insert into tbEquipos (UUID_Equipo, Nombre_Equipo, Descripcion_Equipo, Ubicacion_Equipo, Estado_Equipo) values (?,?,?,?,?)")!!
-                addEquipo.setString(1, UUID.randomUUID().toString())
-                addEquipo.setString(2, txtNombreEquipo.text.toString())
-                addEquipo.setString(3, txtDescripcionEquipo.text.toString())
-                addEquipo.setString(4, txtUbicacionEquipo.text.toString())
-                addEquipo.setString(5, txtEstadoEquipo.text.toString())
-                addEquipo.executeUpdate()
-
-                withContext(Dispatchers.Main) {
-                    Toast.makeText(this@inscribir_equipo, "Equipo Inscrito", Toast.LENGTH_SHORT).show()
-                    txtNombreEquipo.setText("")
-                    txtDescripcionEquipo.setText("")
-                    txtUbicacionEquipo.setText("")
-                    txtEstadoEquipo.setText("")
-                }
-            }
-            val intent: Intent = Intent(this, Equipos::class.java)
-            startActivity(intent)
-
                 if (hayErrores) {
                     Toast.makeText(this@inscribir_equipo, "Datos ingresados incorrectamente", Toast.LENGTH_SHORT).show()
                 } else {
-                    // Si todas las validaciones son correctas, procede a guardar los datos
-                    guardarEquipos(nombre, descripcion, ubicacion, estado)
-                    limpiarCampos()
+                    val intent: Intent = Intent(this, Equipos::class.java)
+                    startActivity(intent)
+
+                    CoroutineScope(Dispatchers.IO).launch {
+                        val objConexion = ClaseConexion().cadenaConexion()
+
+                        val addEquipo = objConexion?.prepareStatement("insert into tbEquipos (UUID_Equipo, Nombre_Equipo, Descripcion_Equipo, Ubicacion_Equipo, Estado_Equipo) values (?,?,?,?,?)")!!
+                        addEquipo.setString(1, UUID.randomUUID().toString())
+                        addEquipo.setString(2, txtNombreEquipo.text.toString())
+                        addEquipo.setString(3, txtDescripcionEquipo.text.toString())
+                        addEquipo.setString(4, txtUbicacionEquipo.text.toString())
+                        addEquipo.setString(5, txtEstadoEquipo.text.toString())
+                        addEquipo.executeUpdate()
+
+                        withContext(Dispatchers.Main) {
+                            Toast.makeText(this@inscribir_equipo, "Equipo Inscrito", Toast.LENGTH_SHORT).show()
+                            txtNombreEquipo.setText("")
+                            txtDescripcionEquipo.setText("")
+                            txtUbicacionEquipo.setText("")
+                            txtEstadoEquipo.setText("")
+                        }
+                    }
                 }
 
             }
         }
     }
-}

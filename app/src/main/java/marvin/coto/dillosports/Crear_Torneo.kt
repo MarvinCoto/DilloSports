@@ -93,62 +93,37 @@ class Crear_Torneo : AppCompatActivity() {
             }
 
 
-            //Funcion para limpiar campos
-            fun limpiarCampos(){
-                txtNombreTorneo.text.clear()
-                txtDescripcionTorneo.text.clear()
-                txtUbicacionTorneo.text.clear()
-                txtTipoDeporte.text.clear()
-                txtEstadoTorneo.text.clear()
-            }
-
-            //Funcion para guardar datos
-            fun guardarTorneos(
-                nombre: String,
-                descripcion: String,
-                ubicacion: String,
-                tipoDeporte: String,
-                estado: String
-            )
-            {
-
-
-
-
-                CoroutineScope(Dispatchers.IO).launch {
-                    val objConexion = ClaseConexion().cadenaConexion()
-
-                    val addTorneo = objConexion?.prepareStatement("insert into tbTorneos (UUID_Torneo, Nombre_Torneo, Ubicacion_Torneo, Descripcion_Torneo, Deporte, Estado_Toneo) values (?,?,?,?,?,?)")!!
-                    addTorneo.setString(1, UUID.randomUUID().toString())
-                    addTorneo.setString(2, txtNombreTorneo.text.toString())
-                    addTorneo.setString(3, txtUbicacionTorneo.text.toString())
-                    addTorneo.setString(4, txtDescripcionTorneo.text.toString())
-                    addTorneo.setString(5, txtEstadoTorneo.text.toString())
-                    addTorneo.setString(6, txtTipoDeporte.text.toString())
-                    addTorneo.executeUpdate()
-
-                    withContext(Dispatchers.Main){
-                        Toast.makeText(this@Crear_Torneo, "Torneo Creado", Toast.LENGTH_SHORT).show()
-                        txtNombreTorneo.setText("")
-                        txtDescripcionTorneo.setText("")
-                        txtUbicacionTorneo.setText("")
-                        txtTipoDeporte.setText("")
-                        txtEstadoTorneo.setText("")
-                    }
-                }
-
-                val intent: Intent = Intent(this, Torneos::class.java)
-                startActivity(intent)
 
                 if (hayErrores) {
                     Toast.makeText(this@Crear_Torneo, "Datos ingresados incorrectamente", Toast.LENGTH_SHORT).show()
                 } else {
-                    // Si todas las validaciones son correctas, procede a guardar los datos
-                    guardarTorneos(nombre, descripcion, ubicacion, tipoDeporte, estado)
-                    limpiarCampos()
+                    val intent: Intent = Intent(this, Torneos::class.java)
+                    startActivity(intent)
+
+                    CoroutineScope(Dispatchers.IO).launch {
+                        val objConexion = ClaseConexion().cadenaConexion()
+
+                        val addTorneo = objConexion?.prepareStatement("insert into tbTorneos (UUID_Torneo, Nombre_Torneo, Ubicacion_Torneo, Descripcion_Torneo, Deporte, Estado_Toneo) values (?,?,?,?,?,?)")!!
+                        addTorneo.setString(1, UUID.randomUUID().toString())
+                        addTorneo.setString(2, txtNombreTorneo.text.toString())
+                        addTorneo.setString(3, txtUbicacionTorneo.text.toString())
+                        addTorneo.setString(4, txtDescripcionTorneo.text.toString())
+                        addTorneo.setString(5, txtEstadoTorneo.text.toString())
+                        addTorneo.setString(6, txtTipoDeporte.text.toString())
+                        addTorneo.executeUpdate()
+
+                        withContext(Dispatchers.Main){
+                            Toast.makeText(this@Crear_Torneo, "Torneo Creado", Toast.LENGTH_SHORT).show()
+                            txtNombreTorneo.setText("")
+                            txtDescripcionTorneo.setText("")
+                            txtUbicacionTorneo.setText("")
+                            txtTipoDeporte.setText("")
+                            txtEstadoTorneo.setText("")
+                        }
+                    }
                 }
 
-            }
+
 
         }
     }

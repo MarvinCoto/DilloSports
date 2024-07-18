@@ -178,94 +178,65 @@ class activity_login : AppCompatActivity() {
 
             //Funcion para limpiar campos
 
-            fun limpiarCampos() {
-
-                txtNombreRegistro.text.clear()
-                txtApellidoRegistro.text.clear()
-                txtUsernameRegistro.text.clear()
-                txtContraseniaRegistro.text.clear()
-                txtCorreoRegistro.text.clear()
-                txtTelefonoRegistro.text.clear()
-                txtGeneroRegistro.text.clear()
-                txtNacimientoRegistro.text.clear()
-                txtEdadRegistro.text.clear()
-                txtAlturaRegistro.text.clear()
-                txtPesoRegistro.text.clear()
-
-            }
 
             //Funcion para guardar los datos
 
-            fun guardarUsuario(
-                nombre: String,
-                apellido: String,
-                username: String,
-                contrasenia: String,
-                correo: String,
-                telefono: String,
-                genero: String,
-                fecha: String,
-                edad: Int,
-                altura: Int,
-                peso: Int
-            ) {
 
-                GlobalScope.launch(Dispatchers.IO) {
-                    //Creo un objeto de la clase conexion
-                    val objConexion = ClaseConexion().cadenaConexion()
 
-                    //Encripto la contraseña
-                    val contraseniaEncriptada = hashSHA256(txtContraseniaRegistro.text.toString())
 
-                    //Creo una variable que contenga el PrepareStatement
-                    val crearUsuario =
-                        objConexion?.prepareStatement("INSERT INTO tbUsuarios(UUID_Usuario, Nombre_Usuario, Apellido_Usuario, User_name, Contrasena_Usuario, Correo_Usuario, Telefono_Usuario, Genero_Usuario, FNacimiento_Usuario, Edad_Usuario, Altura_Usuario, Peso_Usuario) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)")!!
-                    crearUsuario.setString(1, UUID.randomUUID().toString())
-                    crearUsuario.setString(2, txtNombreRegistro.text.toString())
-                    crearUsuario.setString(3, txtApellidoRegistro.text.toString())
-                    crearUsuario.setString(4, txtUsernameRegistro.text.toString())
-                    crearUsuario.setString(5, contraseniaEncriptada)
-                    crearUsuario.setString(6, txtCorreoRegistro.text.toString())
-                    crearUsuario.setString(7, txtTelefonoRegistro.text.toString())
-                    crearUsuario.setString(8, txtGeneroRegistro.text.toString())
-                    crearUsuario.setString(9, txtNacimientoRegistro.text.toString())
-                    crearUsuario.setInt(10, txtEdadRegistro.text.toString().toInt())
-                    crearUsuario.setInt(11, txtAlturaRegistro.text.toString().toInt())
-                    crearUsuario.setInt(12, txtPesoRegistro.text.toString().toInt())
-                    crearUsuario.executeUpdate()
-                    withContext(Dispatchers.Main) {
-                        //Abro otra corrutiana para mostrar el mensaje y limpiar campos
-                        Toast.makeText(
-                            this@activity_login,
-                            "Usuario creado con éxito",
-                            Toast.LENGTH_SHORT
-                        ).show()
-                        txtNombreRegistro.setText("")
-                        txtApellidoRegistro.setText("")
-                        txtUsernameRegistro.setText("")
-                        txtContraseniaRegistro.setText("")
-                        txtCorreoRegistro.setText("")
-                        txtTelefonoRegistro.setText("")
-                        txtGeneroRegistro.setText("")
-                        txtNacimientoRegistro.setText("")
-                        txtEdadRegistro.setText("")
-                        txtAlturaRegistro.setText("")
-                        txtPesoRegistro.setText("")
-                    }
-                }
-                val intent = Intent(this, Home::class.java)
-                startActivity(intent)
+
 
                 if (hayErrores) {
                     Toast.makeText(this@activity_login, "Datos ingresados incorrectamente", Toast.LENGTH_SHORT).show()
                 } else {
+                    val intent = Intent(this, Home::class.java)
+                    startActivity(intent)
                     // Si todas las validaciones son correctas, procede a guardar los datos
-                    guardarUsuario(nombre, apellido, username, contrasenia, correo, telefono, genero, fecha, edad.toInt(), altura.toInt(), peso.toInt())
-                    limpiarCampos()
+                    GlobalScope.launch(Dispatchers.IO) {
+                        //Creo un objeto de la clase conexion
+                        val objConexion = ClaseConexion().cadenaConexion()
+
+                        //Encripto la contraseña
+                        val contraseniaEncriptada = hashSHA256(txtContraseniaRegistro.text.toString())
+
+                        //Creo una variable que contenga el PrepareStatement
+                        val crearUsuario =
+                            objConexion?.prepareStatement("INSERT INTO tbUsuarios1(UUID_Usuario, Nombre_Usuario, Apellido_Usuario, User_name, Contrasena_Usuario, Correo_Usuario, Telefono_Usuario, Genero_Usuario, FNacimiento_Usuario, Edad_Usuario, Altura_Usuario, Peso_Usuario) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)")!!
+                        crearUsuario.setString(1, UUID.randomUUID().toString())
+                        crearUsuario.setString(2, txtNombreRegistro.text.toString())
+                        crearUsuario.setString(3, txtApellidoRegistro.text.toString())
+                        crearUsuario.setString(4, txtUsernameRegistro.text.toString())
+                        crearUsuario.setString(5, contraseniaEncriptada)
+                        crearUsuario.setString(6, txtCorreoRegistro.text.toString())
+                        crearUsuario.setString(7, txtTelefonoRegistro.text.toString())
+                        crearUsuario.setString(8, txtGeneroRegistro.text.toString())
+                        crearUsuario.setString(9, txtNacimientoRegistro.text.toString())
+                        crearUsuario.setInt(10, txtEdadRegistro.text.toString().toInt())
+                        crearUsuario.setInt(11, txtAlturaRegistro.text.toString().toInt())
+                        crearUsuario.setInt(12, txtPesoRegistro.text.toString().toInt())
+                        crearUsuario.executeUpdate()
+                        withContext(Dispatchers.Main) {
+                            //Abro otra corrutiana para mostrar el mensaje y limpiar campos
+                            Toast.makeText(
+                                this@activity_login,
+                                "Usuario creado con éxito",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                            txtNombreRegistro.setText("")
+                            txtApellidoRegistro.setText("")
+                            txtUsernameRegistro.setText("")
+                            txtContraseniaRegistro.setText("")
+                            txtCorreoRegistro.setText("")
+                            txtTelefonoRegistro.setText("")
+                            txtGeneroRegistro.setText("")
+                            txtNacimientoRegistro.setText("")
+                            txtEdadRegistro.setText("")
+                            txtAlturaRegistro.setText("")
+                            txtPesoRegistro.setText("")
+                        }
+                    }
+
                 }
-            }
-
-
         }
 
         btnIrALogin.setOnClickListener {

@@ -79,59 +79,33 @@ class InscribirArbitro : AppCompatActivity() {
                 txtTelefonoArbitro.error = null
             }
 
-
-            //Funcion para limpiar campos
-            fun limpiarCampos() {
-                txtNombreArbitro.text.clear()
-                txtApellidoArbitro.text.clear()
-                txtEdadArbitro.text.clear()
-                txtTelefonoArbitro.text.clear()
-
-            }
-
-
-            //Funcion para guardar datos
-            fun guardarArbitro(
-                nombre: String,
-                apellido: String,
-                edad: Int,
-                telefono: String
-            )
-            {
-
-            CoroutineScope(Dispatchers.IO).launch {
-                val objConexion = ClaseConexion().cadenaConexion()
-
-                val addArbitro = objConexion?.prepareStatement("insert into tbArbitros (UUID_Arbitro, Nombre_Arbitro, Apellido_Arbitro, Edad_Arbitro, Telefono_Arbitro) values (?,?,?,?,?)")!!
-                addArbitro.setString(1, UUID.randomUUID().toString())
-                addArbitro.setString(2, txtNombreArbitro.text.toString())
-                addArbitro.setString(3, txtApellidoArbitro.text.toString())
-                addArbitro.setInt(4, txtEdadArbitro.text.toString().toInt())
-                addArbitro.setString(5, txtTelefonoArbitro.text.toString())
-                addArbitro.executeUpdate()
-
-                withContext(Dispatchers.Main) {
-                    Toast.makeText(this@InscribirArbitro, "Arbitro Inscrito", Toast.LENGTH_SHORT).show()
-                    txtNombreArbitro.setText("")
-                    txtApellidoArbitro.setText("")
-                    txtEdadArbitro.setText("")
-                    txtTelefonoArbitro.setText("")
-                }
-            }
-
-
-            val intent: Intent = Intent(this, Arbitros::class.java)
-            startActivity(intent)
-
                 if (hayErrores) {
                     Toast.makeText(this@InscribirArbitro, "Datos ingresados incorrectamente", Toast.LENGTH_SHORT).show()
                 } else {
-                    // Si todas las validaciones son correctas, procede a guardar los datos
-                    guardarArbitro(nombre, apellido, edad.toInt(), telefono)
-                    limpiarCampos()
+                    val intent: Intent = Intent(this, Arbitros::class.java)
+                    startActivity(intent)
+
+                    CoroutineScope(Dispatchers.IO).launch {
+                        val objConexion = ClaseConexion().cadenaConexion()
+
+                        val addArbitro = objConexion?.prepareStatement("insert into tbArbitros (UUID_Arbitro, Nombre_Arbitro, Apellido_Arbitro, Edad_Arbitro, Telefono_Arbitro) values (?,?,?,?,?)")!!
+                        addArbitro.setString(1, UUID.randomUUID().toString())
+                        addArbitro.setString(2, txtNombreArbitro.text.toString())
+                        addArbitro.setString(3, txtApellidoArbitro.text.toString())
+                        addArbitro.setInt(4, txtEdadArbitro.text.toString().toInt())
+                        addArbitro.setString(5, txtTelefonoArbitro.text.toString())
+                        addArbitro.executeUpdate()
+
+                        withContext(Dispatchers.Main) {
+                            Toast.makeText(this@InscribirArbitro, "Arbitro Inscrito", Toast.LENGTH_SHORT).show()
+                            txtNombreArbitro.setText("")
+                            txtApellidoArbitro.setText("")
+                            txtEdadArbitro.setText("")
+                            txtTelefonoArbitro.setText("")
+                        }
+                    }
                 }
 
             }
         }
     }
-}
