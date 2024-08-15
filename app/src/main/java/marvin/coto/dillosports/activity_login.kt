@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -35,21 +36,10 @@ class activity_login : AppCompatActivity() {
         val txtUsernameRegistro = findViewById<EditText>(R.id.txtUsernameRegistro)
         val txtContraseniaRegistro = findViewById<EditText>(R.id.txtContraseniaRegistro)
         val txtCorreoRegistro = findViewById<EditText>(R.id.txtCorreoRegistro)
-        val txtTelefonoRegistro = findViewById<EditText>(R.id.txtTelefonoRegistro)
-        val txtGeneroRegistro = findViewById<EditText>(R.id.txtGeneroRegistro)
         val txtNacimientoRegistro = findViewById<EditText>(R.id.txtNacimientoRegistro)
-        val txtEdadRegistro = findViewById<EditText>(R.id.txtEdadRegistro)
-        val txtAlturaRegistro = findViewById<EditText>(R.id.txtAlturaRegistro)
-        val txtPesoRegistro = findViewById<EditText>(R.id.txtPesoRegistro)
         val btnCrearCuenta = findViewById<Button>(R.id.btnCrearCuenta)
-        val btnIrALogin = findViewById<Button>(R.id.btnIrALogin)
+        val IrALogin = findViewById<TextView>(R.id.textViewIrALogin)
 
-        txtNacimientoRegistro.setOnClickListener {
-            val calendario = Calendar.getInstance()
-            val anio = calendario.get(Calendar.YEAR)
-            val mes = calendario.get(Calendar.MONTH)
-            val dia = calendario.get(Calendar.DAY_OF_MONTH)
-        }
 
         //Creo la función para encriptar la contraseña
         fun hashSHA256(contraseniaEscrita: String): String {
@@ -101,7 +91,7 @@ class activity_login : AppCompatActivity() {
             startActivity(intent)
         }
 
-        btnIrALogin.setOnClickListener{
+        IrALogin.setOnClickListener{
             val pantallaLogin = Intent(this, activity_iniciar_sesion::class.java)
             startActivity(pantallaLogin)
         }
