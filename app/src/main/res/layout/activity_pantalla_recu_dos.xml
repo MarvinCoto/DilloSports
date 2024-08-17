@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#111111"
+    tools:context=".Pantalla_recuDos">
+
+    <ImageView
+        android:id="@+id/imageView27"
+        android:layout_width="415dp"
+        android:layout_height="748dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.529"
+        app:srcCompat="@drawable/fondo_dos" />
+
+    <TextView
+        android:id="@+id/textViewRecu11"
+        android:layout_width="223dp"
+        android:layout_height="90dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/jaldi_bold"
+        android:text="Recuperación de Cuenta"
+        android:textColor="#00A532"
+        android:textSize="30dp"
+        android:textStyle="italic"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.066"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView26"
+        android:layout_width="75dp"
+        android:layout_height="4dp"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="60dp"
+        app:layout_constraintStart_toEndOf="@+id/textViewRecu11"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/linea_uno" />
+
+    <ImageView
+        android:id="@+id/imageView28"
+        android:layout_width="90dp"
+        android:layout_height="90dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toEndOf="@+id/imageView29"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/dillo" />
+
+    <ImageView
+        android:id="@+id/imageView29"
+        android:layout_width="90dp"
+        android:layout_height="90dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toEndOf="@+id/textViewRecu11"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/dillou" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout14"
+        android:layout_width="388dp"
+        android:layout_height="230dp"
+        android:layout_marginTop="28dp"
+        android:background="@drawable/cards"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.478"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewRecu11">
+
+        <TextView
+            android:id="@+id/textViewRecu12"
+            android:layout_width="332dp"
+            android:layout_height="64dp"
+            android:layout_marginStart="28dp"
+            android:layout_marginTop="28dp"
+            android:text="Compruebe si ha recibido un correo electrónico con un código de 4 dígitos de parte de dillosports para recuperar su cuenta."
+            android:textColor="#707070"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/editTextText2"
+            android:layout_width="320dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/edittext_style1"
+            android:ems="10"
+            android:hint="XXXX"
+            android:inputType="text"
+            android:letterSpacing="4"
+            android:paddingLeft="10dp"
+            android:textColorHint="#898989"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewRecu13" />
+
+        <TextView
+            android:id="@+id/textViewRecu13"
+            android:layout_width="278dp"
+            android:layout_height="25dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="24dp"
+            android:text="Introducir el código de recuperación"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewRecu12" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/textViewRecu15"
+        android:layout_width="104dp"
+        android:layout_height="21dp"
+        android:layout_marginStart="152dp"
+        android:layout_marginTop="4dp"
+        android:text="Enviar Código."
+        android:textColor="#00A532"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewRecu14" />
+
+    <TextView
+        android:id="@+id/textViewRecu14"
+        android:layout_width="306dp"
+        android:layout_height="26dp"
+        android:layout_marginStart="52dp"
+        android:layout_marginTop="28dp"
+        android:text="Enviar otra vez el código de recuperación."
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button4" />
+
+    <Button
+        android:id="@+id/button4"
+        android:layout_width="243dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:backgroundTint="#00A532"
+        android:text="Iniciar Sesión"
+        android:textColor="#000000"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:cornerRadius="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.505"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout14" />
+</androidx.constraintlayout.widget.ConstraintLayout>

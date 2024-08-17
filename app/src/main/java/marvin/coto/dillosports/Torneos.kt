@@ -16,7 +16,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import modelos.ClaseConexion
-import modelos.tbJugadores
 import modelos.tbTorneos
 
 class Torneos : AppCompatActivity() {
@@ -29,7 +28,7 @@ class Torneos : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-        val imgHomeT = findViewById<ImageView>(R.id.imgHomeT)
+        val imgHomeT = findViewById<ImageView>(R.id.img)
         imgHomeT.setOnClickListener {
             val intent = Intent(this, Home::class.java)
             startActivity(intent)

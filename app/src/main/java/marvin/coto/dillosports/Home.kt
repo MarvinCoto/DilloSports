@@ -22,7 +22,7 @@ class Home : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-        val imgTorneo = findViewById<ImageView>(R.id.imgTorneoH)
+        val imgTorneo = findViewById<ImageView>(R.id.imgTorneoHome)
         imgTorneo.setOnClickListener {
             val intent = Intent(this, Torneos::class.java)
             startActivity(intent)
