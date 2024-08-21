@@ -32,8 +32,7 @@ class Crear_Torneo : AppCompatActivity() {
         val txtNombreTorneo = findViewById<EditText>(R.id.txtNombreTorneo)
         val txtDescripcionTorneo = findViewById<EditText>(R.id.txtDescripcionTorneo)
         val txtUbicacionTorneo = findViewById<EditText>(R.id.txtUbicacionTorneo)
-        val txtTipoDeporte = findViewById<EditText>(R.id.txtTipoDeporte)
-        val txtEstadoTorneo = findViewById<EditText>(R.id.txtEstadoTorneo)
+        val txtTipoDeporte = findViewById<EditText>(R.id.spTipoDeporte)
         val btnCrearTorneo = findViewById<Button>(R.id.btnCrearTorneo)
 
         btnCrearTorneo.setOnClickListener {
@@ -44,8 +43,6 @@ class Crear_Torneo : AppCompatActivity() {
             val descripcion = txtDescripcionTorneo.text.toString()
             val ubicacion = txtUbicacionTorneo.text.toString()
             val tipoDeporte = txtTipoDeporte.text.toString()
-            val estado = txtEstadoTorneo.text.toString()
-
 
             // Variable para verificar si hay errores
             //La inicializamos en false
@@ -84,13 +81,6 @@ class Crear_Torneo : AppCompatActivity() {
                 txtTipoDeporte.error = null
             }
 
-            if (estado.isEmpty()) {
-                txtEstadoTorneo.error = "El estado del torneo es obligatorio"
-                hayErrores = true
-            }
-            else {
-                txtEstadoTorneo.error = null
-            }
 
 
 
@@ -103,13 +93,12 @@ class Crear_Torneo : AppCompatActivity() {
                     CoroutineScope(Dispatchers.IO).launch {
                         val objConexion = ClaseConexion().cadenaConexion()
 
-                        val addTorneo = objConexion?.prepareStatement("insert into tbTorneos (UUID_Torneo, Nombre_Torneo, Ubicacion_Torneo, Descripcion_Torneo, Deporte, Estado_Toneo) values (?,?,?,?,?,?)")!!
+                        val addTorneo = objConexion?.prepareStatement("insert into tbTorneos (UUID_Torneo, Nombre_Torneo, Ubicacion_Torneo, Descripcion_Torneo, Deporte) values (?,?,?,?,?)")!!
                         addTorneo.setString(1, UUID.randomUUID().toString())
                         addTorneo.setString(2, txtNombreTorneo.text.toString())
                         addTorneo.setString(3, txtUbicacionTorneo.text.toString())
                         addTorneo.setString(4, txtDescripcionTorneo.text.toString())
-                        addTorneo.setString(5, txtEstadoTorneo.text.toString())
-                        addTorneo.setString(6, txtTipoDeporte.text.toString())
+                        addTorneo.setString(5, txtTipoDeporte.text.toString())
                         addTorneo.executeUpdate()
 
                         withContext(Dispatchers.Main){
@@ -118,7 +107,6 @@ class Crear_Torneo : AppCompatActivity() {
                             txtDescripcionTorneo.setText("")
                             txtUbicacionTorneo.setText("")
                             txtTipoDeporte.setText("")
-                            txtEstadoTorneo.setText("")
                         }
                     }
                 }

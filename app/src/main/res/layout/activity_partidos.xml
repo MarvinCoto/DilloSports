@@ -6,16 +6,30 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#1C1C1C"
-    tools:context=".Arbitros">
+    tools:context=".Partidos">
 
     <ImageView
         android:id="@+id/imgirCrearTorn2"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginTop="36dp"
-        app:layout_constraintEnd_toStartOf="@+id/btnVerCrearArbitros"
+        app:layout_constraintEnd_toStartOf="@+id/btnVerCrearEquipo"
         app:layout_constraintTop_toBottomOf="@+id/textView46"
         app:srcCompat="@drawable/vector_asset_crear" />
+
+    <Button
+        android:id="@+id/btnVerCrearEquipo"
+        android:layout_width="136dp"
+        android:layout_height="51dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="10dp"
+        android:backgroundTint="#1C1C1C"
+        android:text="Calendarizar Partido"
+        android:textColor="#00A532"
+        android:textSize="13sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView8" />
 
     <ImageView
         android:id="@+id/imageView8"
@@ -66,7 +80,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
-        android:text="Arbitros"
+        android:text="Partidos"
         android:textColor="#C3C3C3"
         android:textSize="18sp"
         android:textStyle="bold|italic"
@@ -116,7 +130,7 @@
             android:layout_marginBottom="9dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:srcCompat="@drawable/vector_asset_arbitro_2" />
+            app:srcCompat="@drawable/vector_asset_arbitro_1" />
 
         <ImageView
             android:id="@+id/imgEquiposA"
@@ -126,14 +140,14 @@
             android:layout_marginBottom="9dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/imgArbitrosA"
-            app:srcCompat="@drawable/vector_asset_partidos_1" />
+            app:srcCompat="@drawable/vector_asset_partidos_2" />
 
         <TextView
-            android:id="@+id/textView44"
+            android:id="@+id/textView45"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="72dp"
-            android:text="Partidos"
+            android:layout_marginEnd="7dp"
+            android:text="Arbitros"
             android:textColor="#000000"
             android:textSize="8sp"
             android:textStyle="bold"
@@ -179,33 +193,20 @@
             android:layout_width="9dp"
             android:layout_height="1dp"
             android:layout_marginTop="2dp"
-            android:layout_marginEnd="18dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imgArbitrosA"
+            android:layout_marginEnd="49dp"
+            app:layout_constraintEnd_toStartOf="@+id/textView45"
+            app:layout_constraintTop_toBottomOf="@+id/imgEquiposA"
             app:srcCompat="@drawable/linea_dos" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <Button
-        android:id="@+id/btnVerCrearArbitros"
-        android:layout_width="136dp"
-        android:layout_height="51dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="10dp"
-        android:backgroundTint="#1C1C1C"
-        android:text="Añadir Arbitro"
-        android:textColor="#00A532"
-        android:textSize="13sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView8" />
-
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rcvArbitros"
+        android:id="@+id/rcvPartidos"
         android:layout_width="389dp"
         android:layout_height="454dp"
         android:layout_marginTop="12dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnVerCrearArbitros" />
+        app:layout_constraintTop_toBottomOf="@+id/btnVerCrearEquipo" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
