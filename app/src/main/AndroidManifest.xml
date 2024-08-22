@@ -15,6 +15,9 @@
         android:theme="@style/Theme.DilloSports"
         tools:targetApi="31">
         <activity
+            android:name=".Item_card_partidos"
+            android:exported="false" />
+        <activity
             android:name=".Ver_partido"
             android:exported="false" />
         <activity
