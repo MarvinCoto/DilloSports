@@ -17,34 +17,46 @@
             android:id="@+id/imgCardJugadores"
             android:layout_width="125dp"
             android:layout_height="125dp"
-            android:layout_marginEnd="10dp"
             android:background="@drawable/perfil" />
 
+        <ImageView
+            android:id="@+id/imgCardLineaUno"
+            android:layout_width="10dp"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="10dp"
+            android:background="@drawable/element_grafic_1" />
+
         <LinearLayout
-            android:layout_width="165dp"
-            android:layout_height="125dp"
+            android:layout_width="164dp"
+            android:layout_height="match_parent"
             android:orientation="vertical">
 
             <TextView
                 android:id="@+id/txtNombreJugador"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="NOMBRE"
-                android:textSize="20sp"/>
+                android:textColor="#FFFFFF"
+                android:text="Nombre"
+                android:textSize="18sp"
+                android:layout_marginTop="10dp"/>
 
             <TextView
                 android:id="@+id/txtPosicionJugador"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Posicion"
-                android:textSize="15sp"/>
+                android:textColor="#C3C3C3"
+                android:textSize="15sp"
+                android:layout_marginTop="5dp"/>
 
             <TextView
                 android:id="@+id/txtNumeroCamisa"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="NumerodeCamiseta"
-                android:textSize="15sp"/>
+                android:textColor="#C3C3C3"
+                android:textSize="15sp"
+                android:layout_marginTop="5dp"/>
 
         </LinearLayout>
 
@@ -54,10 +66,11 @@
             android:orientation="vertical">
 
             <LinearLayout
-                android:layout_width="80dp"
-                android:layout_height="62dp"
+                android:layout_width="85dp"
+                android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:padding="12dp">
+                android:padding="8dp"
+                android:layout_marginTop="20dp">
 
                 <ImageView
                     android:id="@+id/imgEditarJugador"
@@ -67,10 +80,10 @@
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="80dp"
-                android:layout_height="match_parent"
+                android:layout_width="85dp"
+                android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:padding="12dp">
+                android:padding="8dp">
 
                 <ImageView
                     android:id="@+id/imgEliminarJugador"
