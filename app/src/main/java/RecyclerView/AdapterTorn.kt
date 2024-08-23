@@ -70,7 +70,7 @@ class AdapterTorn(var Datos: List<tbTorneos>): RecyclerView.Adapter<ViewHolderTo
         holder.txtNombreTorneo.text = item.Nombre_Torneo
         holder.txtUbicacionTorneo.text = item.Ubicacion_Torneo
 
-        holder.imgEliminarTorneo.setOnClickListener {
+        /*holder.imgEliminarTorneo.setOnClickListener {
             val context = holder.itemView.context
             val builder = AlertDialog.Builder(context)
 
@@ -127,7 +127,7 @@ class AdapterTorn(var Datos: List<tbTorneos>): RecyclerView.Adapter<ViewHolderTo
             }
             val dialog = builder.create()
             dialog.show()
-        }
+        }*/
 
         holder.itemView.setOnClickListener {
             val context = holder.itemView.context

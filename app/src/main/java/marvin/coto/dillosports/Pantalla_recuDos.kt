@@ -24,14 +24,16 @@ class Pantalla_recuDos : AppCompatActivity() {
         val txtRecu = findViewById<EditText>(R.id.txtRecu)
         val btnIniciarSesionRecu = findViewById<Button>(R.id.btnIniciarSesionRecu)
 
-        /*btnIniciarSesionRecu.setOnClickListener {
-            if (txtRecu.text.toString() == codigoRecu.toString()){
+        val recuGlobal = Pantalla_recuUno.codigoRecu
+
+        btnIniciarSesionRecu.setOnClickListener {
+            if (txtRecu.text.toString() == recuGlobal.toString()){
                 val intent = Intent(this, Home::class.java)
                 startActivity(intent)
             }
             else{
                 Toast.makeText(this@Pantalla_recuDos, "Codigo Incorrecto", Toast.LENGTH_SHORT).show()
             }
-        }*/
+        }
     }
 }

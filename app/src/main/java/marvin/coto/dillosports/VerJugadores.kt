@@ -36,17 +36,13 @@ class VerJugadores : AppCompatActivity() {
         val estadoRecibido = intent.getStringExtra("EstadoJugador")
         val textViewNombreJugador = findViewById<TextView>(R.id.textViewNombreJugador)
         val textViewApellidoJugador = findViewById<TextView>(R.id.textViewApellidoJugador)
-        val textViewFechaJugador = findViewById<TextView>(R.id.textViewFechaJugador)
         val textViewEdadJugador = findViewById<TextView>(R.id.textViewEdadJugador)
-        val textViewTelefonoJugador = findViewById<TextView>(R.id.textViewTelefonoJugador)
         val textViewNumeroJugador = findViewById<TextView>(R.id.textViewNumeroJugador)
         val textViewPosicionJugador = findViewById<TextView>(R.id.textViewPosicionJugador)
         val textViewEstadoJugador = findViewById<TextView>(R.id.textViewEstadoJugador)
         textViewNombreJugador.text = nombreRecibido
         textViewApellidoJugador.text = apellidoRecibido
-        textViewFechaJugador.text = fNacimientoRecibido
         textViewEdadJugador.text = edadRecibido.toString()
-        textViewTelefonoJugador.text = telefonoRecibido
         textViewNumeroJugador.text = numeroRecibido.toString()
         textViewPosicionJugador.text = posicionRecibido
         textViewEstadoJugador.text = estadoRecibido

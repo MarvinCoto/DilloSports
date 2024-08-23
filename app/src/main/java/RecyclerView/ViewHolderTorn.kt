@@ -9,6 +9,4 @@ import marvin.coto.dillosports.R
 class ViewHolderTorn(view: View): RecyclerView.ViewHolder(view) {
     val txtNombreTorneo = view.findViewById<TextView>(R.id.txtNombresTorneos)
     val txtUbicacionTorneo = view.findViewById<TextView>(R.id.txtUbicacionesTorneos)
-    val imgEditarTorneo = view.findViewById<ImageView>(R.id.imgEditarTorneos)
-    val imgEliminarTorneo = view.findViewById<ImageView>(R.id.imgEliminarTorneos)
 }

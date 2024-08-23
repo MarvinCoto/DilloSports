@@ -60,20 +60,33 @@ class Calendarizar_partido : AppCompatActivity() {
             datePickerDialog.show()
         }
 
-        /*txtHoraPartido.setOnClickListener {
+         fun showTimePickerDialog() {
             val calendario = Calendar.getInstance()
-            val hora = calendario.get(Calendar.HOUR_OF_DAY)
-            val minuto = calendario.get(Calendar.MINUTE)
+            val hour = calendario.get(Calendar.HOUR_OF_DAY)
+            val minute = calendario.get(Calendar.MINUTE)
+
             val timePickerDialog = TimePickerDialog(
                 this,
-                { view, horaSeleccionada, minutoSeleccionado ->
-                    val timeSeleccionado = "$horaSeleccionada/$minutoSeleccionado"
-                    txtHoraPartido.setText(timeSeleccionado)
+                { _, selectedHour, selectedMinute ->
+                    // Formatear la hora seleccionada con AM/PM
+                    val amPm = if (selectedHour < 12) "AM" else "PM"
+                    val hourIn12Format = if (selectedHour % 12 == 0) 12 else selectedHour % 12
+                    val horaSeleccionada = String.format("%02d:%02d %s", hourIn12Format, selectedMinute, amPm)
+                    txtHoraPartido.setText(horaSeleccionada)
+                    // Puedes actualizar el TextView o hacer algo más con la hora seleccionada
                 },
-                hora, minuto
+                hour,
+                minute,
+                false // false para formato de 12 horas
             )
             timePickerDialog.show()
-        }*/
+        }
+
+        txtHoraPartido.setOnClickListener {
+            showTimePickerDialog()
+        }
+
+
 
         fun obtenerEquipo(): List<tbEquipos> {
             val objConexion = ClaseConexion().cadenaConexion()

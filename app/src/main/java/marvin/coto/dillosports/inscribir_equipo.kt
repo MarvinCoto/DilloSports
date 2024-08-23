@@ -31,7 +31,7 @@ class inscribir_equipo : AppCompatActivity() {
         val txtNombreEquipo = findViewById<EditText>(R.id.txtNombreEquipo)
         val txtDescripcionEquipo = findViewById<EditText>(R.id.txtDescripcionEquipo)
         val txtUbicacionEquipo = findViewById<EditText>(R.id.txtUbicacionEquipo)
-        val txtEstadoEquipo = findViewById<EditText>(R.id.txtEstadoEquipo)
+        //val txtEstadoEquipo = findViewById<EditText>(R.id.txtEstadoEquipo)
         val btnInscribirEquipo = findViewById<Button>(R.id.btnInscribirEquipo)
 
         btnInscribirEquipo.setOnClickListener {
@@ -40,7 +40,6 @@ class inscribir_equipo : AppCompatActivity() {
             val nombre = txtNombreEquipo.text.toString()
             val descripcion = txtDescripcionEquipo.text.toString()
             val ubicacion = txtUbicacionEquipo.text.toString()
-            val estado = txtEstadoEquipo.text.toString()
 
 
             // Variable para verificar si hay errores
@@ -74,13 +73,6 @@ class inscribir_equipo : AppCompatActivity() {
                 txtUbicacionEquipo.error = null
             }
 
-            if (estado.isEmpty()) {
-                txtEstadoEquipo.error = "El estado es obligatorio"
-                hayErrores = true
-            }
-            else {
-                txtEstadoEquipo.error = null
-            }
 
                 if (hayErrores) {
                     Toast.makeText(this@inscribir_equipo, "Datos ingresados incorrectamente", Toast.LENGTH_SHORT).show()
@@ -96,7 +88,7 @@ class inscribir_equipo : AppCompatActivity() {
                         addEquipo.setString(2, txtNombreEquipo.text.toString())
                         addEquipo.setString(3, txtDescripcionEquipo.text.toString())
                         addEquipo.setString(4, txtUbicacionEquipo.text.toString())
-                        addEquipo.setString(5, txtEstadoEquipo.text.toString())
+                        //addEquipo.setString(5, txtEstadoEquipo.text.toString())
                         addEquipo.executeUpdate()
 
                         withContext(Dispatchers.Main) {
@@ -104,7 +96,6 @@ class inscribir_equipo : AppCompatActivity() {
                             txtNombreEquipo.setText("")
                             txtDescripcionEquipo.setText("")
                             txtUbicacionEquipo.setText("")
-                            txtEstadoEquipo.setText("")
                         }
                     }
                 }

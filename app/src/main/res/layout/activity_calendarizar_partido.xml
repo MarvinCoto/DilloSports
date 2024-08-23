@@ -5,19 +5,8 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#1C1C1C"
+    android:background="@drawable/fondo_dos"
     tools:context=".Calendarizar_partido">
-
-    <ImageView
-        android:id="@+id/imageView33"
-        android:layout_width="414dp"
-        android:layout_height="735dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.666"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/fondo_dos" />
 
     <ImageView
         android:id="@+id/imageView36"
@@ -102,9 +91,10 @@
                     android:background="@drawable/edittext_style1"
                     android:ems="10"
                     android:focusable="false"
-                    android:inputType="none"
                     android:hint="Seleccione la fecha del partido"
+                    android:inputType="none"
                     android:paddingLeft="10dp"
+                    android:textColor="#FFFFFF"
                     android:textColorHint="#898989"
                     android:textSize="16sp"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -134,9 +124,11 @@
                     android:layout_marginTop="8dp"
                     android:background="@drawable/edittext_style1"
                     android:ems="10"
+                    android:focusable="false"
                     android:hint="Ingrese la hora del partido"
-                    android:inputType="text"
+                    android:inputType="none"
                     android:paddingLeft="10dp"
+                    android:textColor="#FFFFFF"
                     android:textColorHint="#898989"
                     android:textSize="16sp"
                     app:layout_constraintEnd_toEndOf="parent"
