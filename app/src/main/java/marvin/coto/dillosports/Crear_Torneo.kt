@@ -1,7 +1,12 @@
 package marvin.coto.dillosports
 
+import android.app.Activity
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.graphics.Bitmap
+import android.net.Uri
 import android.os.Bundle
+import android.provider.MediaStore
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
@@ -9,6 +14,8 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import kotlinx.coroutines.CoroutineScope
@@ -19,6 +26,14 @@ import modelos.ClaseConexion
 import java.util.UUID
 
 class Crear_Torneo : AppCompatActivity() {
+    val codigo_opcion_galeria = 102
+    val STORAGE_REQUEST_CODE = 1
+
+    lateinit var imageView: ImageView
+    lateinit var miPath: String
+
+    val uuid = UUID.randomUUID().toString()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -28,12 +43,17 @@ class Crear_Torneo : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-
+        imageView = findViewById(R.id.img_torneo)
+        val btnSubirImgTorneo = findViewById<Button>(R.id.btnSubirImgTorneo)
         val txtNombreTorneo = findViewById<EditText>(R.id.txtNombreTorneo)
         val txtDescripcionTorneo = findViewById<EditText>(R.id.txtDescripcionTorneo)
         val txtUbicacionTorneo = findViewById<EditText>(R.id.txtUbicacionTorneo)
-        val txtTipoDeporte = findViewById<EditText>(R.id.spTipoDeporte)
+        //val spTipoDeporte = findViewById<Spinner>(R.id.spTipoDeporte)
         val btnCrearTorneo = findViewById<Button>(R.id.btnCrearTorneo)
+
+        btnSubirImgTorneo.setOnClickListener {
+            checkStoragePermission()
+        }
 
         btnCrearTorneo.setOnClickListener {
 
@@ -42,7 +62,6 @@ class Crear_Torneo : AppCompatActivity() {
             val nombre = txtNombreTorneo.text.toString()
             val descripcion = txtDescripcionTorneo.text.toString()
             val ubicacion = txtUbicacionTorneo.text.toString()
-            val tipoDeporte = txtTipoDeporte.text.toString()
 
             // Variable para verificar si hay errores
             //La inicializamos en false
@@ -73,15 +92,6 @@ class Crear_Torneo : AppCompatActivity() {
                 txtUbicacionTorneo.error = null
             }
 
-            if (tipoDeporte.isEmpty()) {
-                txtTipoDeporte.error = "El deporte es obligatorio"
-                hayErrores = true
-            }
-            else {
-                txtTipoDeporte.error = null
-            }
-
-
 
 
                 if (hayErrores) {
@@ -98,7 +108,7 @@ class Crear_Torneo : AppCompatActivity() {
                         addTorneo.setString(2, txtNombreTorneo.text.toString())
                         addTorneo.setString(3, txtUbicacionTorneo.text.toString())
                         addTorneo.setString(4, txtDescripcionTorneo.text.toString())
-                        addTorneo.setString(5, txtTipoDeporte.text.toString())
+                        //addTorneo.setString(5, txtTipoDeporte.text.toString())
                         addTorneo.executeUpdate()
 
                         withContext(Dispatchers.Main){
@@ -106,7 +116,6 @@ class Crear_Torneo : AppCompatActivity() {
                             txtNombreTorneo.setText("")
                             txtDescripcionTorneo.setText("")
                             txtUbicacionTorneo.setText("")
-                            txtTipoDeporte.setText("")
                         }
                     }
                 }
@@ -115,4 +124,64 @@ class Crear_Torneo : AppCompatActivity() {
 
         }
     }
+    private fun pedirPermisoAlmacenamiento() {
+        if (ActivityCompat.shouldShowRequestPermissionRationale(this, android.Manifest.permission.READ_EXTERNAL_STORAGE)) {
+
+        }
+        else {
+            ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.READ_EXTERNAL_STORAGE), STORAGE_REQUEST_CODE)
+        }
+    }
+
+    private fun checkStoragePermission(){
+        if(ContextCompat.checkSelfPermission(this, android.Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED){
+            pedirPermisoAlmacenamiento()
+        }
+        else{
+            val intent = Intent(Intent.ACTION_PICK)
+            intent.type = "image/*"
+            startActivityForResult(intent, codigo_opcion_galeria)
+        }
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<String>, grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        when (requestCode) {
+            STORAGE_REQUEST_CODE -> {
+                if ((grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
+                    val intent = Intent(Intent.ACTION_PICK)
+                    intent.type = "image/*"
+                    startActivityForResult(intent, codigo_opcion_galeria)
+                } else {
+                    Toast.makeText(this, "Permiso de almacenamiento denegado", Toast.LENGTH_SHORT)
+                        .show()
+                }
+            }
+            else -> {
+                //...
+            }
+        }
+    }
+
+    /*override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (resultCode == Activity.RESULT_OK) {
+            when (requestCode) {
+                codigo_opcion_galeria -> {
+                    val imageUri: Uri? = data?.data
+                    imageUri?.let {
+                        val imageBitmap = MediaStore.Images.Media.getBitmap(contentResolver, it)
+                        subirimagenFirebase(imageBitmap) { url ->
+                            miPath = url
+                            imageView.setImageURI(it)
+                        }
+                    }
+                }
+            }
+        }
+    }*/
+
 }

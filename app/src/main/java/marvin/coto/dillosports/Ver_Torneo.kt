@@ -25,6 +25,12 @@ class Ver_Torneo : AppCompatActivity() {
             startActivity(intent)
         }
 
+        val imgPartidosA = findViewById<ImageView>(R.id.imgPartidosA)
+        imgPartidosA.setOnClickListener {
+            val intent = Intent(this, Partidos::class.java)
+            startActivity(intent)
+        }
+
         val imgEquipo = findViewById<ImageView>(R.id.imgEquiposA)
         imgEquipo.setOnClickListener {
             val intent = Intent(this, Equipos::class.java)

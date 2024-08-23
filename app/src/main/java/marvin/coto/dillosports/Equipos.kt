@@ -30,13 +30,19 @@ class Equipos : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+        val imgPartidosB = findViewById<ImageView>(R.id.imgPartidosB)
+        imgPartidosB.setOnClickListener {
+            val intent = Intent(this, Partidos::class.java)
+            startActivity(intent)
+        }
+
         val imgTorneoB = findViewById<ImageView>(R.id.imgTorneoB)
         imgTorneoB.setOnClickListener {
             val intent = Intent(this, Ver_Torneo::class.java)
             startActivity(intent)
         }
 
-        val imgArbitroB = findViewById<ImageView>(R.id.imgArbitroB)
+        val imgArbitroB = findViewById<ImageView>(R.id.imgArbitrosB)
         imgArbitroB.setOnClickListener {
             val intent = Intent(this, Arbitros::class.java)
             startActivity(intent)

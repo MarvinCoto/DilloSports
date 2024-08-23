@@ -240,10 +240,10 @@
             app:srcCompat="@drawable/fondo_img_torneo" />
 
         <ImageView
-            android:id="@+id/imageView41"
+            android:id="@+id/img_torneo"
             android:layout_width="100dp"
-            android:layout_height="86dp"
-            android:layout_marginTop="12dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="4dp"
             app:layout_constraintEnd_toEndOf="@+id/imageView40"
             app:layout_constraintHorizontal_bias="0.571"
             app:layout_constraintStart_toStartOf="@+id/imageView40"
@@ -251,7 +251,7 @@
             app:srcCompat="@drawable/icon_torneo_2" />
 
         <Button
-            android:id="@+id/button5"
+            android:id="@+id/btnSubirImgTorneo"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"

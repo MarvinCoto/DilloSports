@@ -101,8 +101,9 @@
                     android:layout_marginTop="8dp"
                     android:background="@drawable/edittext_style1"
                     android:ems="10"
-                    android:hint="Ingrese la fecha del partido"
-                    android:inputType="text"
+                    android:focusable="false"
+                    android:inputType="none"
+                    android:hint="Seleccione la fecha del partido"
                     android:paddingLeft="10dp"
                     android:textColorHint="#898989"
                     android:textSize="16sp"
@@ -282,7 +283,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <Button
-        android:id="@+id/button8"
+        android:id="@+id/btnCalendarizarPartido"
         android:layout_width="243dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"

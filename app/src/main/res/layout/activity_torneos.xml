@@ -113,7 +113,7 @@
         app:layout_constraintStart_toStartOf="parent">
 
         <ImageView
-            android:id="@+id/img"
+            android:id="@+id/imgCasa"
             android:layout_width="38dp"
             android:layout_height="38dp"
             android:layout_marginStart="4dp"
@@ -140,7 +140,7 @@
             app:srcCompat="@drawable/icon_torneo_2"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/imgPerfilT"
-            app:layout_constraintStart_toEndOf="@+id/img" />
+            app:layout_constraintStart_toEndOf="@+id/imgCasa" />
 
         <TextView
             android:id="@+id/textView43"
@@ -152,7 +152,7 @@
             android:textSize="8sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/img" />
+            app:layout_constraintTop_toBottomOf="@+id/imgCasa" />
 
         <TextView
             android:id="@+id/textView42"

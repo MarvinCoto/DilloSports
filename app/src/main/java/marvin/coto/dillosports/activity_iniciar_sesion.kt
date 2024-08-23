@@ -31,7 +31,7 @@ class activity_iniciar_sesion : AppCompatActivity() {
         val txtCorreoUsuario = findViewById<EditText>(R.id.txtCorreoUsuario)
         val txtContraseniaUsuario = findViewById<EditText>(R.id.txtContraseniaUsuario)
         val btnIniciarSesion = findViewById<Button>(R.id.btnIniciarSesion)
-        val irRegistro = findViewById<TextView>(R.id.textViewIrRegistro)
+        val textViewIrRegistro = findViewById<TextView>(R.id.textViewIrRegistro)
 
         fun hashSHA256(contraseniaEscrita: String): String {
             val bytes = MessageDigest.getInstance("SHA-256").digest(contraseniaEscrita.toByteArray())
@@ -39,7 +39,7 @@ class activity_iniciar_sesion : AppCompatActivity() {
         }
 
         btnIniciarSesion.setOnClickListener {
-            //Preparo un inter para ir a la pantalla principal
+            //Preparo un intent para ir a la pantalla principal
             val pantallaPrincipal = Intent(this, Home::class.java)
 
             //Hago una corrutina para hacer un select a la base de datos
@@ -66,7 +66,7 @@ class activity_iniciar_sesion : AppCompatActivity() {
             }
         }
 
-        irRegistro.setOnClickListener{
+        textViewIrRegistro.setOnClickListener{
             val pantallaRegistro = Intent(this, activity_login::class.java)
             startActivity((pantallaRegistro))
         }

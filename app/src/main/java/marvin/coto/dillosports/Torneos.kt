@@ -28,7 +28,7 @@ class Torneos : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-        val imgHomeT = findViewById<ImageView>(R.id.img)
+        val imgHomeT = findViewById<ImageView>(R.id.imgCasa)
         imgHomeT.setOnClickListener {
             val intent = Intent(this, Home::class.java)
             startActivity(intent)

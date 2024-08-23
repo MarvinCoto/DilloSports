@@ -13,12 +13,12 @@
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginTop="36dp"
-        app:layout_constraintEnd_toStartOf="@+id/btnVerCrearEquipo"
+        app:layout_constraintEnd_toStartOf="@+id/btnVerCrearPartido"
         app:layout_constraintTop_toBottomOf="@+id/textView46"
         app:srcCompat="@drawable/vector_asset_crear" />
 
     <Button
-        android:id="@+id/btnVerCrearEquipo"
+        android:id="@+id/btnVerCrearPartido"
         android:layout_width="136dp"
         android:layout_height="51dp"
         android:layout_marginTop="16dp"
@@ -113,7 +113,7 @@
         app:layout_constraintStart_toStartOf="parent">
 
         <ImageView
-            android:id="@+id/imageView17"
+            android:id="@+id/imgTorneoC"
             android:layout_width="33dp"
             android:layout_height="33dp"
             android:layout_marginStart="4dp"
@@ -123,7 +123,7 @@
             app:srcCompat="@drawable/icon_torneo_1" />
 
         <ImageView
-            android:id="@+id/imgArbitrosA"
+            android:id="@+id/imgArbitrosC"
             android:layout_width="36dp"
             android:layout_height="36dp"
             android:layout_marginEnd="4dp"
@@ -139,7 +139,7 @@
             android:layout_marginEnd="32dp"
             android:layout_marginBottom="9dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/imgArbitrosA"
+            app:layout_constraintEnd_toStartOf="@+id/imgArbitrosC"
             app:srcCompat="@drawable/vector_asset_partidos_2" />
 
         <TextView
@@ -152,16 +152,16 @@
             android:textSize="8sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imgArbitrosA" />
+            app:layout_constraintTop_toBottomOf="@+id/imgArbitrosC" />
 
         <ImageView
-            android:id="@+id/imageView37"
+            android:id="@+id/imgEquipoC"
             android:layout_width="33dp"
             android:layout_height="33dp"
             android:layout_marginStart="32dp"
             android:layout_marginBottom="9dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/imageView17"
+            app:layout_constraintStart_toEndOf="@+id/imgTorneoC"
             app:srcCompat="@drawable/icon_equipo_2" />
 
         <TextView
@@ -174,7 +174,7 @@
             android:textSize="8sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView37" />
+            app:layout_constraintTop_toBottomOf="@+id/imgEquipoC" />
 
         <TextView
             android:id="@+id/textView43"
@@ -186,7 +186,7 @@
             android:textSize="8sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView17" />
+            app:layout_constraintTop_toBottomOf="@+id/imgTorneoC" />
 
         <ImageView
             android:id="@+id/imageView3"
@@ -207,6 +207,6 @@
         android:layout_marginTop="12dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnVerCrearEquipo" />
+        app:layout_constraintTop_toBottomOf="@+id/btnVerCrearPartido" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

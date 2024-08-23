@@ -1,5 +1,6 @@
 package marvin.coto.dillosports
 
+import android.app.DatePickerDialog
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
@@ -40,6 +41,23 @@ class activity_login : AppCompatActivity() {
         val btnCrearCuenta = findViewById<Button>(R.id.btnCrearCuenta)
         val IrALogin = findViewById<TextView>(R.id.textViewIrALogin)
 
+        txtNacimientoRegistro.setOnClickListener {
+            val calendario = Calendar.getInstance()
+            val anio = calendario.get(Calendar.YEAR)
+            val mes = calendario.get(Calendar.MONTH)
+            val dia = calendario.get(Calendar.DAY_OF_MONTH)
+            val datePickerDialog = DatePickerDialog(
+                this,
+                { view, anioSeleccionado, mesSeleccionado, diaSeleccionado ->
+                    val fechaSeleccionada =
+                        "$diaSeleccionado/${mesSeleccionado + 1}/$anioSeleccionado"
+                    txtNacimientoRegistro.setText(fechaSeleccionada)
+                },
+                anio, mes, dia
+            )
+            datePickerDialog.show()
+        }
+
 
         //Creo la función para encriptar la contraseña
         fun hashSHA256(contraseniaEscrita: String): String {
@@ -57,12 +75,7 @@ class activity_login : AppCompatActivity() {
             val username = txtUsernameRegistro.text.toString()
             val contrasenia = txtContraseniaRegistro.text.toString()
             val correo = txtCorreoRegistro.text.toString()
-            val telefono = txtTelefonoRegistro.text.toString()
-            val genero = txtGeneroRegistro.text.toString()
             val fecha = txtNacimientoRegistro.text.toString()
-            val edad = txtEdadRegistro.text.toString()
-            val altura = txtAlturaRegistro.text.toString()
-            val peso = txtPesoRegistro.text.toString()
 
             //Creo la variable para verificar que no hay errores
             //Se inicializa en false
@@ -106,48 +119,12 @@ class activity_login : AppCompatActivity() {
                 txtCorreoRegistro.error = null
             }
 
-            if (telefono.isEmpty()) {
-                txtTelefonoRegistro.error = "El teléfono es obligatorio"
-                hayErrores = true
-            } else {
-                txtTelefonoRegistro.error = null
-            }
-
-            if (genero.isEmpty()) {
-                txtGeneroRegistro.error = "El género es obligatorio"
-                hayErrores = true
-            } else {
-                txtGeneroRegistro.error = null
-            }
-
             if (fecha.isEmpty()) {
                 txtNacimientoRegistro.error = "La fecha de nacimiento es obligatorio"
                 hayErrores = true
             } else {
                 txtNacimientoRegistro.error = null
             }
-
-            if (edad.isEmpty()) {
-                txtEdadRegistro.error = "La edad es obligatorio"
-                hayErrores = true
-            } else {
-                txtEdadRegistro.error = null
-            }
-
-            if (altura.isEmpty()) {
-                txtAlturaRegistro.error = "La altura es obligatorio"
-                hayErrores = true
-            } else {
-                txtEdadRegistro.error = null
-            }
-
-            if (peso.isEmpty()) {
-                txtPesoRegistro.error = "El peso es obligatorio"
-                hayErrores = true
-            } else {
-                txtPesoRegistro.error = null
-            }
-
             //Validar que el correo sea correo
 
             if (!correo.matches(Regex("[a-zA-Z0-9._-]+@[a-z]+[.][a-z]+"))) {
@@ -191,19 +168,15 @@ class activity_login : AppCompatActivity() {
 
                         //Creo una variable que contenga el PrepareStatement
                         val crearUsuario =
-                            objConexion?.prepareStatement("INSERT INTO tbUsuarios1(UUID_Usuario, Nombre_Usuario, Apellido_Usuario, User_name, Contrasena_Usuario, Correo_Usuario, Telefono_Usuario, Genero_Usuario, FNacimiento_Usuario, Edad_Usuario, Altura_Usuario, Peso_Usuario) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)")!!
+                            objConexion?.prepareStatement("INSERT INTO tbUsuarios1(UUID_Usuario, Nombre_Usuario, Apellido_Usuario, User_name, Contrasena_Usuario, Correo_Usuario, Genero_Usuario, FNacimiento_Usuario) VALUES (?,?,?,?,?,?,?,?)")!!
                         crearUsuario.setString(1, UUID.randomUUID().toString())
                         crearUsuario.setString(2, txtNombreRegistro.text.toString())
                         crearUsuario.setString(3, txtApellidoRegistro.text.toString())
                         crearUsuario.setString(4, txtUsernameRegistro.text.toString())
                         crearUsuario.setString(5, contraseniaEncriptada)
                         crearUsuario.setString(6, txtCorreoRegistro.text.toString())
-                        crearUsuario.setString(7, txtTelefonoRegistro.text.toString())
-                        crearUsuario.setString(8, txtGeneroRegistro.text.toString())
-                        crearUsuario.setString(9, txtNacimientoRegistro.text.toString())
-                        crearUsuario.setInt(10, txtEdadRegistro.text.toString().toInt())
-                        crearUsuario.setInt(11, txtAlturaRegistro.text.toString().toInt())
-                        crearUsuario.setInt(12, txtPesoRegistro.text.toString().toInt())
+                        //crearUsuario.setString(7, txtGeneroRegistro.text.toString())
+                        crearUsuario.setString(8, txtNacimientoRegistro.text.toString())
                         crearUsuario.executeUpdate()
                         withContext(Dispatchers.Main) {
                             //Abro otra corrutiana para mostrar el mensaje y limpiar campos
@@ -217,23 +190,15 @@ class activity_login : AppCompatActivity() {
                             txtUsernameRegistro.setText("")
                             txtContraseniaRegistro.setText("")
                             txtCorreoRegistro.setText("")
-                            txtTelefonoRegistro.setText("")
-                            txtGeneroRegistro.setText("")
                             txtNacimientoRegistro.setText("")
-                            txtEdadRegistro.setText("")
-                            txtAlturaRegistro.setText("")
-                            txtPesoRegistro.setText("")
                         }
                     }
 
                 }
         }
 
-<<<<<<< HEAD
+
         IrALogin.setOnClickListener{
-=======
-        btnIrALogin.setOnClickListener {
->>>>>>> 0f76fa9cfcb113e508b9cc9f6d5d1fc05b043830
             val pantallaLogin = Intent(this, activity_iniciar_sesion::class.java)
             startActivity(pantallaLogin)
         }
