@@ -112,7 +112,7 @@ class Calendarizar_partido : AppCompatActivity() {
             val nombreEquipo = listaEquipos.map { it.Nombre_Equipo }
 
             withContext(Dispatchers.Main){
-                val miAdaptador = ArrayAdapter(this@Calendarizar_partido, android.R.layout.simple_spinner_item, nombreEquipo)
+                val miAdaptador = ArrayAdapter(this@Calendarizar_partido, android.R.layout.simple_spinner_dropdown_item, nombreEquipo)
                 spEquipoUno.adapter = miAdaptador
             }
         }
@@ -122,7 +122,7 @@ class Calendarizar_partido : AppCompatActivity() {
             val nombreEquipos = listaEquiposs.map { it.Nombre_Equipo }
 
             withContext(Dispatchers.Main){
-                val miAdaptador = ArrayAdapter(this@Calendarizar_partido, android.R.layout.simple_spinner_item, nombreEquipos)
+                val miAdaptador = ArrayAdapter(this@Calendarizar_partido, android.R.layout.simple_spinner_dropdown_item, nombreEquipos)
                 spEquipoDos.adapter = miAdaptador
             }
         }
@@ -151,7 +151,7 @@ class Calendarizar_partido : AppCompatActivity() {
             val nombreArbitro = listaArbitros.map { it.Nombre_Arbitro }
 
             withContext(Dispatchers.Main){
-                val miAdaptador = ArrayAdapter(this@Calendarizar_partido, android.R.layout.simple_spinner_item, nombreArbitro)
+                val miAdaptador = ArrayAdapter(this@Calendarizar_partido, android.R.layout.simple_spinner_dropdown_item, nombreArbitro)
                 spArbitro.adapter = miAdaptador
             }
         }
