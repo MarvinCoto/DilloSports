@@ -22,13 +22,13 @@ suspend fun enviarCorreo(receptor: String, asunto: String, mensaje: String) = wi
 
     val session = Session.getInstance(props, object : javax.mail.Authenticator() {
         override fun getPasswordAuthentication(): PasswordAuthentication {
-            return PasswordAuthentication("20230253@ricaldone.edu.sv", "dlqn vjxm cqap uqwc")
+            return PasswordAuthentication("oficial.dillo.sports@gmail.com", "l b v d y n r x x n g b w m g u")
         }
     })
 
     try {
         val message = MimeMessage(session).apply {
-            setFrom(InternetAddress("20230253@ricaldone.edu.sv"))
+            setFrom(InternetAddress("oficial.dillo.sports@gmail.com"))
             addRecipient(Message.RecipientType.TO, InternetAddress(receptor))
             subject = asunto
             setText(mensaje)

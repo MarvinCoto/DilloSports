@@ -76,13 +76,14 @@
 
         <EditText
             android:id="@+id/txtRecu"
+            android:maxLength="4"
             android:layout_width="320dp"
             android:layout_height="50dp"
             android:layout_marginTop="8dp"
             android:background="@drawable/edittext_style1"
             android:ems="10"
             android:hint="XXXX"
-            android:inputType="text"
+            android:inputType="number"
             android:letterSpacing="4"
             android:paddingLeft="10dp"
             android:textColor="#FFFFFF"
