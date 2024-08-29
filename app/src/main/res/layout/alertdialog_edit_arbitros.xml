@@ -18,7 +18,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingBottom="10dp"
-            android:text="Editar Torneo"
+            android:text="Editar Arbitro"
             android:textColor="@android:color/white"
 
             android:textSize="20sp"
@@ -37,18 +37,18 @@
         android:id="@+id/textView340"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Nombre del Torneo"
+        android:text="Nombres del Arbitro"
         android:textColor="#FFFFFF"
         android:textSize="18sp" />
 
     <EditText
-        android:id="@+id/txtEditar_Nombre_Torn"
+        android:id="@+id/txtNombresArbi"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginTop="6dp"
         android:layout_marginBottom="7dp"
         android:background="@drawable/edittext_style2"
-        android:hint="*Nombre"
+        android:hint="*Nombres"
         android:inputType="text"
         android:padding="10dp"
         android:textColor="#FFFFFF"
@@ -58,18 +58,18 @@
         android:id="@+id/textView341"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Descripción del Torneo"
+        android:text="Apellidos del Arbitro"
         android:textColor="#FFFFFF"
         android:textSize="18sp" />
 
     <EditText
-        android:id="@+id/txtDescripcion_Torn"
+        android:id="@+id/txtApellidosArbi"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:layout_marginTop="6dp"
         android:layout_marginBottom="7dp"
         android:background="@drawable/edittext_style2"
-        android:hint="*Descripción"
+        android:hint="*Apellidos"
         android:inputType="textMultiLine"
         android:minLines="3"
         android:padding="10dp"
@@ -79,56 +79,43 @@
     <TextView
         android:id="@+id/textView342"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Ubicación del Torneo"
+        android:layout_height="30dp"
+        android:text="Edad del Arbitro"
         android:textColor="#FFFFFF"
         android:textSize="18sp" />
 
     <EditText
-        android:id="@+id/txtUbicacion_Torn"
+        android:id="@+id/txtEdadArbitro"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginTop="6dp"
         android:layout_marginBottom="7dp"
         android:background="@drawable/edittext_style2"
-        android:hint="*Ubicación"
+        android:hint="*Edad"
         android:padding="10dp"
         android:textColor="#FFFFFF"
         android:textColorHint="#FFFFFF" />
 
     <TextView
-        android:id="@+id/textView343"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Tipo de deporte"
-        android:textColor="#FFFFFF"
-        android:textSize="18sp" />
-
-    <Spinner
-        android:id="@+id/spTipoDeporte_Torn"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginTop="6dp"
-        android:layout_marginBottom="7dp"
-        android:background="@drawable/sp_style_cards"
-        android:padding="10dp" />
-
-    <TextView
         android:id="@+id/textView344"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Estado del torneo"
+        android:layout_height="30dp"
+        android:text="Número de teléfono"
         android:textColor="#FFFFFF"
         android:textSize="18sp" />
 
-    <Spinner
-        android:id="@+id/spEstado_Torn"
+    <EditText
+        android:id="@+id/txtNumeroArbi"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginTop="6dp"
         android:layout_marginBottom="7dp"
-        android:background="@drawable/sp_style_cards"
-        android:padding="10dp" />
+        android:background="@drawable/edittext_style2"
+        android:hint="*Numero"
+        android:padding="10dp"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#FFFFFF" />
+
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -138,7 +125,7 @@
         android:paddingTop="10dp">
 
         <Button
-            android:id="@+id/btnCancelarEditarTorn"
+            android:id="@+id/btnCancelarEditarArbi"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="?android:attr/selectableItemBackground"
@@ -148,7 +135,7 @@
             android:textStyle="bold" />
 
         <Button
-            android:id="@+id/btnActualizarEditarTorn"
+            android:id="@+id/btnActualizarEditarArbi"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"

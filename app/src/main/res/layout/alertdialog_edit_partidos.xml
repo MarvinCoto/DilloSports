@@ -17,8 +17,8 @@
             android:id="@+id/dialogTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingBottom="10dp"
-            android:text="Editar Torneo"
+            android:paddingBottom="2dp"
+            android:text="Editar Partido"
             android:textColor="@android:color/white"
 
             android:textSize="20sp"
@@ -37,18 +37,18 @@
         android:id="@+id/textView340"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Nombre del Torneo"
+        android:text="Lugar del Partido"
         android:textColor="#FFFFFF"
         android:textSize="18sp" />
 
     <EditText
-        android:id="@+id/txtEditar_Nombre_Torn"
+        android:id="@+id/txtEditar_Lugar_Part"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginTop="6dp"
         android:layout_marginBottom="7dp"
         android:background="@drawable/edittext_style2"
-        android:hint="*Nombre"
+        android:hint="*Lugar"
         android:inputType="text"
         android:padding="10dp"
         android:textColor="#FFFFFF"
@@ -58,40 +58,20 @@
         android:id="@+id/textView341"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Descripción del Torneo"
+        android:text="Tipo de Partido"
         android:textColor="#FFFFFF"
         android:textSize="18sp" />
 
     <EditText
-        android:id="@+id/txtDescripcion_Torn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="6dp"
-        android:layout_marginBottom="7dp"
-        android:background="@drawable/edittext_style2"
-        android:hint="*Descripción"
-        android:inputType="textMultiLine"
-        android:minLines="3"
-        android:padding="10dp"
-        android:textColor="#FFFFFF"
-        android:textColorHint="#FFFFFF" />
-
-    <TextView
-        android:id="@+id/textView342"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Ubicación del Torneo"
-        android:textColor="#FFFFFF"
-        android:textSize="18sp" />
-
-    <EditText
-        android:id="@+id/txtUbicacion_Torn"
+        android:id="@+id/txtTipo_Part"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginTop="6dp"
         android:layout_marginBottom="7dp"
         android:background="@drawable/edittext_style2"
-        android:hint="*Ubicación"
+        android:hint="*Tipo"
+        android:inputType="textMultiLine"
+        android:minLines="3"
         android:padding="10dp"
         android:textColor="#FFFFFF"
         android:textColorHint="#FFFFFF" />
@@ -100,12 +80,12 @@
         android:id="@+id/textView343"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Tipo de deporte"
+        android:text="Equipo 1"
         android:textColor="#FFFFFF"
         android:textSize="18sp" />
 
     <Spinner
-        android:id="@+id/spTipoDeporte_Torn"
+        android:id="@+id/spEquipo1"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginTop="6dp"
@@ -117,12 +97,12 @@
         android:id="@+id/textView344"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Estado del torneo"
+        android:text="Equipo 2"
         android:textColor="#FFFFFF"
         android:textSize="18sp" />
 
     <Spinner
-        android:id="@+id/spEstado_Torn"
+        android:id="@+id/spEquipo2"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginTop="6dp"
@@ -130,15 +110,74 @@
         android:background="@drawable/sp_style_cards"
         android:padding="10dp" />
 
+    <TextView
+        android:id="@+id/textView345"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Arbitro"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp" />
+
+    <Spinner
+        android:id="@+id/spArbitros_Editar"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="6dp"
+        android:layout_marginBottom="7dp"
+        android:background="@drawable/sp_style_cards"
+        android:padding="10dp" />
+
+    <TextView
+        android:id="@+id/textView346"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Marcador 1"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp" />
+
+    <EditText
+        android:id="@+id/txtMarcador1"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="6dp"
+        android:layout_marginBottom="7dp"
+        android:background="@drawable/edittext_style2"
+        android:hint="*Marcador1"
+        android:inputType="text"
+        android:padding="10dp"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#FFFFFF" />
+
+    <TextView
+        android:id="@+id/textView347"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Marcador 2"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp" />
+
+    <EditText
+        android:id="@+id/txtMarcador2"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="6dp"
+        android:layout_marginBottom="7dp"
+        android:background="@drawable/edittext_style2"
+        android:hint="*Marcador2"
+        android:inputType="text"
+        android:padding="10dp"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#FFFFFF" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="end"
         android:orientation="horizontal"
-        android:paddingTop="10dp">
+        android:paddingTop="5dp">
 
         <Button
-            android:id="@+id/btnCancelarEditarTorn"
+            android:id="@+id/btnCancelarEditarPart"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="?android:attr/selectableItemBackground"
@@ -148,7 +187,7 @@
             android:textStyle="bold" />
 
         <Button
-            android:id="@+id/btnActualizarEditarTorn"
+            android:id="@+id/btnActualizarEditarPart"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
