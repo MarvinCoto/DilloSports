@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "129222254640",
+    "project_id": "ptcfirebase-4caa0",
+    "storage_bucket": "ptcfirebase-4caa0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:129222254640:android:2ad2e8486354d1cc8b0df5",
+        "android_client_info": {
+          "package_name": "marvin.coto.dillosports"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDfmCPVUQf3qRNYwegaok6UpwCVejsb1gk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -20,7 +20,7 @@
             android:background="@drawable/fondo_verde_card">
 
             <ImageView
-                android:id="@+id/imageView47"
+                android:id="@+id/imgEquipo2"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:layout_marginEnd="75dp"
@@ -30,7 +30,7 @@
                 app:srcCompat="@drawable/icon_equipo_2" />
 
             <ImageView
-                android:id="@+id/imageView46"
+                android:id="@+id/imgEquipo1"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:layout_marginStart="75dp"
@@ -123,11 +123,11 @@
                         android:id="@+id/txtEspPartido"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Nequipo2"
+                        android:text="tipo"
                         android:textColor="#FFFFFF"
                         android:textSize="17sp"
                         android:layout_marginTop="26dp"
-                        android:layout_marginLeft="30dp"/>
+                        android:layout_marginLeft="20dp"/>
                 </LinearLayout>
 
 

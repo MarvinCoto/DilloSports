@@ -1,12 +1,23 @@
 package marvin.coto.dillosports
 
+import RecyclerView.AdapterPart
+import RecyclerView.AdapterTorn
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Button
 import android.widget.ImageView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import modelos.ClaseConexion
+import modelos.tbPartidos
 
 class Partidos : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,10 +47,46 @@ class Partidos : AppCompatActivity() {
             startActivity(intent)
         }
 
-        val btnVerCrearPartido = findViewById<ImageView>(R.id.btnVerCrearPartido)
+        val btnVerCrearPartido = findViewById<Button>(R.id.btnVerCrearPartido)
         btnVerCrearPartido.setOnClickListener {
             val intent = Intent(this, Calendarizar_partido::class.java)
             startActivity(intent)
+        }
+
+        val rcvPartidos = findViewById<RecyclerView>(R.id.rcvPartidos)
+        rcvPartidos.layoutManager = LinearLayoutManager(this)
+
+        fun obtenerPartidos(): List<tbPartidos>{
+            val objConexion = ClaseConexion().cadenaConexion()
+
+            val statement = objConexion?.createStatement()
+            val resultSet = statement?.executeQuery("SELECT * FROM tbPartidos")!!
+            val listaPartidos = mutableListOf<tbPartidos>()
+
+            while(resultSet.next()){
+                val UUID_Partido = resultSet.getString("UUID_Partido")
+                val UUID_Equipo1 = resultSet.getString("UUID_Equipo1")
+                val UUID_Equipo2 = resultSet.getString("UUID_Equipo2")
+                val UUID_Arbitro = resultSet.getString("UUID_Arbitro")
+                val Fecha_Partido = resultSet.getString("Fecha_Partido")
+                val Lugar_Partido = resultSet.getString("Lugar_Partido")
+                val Hora_Partido = resultSet.getString("Hora_Partido")
+                val Tipo_Partido = resultSet.getString("Tipo_Partido")
+                val Marcador_Equipo1 = resultSet.getInt("Marcador_Equipo1")
+                val Marcador_Equipo2 = resultSet.getInt("Marcador_Equipo2")
+
+                val valoresJuntos = tbPartidos(UUID_Partido, UUID_Equipo1, UUID_Equipo2, UUID_Arbitro, Fecha_Partido, Lugar_Partido, Hora_Partido, Tipo_Partido, Marcador_Equipo1, Marcador_Equipo2)
+                listaPartidos.add(valoresJuntos)
+            }
+            return listaPartidos
+        }
+
+        CoroutineScope(Dispatchers.IO).launch {
+            val partidosBD = obtenerPartidos()
+            withContext(Dispatchers.Main){
+                val adapter = AdapterPart(partidosBD)
+                rcvPartidos.adapter = adapter
+            }
         }
     }
 }

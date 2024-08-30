@@ -3,14 +3,19 @@ package marvin.coto.dillosports
 import android.app.DatePickerDialog
 import android.content.Intent
 import android.os.Bundle
+import android.text.InputType
+import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageView
+import android.widget.Spinner
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -39,7 +44,27 @@ class activity_login : AppCompatActivity() {
         val txtCorreoRegistro = findViewById<EditText>(R.id.txtCorreoRegistro)
         val txtNacimientoRegistro = findViewById<EditText>(R.id.txtNacimientoRegistro)
         val btnCrearCuenta = findViewById<Button>(R.id.btnCrearCuenta)
+        val spGenero = findViewById<Spinner>(R.id.spGenero)
         val IrALogin = findViewById<TextView>(R.id.textViewIrALogin)
+        val imgVerPassword = findViewById<ImageView>(R.id.imgVerContraseñaR)
+
+        imgVerPassword.setOnClickListener {
+            if (txtContraseniaRegistro.inputType == InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD) {
+                txtContraseniaRegistro.inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD
+            }
+            else {
+                txtContraseniaRegistro.inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
+            }
+        }
+
+        CoroutineScope(Dispatchers.IO).launch {
+            val listaGenero = arrayOf("Masculino", "Femenino")
+
+            withContext(Dispatchers.Main){
+                val miAdaptador = ArrayAdapter(this@activity_login, android.R.layout.simple_spinner_dropdown_item, listaGenero)
+                spGenero.adapter = miAdaptador
+            }
+        }
 
         txtNacimientoRegistro.setOnClickListener {
             val calendario = Calendar.getInstance()
@@ -143,21 +168,9 @@ class activity_login : AppCompatActivity() {
                 txtContraseniaRegistro.error = null
             }
 
-            //Funcion para limpiar campos
-
-
-            //Funcion para guardar los datos
-
-
-
-
-
-
                 if (hayErrores) {
                     Toast.makeText(this@activity_login, "Datos ingresados incorrectamente", Toast.LENGTH_SHORT).show()
                 } else {
-                    val intent = Intent(this, Home::class.java)
-                    startActivity(intent)
                     // Si todas las validaciones son correctas, procede a guardar los datos
                     GlobalScope.launch(Dispatchers.IO) {
                         //Creo un objeto de la clase conexion
@@ -175,7 +188,7 @@ class activity_login : AppCompatActivity() {
                         crearUsuario.setString(4, txtUsernameRegistro.text.toString())
                         crearUsuario.setString(5, contraseniaEncriptada)
                         crearUsuario.setString(6, txtCorreoRegistro.text.toString())
-                        //crearUsuario.setString(7, txtGeneroRegistro.text.toString())
+                        crearUsuario.setString(7, spGenero.selectedItemPosition.toString())
                         crearUsuario.setString(8, txtNacimientoRegistro.text.toString())
                         crearUsuario.executeUpdate()
                         withContext(Dispatchers.Main) {
@@ -193,7 +206,8 @@ class activity_login : AppCompatActivity() {
                             txtNacimientoRegistro.setText("")
                         }
                     }
-
+                    val intent = Intent(this, Home::class.java)
+                    startActivity(intent)
                 }
         }
 

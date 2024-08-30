@@ -2,8 +2,10 @@ package marvin.coto.dillosports
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.InputType
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -28,10 +30,26 @@ class activity_iniciar_sesion : AppCompatActivity() {
             insets
         }
 
+        val recuperar = findViewById<TextView>(R.id.textViewRecuperar)
         val txtCorreoUsuario = findViewById<EditText>(R.id.txtCorreoUsuario)
         val txtContraseniaUsuario = findViewById<EditText>(R.id.txtContraseniaUsuario)
         val btnIniciarSesion = findViewById<Button>(R.id.btnIniciarSesion)
         val textViewIrRegistro = findViewById<TextView>(R.id.textViewIrRegistro)
+        val imgVerPassword = findViewById<ImageView>(R.id.imgVerContraseñaI)
+
+        imgVerPassword.setOnClickListener {
+            if (txtContraseniaUsuario.inputType == InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD) {
+                txtContraseniaUsuario.inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD
+            }
+            else {
+                txtContraseniaUsuario.inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
+            }
+        }
+
+        recuperar.setOnClickListener {
+            val intent = Intent(this, Pantalla_recuUno::class.java)
+            startActivity(intent)
+        }
 
         fun hashSHA256(contraseniaEscrita: String): String {
             val bytes = MessageDigest.getInstance("SHA-256").digest(contraseniaEscrita.toByteArray())

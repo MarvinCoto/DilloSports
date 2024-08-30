@@ -193,6 +193,25 @@ class Crear_Torneo : AppCompatActivity() {
                 }
             }
         }
-    } */
+    }
+
+    private fun subirimagenFirebase(Bitmap: Bitmap, onSucces: (String) -> Unit) {
+    val storageRef = Firebase.storage.reference
+    val imageRef = storageRef.child("images/${uuid}.jpg ")
+    val baos = ByteArrayOutputStream()
+    bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)
+    val data = baos.toByteArray()
+    val uploadTask = imageRef.putBytes(data)
+
+    uploadTask.addOnFailureListener {
+        Toast.makeText(this, "Error al subir la imagen", Toast.LENGTH_SHORT).show()
+    }.addOnSuccessListener { taskSnapshot ->
+        imageRef.downloadUrl.addOnSuccessListener { uri ->
+        onSucces(uri.toString())
+        }
+    }
+
+    }
+    */
 
 }

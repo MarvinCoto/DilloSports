@@ -2,7 +2,9 @@ package marvin.coto.dillosports
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Button
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -30,5 +32,19 @@ class Perfil : AppCompatActivity() {
             val intent = Intent(this, Torneos::class.java)
             startActivity(intent)
         }
+
+        val btnCerrarSesion = findViewById<Button>(R.id.btnCerrarSesion)
+        btnCerrarSesion.setOnClickListener {
+            val intent = Intent(this, activity_bienvenida::class.java)
+            startActivity(intent)
+        }
+
+        val textViewNombresTitle = findViewById<TextView>(R.id.textViewNombresTitle)
+        val textViewNombres = findViewById<TextView>(R.id.textViewNombres)
+        val textViewApellidos = findViewById<TextView>(R.id.textViewApellidos)
+        val textViewEdad = findViewById<TextView>(R.id.textViewEdad)
+        val textViewTelefono = findViewById<TextView>(R.id.textViewTelefono)
+        val textViewGenero = findViewById<TextView>(R.id.textViewGenero)
+        val textViewGmail = findViewById<TextView>(R.id.textViewGmail)
     }
 }

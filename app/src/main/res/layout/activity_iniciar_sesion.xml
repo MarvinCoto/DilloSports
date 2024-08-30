@@ -5,18 +5,8 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#0F0F0F"
+    android:background="@drawable/fondo_dos"
     tools:context=".activity_iniciar_sesion">
-
-    <ImageView
-        android:id="@+id/imageView10"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/fondo_dos" />
 
     <TextView
         android:id="@+id/textView4"
@@ -115,7 +105,7 @@
             app:layout_constraintTop_toBottomOf="@+id/txtCorreoUsuario" />
 
         <TextView
-            android:id="@+id/textView32"
+            android:id="@+id/textViewRecuperar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -137,6 +127,18 @@
             android:textSize="15sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/txtContraseniaUsuario" />
+
+        <ImageView
+            android:id="@+id/imgVerContraseñaI"
+            android:layout_width="27dp"
+            android:layout_height="27dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginEnd="10dp"
+            app:layout_constraintBottom_toBottomOf="@+id/txtContraseniaUsuario"
+            app:layout_constraintEnd_toEndOf="@+id/txtContraseniaUsuario"
+            app:layout_constraintTop_toTopOf="@+id/txtContraseniaUsuario"
+            app:srcCompat="@drawable/eye" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

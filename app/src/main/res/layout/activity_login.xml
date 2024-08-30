@@ -116,6 +116,18 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView36" />
 
+                <ImageView
+                    android:id="@+id/imgVerContraseñaR"
+                    android:layout_width="27dp"
+                    android:layout_height="27dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginEnd="10dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/txtContraseniaRegistro"
+                    app:layout_constraintEnd_toEndOf="@+id/txtContraseniaRegistro"
+                    app:layout_constraintTop_toTopOf="@+id/txtContraseniaRegistro"
+                    app:srcCompat="@drawable/eye" />
+
                 <EditText
                     android:id="@+id/txtCorreoRegistro"
                     android:layout_width="320dp"
@@ -325,7 +337,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/txtNacimientoRegistro" />
 
                 <Spinner
-                    android:id="@+id/spinner"
+                    android:id="@+id/spGenero"
                     android:layout_width="320dp"
                     android:layout_height="50dp"
                     android:layout_marginStart="32dp"
@@ -341,7 +353,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="36dp"
-                android:layout_marginEnd="72dp"
+                android:layout_marginEnd="76dp"
                 android:text="Inicia Sesión"
                 android:textColor="#00A532"
                 android:textSize="16sp"
@@ -359,6 +371,8 @@
                 android:textColor="#FFFFFF"
                 android:textSize="16sp"
                 android:textStyle="bold"
+                app:layout_constraintEnd_toStartOf="@+id/textViewIrALogin"
+                app:layout_constraintHorizontal_bias="0.444"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/btnCrearCuenta" />
 
