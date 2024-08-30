@@ -5,19 +5,8 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#0C0C0C"
+    android:background="@drawable/fondo_dos"
     tools:context=".Crear_Torneo">
-
-    <ImageView
-        android:id="@+id/imageView33"
-        android:layout_width="414dp"
-        android:layout_height="735dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.666"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/fondo_dos" />
 
     <ImageView
         android:id="@+id/imageView36"
@@ -241,9 +230,8 @@
 
         <ImageView
             android:id="@+id/img_torneo"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_marginTop="4dp"
+            android:layout_width="110dp"
+            android:layout_height="110dp"
             app:layout_constraintEnd_toEndOf="@+id/imageView40"
             app:layout_constraintHorizontal_bias="0.571"
             app:layout_constraintStart_toStartOf="@+id/imageView40"

@@ -40,12 +40,7 @@
             android:exported="false" />
         <activity
             android:name=".Pantalla_recuDos"
-            android:exported="true" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            android:exported="false" >
         </activity>
         <activity
             android:name=".Pantalla_recuUno"
@@ -114,7 +109,13 @@
             android:exported="false" />
         <activity
             android:name=".Crear_Torneo"
-            android:exported="false" />
+            android:exported="true" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".Torneos"
             android:exported="false" />

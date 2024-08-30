@@ -63,8 +63,9 @@ class Torneos : AppCompatActivity() {
                 val Descripcion_Torneo = resultSet.getString("Descripcion_Torneo")
                 val Deporte = resultSet.getString("Deporte")
                 val Estado_Toneo = resultSet.getString("Estado_Toneo")
+                val Logo_Torneo = resultSet.getString("Logo_Torneo")
 
-                val valoresJuntos = tbTorneos(UUID_Torneo, Nombre_Torneo, Ubicacion_Torneo, Descripcion_Torneo, Deporte, Estado_Toneo)
+                val valoresJuntos = tbTorneos(UUID_Torneo, Nombre_Torneo, Ubicacion_Torneo, Descripcion_Torneo, Deporte, Estado_Toneo, Logo_Torneo)
                 listaTorneos.add(valoresJuntos)
             }
             return listaTorneos

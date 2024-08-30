@@ -6,5 +6,6 @@ data class tbTorneos(
     val Ubicacion_Torneo: String,
     val Descripcion_Torneo: String,
     val Deporte: String,
-    val Estado_Toneo: String
+    val Estado_Toneo: String,
+    val Logo_Torneo: String
 )

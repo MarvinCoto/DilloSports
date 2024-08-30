@@ -181,7 +181,7 @@ class activity_login : AppCompatActivity() {
 
                         //Creo una variable que contenga el PrepareStatement
                         val crearUsuario =
-                            objConexion?.prepareStatement("INSERT INTO tbUsuarios1(UUID_Usuario, Nombre_Usuario, Apellido_Usuario, User_name, Contrasena_Usuario, Correo_Usuario, Genero_Usuario, FNacimiento_Usuario) VALUES (?,?,?,?,?,?,?,?)")!!
+                            objConexion?.prepareStatement("INSERT INTO tbUsuarios1(UUID_Usuario, Nombre_Usuario, Apellido_Usuario, User_name, Contrasena_Usuario, Correo_Usuario, Genero_Usuario, FNacimiento_Usuario, UUID_Tipo_Usuario) VALUES (?,?,?,?,?,?,?,?,?)")!!
                         crearUsuario.setString(1, UUID.randomUUID().toString())
                         crearUsuario.setString(2, txtNombreRegistro.text.toString())
                         crearUsuario.setString(3, txtApellidoRegistro.text.toString())
@@ -190,6 +190,7 @@ class activity_login : AppCompatActivity() {
                         crearUsuario.setString(6, txtCorreoRegistro.text.toString())
                         crearUsuario.setString(7, spGenero.selectedItemPosition.toString())
                         crearUsuario.setString(8, txtNacimientoRegistro.text.toString())
+                        crearUsuario.setInt(9, 1)
                         crearUsuario.executeUpdate()
                         withContext(Dispatchers.Main) {
                             //Abro otra corrutiana para mostrar el mensaje y limpiar campos
