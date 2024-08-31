@@ -1,27 +1,46 @@
 package marvin.coto.dillosports
 
+import android.app.Activity
 import android.app.DatePickerDialog
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.graphics.Bitmap
+import android.net.Uri
 import android.os.Bundle
+import android.provider.MediaStore
+import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.Spinner
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
 import androidx.core.content.ContentProviderCompat.requireContext
+import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.google.firebase.Firebase
+import com.google.firebase.storage.storage
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import modelos.ClaseConexion
+import java.io.ByteArrayOutputStream
 import java.util.Calendar
 import java.util.UUID
 
 class activityNuevosJugadores : AppCompatActivity() {
+    val codigo_opcion_galeria = 102
+    val STORAGE_REQUEST_CODE = 1
+
+    lateinit var imageView: ImageView
+    lateinit var miPath: String
+
+    val uuid = UUID.randomUUID().toString()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -31,7 +50,8 @@ class activityNuevosJugadores : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-
+        imageView = findViewById(R.id.img_Jugador)
+        val btnSubirImgJugador = findViewById<Button>(R.id.btnSubirImgJugador)
         val txtNombreJugador = findViewById<EditText>(R.id.txtNombreJugador)
         val txtApellidoJugador = findViewById<EditText>(R.id.txtApellidoJugador)
         val txtNumJugador = findViewById<EditText>(R.id.txtNumJugador)
@@ -39,6 +59,19 @@ class activityNuevosJugadores : AppCompatActivity() {
         val txtFechaJugador = findViewById<EditText>(R.id.txtFechaJugador)
         val spEstadoJugador = findViewById<Spinner>(R.id.spEstadoJugador)
         val btnInscribirJugador = findViewById<Button>(R.id.btnInscribirJugador)
+
+        CoroutineScope(Dispatchers.IO).launch {
+            val listaEstadoJugador = arrayOf("Seleccionar Estado del Jugador", "Activo", "Inactivo", "Expulsado", "Lesionado")
+
+            withContext(Dispatchers.Main){
+                val miAdaptador = ArrayAdapter(this@activityNuevosJugadores, android.R.layout.simple_spinner_dropdown_item, listaEstadoJugador)
+                spEstadoJugador.adapter = miAdaptador
+            }
+        }
+
+        btnSubirImgJugador.setOnClickListener {
+            checkStoragePermission()
+        }
 
         txtFechaJugador.setOnClickListener {
             val calendario = Calendar.getInstance()
@@ -116,14 +149,15 @@ class activityNuevosJugadores : AppCompatActivity() {
                     CoroutineScope(Dispatchers.IO).launch {
                         val objConexion = ClaseConexion().cadenaConexion()
 
-                        val addJugadores = objConexion?.prepareStatement("insert into tbJugadores (UUID_Jugador, Nombre_Jugador, Apellido_Jugador, FNacimiento_Jugador, Numero_Jugador, Posicion_Jugador, Estado_Jugador) values (?,?,?,?,?,?,?)")!!
+                        val addJugadores = objConexion?.prepareStatement("insert into tbJugadores (UUID_Jugador, Nombre_Jugador, Apellido_Jugador, FNacimiento_Jugador, Numero_Jugador, Posicion_Jugador, UUID_Estado_Jugador, Foto_Jugador) values (?,?,?,?,?,?,?,?)")!!
                         addJugadores.setString(1, UUID.randomUUID().toString())
                         addJugadores.setString(2, txtNombreJugador.text.toString())
                         addJugadores.setString(3, txtApellidoJugador.text.toString())
                         addJugadores.setString(4, txtFechaJugador.text.toString())
                         addJugadores.setInt(5, txtNumJugador.text.toString().toInt())
                         addJugadores.setString(6, txtPosicionJugador.text.toString())
-                        //addJugadores.setString(7, txtEstadoJugador.text.toString()) //spinner
+                        addJugadores.setString(7, spEstadoJugador.selectedItemPosition.toString())
+                        addJugadores.setString(8, miPath)
                         addJugadores.executeUpdate()
 
                         withContext(Dispatchers.Main){
@@ -140,6 +174,82 @@ class activityNuevosJugadores : AppCompatActivity() {
             }
         }
 
+    private fun pedirPermisoAlmacenamiento() {
+        if (ActivityCompat.shouldShowRequestPermissionRationale(this, android.Manifest.permission.READ_EXTERNAL_STORAGE)) {
 
+        }
+        else {
+            ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.READ_EXTERNAL_STORAGE), STORAGE_REQUEST_CODE)
+        }
+    }
+
+    private fun checkStoragePermission(){
+        if(ContextCompat.checkSelfPermission(this, android.Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED){
+            pedirPermisoAlmacenamiento()
+        }
+        else{
+            val intent = Intent(Intent.ACTION_PICK)
+            intent.type = "image/*"
+            startActivityForResult(intent, codigo_opcion_galeria)
+        }
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<String>, grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        when (requestCode) {
+            STORAGE_REQUEST_CODE -> {
+                if ((grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
+                    val intent = Intent(Intent.ACTION_PICK)
+                    intent.type = "image/*"
+                    startActivityForResult(intent, codigo_opcion_galeria)
+                } else {
+                    Toast.makeText(this, "Permiso de almacenamiento denegado", Toast.LENGTH_SHORT)
+                        .show()
+                }
+            }
+            else -> {
+
+            }
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (resultCode == Activity.RESULT_OK) {
+            when (requestCode) {
+                codigo_opcion_galeria -> {
+                    val imageUri: Uri? = data?.data
+                    imageUri?.let {
+                        val imageBitmap = MediaStore.Images.Media.getBitmap(contentResolver, it)
+                        subirimagenFirebase(imageBitmap) { url ->
+                            miPath = url
+                            imageView.setImageURI(it)
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    private fun subirimagenFirebase(bitmap: Bitmap, onSucces: (String) -> Unit) {
+        val storageRef = Firebase.storage.reference
+        val imageRef = storageRef.child("images/${uuid}.jpg ")
+        val baos = ByteArrayOutputStream()
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)
+        val data = baos.toByteArray()
+        val uploadTask = imageRef.putBytes(data)
+
+        uploadTask.addOnFailureListener {
+            Toast.makeText(this, "Error al subir la imagen", Toast.LENGTH_SHORT).show()
+        }.addOnSuccessListener { taskSnapshot ->
+            imageRef.downloadUrl.addOnSuccessListener { uri ->
+                onSucces(uri.toString())
+            }
+        }
 
     }
+
+}

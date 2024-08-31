@@ -44,10 +44,10 @@
                 android:id="@+id/textViewArbitro"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
                 android:text="Arbitro"
                 android:textColor="#C3C3C3"
-                android:textSize="15sp"
-                android:layout_marginTop="5dp"/>
+                android:textSize="15sp" />
 
             <TextView
                 android:id="@+id/txtEdadArbitro"

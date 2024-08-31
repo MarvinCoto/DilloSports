@@ -5,5 +5,6 @@ data class tbEquipos(
     val Nombre_Equipo: String,
     val Descripcion_Equipo: String,
     val Ubicacion_Equipo: String,
-    val Estado_Equipo: String
+    val Estado_Equipo: String,
+    val Logo_Equipo: String
 )

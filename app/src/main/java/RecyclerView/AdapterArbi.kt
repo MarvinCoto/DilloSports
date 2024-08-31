@@ -66,6 +66,7 @@ class AdapterArbi(var Datos: List<tbArbitros>): RecyclerView.Adapter<ViewHolderA
     override fun onBindViewHolder(holder: ViewHolderArbi, position: Int) {
         val item = Datos[position]
         holder.txtNombreArbitro.text = item.Nombre_Arbitro
+        holder.txtEdadArbitro.text = item.Edad_Arbitro.toString()
 
         holder.imgEliminarArbitro.setOnClickListener {
             val context = holder.itemView.context

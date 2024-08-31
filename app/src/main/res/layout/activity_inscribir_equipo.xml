@@ -5,19 +5,8 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#1C1C1C"
+    android:background="@drawable/fondo_dos"
     tools:context=".inscribir_equipo">
-
-    <ImageView
-        android:id="@+id/imageView33"
-        android:layout_width="414dp"
-        android:layout_height="735dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.666"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/fondo_dos" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout15"
@@ -55,7 +44,7 @@
             app:srcCompat="@drawable/fondo_img_torneo" />
 
         <Button
-            android:id="@+id/button5"
+            android:id="@+id/btnSubirImgEquipo"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
@@ -70,9 +59,9 @@
             app:layout_constraintTop_toBottomOf="@+id/textView33" />
 
         <ImageView
-            android:id="@+id/imageView18"
-            android:layout_width="100dp"
-            android:layout_height="86dp"
+            android:id="@+id/img_Equipo"
+            android:layout_width="110dp"
+            android:layout_height="110dp"
             app:layout_constraintBottom_toBottomOf="@+id/imageView40"
             app:layout_constraintEnd_toEndOf="@+id/imageView40"
             app:layout_constraintStart_toStartOf="@+id/imageView40"

@@ -45,7 +45,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <Button
-            android:id="@+id/button5"
+            android:id="@+id/btnSubirImgArbitro"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
@@ -70,9 +70,9 @@
             app:srcCompat="@drawable/fondo_img_torneo" />
 
         <ImageView
-            android:id="@+id/imageView20"
-            android:layout_width="100dp"
-            android:layout_height="86dp"
+            android:id="@+id/img_Arbitro"
+            android:layout_width="110dp"
+            android:layout_height="110dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/imageView40"
             app:layout_constraintStart_toStartOf="@+id/imageView40"

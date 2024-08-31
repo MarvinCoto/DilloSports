@@ -5,5 +5,6 @@ data class tbArbitros(
     val Nombre_Arbitro: String,
     val Apellido_Arbitro: String,
     val Edad_Arbitro: Int,
-    val Telefono_Arbitro: String
+    val Telefono_Arbitro: String,
+    val Foto_Arbitro: String
 )

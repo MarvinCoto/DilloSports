@@ -77,6 +77,7 @@ class Crear_Torneo : AppCompatActivity() {
             val nombre = txtNombreTorneo.text.toString()
             val descripcion = txtDescripcionTorneo.text.toString()
             val ubicacion = txtUbicacionTorneo.text.toString()
+            //val deporte = spTipoDeporte.selectedItemPosition.toString()
 
             // Variable para verificar si hay errores
             //La inicializamos en false
@@ -106,7 +107,9 @@ class Crear_Torneo : AppCompatActivity() {
             else {
                 txtUbicacionTorneo.error = null
             }
-
+            /*if (deporte == "Seleccionar Tipo de Deporte") {
+                spTipoDeporte.error = "El deporte es obligatorio"
+            } ChatGpt*/
 
 
                 if (hayErrores) {
@@ -118,7 +121,7 @@ class Crear_Torneo : AppCompatActivity() {
                     CoroutineScope(Dispatchers.IO).launch {
                         val objConexion = ClaseConexion().cadenaConexion()
 
-                        val addTorneo = objConexion?.prepareStatement("insert into tbTorneos (UUID_Torneo, Nombre_Torneo, Ubicacion_Torneo, Descripcion_Torneo, Tipo_Deporte, Logo_Torneo) values (?,?,?,?,?,?)")!!
+                        val addTorneo = objConexion?.prepareStatement("insert into tbTorneos (UUID_Torneo, Nombre_Torneo, Ubicacion_Torneo, Descripcion_Torneo, UUID_Tipo_Deporte, Logo_Torneo) values (?,?,?,?,?,?)")!!
                         addTorneo.setString(1, uuid)
                         addTorneo.setString(2, txtNombreTorneo.text.toString())
                         addTorneo.setString(3, txtUbicacionTorneo.text.toString())
@@ -138,7 +141,7 @@ class Crear_Torneo : AppCompatActivity() {
 
 
 
-        }
+            }
     }
     private fun pedirPermisoAlmacenamiento() {
         if (ActivityCompat.shouldShowRequestPermissionRationale(this, android.Manifest.permission.READ_EXTERNAL_STORAGE)) {

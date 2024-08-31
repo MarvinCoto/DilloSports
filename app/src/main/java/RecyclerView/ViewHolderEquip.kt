@@ -10,4 +10,5 @@ class ViewHolderEquip(view: View): RecyclerView.ViewHolder(view) {
     val txtNombreEquipo = view.findViewById<TextView>(R.id.txtNombreEquipo)
     val imgEditarEquipo = view.findViewById<ImageView>(R.id.imgEditarEquipo)
     val imgEliminarEquipo = view.findViewById<ImageView>(R.id.imgEliminarEquipo)
+    //val imgCardEquipo = view.findViewById<ImageView>(R.id.imgCardEquipo)
 }

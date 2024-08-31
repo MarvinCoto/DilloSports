@@ -1,23 +1,43 @@
 package marvin.coto.dillosports
 
+import android.app.Activity
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.graphics.Bitmap
+import android.net.Uri
 import android.os.Bundle
+import android.provider.MediaStore
+import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageView
+import android.widget.Spinner
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.google.firebase.Firebase
+import com.google.firebase.storage.storage
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import modelos.ClaseConexion
+import java.io.ByteArrayOutputStream
 import java.util.UUID
 
 class inscribir_equipo : AppCompatActivity() {
+    val codigo_opcion_galeria = 102
+    val STORAGE_REQUEST_CODE = 1
+
+    lateinit var imageView: ImageView
+    lateinit var miPath: String
+
+    val uuid = UUID.randomUUID().toString()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -27,12 +47,26 @@ class inscribir_equipo : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-
+        imageView = findViewById(R.id.img_Equipo)
+        val btnSubirImgEquipo = findViewById<Button>(R.id.btnSubirImgEquipo)
         val txtNombreEquipo = findViewById<EditText>(R.id.txtNombreEquipo)
         val txtDescripcionEquipo = findViewById<EditText>(R.id.txtDescripcionEquipo)
         val txtUbicacionEquipo = findViewById<EditText>(R.id.txtUbicacionEquipo)
-        //val txtEstadoEquipo = findViewById<EditText>(R.id.txtEstadoEquipo)
+        val spEstadoEquipo = findViewById<Spinner>(R.id.spEstadoEquipo)
         val btnInscribirEquipo = findViewById<Button>(R.id.btnInscribirEquipo)
+
+        CoroutineScope(Dispatchers.IO).launch {
+            val listaEstadoEquipo = arrayOf("Seleccionar Estado del Equipo", "Activo", "Inactivo", "Penalizado")
+
+            withContext(Dispatchers.Main) {
+                val miAdaptador = ArrayAdapter(this@inscribir_equipo, android.R.layout.simple_spinner_dropdown_item, listaEstadoEquipo)
+                spEstadoEquipo.adapter = miAdaptador
+            }
+        }
+
+        btnSubirImgEquipo.setOnClickListener {
+            checkStoragePermission()
+        }
 
         btnInscribirEquipo.setOnClickListener {
 
@@ -83,12 +117,13 @@ class inscribir_equipo : AppCompatActivity() {
                     CoroutineScope(Dispatchers.IO).launch {
                         val objConexion = ClaseConexion().cadenaConexion()
 
-                        val addEquipo = objConexion?.prepareStatement("insert into tbEquipos (UUID_Equipo, Nombre_Equipo, Descripcion_Equipo, Ubicacion_Equipo, Estado_Equipo) values (?,?,?,?,?)")!!
-                        addEquipo.setString(1, UUID.randomUUID().toString())
+                        val addEquipo = objConexion?.prepareStatement("insert into tbEquipos (UUID_Equipo, Nombre_Equipo, Descripcion_Equipo, Ubicacion_Equipo, UUID_Estado_Equipo, Logo_Equipo) values (?,?,?,?,?,?)")!!
+                        addEquipo.setString(1, uuid)
                         addEquipo.setString(2, txtNombreEquipo.text.toString())
                         addEquipo.setString(3, txtDescripcionEquipo.text.toString())
                         addEquipo.setString(4, txtUbicacionEquipo.text.toString())
-                        //addEquipo.setString(5, txtEstadoEquipo.text.toString())
+                        addEquipo.setString(5, spEstadoEquipo.selectedItemPosition.toString())
+                        addEquipo.setString(6, miPath)
                         addEquipo.executeUpdate()
 
                         withContext(Dispatchers.Main) {
@@ -102,4 +137,82 @@ class inscribir_equipo : AppCompatActivity() {
 
             }
         }
+
+    private fun pedirPermisoAlmacenamiento() {
+        if (ActivityCompat.shouldShowRequestPermissionRationale(this, android.Manifest.permission.READ_EXTERNAL_STORAGE)) {
+
+        }
+        else {
+            ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.READ_EXTERNAL_STORAGE), STORAGE_REQUEST_CODE)
+        }
     }
+
+    private fun checkStoragePermission(){
+        if(ContextCompat.checkSelfPermission(this, android.Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED){
+            pedirPermisoAlmacenamiento()
+        }
+        else{
+            val intent = Intent(Intent.ACTION_PICK)
+            intent.type = "image/*"
+            startActivityForResult(intent, codigo_opcion_galeria)
+        }
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<String>, grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        when (requestCode) {
+            STORAGE_REQUEST_CODE -> {
+                if ((grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
+                    val intent = Intent(Intent.ACTION_PICK)
+                    intent.type = "image/*"
+                    startActivityForResult(intent, codigo_opcion_galeria)
+                } else {
+                    Toast.makeText(this, "Permiso de almacenamiento denegado", Toast.LENGTH_SHORT)
+                        .show()
+                }
+            }
+            else -> {
+
+            }
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (resultCode == Activity.RESULT_OK) {
+            when (requestCode) {
+                codigo_opcion_galeria -> {
+                    val imageUri: Uri? = data?.data
+                    imageUri?.let {
+                        val imageBitmap = MediaStore.Images.Media.getBitmap(contentResolver, it)
+                        subirimagenFirebase(imageBitmap) { url ->
+                            miPath = url
+                            imageView.setImageURI(it)
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    private fun subirimagenFirebase(bitmap: Bitmap, onSucces: (String) -> Unit) {
+        val storageRef = Firebase.storage.reference
+        val imageRef = storageRef.child("images/${uuid}.jpg ")
+        val baos = ByteArrayOutputStream()
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)
+        val data = baos.toByteArray()
+        val uploadTask = imageRef.putBytes(data)
+
+        uploadTask.addOnFailureListener {
+            Toast.makeText(this, "Error al subir la imagen", Toast.LENGTH_SHORT).show()
+        }.addOnSuccessListener { taskSnapshot ->
+            imageRef.downloadUrl.addOnSuccessListener { uri ->
+                onSucces(uri.toString())
+            }
+        }
+    }
+
+}

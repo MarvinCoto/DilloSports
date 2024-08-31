@@ -69,45 +69,9 @@ class AdapterPart(var Datos: List<tbPartidos>): RecyclerView.Adapter<ViewHolderP
         holder.txtResultado2.text = item.Marcador_Equipo2.toString()
         holder.txtFechaPart.text = item.Fecha_Partido
         holder.txtEspPartido.text = item.Tipo_Partido
+        holder.txtNombreEquipo1.text = item.UUID_Equipo1
+        holder.txtNombreEquipo2.text = item.UUID_Equipo2
 
     }
 
-    /*
-    private fun showEditTorneoDialog() {
-    // Crea el AlertDialog
-    val builder = AlertDialog.Builder(this)
-    val inflater = layoutInflater
-    val dialogLayout = inflater.inflate(R.layout.dialog_edit_torneo, null)
-
-    val etNombre = dialogLayout.findViewById<EditText>(R.id.etNombre)
-    val etDescripcion = dialogLayout.findViewById<EditText>(R.id.etDescripcion)
-    val etUbicacion = dialogLayout.findViewById<EditText>(R.id.etUbicacion)
-    val spTipoDeporte = dialogLayout.findViewById<Spinner>(R.id.spTipoDeporte)
-    val spEstadoTorneo = dialogLayout.findViewById<Spinner>(R.id.spEstadoTorneo)
-
-    // Configura el AlertDialog
-    builder.setView(dialogLayout)
-    val alertDialog = builder.create()
-
-    // Botones
-    dialogLayout.findViewById<Button>(R.id.btnCancelar).setOnClickListener {
-        alertDialog.dismiss()
-    }
-
-    dialogLayout.findViewById<Button>(R.id.btnActualizar).setOnClickListener {
-        // Lógica para actualizar los datos
-        val nombre = etNombre.text.toString()
-        val descripcion = etDescripcion.text.toString()
-        val ubicacion = etUbicacion.text.toString()
-        val tipoDeporte = spTipoDeporte.selectedItem.toString()
-        val estadoTorneo = spEstadoTorneo.selectedItem.toString()
-
-        // Aquí puede añadir todo lo demás que utilizará
-
-        alertDialog.dismiss()
-    }
-
-    alertDialog.show()
-}
-*/
 }

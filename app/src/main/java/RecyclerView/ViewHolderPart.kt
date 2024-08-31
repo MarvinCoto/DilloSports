@@ -9,8 +9,8 @@ import marvin.coto.dillosports.R
 class ViewHolderPart(view: View): RecyclerView.ViewHolder(view) {
     //val imgEquipo1 = view.findViewById<ImageView>(R.id.imgEquipo1)
     //val imgEquipo2 = view.findViewById<ImageView>(R.id.imgEquipo2)
-   // val txtNombreEquipo1 = view.findViewById<TextView>(R.id.txtNombreEquipo1) sppiners
-    //val txtNombreEquipo2 = view.findViewById<TextView>(R.id.txtNombreEquipo2)
+    val txtNombreEquipo1 = view.findViewById<TextView>(R.id.txtNombreEquipo1)
+    val txtNombreEquipo2 = view.findViewById<TextView>(R.id.txtNombreEquipo2)
     val txtResultado1 = view.findViewById<TextView>(R.id.txtResultado1)
     val txtResultado2 = view.findViewById<TextView>(R.id.txtResultado2)
     val txtEspPartido = view.findViewById<TextView>(R.id.txtEspPartido)

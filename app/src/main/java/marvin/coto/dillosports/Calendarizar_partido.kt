@@ -101,7 +101,8 @@ class Calendarizar_partido : AppCompatActivity() {
                 val descripcionEquipo = resultSet.getString("Descripcion_Equipo")
                 val ubicacionEquipo = resultSet.getString("Ubicacion_Equipo")
                 val estadoEquipo = resultSet.getString("Estado_Equipo")
-                val unEquipo = tbEquipos(uuidEquipo, nombreEquipo, descripcionEquipo, ubicacionEquipo, estadoEquipo)
+                val logoEquipo = resultSet.getString("Logo_Equipo")
+                val unEquipo = tbEquipos(uuidEquipo, nombreEquipo, descripcionEquipo, ubicacionEquipo, estadoEquipo, logoEquipo)
                 listaEquipos.add(unEquipo)
             }
             return listaEquipos
