@@ -108,7 +108,6 @@ class AdapterEqui(var Datos: List<tbEquipos>): RecyclerView.Adapter<ViewHolderEq
             val txtUbicacion_Equip = dialogLayout.findViewById<EditText>(R.id.txtUbicacion_Equip)
             val spEstado_Equip = dialogLayout.findViewById<Spinner>(R.id.spEstado_Equip)
 
-            spEstado_Equip.setOnClickListener {
                 CoroutineScope(Dispatchers.IO).launch {
                     val listaEstado = arrayOf("Seleccionar Estado", "Activo", "Inactivo", "Penalizado")
 
@@ -117,7 +116,7 @@ class AdapterEqui(var Datos: List<tbEquipos>): RecyclerView.Adapter<ViewHolderEq
                         spEstado_Equip.adapter = miAdaptador
                     }
                 }
-            }
+
             builder.setView(dialogLayout)
             val alertDialog = builder.create()
 

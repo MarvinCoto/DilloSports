@@ -56,7 +56,6 @@ class activity_login : AppCompatActivity() {
                 txtContraseniaRegistro.inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
             }
         }
-
         CoroutineScope(Dispatchers.IO).launch {
             val listaGenero = arrayOf("Seleccionar genero","Masculino", "Femenino")
 
@@ -64,7 +63,9 @@ class activity_login : AppCompatActivity() {
                 val miAdaptador = ArrayAdapter(this@activity_login, android.R.layout.simple_spinner_dropdown_item, listaGenero)
                 spGenero.adapter = miAdaptador
             }
+
         }
+
 
         txtNacimientoRegistro.setOnClickListener {
             val calendario = Calendar.getInstance()

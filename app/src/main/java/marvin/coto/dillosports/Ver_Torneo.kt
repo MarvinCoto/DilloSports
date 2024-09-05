@@ -131,7 +131,6 @@ class Ver_Torneo : AppCompatActivity() {
             val spTipoDeporte_Torn = dialogLayout.findViewById<Spinner>(R.id.spTipoDeporte_Torn)
             val spEstado_Torn = dialogLayout.findViewById<Spinner>(R.id.spEstado_Torn)
 
-            spTipoDeporte_Torn.setOnClickListener {
                 CoroutineScope(Dispatchers.IO).launch {
                     val listaTipoDeporte = arrayOf("Seleccionar Tipo de Deporte","Fútbol","Básquetbol","Voleibol")
 
@@ -140,9 +139,8 @@ class Ver_Torneo : AppCompatActivity() {
                         spTipoDeporte_Torn.adapter = miAdaptador
                     }
                 }
-            }
 
-            spEstado_Torn.setOnClickListener {
+
                 CoroutineScope(Dispatchers.IO).launch {
                     val listaEstados = arrayOf("Seleccionar Estado del Torneo","Activo","Finalizado")
 
@@ -151,7 +149,7 @@ class Ver_Torneo : AppCompatActivity() {
                         spEstado_Torn.adapter = miAdaptador
                     }
                 }
-            }
+
 
             builder.setView(dialogLayout)
             val alertDialog = builder.create()
