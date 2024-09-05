@@ -55,13 +55,12 @@ class mostrarJugadores : AppCompatActivity() {
                 val Nombre_Jugador = resultSet.getString("Nombre_Jugador")
                 val Apellido_Jugador = resultSet.getString("Apellido_Jugador")
                 val FNacimiento_Jugador = resultSet.getString("FNacimiento_Jugador")
-                val Edad_Jugador = resultSet.getInt("Edad_Jugador")
-                val Telefono_Jugador = resultSet.getString("Telefono_Jugador")
                 val Numero_Jugador = resultSet.getInt("Numero_Jugador")
                 val Posicion_Jugador = resultSet.getString("Posicion_Jugador")
                 val Estado_Jugador = resultSet.getString("Estado_Jugador")
+                val Foto_Jugador = resultSet.getString("Foto_Jugador")
 
-                val valoresJuntos = tbJugadores(UUID_Jugador, Nombre_Jugador, Apellido_Jugador, FNacimiento_Jugador, Edad_Jugador, Telefono_Jugador, Numero_Jugador, Posicion_Jugador, Estado_Jugador)
+                val valoresJuntos = tbJugadores(UUID_Jugador, Nombre_Jugador, Apellido_Jugador, FNacimiento_Jugador, Numero_Jugador, Posicion_Jugador, Estado_Jugador, Foto_Jugador)
                 listaJugadores.add(valoresJuntos)
             }
             return listaJugadores

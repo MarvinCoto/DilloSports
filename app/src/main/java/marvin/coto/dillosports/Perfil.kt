@@ -21,6 +21,12 @@ class Perfil : AppCompatActivity() {
             insets
         }
 
+        val imgAjustes43 = findViewById<ImageView>(R.id.imgAjustes43)
+        imgAjustes43.setOnClickListener {
+            val intent = Intent (this, Ajustes::class.java)
+            startActivity(intent)
+        }
+
         val imgHome1 = findViewById<ImageView>(R.id.imgHome1)
         imgHome1.setOnClickListener {
             val intent = Intent(this, Home::class.java)

@@ -58,7 +58,7 @@ class activity_login : AppCompatActivity() {
         }
 
         CoroutineScope(Dispatchers.IO).launch {
-            val listaGenero = arrayOf("Masculino", "Femenino")
+            val listaGenero = arrayOf("Seleccionar genero","Masculino", "Femenino")
 
             withContext(Dispatchers.Main){
                 val miAdaptador = ArrayAdapter(this@activity_login, android.R.layout.simple_spinner_dropdown_item, listaGenero)
@@ -181,7 +181,7 @@ class activity_login : AppCompatActivity() {
 
                         //Creo una variable que contenga el PrepareStatement
                         val crearUsuario =
-                            objConexion?.prepareStatement("INSERT INTO tbUsuarios1(UUID_Usuario, Nombre_Usuario, Apellido_Usuario, User_name, Contrasena_Usuario, Correo_Usuario, Genero_Usuario, FNacimiento_Usuario, UUID_Tipo_Usuario) VALUES (?,?,?,?,?,?,?,?,?)")!!
+                            objConexion?.prepareStatement("INSERT INTO tbUsuarios (UUID_Usuario, Nombre_Usuario, Apellido_Usuario, User_name, Contrasena_Usuario, Correo_Usuario, Genero_Usuario, FNacimiento_Usuario, UUID_Tipo_Usuario) VALUES (?,?,?,?,?,?,?,?,?)")!!
                         crearUsuario.setString(1, UUID.randomUUID().toString())
                         crearUsuario.setString(2, txtNombreRegistro.text.toString())
                         crearUsuario.setString(3, txtApellidoRegistro.text.toString())

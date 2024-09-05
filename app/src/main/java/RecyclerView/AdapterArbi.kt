@@ -28,7 +28,7 @@ class AdapterArbi(var Datos: List<tbArbitros>): RecyclerView.Adapter<ViewHolderA
         GlobalScope.launch(Dispatchers.IO){
             val objConexion = ClaseConexion().cadenaConexion()
 
-            val deleteArbitro = objConexion?.prepareStatement("delete tbArbitros1 where Nombre_Arbitro = ?")!!
+            val deleteArbitro = objConexion?.prepareStatement("delete tbArbitros where Nombre_Arbitro = ?")!!
             deleteArbitro.setString(1, Nombre_Arbitro)
             deleteArbitro.executeUpdate()
 

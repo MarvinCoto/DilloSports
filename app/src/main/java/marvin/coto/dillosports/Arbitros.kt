@@ -66,8 +66,9 @@ class Arbitros : AppCompatActivity() {
                 val Apellido_Arbitro = resultSet.getString("Apellido_Arbitro")
                 val Edad_Arbitro = resultSet.getInt("Edad_Arbitro")
                 val Telefono_Arbitro = resultSet.getString("Telefono_Arbitro")
+                val Foto_Arbitro = resultSet.getString("Foto_Arbitro")
 
-                val valoresJuntos = tbArbitros(UUID_Arbitro, Nombre_Arbitro, Apellido_Arbitro, Edad_Arbitro, Telefono_Arbitro)
+                val valoresJuntos = tbArbitros(UUID_Arbitro, Nombre_Arbitro, Apellido_Arbitro, Edad_Arbitro, Telefono_Arbitro, Foto_Arbitro)
                 listaArbitros.add(valoresJuntos)
             }
             return listaArbitros

@@ -70,8 +70,9 @@ class Equipos : AppCompatActivity() {
                 val Descripcion_Equipo = resultSet.getString("Descripcion_Equipo")
                 val Ubicacion_Equipo = resultSet.getString("Ubicacion_Equipo")
                 val Estado_Equipo = resultSet.getString("Estado_Equipo")
+                val Logo_Equipo = resultSet.getString("Logo_Equipo")
 
-                val valoresJuntos = tbEquipos(UUID_Equipo, Nombre_Equipo, Descripcion_Equipo, Ubicacion_Equipo, Estado_Equipo)
+                val valoresJuntos = tbEquipos(UUID_Equipo, Nombre_Equipo, Descripcion_Equipo, Ubicacion_Equipo, Estado_Equipo, Logo_Equipo)
                 listaEquipos.add(valoresJuntos)
             }
             return listaEquipos
