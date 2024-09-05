@@ -20,7 +20,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView46">
 
         <ImageView
-            android:id="@+id/imageView43"
+            android:id="@+id/img_Jugadores"
             android:layout_width="109dp"
             android:layout_height="94dp"
             android:layout_marginTop="10dp"
@@ -41,7 +41,7 @@
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView43" />
+            app:layout_constraintTop_toBottomOf="@+id/img_Jugadores" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -179,14 +179,14 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="12dp"
-            android:text="Edad:"
+            android:text="Fecha de Nacimiento:"
             android:textColor="#FFFFFF"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textViewApellidoJugador" />
 
         <TextView
-            android:id="@+id/textViewEdadJugador"
+            android:id="@+id/textViewFecha_Jugador"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -206,7 +206,7 @@
             android:textColor="#FFFFFF"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textViewEdadJugador" />
+            app:layout_constraintTop_toBottomOf="@+id/textViewFecha_Jugador" />
 
         <TextView
             android:id="@+id/textViewPosicionJugador"

@@ -60,14 +60,17 @@ class activityNuevosJugadores : AppCompatActivity() {
         val spEstadoJugador = findViewById<Spinner>(R.id.spEstadoJugador)
         val btnInscribirJugador = findViewById<Button>(R.id.btnInscribirJugador)
 
-        CoroutineScope(Dispatchers.IO).launch {
-            val listaEstadoJugador = arrayOf("Seleccionar Estado del Jugador", "Activo", "Inactivo", "Expulsado", "Lesionado")
+        spEstadoJugador.setOnClickListener {
+            CoroutineScope(Dispatchers.IO).launch {
+                val listaEstadoJugador = arrayOf("Seleccionar Estado del Jugador", "Activo", "Inactivo", "Expulsado", "Lesionado")
 
-            withContext(Dispatchers.Main){
-                val miAdaptador = ArrayAdapter(this@activityNuevosJugadores, android.R.layout.simple_spinner_dropdown_item, listaEstadoJugador)
-                spEstadoJugador.adapter = miAdaptador
+                withContext(Dispatchers.Main){
+                    val miAdaptador = ArrayAdapter(this@activityNuevosJugadores, android.R.layout.simple_spinner_dropdown_item, listaEstadoJugador)
+                    spEstadoJugador.adapter = miAdaptador
+                }
             }
         }
+
 
         btnSubirImgJugador.setOnClickListener {
             checkStoragePermission()

@@ -70,7 +70,7 @@
         android:layout_marginBottom="7dp"
         android:background="@drawable/edittext_style2"
         android:hint="*Tipo"
-        android:inputType="textMultiLine"
+        android:inputType="text"
         android:minLines="3"
         android:padding="10dp"
         android:textColor="#FFFFFF"
@@ -85,7 +85,7 @@
         android:textSize="18sp" />
 
     <Spinner
-        android:id="@+id/spEquipo1"
+        android:id="@+id/spEdit_Equipo1"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginTop="6dp"
@@ -102,7 +102,7 @@
         android:textSize="18sp" />
 
     <Spinner
-        android:id="@+id/spEquipo2"
+        android:id="@+id/spEdit_Equipo2"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginTop="6dp"
@@ -143,7 +143,7 @@
         android:layout_marginBottom="7dp"
         android:background="@drawable/edittext_style2"
         android:hint="*Marcador1"
-        android:inputType="text"
+        android:inputType="number"
         android:padding="10dp"
         android:textColor="#FFFFFF"
         android:textColorHint="#FFFFFF" />
@@ -164,7 +164,7 @@
         android:layout_marginBottom="7dp"
         android:background="@drawable/edittext_style2"
         android:hint="*Marcador2"
-        android:inputType="text"
+        android:inputType="number"
         android:padding="10dp"
         android:textColor="#FFFFFF"
         android:textColorHint="#FFFFFF" />

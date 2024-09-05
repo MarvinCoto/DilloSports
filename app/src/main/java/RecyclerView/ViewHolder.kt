@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import marvin.coto.dillosports.R
 
 class ViewHolder(view: View): RecyclerView.ViewHolder(view) {
+    val imgCardJugadores = view.findViewById<ImageView>(R.id.imgCardJugadores)
     val txtNombreJugador = view.findViewById<TextView>(R.id.txtNombreJugador)
     val txtPosicionJugador = view.findViewById<TextView>(R.id.txtPosicionJugador)
     val txtNumeroCamiseta = view.findViewById<TextView>(R.id.txtNumeroCamisa)

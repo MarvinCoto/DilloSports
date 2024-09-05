@@ -1,18 +1,21 @@
 package RecyclerView
 
-import android.app.AlertDialog
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
+import android.widget.Button
 import android.widget.EditText
-import android.widget.LinearLayout
+import android.widget.Spinner
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import marvin.coto.dillosports.R
 import marvin.coto.dillosports.VerEquipo
-import marvin.coto.dillosports.Ver_Torneo
 import modelos.ClaseConexion
 import modelos.tbEquipos
 
@@ -57,6 +60,8 @@ class AdapterEqui(var Datos: List<tbEquipos>): RecyclerView.Adapter<ViewHolderEq
         }
     }
 
+
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolderEquip {
         val vista = LayoutInflater.from(parent.context).inflate(R.layout.activity_item_card_equipos, parent, false)
         return ViewHolderEquip(vista)
@@ -67,60 +72,68 @@ class AdapterEqui(var Datos: List<tbEquipos>): RecyclerView.Adapter<ViewHolderEq
     override fun onBindViewHolder(holder: ViewHolderEquip, position: Int) {
         val item = Datos[position]
         holder.txtNombreEquipo.text = item.Nombre_Equipo
+        Glide.with(holder.imgCardEquipo.context)
+            .load(item.Logo_Equipo)
+            .into(holder.imgCardEquipo)
 
         holder.imgEliminarEquipo.setOnClickListener {
             val context = holder.itemView.context
-            val builder = AlertDialog.Builder(context)
+            val builder = androidx.appcompat.app.AlertDialog.Builder(context)
+            val inflater = LayoutInflater.from(holder.itemView.context)
+            val dialogLayout = inflater.inflate(R.layout.alertdialog_elim_equipo, null)
 
-            builder.setTitle("Eliminar Equipo")
-            builder.setMessage("¿Desea eliminar el Equipo?")
+            builder.setView(dialogLayout)
+            val alertDialog = builder.create()
 
-            builder.setPositiveButton("Si"){
-                    dialog, wich -> eliminarDatos(item.Nombre_Equipo, position)
+            dialogLayout.findViewById<Button>(R.id.btnCancelarEliminarEqui).setOnClickListener {
+                alertDialog.dismiss()
             }
-            builder.setNegativeButton("No"){
-                    dialog, wich -> dialog.dismiss()
+
+            dialogLayout.findViewById<Button>(R.id.btnEliminarEqui).setOnClickListener {
+                eliminarDatos(item.Nombre_Equipo, position)
+                alertDialog.dismiss()
             }
-            val dialog = builder.create()
-            dialog.show()
+
+            alertDialog.show()
         }
 
         holder.imgEditarEquipo.setOnClickListener {
             val context = holder.itemView.context
-            val builder = AlertDialog.Builder(context)
+            val builder = androidx.appcompat.app.AlertDialog.Builder(context)
+            val inflater = LayoutInflater.from(holder.itemView.context)
+            val dialogLayout = inflater.inflate(R.layout.alertdialog_edit_equipos, null)
 
-            builder.setTitle("Editar Equipo")
+            val txtEditar_Nombre_Equip = dialogLayout.findViewById<EditText>(R.id.txtEditar_Nombre_Equip)
+            val txtDescripcion_Equip = dialogLayout.findViewById<EditText>(R.id.txtDescripcion_Equip)
+            val txtUbicacion_Equip = dialogLayout.findViewById<EditText>(R.id.txtUbicacion_Equip)
+            val spEstado_Equip = dialogLayout.findViewById<Spinner>(R.id.spEstado_Equip)
 
-            val txtNuevoNombre = EditText(context).apply {
-                setHint(item.Nombre_Equipo)
-            }
-            val txtNuevaDescripcion = EditText(context).apply {
-                setHint(item.Descripcion_Equipo)
-            }
-            val txtNuevaUbicacion = EditText(context).apply {
-                setHint(item.Ubicacion_Equipo)
-            }
-            val txtNuevoEstado = EditText(context).apply {
-                setHint(item.Estado_Equipo)
-            }
+            spEstado_Equip.setOnClickListener {
+                CoroutineScope(Dispatchers.IO).launch {
+                    val listaEstado = arrayOf("Seleccionar Estado", "Activo", "Inactivo", "Penalizado")
 
-            val layout = LinearLayout(context).apply {
-                orientation = LinearLayout.VERTICAL
-                addView(txtNuevoNombre)
-                addView(txtNuevaDescripcion)
-                addView(txtNuevaUbicacion)
-                addView(txtNuevoEstado)
+                    withContext(Dispatchers.Main){
+                        val miAdaptador = ArrayAdapter(context, android.R.layout.simple_spinner_dropdown_item, listaEstado)
+                        spEstado_Equip.adapter = miAdaptador
+                    }
+                }
             }
-            builder.setView(layout)
+            builder.setView(dialogLayout)
+            val alertDialog = builder.create()
 
-            builder.setPositiveButton("Guardar"){
-                dialog, wich -> editarDatos(txtNuevoNombre.text.toString(), txtNuevaDescripcion.text.toString(), txtNuevaUbicacion.text.toString(), txtNuevoEstado.text.toString(), item.UUID_Equipo)
+            dialogLayout.findViewById<Button>(R.id.btnCancelarEditarEquip).setOnClickListener {
+                alertDialog.dismiss()
             }
-            builder.setNegativeButton("Cancelar"){
-                dialog, wich -> dialog.dismiss()
+            dialogLayout.findViewById<Button>(R.id.btnActualizarEditarEquip).setOnClickListener {
+                val nombre = txtEditar_Nombre_Equip.text.toString()
+                val descripcion = txtDescripcion_Equip.text.toString()
+                val ubicacion = txtUbicacion_Equip.text.toString()
+                val estado = spEstado_Equip.selectedItemPosition.toString()
+                editarDatos(nombre, descripcion, ubicacion, estado, item.UUID_Equipo)
+
+                alertDialog.dismiss()
             }
-            val dialog = builder.create()
-            dialog.show()
+            alertDialog.show()
         }
 
         holder.itemView.setOnClickListener {
@@ -132,6 +145,7 @@ class AdapterEqui(var Datos: List<tbEquipos>): RecyclerView.Adapter<ViewHolderEq
             pantallaVer.putExtra("DescripcionEquipo", item.Descripcion_Equipo)
             pantallaVer.putExtra("UbicacionEquipo", item.Ubicacion_Equipo)
             pantallaVer.putExtra("EstadoEquipo", item.Estado_Equipo)
+            pantallaVer.putExtra("LogoEquipo", item.Logo_Equipo)
             context.startActivity(pantallaVer)
         }
     }

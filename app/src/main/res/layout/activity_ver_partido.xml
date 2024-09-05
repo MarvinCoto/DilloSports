@@ -70,7 +70,7 @@
         app:srcCompat="@drawable/dillo" />
 
     <ImageView
-        android:id="@+id/imgAtras4"
+        android:id="@+id/imgAtrasola"
         android:layout_width="38dp"
         android:layout_height="38dp"
         app:layout_constraintBottom_toBottomOf="@+id/imageView36"
@@ -102,7 +102,7 @@
             app:layout_constraintTop_toBottomOf="@+id/constraintLayout11" />
 
         <TextView
-            android:id="@+id/textViewGmail3"
+            android:id="@+id/textViewMarcador2"
             android:layout_width="wrap_content"
             android:layout_height="21dp"
             android:layout_marginStart="4dp"
@@ -114,7 +114,7 @@
             app:layout_constraintTop_toBottomOf="@+id/constraintLayout11" />
 
         <TextView
-            android:id="@+id/textViewGmail4"
+            android:id="@+id/textViewMarcador1"
             android:layout_width="wrap_content"
             android:layout_height="21dp"
             android:layout_marginTop="4dp"
@@ -126,7 +126,7 @@
             app:layout_constraintTop_toBottomOf="@+id/constraintLayout11" />
 
         <TextView
-            android:id="@+id/textViewGmail5"
+            android:id="@+id/textViewEquipo1"
             android:layout_width="wrap_content"
             android:layout_height="21dp"
             android:layout_marginTop="4dp"
@@ -134,11 +134,11 @@
             android:text="Equipo 1"
             android:textColor="#FFFFFF"
             android:textStyle="bold"
-            app:layout_constraintEnd_toStartOf="@+id/textViewGmail4"
+            app:layout_constraintEnd_toStartOf="@+id/textViewMarcador1"
             app:layout_constraintTop_toBottomOf="@+id/constraintLayout11" />
 
         <TextView
-            android:id="@+id/textViewGmail6"
+            android:id="@+id/textViewEquipo2"
             android:layout_width="wrap_content"
             android:layout_height="21dp"
             android:layout_marginStart="10dp"
@@ -146,7 +146,7 @@
             android:text="Equipo 2"
             android:textColor="#FFFFFF"
             android:textStyle="bold"
-            app:layout_constraintStart_toEndOf="@+id/textViewGmail3"
+            app:layout_constraintStart_toEndOf="@+id/textViewMarcador2"
             app:layout_constraintTop_toBottomOf="@+id/constraintLayout11" />
 
         <TextView
@@ -159,7 +159,7 @@
             android:textColor="#FFFFFF"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textViewGmail5" />
+            app:layout_constraintTop_toBottomOf="@+id/textViewEquipo1" />
 
         <TextView
             android:id="@+id/textViewGmail12"
@@ -171,7 +171,7 @@
             android:textColor="#FFFFFF"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textViewGmail5" />
+            app:layout_constraintTop_toBottomOf="@+id/textViewEquipo2" />
 
         <TextView
             android:id="@+id/textViewGmail8"
@@ -183,7 +183,7 @@
             android:textColor="#FFFFFF"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textViewGmail9" />
+            app:layout_constraintTop_toBottomOf="@+id/textViewLugarPart" />
 
         <TextView
             android:id="@+id/textViewGmail14"
@@ -195,10 +195,10 @@
             android:textColor="#FFFFFF"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textViewGmail13" />
+            app:layout_constraintTop_toBottomOf="@+id/textViewFechaPart" />
 
         <TextView
-            android:id="@+id/textViewGmail9"
+            android:id="@+id/textViewLugarPart"
             android:layout_width="wrap_content"
             android:layout_height="21dp"
             android:layout_marginStart="16dp"
@@ -209,7 +209,7 @@
             app:layout_constraintTop_toBottomOf="@+id/textViewGmail7" />
 
         <TextView
-            android:id="@+id/textViewGmail13"
+            android:id="@+id/textViewFechaPart"
             android:layout_width="wrap_content"
             android:layout_height="21dp"
             android:layout_marginTop="4dp"
@@ -220,7 +220,7 @@
             app:layout_constraintTop_toBottomOf="@+id/textViewGmail12" />
 
         <TextView
-            android:id="@+id/textViewGmail10"
+            android:id="@+id/textViewArbitro"
             android:layout_width="wrap_content"
             android:layout_height="21dp"
             android:layout_marginStart="16dp"
@@ -231,7 +231,7 @@
             app:layout_constraintTop_toBottomOf="@+id/textViewGmail8" />
 
         <TextView
-            android:id="@+id/textViewGmail15"
+            android:id="@+id/textHoraPart"
             android:layout_width="wrap_content"
             android:layout_height="21dp"
             android:layout_marginTop="4dp"
@@ -242,7 +242,7 @@
             app:layout_constraintTop_toBottomOf="@+id/textViewGmail14" />
 
         <TextView
-            android:id="@+id/textViewGmail11"
+            android:id="@+id/textViewTipoPart"
             android:layout_width="wrap_content"
             android:layout_height="21dp"
             android:layout_marginStart="24dp"
@@ -251,7 +251,7 @@
             android:textAllCaps="true"
             android:textColor="#C3C3C3"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textViewGmail10" />
+            app:layout_constraintTop_toBottomOf="@+id/textViewArbitro" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayout11"

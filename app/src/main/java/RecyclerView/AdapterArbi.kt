@@ -4,9 +4,11 @@ import android.app.AlertDialog
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.EditText
 import android.widget.LinearLayout
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -67,60 +69,56 @@ class AdapterArbi(var Datos: List<tbArbitros>): RecyclerView.Adapter<ViewHolderA
         val item = Datos[position]
         holder.txtNombreArbitro.text = item.Nombre_Arbitro
         holder.txtEdadArbitro.text = item.Edad_Arbitro.toString()
+        Glide.with(holder.imgCardArbi.context)
+            .load(item.Foto_Arbitro)
+            .into(holder.imgCardArbi)
 
         holder.imgEliminarArbitro.setOnClickListener {
             val context = holder.itemView.context
-            val builder = AlertDialog.Builder(context)
+            val builder = androidx.appcompat.app.AlertDialog.Builder(context)
+            val inflater = LayoutInflater.from(holder.itemView.context)
+            val dialogLayout = inflater.inflate(R.layout.alertdialog_elim_arbitros, null)
 
-            builder.setTitle("Eliminar Arbitro")
-            builder.setMessage("¿Desea eliminar el Arbitro?")
+            builder.setView(dialogLayout)
+            val alertDialog = builder.create()
 
-            builder.setPositiveButton("Si"){
-                dialog, wich -> eliminarDatos(item.Nombre_Arbitro, position)
+            dialogLayout.findViewById<Button>(R.id.btnCancelarEliminarArbi).setOnClickListener {
+                alertDialog.dismiss()
             }
-            builder.setNegativeButton("No"){
-                dialog, wich -> dialog.dismiss()
+            dialogLayout.findViewById<Button>(R.id.btnEliminarArbi).setOnClickListener {
+                eliminarDatos(item.Nombre_Arbitro, position)
+                alertDialog.dismiss()
             }
-            val dialog = builder.create()
-            dialog.show()
+            alertDialog.show()
         }
 
         holder.imgEditarArbitro.setOnClickListener {
             val context = holder.itemView.context
-            val builder = AlertDialog.Builder(context)
+            val builder = androidx.appcompat.app.AlertDialog.Builder(context)
+            val inflater = LayoutInflater.from(holder.itemView.context)
+            val dialogLayout = inflater.inflate(R.layout.alertdialog_edit_arbitros, null)
 
-            builder.setTitle("Editar Arbitro")
+            val txtNombresArbi = dialogLayout.findViewById<EditText>(R.id.txtNombresArbi)
+            val txtApellidosArbi = dialogLayout.findViewById<EditText>(R.id.txtApellidosArbi)
+            val txtEdadArbitro = dialogLayout.findViewById<EditText>(R.id.txtEdadArbitro)
+            val txtNumeroArbi = dialogLayout.findViewById<EditText>(R.id.txtNumeroArbi)
 
-            val txtNuevoNombre = EditText(context).apply {
-                setHint(item.Nombre_Arbitro)
-            }
-            val txtNuevoApellido = EditText(context).apply {
-                setHint(item.Apellido_Arbitro)
-            }
-            val txtNuevaEdad = EditText(context).apply {
-                setHint(item.Edad_Arbitro.toString())
-            }
-            val txtNuevoTelefono = EditText(context).apply {
-                setHint(item.Telefono_Arbitro)
-            }
+            builder.setView(dialogLayout)
+            val alertDialog = builder.create()
 
-            val layout = LinearLayout(context).apply {
-                orientation = LinearLayout.VERTICAL
-                addView(txtNuevoNombre)
-                addView(txtNuevoApellido)
-                addView(txtNuevaEdad)
-                addView(txtNuevoTelefono)
+            dialogLayout.findViewById<Button>(R.id.btnCancelarEditarArbi).setOnClickListener {
+                alertDialog.dismiss()
             }
-            builder.setView(layout)
+            dialogLayout.findViewById<Button>(R.id.btnActualizarEditarArbi).setOnClickListener {
+                val nombre = txtNombresArbi.text.toString()
+                val apellido = txtApellidosArbi.text.toString()
+                val edad = txtEdadArbitro.text.toString().toInt()
+                val numero = txtNumeroArbi.text.toString()
+                editarDatos(nombre, apellido, edad, numero, item.UUID_Arbitro)
 
-            builder.setPositiveButton("Guardar"){
-                dialog, wich -> editarDatos(txtNuevoNombre.text.toString(), txtNuevoApellido.text.toString(), txtNuevaEdad.text.toString().toInt(), txtNuevoTelefono.text.toString(), item.UUID_Arbitro)
+                alertDialog.dismiss()
             }
-            builder.setNegativeButton("Cancelar"){
-                dialog, wich -> dialog.dismiss()
-            }
-            val dialog = builder.create()
-            dialog.show()
+            alertDialog.show()
         }
 
         holder.itemView.setOnClickListener {
@@ -132,6 +130,7 @@ class AdapterArbi(var Datos: List<tbArbitros>): RecyclerView.Adapter<ViewHolderA
             pantallaVer.putExtra("ApellidoArbitro", item.Apellido_Arbitro)
             pantallaVer.putExtra("EdadArbitro", item.Edad_Arbitro)
             pantallaVer.putExtra("TelefonoArbitro", item.Telefono_Arbitro)
+            pantallaVer.putExtra("FotoArbitro", item.Foto_Arbitro)
             context.startActivity(pantallaVer)
         }
     }

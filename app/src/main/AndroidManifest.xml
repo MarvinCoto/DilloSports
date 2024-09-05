@@ -6,13 +6,17 @@
         android:name="android.hardware.camera"
         android:required="false" />
 
-    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" tools:ignore="SelectedPhotoAccess" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" android:maxSdkVersion="32" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" android:maxSdkVersion="32" />
-    <uses-permission android:name="android.permission.CAMERA"/>
-
+    <uses-permission
+        android:name="android.permission.READ_MEDIA_IMAGES"
+        tools:ignore="SelectedPhotoAccess" />
+    <uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        android:maxSdkVersion="32" />
+    <uses-permission
+        android:name="android.permission.READ_EXTERNAL_STORAGE"
+        android:maxSdkVersion="32" />
+    <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.INTERNET" />
-
 
     <application
         android:allowBackup="true"
@@ -25,6 +29,24 @@
         android:theme="@style/Theme.DilloSports"
         tools:targetApi="31">
         <activity
+            android:name=".Ver_Torneo_User"
+            android:exported="false" />
+        <activity
+            android:name=".Item_card_torneos_user"
+            android:exported="false" />
+        <activity
+            android:name=".Torneos_Usuario"
+            android:exported="false" />
+        <activity
+            android:name=".Help"
+            android:exported="false" />
+        <activity
+            android:name=".Redes"
+            android:exported="false" />
+        <activity
+            android:name=".Ajustes"
+            android:exported="false" />
+        <activity
             android:name=".Item_card_partidos"
             android:exported="false" />
         <activity
@@ -32,21 +54,16 @@
             android:exported="false" />
         <activity
             android:name=".Calendarizar_partido"
-            android:exported="false" >
-        </activity>
-
+            android:exported="false" />
         <activity
             android:name=".Partidos"
             android:exported="false" />
         <activity
             android:name=".Pantalla_recuDos"
-            android:exported="false" >
-        </activity>
+            android:exported="false" />
         <activity
             android:name=".Pantalla_recuUno"
-            android:exported="false" >
-
-        </activity>
+            android:exported="false" />
         <activity
             android:name=".activity_bienvenida"
             android:exported="false" />
@@ -64,9 +81,12 @@
             android:exported="false" />
         <activity
             android:name=".Splash_Screen"
-            android:exported="false">
+            android:exported="true" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".Home"
@@ -109,13 +129,7 @@
             android:exported="false" />
         <activity
             android:name=".Crear_Torneo"
-            android:exported="true" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:exported="false"/>
         <activity
             android:name=".Torneos"
             android:exported="false" />

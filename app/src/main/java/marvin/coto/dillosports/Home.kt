@@ -11,6 +11,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import modelos.ClaseConexion
+import modelos.tbUsuario
 
 class Home : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,5 +35,20 @@ class Home : AppCompatActivity() {
             val intent = Intent(this, Perfil::class.java)
             startActivity(intent)
         }
+
+        /*fun obtenerRol(): List<tbUsuario>{
+            val objConexion = ClaseConexion().cadenaConexion()
+            val statement = objConexion?.createStatement()
+            val resultSet = statement?.executeQuery("SELECT * FROM tbUsuarios")!!
+            val listaUsuarios = mutableListOf<tbUsuario>()
+
+            while(resultSet.next()){
+                val UUID_Usuario = resultSet.getString("UUID_Usuario")
+                val UUID_Tipo_Usuario = resultSet.getString("UUID_Tipo_Usuario")
+                val valoresJuntos = tbUsuario(UUID_Usuario, UUID_Tipo_Usuario)
+                listaUsuarios.add(valoresJuntos)
+            }
+            return listaUsuarios
+        }*/
     }
 }

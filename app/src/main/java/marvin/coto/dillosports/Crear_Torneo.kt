@@ -1,6 +1,5 @@
 package marvin.coto.dillosports
 
-
 import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -29,7 +28,6 @@ import android.widget.ArrayAdapter
 import android.widget.Spinner
 import kotlinx.coroutines.CoroutineScope
 import modelos.ClaseConexion
-
 
 class Crear_Torneo : AppCompatActivity() {
     val codigo_opcion_galeria = 102
@@ -66,6 +64,7 @@ class Crear_Torneo : AppCompatActivity() {
             }
         }
 
+
         btnSubirImgTorneo.setOnClickListener {
             checkStoragePermission()
         }
@@ -77,7 +76,6 @@ class Crear_Torneo : AppCompatActivity() {
             val nombre = txtNombreTorneo.text.toString()
             val descripcion = txtDescripcionTorneo.text.toString()
             val ubicacion = txtUbicacionTorneo.text.toString()
-            //val deporte = spTipoDeporte.selectedItemPosition.toString()
 
             // Variable para verificar si hay errores
             //La inicializamos en false
@@ -107,9 +105,6 @@ class Crear_Torneo : AppCompatActivity() {
             else {
                 txtUbicacionTorneo.error = null
             }
-            /*if (deporte == "Seleccionar Tipo de Deporte") {
-                spTipoDeporte.error = "El deporte es obligatorio"
-            } ChatGpt*/
 
 
                 if (hayErrores) {

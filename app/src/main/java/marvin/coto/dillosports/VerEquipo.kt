@@ -9,6 +9,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.bumptech.glide.Glide
 
 class VerEquipo : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,10 +38,15 @@ class VerEquipo : AppCompatActivity() {
         val ubicacionRecibido = intent.getStringExtra("UbicacionEquipo")
         val descripcionRecibido = intent.getStringExtra("DescripcionEquipo")
         val estadoRecibido = intent.getStringExtra("EstadoEquipo")
+        val logoRecibido = intent.getStringExtra("LogoEquipo")
+        val imgEquipo = findViewById<ImageView>(R.id.imgEquip)
         val txtNombreEquipo = findViewById<TextView>(R.id.textViewNombreEquipo)
         val txtUbicacionEquipo = findViewById<TextView>(R.id.textViewUbicacionEquipo)
         val txtDescripcionEquipo = findViewById<TextView>(R.id.textViewDescripcionEquipo)
         val txtEstadoEquipo = findViewById<TextView>(R.id.textViewEstadoEquipo)
+        Glide.with(imgEquipo.context)
+            .load(logoRecibido)
+            .into(imgEquipo)
         txtNombreEquipo.text = nombreRecibido
         txtUbicacionEquipo.text = ubicacionRecibido
         txtDescripcionEquipo.text = descripcionRecibido

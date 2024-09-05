@@ -93,6 +93,7 @@
         android:background="@drawable/edittext_style2"
         android:hint="*Ubicación"
         android:padding="10dp"
+        android:inputType="text"
         android:textColor="#FFFFFF"
         android:textColorHint="#FFFFFF" />
 

@@ -70,7 +70,7 @@
         android:layout_marginBottom="7dp"
         android:background="@drawable/edittext_style2"
         android:hint="*Apellidos"
-        android:inputType="textMultiLine"
+        android:inputType="text"
         android:minLines="3"
         android:padding="10dp"
         android:textColor="#FFFFFF"
@@ -92,6 +92,7 @@
         android:layout_marginBottom="7dp"
         android:background="@drawable/edittext_style2"
         android:hint="*Numero"
+        android:inputType="number"
         android:padding="10dp"
         android:textColor="#FFFFFF"
         android:textColorHint="#FFFFFF" />
@@ -113,6 +114,7 @@
         android:background="@drawable/edittext_style2"
         android:hint="*Posicion"
         android:padding="10dp"
+        android:inputType="text"
         android:textColor="#FFFFFF"
         android:textColorHint="#FFFFFF" />
 

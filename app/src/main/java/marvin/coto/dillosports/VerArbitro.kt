@@ -8,6 +8,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.bumptech.glide.Glide
 
 class VerArbitro : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,6 +31,8 @@ class VerArbitro : AppCompatActivity() {
         val apellidoRecibido = intent.getStringExtra("ApellidoArbitro")
         val edadRecibido = intent.getIntExtra("EdadArbitro", 0)
         val telefonoRecibido = intent.getStringExtra("TelefonoArbitro")
+        val fotoRecibida = intent.getStringExtra("FotoArbitro")
+        val imgArbi = findViewById<ImageView>(R.id.imgArbi)
         val textViewNombreArbitro = findViewById<TextView>(R.id.textViewNombreArbitro)
         val textViewApellidoArbitro = findViewById<TextView>(R.id.textViewApellidoArbitro)
         val textViewEdadArbitro = findViewById<TextView>(R.id.textViewEdadArbitro)
@@ -38,5 +41,9 @@ class VerArbitro : AppCompatActivity() {
         textViewApellidoArbitro.text = apellidoRecibido
         textViewEdadArbitro.text = edadRecibido.toString()
         textViewTelefonoArbitro.text = telefonoRecibido
+        Glide.with(imgArbi.context)
+            .load(fotoRecibida)
+            .into(imgArbi)
+
     }
 }

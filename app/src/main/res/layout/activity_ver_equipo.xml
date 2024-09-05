@@ -188,7 +188,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView46">
 
         <ImageView
-            android:id="@+id/imageView43"
+            android:id="@+id/imgEquip"
             android:layout_width="109dp"
             android:layout_height="94dp"
             android:layout_marginTop="10dp"
@@ -210,7 +210,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.502"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView43" />
+            app:layout_constraintTop_toBottomOf="@+id/imgEquip" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

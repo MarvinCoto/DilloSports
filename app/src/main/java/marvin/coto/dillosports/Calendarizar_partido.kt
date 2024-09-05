@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.Spinner
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -33,7 +34,6 @@ class Calendarizar_partido : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-
         val txtFechaPartido = findViewById<EditText>(R.id.txtFechaPartido)
         val txtLugarPartido = findViewById<EditText>(R.id.txtLugarPartido)
         val txtHoraPartido = findViewById<EditText>(R.id.txtHoraPartido)
@@ -141,7 +141,8 @@ class Calendarizar_partido : AppCompatActivity() {
                 val apellidoArbitro = resultSet.getString("Apellido_Arbitro")
                 val edadArbitro = resultSet.getInt("Edad_Arbitro")
                 val telefonoArbitro = resultSet.getString("Telefono_Arbitro")
-                val unArbitro = tbArbitros(uuidArbitro, nombreArbitro, apellidoArbitro, edadArbitro, telefonoArbitro)
+                val fotoArbitro = resultSet.getString("Foto_Arbitro")
+                val unArbitro = tbArbitros(uuidArbitro, nombreArbitro, apellidoArbitro, edadArbitro, telefonoArbitro, fotoArbitro)
                 listaArbitros.add(unArbitro)
             }
             return listaArbitros

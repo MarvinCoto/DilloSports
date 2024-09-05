@@ -8,6 +8,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.bumptech.glide.Glide
 
 class VerJugadores : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,22 +30,26 @@ class VerJugadores : AppCompatActivity() {
         val nombreRecibido = intent.getStringExtra("NombreJugador")
         val apellidoRecibido = intent.getStringExtra("ApellidoJugador")
         val fNacimientoRecibido = intent.getStringExtra("FNacimientoJugador")
-        val edadRecibido = intent.getIntExtra("EdadJugador", 0)
-        val telefonoRecibido = intent.getStringExtra("TelefonoJugador")
         val numeroRecibido = intent.getIntExtra("NumeroJugador", 0)
+        val fotoRecibido = intent.getStringExtra("FotoJugador")
         val posicionRecibido = intent.getStringExtra("PosicionJugador")
         val estadoRecibido = intent.getStringExtra("EstadoJugador")
+        val img_Jugadores = findViewById<ImageView>(R.id.img_Jugadores)
+        val textViewFecha_Jugador = findViewById<TextView>(R.id.textViewFecha_Jugador)
         val textViewNombreJugador = findViewById<TextView>(R.id.textViewNombreJugador)
         val textViewApellidoJugador = findViewById<TextView>(R.id.textViewApellidoJugador)
-        val textViewEdadJugador = findViewById<TextView>(R.id.textViewEdadJugador)
         val textViewNumeroJugador = findViewById<TextView>(R.id.textViewNumeroJugador)
         val textViewPosicionJugador = findViewById<TextView>(R.id.textViewPosicionJugador)
         val textViewEstadoJugador = findViewById<TextView>(R.id.textViewEstadoJugador)
         textViewNombreJugador.text = nombreRecibido
         textViewApellidoJugador.text = apellidoRecibido
-        textViewEdadJugador.text = edadRecibido.toString()
         textViewNumeroJugador.text = numeroRecibido.toString()
         textViewPosicionJugador.text = posicionRecibido
         textViewEstadoJugador.text = estadoRecibido
+        textViewFecha_Jugador.text = fNacimientoRecibido
+        Glide.with(img_Jugadores.context)
+            .load(fotoRecibido)
+            .into(img_Jugadores)
+
     }
 }
