@@ -115,7 +115,6 @@ class Adapter(var Datos: List<tbJugadores>): RecyclerView.Adapter<ViewHolder>() 
             val txtPosicion_Jugad = dialogLayout.findViewById<EditText>(R.id.txtPosicion_Jugad)
             val spEstado_Jugad = dialogLayout.findViewById<Spinner>(R.id.spEstado_Jugad)
 
-            spEstado_Jugad.setOnClickListener {
                 CoroutineScope(Dispatchers.IO).launch {
                     val listaEstadoJugador = arrayOf("Seleccionar Estado", "Activo", "Inactivo", "Expulsado", "Lesionado")
 
@@ -124,7 +123,7 @@ class Adapter(var Datos: List<tbJugadores>): RecyclerView.Adapter<ViewHolder>() 
                         spEstado_Jugad.adapter = miAdaptador
                     }
                 }
-            }
+
             builder.setView(dialogLayout)
             val alertDialog = builder.create()
 
@@ -154,8 +153,8 @@ class Adapter(var Datos: List<tbJugadores>): RecyclerView.Adapter<ViewHolder>() 
             pantallaVer.putExtra("FNacimientoJugador", item.FNacimiento_Jugador)
             pantallaVer.putExtra("NumeroJugador", item.Numero_Jugador)
             pantallaVer.putExtra("PosicionJugador", item.Posicion_Jugador)
-            pantallaVer.putExtra("EstadoJugador", item.UUID_Estado_Jugador)
             pantallaVer.putExtra("FotoJugador", item.Foto_Jugador)
+            pantallaVer.putExtra("EstadoJugador", item.UUID_Estado_Jugador)
             context.startActivity(pantallaVer)
         }
 

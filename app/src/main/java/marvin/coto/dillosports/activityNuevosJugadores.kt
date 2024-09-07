@@ -34,13 +34,13 @@ import java.util.Calendar
 import java.util.UUID
 
 class activityNuevosJugadores : AppCompatActivity() {
-    val codigo_opcion_galeria = 102
-    val STORAGE_REQUEST_CODE = 1
+    val codigo_opcion_galeria_jug = 102
+    val STORAGE_REQUEST_CODE_JUG = 1
 
-    lateinit var imageView: ImageView
-    lateinit var miPath: String
+    lateinit var imageViewJug: ImageView
+    lateinit var miPathJug: String
 
-    val uuid = UUID.randomUUID().toString()
+    val uuidJug = UUID.randomUUID().toString()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -50,7 +50,7 @@ class activityNuevosJugadores : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-        imageView = findViewById(R.id.img_Jugador)
+        imageViewJug = findViewById(R.id.img_Jugador)
         val btnSubirImgJugador = findViewById<Button>(R.id.btnSubirImgJugador)
         val txtNombreJugador = findViewById<EditText>(R.id.txtNombreJugador)
         val txtApellidoJugador = findViewById<EditText>(R.id.txtApellidoJugador)
@@ -146,21 +146,20 @@ class activityNuevosJugadores : AppCompatActivity() {
                 if (hayErrores) {
                     Toast.makeText(this@activityNuevosJugadores, "Datos ingresados incorrectamente", Toast.LENGTH_SHORT).show()
                 } else {
-                    val intent: Intent = Intent(this, mostrarJugadores::class.java)
-                    startActivity(intent)
+                    val intent = Intent(this, mostrarJugadores::class.java)
 
                     CoroutineScope(Dispatchers.IO).launch {
                         val objConexion = ClaseConexion().cadenaConexion()
 
-                        val addJugadores = objConexion?.prepareStatement("insert into tbJugadores (UUID_Jugador, Nombre_Jugador, Apellido_Jugador, FNacimiento_Jugador, Numero_Jugador, Posicion_Jugador, UUID_Estado_Jugador, Foto_Jugador) values (?,?,?,?,?,?,?,?)")!!
-                        addJugadores.setString(1, UUID.randomUUID().toString())
+                        val addJugadores = objConexion?.prepareStatement("insert into tbJugadores (UUID_Jugador, Nombre_Jugador, Apellido_Jugador, FNacimiento_Jugador, Numero_Jugador, Posicion_Jugador, Foto_Jugador, UUID_Estado_Jugador) values (?,?,?,?,?,?,?,?)")!!
+                        addJugadores.setString(1, uuidJug)
                         addJugadores.setString(2, txtNombreJugador.text.toString())
                         addJugadores.setString(3, txtApellidoJugador.text.toString())
                         addJugadores.setString(4, txtFechaJugador.text.toString())
                         addJugadores.setInt(5, txtNumJugador.text.toString().toInt())
                         addJugadores.setString(6, txtPosicionJugador.text.toString())
-                        addJugadores.setString(7, spEstadoJugador.selectedItemPosition.toString())
-                        addJugadores.setString(8, miPath)
+                        addJugadores.setString(7, miPathJug)
+                        addJugadores.setString(8, spEstadoJugador.selectedItemPosition.toString())
                         addJugadores.executeUpdate()
 
                         withContext(Dispatchers.Main){
@@ -171,20 +170,12 @@ class activityNuevosJugadores : AppCompatActivity() {
                             txtPosicionJugador.setText("")
                             txtFechaJugador.setText("")
                         }
+                        startActivity(intent)
                     }
                 }
 
             }
         }
-
-    private fun pedirPermisoAlmacenamiento() {
-        if (ActivityCompat.shouldShowRequestPermissionRationale(this, android.Manifest.permission.READ_EXTERNAL_STORAGE)) {
-
-        }
-        else {
-            ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.READ_EXTERNAL_STORAGE), STORAGE_REQUEST_CODE)
-        }
-    }
 
     private fun checkStoragePermission(){
         if(ContextCompat.checkSelfPermission(this, android.Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED){
@@ -193,7 +184,16 @@ class activityNuevosJugadores : AppCompatActivity() {
         else{
             val intent = Intent(Intent.ACTION_PICK)
             intent.type = "image/*"
-            startActivityForResult(intent, codigo_opcion_galeria)
+            startActivityForResult(intent, codigo_opcion_galeria_jug)
+        }
+    }
+
+    private fun pedirPermisoAlmacenamiento() {
+        if (ActivityCompat.shouldShowRequestPermissionRationale(this, android.Manifest.permission.READ_EXTERNAL_STORAGE)) {
+            // hola
+        }
+        else {
+            ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.READ_EXTERNAL_STORAGE), STORAGE_REQUEST_CODE_JUG)
         }
     }
 
@@ -203,18 +203,18 @@ class activityNuevosJugadores : AppCompatActivity() {
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         when (requestCode) {
-            STORAGE_REQUEST_CODE -> {
+            STORAGE_REQUEST_CODE_JUG -> {
                 if ((grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
                     val intent = Intent(Intent.ACTION_PICK)
                     intent.type = "image/*"
-                    startActivityForResult(intent, codigo_opcion_galeria)
+                    startActivityForResult(intent, codigo_opcion_galeria_jug)
                 } else {
                     Toast.makeText(this, "Permiso de almacenamiento denegado", Toast.LENGTH_SHORT)
                         .show()
                 }
             }
             else -> {
-
+                // como estoy?
             }
         }
     }
@@ -223,13 +223,13 @@ class activityNuevosJugadores : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == Activity.RESULT_OK) {
             when (requestCode) {
-                codigo_opcion_galeria -> {
+                codigo_opcion_galeria_jug -> {
                     val imageUri: Uri? = data?.data
                     imageUri?.let {
                         val imageBitmap = MediaStore.Images.Media.getBitmap(contentResolver, it)
                         subirimagenFirebase(imageBitmap) { url ->
-                            miPath = url
-                            imageView.setImageURI(it)
+                            miPathJug = url
+                            imageViewJug.setImageURI(it)
                         }
                     }
                 }
@@ -239,7 +239,7 @@ class activityNuevosJugadores : AppCompatActivity() {
 
     private fun subirimagenFirebase(bitmap: Bitmap, onSucces: (String) -> Unit) {
         val storageRef = Firebase.storage.reference
-        val imageRef = storageRef.child("images/${uuid}.jpg ")
+        val imageRef = storageRef.child("images/${uuidJug}.jpg ")
         val baos = ByteArrayOutputStream()
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)
         val data = baos.toByteArray()

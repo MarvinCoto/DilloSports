@@ -57,7 +57,7 @@
         app:srcCompat="@drawable/linea_uno" />
 
     <ImageView
-        android:id="@+id/imageView39"
+        android:id="@+id/imgAtraaaaaaas"
         android:layout_width="35dp"
         android:layout_height="35dp"
         app:layout_constraintBottom_toBottomOf="@+id/imageView36"

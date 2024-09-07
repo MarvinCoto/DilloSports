@@ -56,6 +56,7 @@ class activity_login : AppCompatActivity() {
                 txtContraseniaRegistro.inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
             }
         }
+
         CoroutineScope(Dispatchers.IO).launch {
             val listaGenero = arrayOf("Seleccionar genero","Masculino", "Femenino")
 
@@ -63,7 +64,6 @@ class activity_login : AppCompatActivity() {
                 val miAdaptador = ArrayAdapter(this@activity_login, android.R.layout.simple_spinner_dropdown_item, listaGenero)
                 spGenero.adapter = miAdaptador
             }
-
         }
 
 
@@ -93,6 +93,7 @@ class activity_login : AppCompatActivity() {
         }
 
         btnCrearCuenta.setOnClickListener {
+            val intent = Intent(this, Home::class.java)
 
             //Guardo en una variable los valores que escribió el usuario
 
@@ -207,9 +208,8 @@ class activity_login : AppCompatActivity() {
                             txtCorreoRegistro.setText("")
                             txtNacimientoRegistro.setText("")
                         }
+                        startActivity(intent)
                     }
-                    val intent = Intent(this, Home::class.java)
-                    startActivity(intent)
                 }
         }
 

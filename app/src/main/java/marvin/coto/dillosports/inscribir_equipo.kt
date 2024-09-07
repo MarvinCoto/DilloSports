@@ -31,13 +31,13 @@ import java.io.ByteArrayOutputStream
 import java.util.UUID
 
 class inscribir_equipo : AppCompatActivity() {
-    val codigo_opcion_galeria = 102
-    val STORAGE_REQUEST_CODE = 1
+    val codigo_opcion_galeria_equi = 102
+    val STORAGE_REQUEST_CODE_EQUI = 1
 
-    lateinit var imageView: ImageView
-    lateinit var miPath: String
+    lateinit var imageViewEqui: ImageView
+    lateinit var miPathEqui: String
 
-    val uuid = UUID.randomUUID().toString()
+    val uuidEqui = UUID.randomUUID().toString()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -47,7 +47,7 @@ class inscribir_equipo : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-        imageView = findViewById(R.id.img_Equipo)
+        imageViewEqui = findViewById(R.id.img_Equipo)
         val btnSubirImgEquipo = findViewById<Button>(R.id.btnSubirImgEquipo)
         val txtNombreEquipo = findViewById<EditText>(R.id.txtNombreEquipo)
         val txtDescripcionEquipo = findViewById<EditText>(R.id.txtDescripcionEquipo)
@@ -111,19 +111,18 @@ class inscribir_equipo : AppCompatActivity() {
                 if (hayErrores) {
                     Toast.makeText(this@inscribir_equipo, "Datos ingresados incorrectamente", Toast.LENGTH_SHORT).show()
                 } else {
-                    val intent: Intent = Intent(this, Equipos::class.java)
-                    startActivity(intent)
+                    val intent = Intent(this, Equipos::class.java)
 
                     CoroutineScope(Dispatchers.IO).launch {
                         val objConexion = ClaseConexion().cadenaConexion()
 
-                        val addEquipo = objConexion?.prepareStatement("insert into tbEquipos (UUID_Equipo, Nombre_Equipo, Descripcion_Equipo, Ubicacion_Equipo, UUID_Estado_Equipo, Logo_Equipo) values (?,?,?,?,?,?)")!!
-                        addEquipo.setString(1, uuid)
+                        val addEquipo = objConexion?.prepareStatement("insert into tbEquipos (UUID_Equipo, Nombre_Equipo, Descripcion_Equipo, Ubicacion_Equipo, Logo_Equipo, UUID_Estado_Equipo) values (?,?,?,?,?,?)")!!
+                        addEquipo.setString(1, uuidEqui)
                         addEquipo.setString(2, txtNombreEquipo.text.toString())
                         addEquipo.setString(3, txtDescripcionEquipo.text.toString())
                         addEquipo.setString(4, txtUbicacionEquipo.text.toString())
-                        addEquipo.setString(5, spEstadoEquipo.selectedItemPosition.toString())
-                        addEquipo.setString(6, miPath)
+                        addEquipo.setString(5, miPathEqui)
+                        addEquipo.setString(6, spEstadoEquipo.selectedItemPosition.toString())
                         addEquipo.executeUpdate()
 
                         withContext(Dispatchers.Main) {
@@ -132,20 +131,12 @@ class inscribir_equipo : AppCompatActivity() {
                             txtDescripcionEquipo.setText("")
                             txtUbicacionEquipo.setText("")
                         }
+                        startActivity(intent)
                     }
                 }
 
             }
         }
-
-    private fun pedirPermisoAlmacenamiento() {
-        if (ActivityCompat.shouldShowRequestPermissionRationale(this, android.Manifest.permission.READ_EXTERNAL_STORAGE)) {
-
-        }
-        else {
-            ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.READ_EXTERNAL_STORAGE), STORAGE_REQUEST_CODE)
-        }
-    }
 
     private fun checkStoragePermission(){
         if(ContextCompat.checkSelfPermission(this, android.Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED){
@@ -154,7 +145,16 @@ class inscribir_equipo : AppCompatActivity() {
         else{
             val intent = Intent(Intent.ACTION_PICK)
             intent.type = "image/*"
-            startActivityForResult(intent, codigo_opcion_galeria)
+            startActivityForResult(intent, codigo_opcion_galeria_equi)
+        }
+    }
+
+    private fun pedirPermisoAlmacenamiento() {
+        if (ActivityCompat.shouldShowRequestPermissionRationale(this, android.Manifest.permission.READ_EXTERNAL_STORAGE)) {
+
+        }
+        else {
+            ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.READ_EXTERNAL_STORAGE), STORAGE_REQUEST_CODE_EQUI)
         }
     }
 
@@ -164,11 +164,11 @@ class inscribir_equipo : AppCompatActivity() {
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         when (requestCode) {
-            STORAGE_REQUEST_CODE -> {
+            STORAGE_REQUEST_CODE_EQUI -> {
                 if ((grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
                     val intent = Intent(Intent.ACTION_PICK)
                     intent.type = "image/*"
-                    startActivityForResult(intent, codigo_opcion_galeria)
+                    startActivityForResult(intent, codigo_opcion_galeria_equi)
                 } else {
                     Toast.makeText(this, "Permiso de almacenamiento denegado", Toast.LENGTH_SHORT)
                         .show()
@@ -184,13 +184,13 @@ class inscribir_equipo : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == Activity.RESULT_OK) {
             when (requestCode) {
-                codigo_opcion_galeria -> {
+                codigo_opcion_galeria_equi -> {
                     val imageUri: Uri? = data?.data
                     imageUri?.let {
                         val imageBitmap = MediaStore.Images.Media.getBitmap(contentResolver, it)
                         subirimagenFirebase(imageBitmap) { url ->
-                            miPath = url
-                            imageView.setImageURI(it)
+                            miPathEqui = url
+                            imageViewEqui.setImageURI(it)
                         }
                     }
                 }
@@ -200,7 +200,7 @@ class inscribir_equipo : AppCompatActivity() {
 
     private fun subirimagenFirebase(bitmap: Bitmap, onSucces: (String) -> Unit) {
         val storageRef = Firebase.storage.reference
-        val imageRef = storageRef.child("images/${uuid}.jpg ")
+        val imageRef = storageRef.child("images/${uuidEqui}.jpg ")
         val baos = ByteArrayOutputStream()
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)
         val data = baos.toByteArray()

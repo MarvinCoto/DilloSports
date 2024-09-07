@@ -46,7 +46,7 @@ class Arbitros : AppCompatActivity() {
 
         val btnVerCrearArbitros = findViewById<Button>(R.id.btnVerCrearArbitros)
         btnVerCrearArbitros.setOnClickListener {
-            val intent: Intent = Intent(this, InscribirArbitro::class.java)
+            val intent = Intent(this, InscribirArbitro::class.java)
             startActivity(intent)
         }
 

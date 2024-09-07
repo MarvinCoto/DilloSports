@@ -50,7 +50,7 @@ class Ver_partido : AppCompatActivity() {
         textHoraPart.text = Hora_Partido
 
         imgAtrasola.setOnClickListener {
-            val intent: Intent = Intent(this, Partidos::class.java)
+            val intent = Intent(this, Partidos::class.java)
             startActivity(intent)
         }
     }

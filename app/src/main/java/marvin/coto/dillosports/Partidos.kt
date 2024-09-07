@@ -53,9 +53,6 @@ class Partidos : AppCompatActivity() {
             startActivity(intent)
         }
 
-        val rcvPartidos = findViewById<RecyclerView>(R.id.rcvPartidos)
-        rcvPartidos.layoutManager = LinearLayoutManager(this)
-
         fun obtenerPartidos(): List<tbPartidos>{
             val objConexion = ClaseConexion().cadenaConexion()
 
@@ -67,19 +64,22 @@ class Partidos : AppCompatActivity() {
                 val UUID_Partido = resultSet.getString("UUID_Partido")
                 val UUID_Equipo1 = resultSet.getString("UUID_Equipo1")
                 val UUID_Equipo2 = resultSet.getString("UUID_Equipo2")
-                val UUID_Arbitro = resultSet.getString("UUID_Arbitro")
                 val Fecha_Partido = resultSet.getString("Fecha_Partido")
                 val Lugar_Partido = resultSet.getString("Lugar_Partido")
                 val Hora_Partido = resultSet.getString("Hora_Partido")
-                val Tipo_Partido = resultSet.getString("Tipo_Partido")
                 val Marcador_Equipo1 = resultSet.getInt("Marcador_Equipo1")
                 val Marcador_Equipo2 = resultSet.getInt("Marcador_Equipo2")
+                val UUID_Tipo_Partido = resultSet.getString("UUID_Tipo_Partido")
+                val UUID_Arbitro = resultSet.getString("UUID_Arbitro")
 
-                val valoresJuntos = tbPartidos(UUID_Partido, UUID_Equipo1, UUID_Equipo2, UUID_Arbitro, Fecha_Partido, Lugar_Partido, Hora_Partido, Tipo_Partido, Marcador_Equipo1, Marcador_Equipo2)
+                val valoresJuntos = tbPartidos(UUID_Partido, UUID_Equipo1, UUID_Equipo2, Fecha_Partido, Lugar_Partido, Hora_Partido, Marcador_Equipo1, Marcador_Equipo2, UUID_Tipo_Partido, UUID_Arbitro)
                 listaPartidos.add(valoresJuntos)
             }
             return listaPartidos
         }
+
+        val rcvPartidos = findViewById<RecyclerView>(R.id.rcvPartidos)
+        rcvPartidos.layoutManager = LinearLayoutManager(this)
 
         CoroutineScope(Dispatchers.IO).launch {
             val partidosBD = obtenerPartidos()

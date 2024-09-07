@@ -143,7 +143,7 @@ class AdapterEqui(var Datos: List<tbEquipos>): RecyclerView.Adapter<ViewHolderEq
             pantallaVer.putExtra("NombreEquipo", item.Nombre_Equipo)
             pantallaVer.putExtra("DescripcionEquipo", item.Descripcion_Equipo)
             pantallaVer.putExtra("UbicacionEquipo", item.Ubicacion_Equipo)
-            pantallaVer.putExtra("EstadoEquipo", item.Estado_Equipo)
+            pantallaVer.putExtra("EstadoEquipo", item.UUID_Estado_Equipo)
             pantallaVer.putExtra("LogoEquipo", item.Logo_Equipo)
             context.startActivity(pantallaVer)
         }

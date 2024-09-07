@@ -100,9 +100,9 @@ class Calendarizar_partido : AppCompatActivity() {
                 val nombreEquipo = resultSet.getString("Nombre_Equipo")
                 val descripcionEquipo = resultSet.getString("Descripcion_Equipo")
                 val ubicacionEquipo = resultSet.getString("Ubicacion_Equipo")
-                val estadoEquipo = resultSet.getString("Estado_Equipo")
                 val logoEquipo = resultSet.getString("Logo_Equipo")
-                val unEquipo = tbEquipos(uuidEquipo, nombreEquipo, descripcionEquipo, ubicacionEquipo, estadoEquipo, logoEquipo)
+                val estadoEquipo = resultSet.getString("UUID_Estado_Equipo")
+                val unEquipo = tbEquipos(uuidEquipo, nombreEquipo, descripcionEquipo, ubicacionEquipo, logoEquipo, estadoEquipo)
                 listaEquipos.add(unEquipo)
             }
             return listaEquipos
@@ -159,20 +159,21 @@ class Calendarizar_partido : AppCompatActivity() {
         }
 
         btnCalendarizarPartido.setOnClickListener {
+            val intent = Intent(this, Partidos::class.java)
             CoroutineScope(Dispatchers.IO).launch {
                 val objConexion = ClaseConexion().cadenaConexion()
                 val equipo1 = obtenerEquipo()
                 val equipo2 = obtenerEquipo()
                 val arbitro = obtenerArbitro()
 
-                val addPartido = objConexion?.prepareStatement("insert into tbPartidos (UUID_Partido, Fecha_Partido, Lugar_Partido, Hora_Partido, Tipo_Partido, UUID_Equipo1 UUID_Equipo2, UUID_Arbitro) values (?,?,?,?,?,?,?,?)")!!
+                val addPartido = objConexion?.prepareStatement("insert into tbPartidos (UUID_Partido, UUID_Equipo1, UUID_Equipo2, Fecha_Partido, Lugar_Partido, Hora_Partido, UUID_Tipo_Partido, UUID_Arbitro) values (?,?,?,?,?,?,?,?)")!!
                 addPartido.setString(1, UUID.randomUUID().toString())
-                addPartido.setString(2, txtFechaPartido.text.toString())
-                addPartido.setString(3, txtLugarPartido.text.toString())
-                addPartido.setString(4, txtHoraPartido.text.toString())
-                addPartido.setString(5, txtTipoPartido.text.toString())
-                addPartido.setString(6, equipo1[spEquipoUno.selectedItemPosition].UUID_Equipo)
-                addPartido.setString(7, equipo2[spEquipoDos.selectedItemPosition].UUID_Equipo)
+                addPartido.setString(2, equipo1[spEquipoUno.selectedItemPosition].UUID_Equipo)
+                addPartido.setString(3, equipo2[spEquipoDos.selectedItemPosition].UUID_Equipo)
+                addPartido.setString(4, txtFechaPartido.text.toString())
+                addPartido.setString(5, txtLugarPartido.text.toString())
+                addPartido.setString(6, txtHoraPartido.text.toString())
+                addPartido.setString(7, txtTipoPartido.text.toString())
                 addPartido.setString(8, arbitro[spArbitro.selectedItemPosition].UUID_Arbitro)
                 addPartido.executeUpdate()
 
@@ -183,10 +184,8 @@ class Calendarizar_partido : AppCompatActivity() {
                     txtHoraPartido.setText("")
                     txtTipoPartido.setText("")
                 }
-
+                startActivity(intent)
             }
-            val intent = Intent(this, Partidos::class.java)
-            startActivity(intent)
         }
 
     }

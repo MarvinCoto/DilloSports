@@ -32,13 +32,13 @@ class AdapterPart(var Datos: List<tbPartidos>): RecyclerView.Adapter<ViewHolderP
         val listaArbitros = mutableListOf<tbArbitros>()
 
         while (resultSet.next()) {
-            val uuidArbitro = resultSet.getString("UUID_Arbitro")
-            val nombreArbitro = resultSet.getString("Nombre_Arbitro")
-            val apellidoArbitro = resultSet.getString("Apellido_Arbitro")
-            val edadArbitro = resultSet.getInt("Edad_Arbitro")
-            val telefonoArbitro = resultSet.getString("Telefono_Arbitro")
-            val fotoArbitro = resultSet.getString("Foto_Arbitro")
-            val unArbitro = tbArbitros(uuidArbitro, nombreArbitro, apellidoArbitro, edadArbitro, telefonoArbitro, fotoArbitro)
+            val UUID_Arbitro = resultSet.getString("UUID_Arbitro")
+            val Nombre_Arbitro = resultSet.getString("Nombre_Arbitro")
+            val Apellido_Arbitro = resultSet.getString("Apellido_Arbitro")
+            val Edad_Arbitro = resultSet.getInt("Edad_Arbitro")
+            val Telefono_Arbitro = resultSet.getString("Telefono_Arbitro")
+            val Foto_Arbitro = resultSet.getString("Foto_Arbitro")
+            val unArbitro = tbArbitros(UUID_Arbitro, Nombre_Arbitro, Apellido_Arbitro, Edad_Arbitro, Telefono_Arbitro, Foto_Arbitro)
             listaArbitros.add(unArbitro)
         }
         return listaArbitros
@@ -52,13 +52,13 @@ class AdapterPart(var Datos: List<tbPartidos>): RecyclerView.Adapter<ViewHolderP
         val listaEquipos = mutableListOf<tbEquipos>()
 
         while (resultSet.next()) {
-            val uuidEquipo = resultSet.getString("UUID_Equipo")
-            val nombreEquipo = resultSet.getString("Nombre_Equipo")
-            val descripcionEquipo = resultSet.getString("Descripcion_Equipo")
-            val ubicacionEquipo = resultSet.getString("Ubicacion_Equipo")
-            val estadoEquipo = resultSet.getString("Estado_Equipo")
-            val logoEquipo = resultSet.getString("Logo_Equipo")
-            val unEquipo = tbEquipos(uuidEquipo, nombreEquipo, descripcionEquipo, ubicacionEquipo, estadoEquipo, logoEquipo)
+            val UUID_Equipo = resultSet.getString("UUID_Equipo")
+            val Nombre_Equipo = resultSet.getString("Nombre_Equipo")
+            val Descripcion_Equipo = resultSet.getString("Descripcion_Equipo")
+            val Ubicacion_Equipo = resultSet.getString("Ubicacion_Equipo")
+            val Logo_Equipo = resultSet.getString("Logo_Equipo")
+            val UUID_Estado_Equipo = resultSet.getString("UUID_Estado_Equipo")
+            val unEquipo = tbEquipos(UUID_Equipo, Nombre_Equipo, Descripcion_Equipo, Ubicacion_Equipo, Logo_Equipo, UUID_Estado_Equipo)
             listaEquipos.add(unEquipo)
         }
         return listaEquipos
@@ -72,7 +72,7 @@ class AdapterPart(var Datos: List<tbPartidos>): RecyclerView.Adapter<ViewHolderP
         GlobalScope.launch(Dispatchers.IO){
             val objConexion = ClaseConexion().cadenaConexion()
 
-            val deletePartido = objConexion?.prepareStatement("delete tbPartidos where Marcador_Equipo1 = ? and Marcador_Equipo2 = ? and Fecha_Partido = ? and Tipo_Partido = ?")!!
+            val deletePartido = objConexion?.prepareStatement("delete tbPartidos where Marcador_Equipo1 = ? and Marcador_Equipo2 = ? and Fecha_Partido = ? and UUID_Tipo_Partido = ?")!!
             deletePartido.setInt(1, Marcador_Equipo1)
             deletePartido.setInt(2, Marcador_Equipo2)
             deletePartido.setString(3, Fecha_Partido)
@@ -92,7 +92,7 @@ class AdapterPart(var Datos: List<tbPartidos>): RecyclerView.Adapter<ViewHolderP
         GlobalScope.launch(Dispatchers.IO){
             val objConexion = ClaseConexion().cadenaConexion()
 
-            val updatePartido = objConexion?.prepareStatement("update tbPartidos set Marcador_Equipo1 =?, Marcador_Equipo2 =?, Tipo_Partido =?, Lugar_Partido =?, UUID_Arbitro =?, UUID_Equipo1 =?, UUID_Equipo2 =? where UUID_Partido =?")!!
+            val updatePartido = objConexion?.prepareStatement("update tbPartidos set Marcador_Equipo1 =?, Marcador_Equipo2 =?, UUID_Tipo_Partido =?, Lugar_Partido =?, UUID_Arbitro =?, UUID_Equipo1 =?, UUID_Equipo2 =? where UUID_Partido =?")!!
             updatePartido.setInt(1, nuevoMarcadorEquipo1)
             updatePartido.setInt(2, nuevoMarcadorEquipo2)
             updatePartido.setString(3, nuevoTipoPartido)
@@ -119,7 +119,7 @@ class AdapterPart(var Datos: List<tbPartidos>): RecyclerView.Adapter<ViewHolderP
         holder.txtResultado1.text = item.Marcador_Equipo1.toString()
         holder.txtResultado2.text = item.Marcador_Equipo2.toString()
         holder.txtFechaPart.text = item.Fecha_Partido
-        holder.txtEspPartido.text = item.Tipo_Partido
+        holder.txtEspPartido.text = item.UUID_Tipo_Partido
         holder.txtNombreEquipo1.text = item.UUID_Equipo1
         holder.txtNombreEquipo2.text = item.UUID_Equipo2
 
@@ -136,7 +136,7 @@ class AdapterPart(var Datos: List<tbPartidos>): RecyclerView.Adapter<ViewHolderP
                 alertDialog.dismiss()
             }
             dialogLayout.findViewById<Button>(R.id.btnEliminarPart).setOnClickListener {
-                eliminarDatos(item.Marcador_Equipo1, item.Marcador_Equipo2, item.Fecha_Partido, item.Tipo_Partido, position)
+                eliminarDatos(item.Marcador_Equipo1, item.Marcador_Equipo2, item.Fecha_Partido, item.UUID_Tipo_Partido, position)
                 alertDialog.dismiss()
             }
             alertDialog.show()
@@ -198,10 +198,10 @@ class AdapterPart(var Datos: List<tbPartidos>): RecyclerView.Adapter<ViewHolderP
                 val tipo = txtTipo_Part.text.toString()
                 val marcador1 = txtMarcador1.text.toString().toInt()
                 val marcador2 = txtMarcador2.text.toString().toInt()
+                val arbitro = spArbitros_Editar.selectedItemPosition.toString()
                 val equipo1 = spEdit_Equipo1.selectedItemPosition.toString()
                 val equipo2 = spEdit_Equipo2.selectedItemPosition.toString()
-                val arbitro = spArbitros_Editar.selectedItemPosition.toString()
-                editarDatos(marcador1, marcador2, tipo, lugar, equipo1, equipo2, arbitro, item.UUID_Partido)
+                editarDatos(marcador1, marcador2, tipo, lugar, arbitro, equipo1, equipo2, item.UUID_Partido)
 
                 alertDialog.dismiss()
             }
@@ -215,13 +215,13 @@ class AdapterPart(var Datos: List<tbPartidos>): RecyclerView.Adapter<ViewHolderP
             pantallaVer.putExtra("UUID_Partido", item.UUID_Partido)
             pantallaVer.putExtra("UUID_Equipo1", item.UUID_Equipo1)
             pantallaVer.putExtra("UUID_Equipo2", item.UUID_Equipo2)
-            pantallaVer.putExtra("UUID_Arbitro", item.UUID_Arbitro)
             pantallaVer.putExtra("Fecha_Partido", item.Fecha_Partido)
             pantallaVer.putExtra("Lugar_Partido", item.Lugar_Partido)
             pantallaVer.putExtra("Hora_Partido", item.Hora_Partido)
-            pantallaVer.putExtra("Tipo_Partido", item.Tipo_Partido)
             pantallaVer.putExtra("Marcador_Equipo1", item.Marcador_Equipo1)
             pantallaVer.putExtra("Marcador_Equipo2", item.Marcador_Equipo2)
+            pantallaVer.putExtra("Tipo_Partido", item.UUID_Tipo_Partido)
+            pantallaVer.putExtra("UUID_Arbitro", item.UUID_Arbitro)
             context.startActivity(pantallaVer)
         }
     }

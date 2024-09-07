@@ -12,7 +12,6 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import modelos.ClaseConexion
-import modelos.tbUsuario
 
 class Home : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

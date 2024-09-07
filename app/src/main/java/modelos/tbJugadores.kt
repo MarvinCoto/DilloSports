@@ -7,6 +7,6 @@ data class tbJugadores(
     val FNacimiento_Jugador: String,
     val Numero_Jugador: Int,
     val Posicion_Jugador: String,
-    val UUID_Estado_Jugador: String,
-    val Foto_Jugador: String
+    val Foto_Jugador: String,
+    val UUID_Estado_Jugador: String
 )

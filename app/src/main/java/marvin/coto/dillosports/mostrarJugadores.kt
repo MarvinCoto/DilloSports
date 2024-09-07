@@ -40,9 +40,6 @@ class mostrarJugadores : AppCompatActivity() {
             startActivity(intent)
         }
 
-        val rcvMostrarJugador = findViewById<RecyclerView>(R.id.rcvMostrarJugador)
-        rcvMostrarJugador.layoutManager = LinearLayoutManager(this)
-
         fun obtenerJugadores(): List<tbJugadores>{
             val objConexion = ClaseConexion().cadenaConexion()
 
@@ -57,14 +54,17 @@ class mostrarJugadores : AppCompatActivity() {
                 val FNacimiento_Jugador = resultSet.getString("FNacimiento_Jugador")
                 val Numero_Jugador = resultSet.getInt("Numero_Jugador")
                 val Posicion_Jugador = resultSet.getString("Posicion_Jugador")
-                val Estado_Jugador = resultSet.getString("Estado_Jugador")
                 val Foto_Jugador = resultSet.getString("Foto_Jugador")
+                val UUID_Estado_Jugador = resultSet.getString("UUID_Estado_Jugador")
 
-                val valoresJuntos = tbJugadores(UUID_Jugador, Nombre_Jugador, Apellido_Jugador, FNacimiento_Jugador, Numero_Jugador, Posicion_Jugador, Estado_Jugador, Foto_Jugador)
+                val valoresJuntos = tbJugadores(UUID_Jugador, Nombre_Jugador, Apellido_Jugador, FNacimiento_Jugador, Numero_Jugador, Posicion_Jugador, Foto_Jugador, UUID_Estado_Jugador)
                 listaJugadores.add(valoresJuntos)
             }
             return listaJugadores
         }
+
+        val rcvMostrarJugador = findViewById<RecyclerView>(R.id.rcvMostrarJugador)
+        rcvMostrarJugador.layoutManager = LinearLayoutManager(this)
 
         CoroutineScope(Dispatchers.IO).launch {
             val jugadoresBD = obtenerJugadores()

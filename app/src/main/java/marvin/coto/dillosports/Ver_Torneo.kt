@@ -104,7 +104,7 @@ class Ver_Torneo : AppCompatActivity() {
             GlobalScope.launch(Dispatchers.IO){
                 val objConexion = ClaseConexion().cadenaConexion()
 
-                val updateTorneo = objConexion?.prepareStatement("update tbTorneos set Nombre_Torneo =?, Ubicacion_Torneo =?, Descripcion_Torneo =?, Deporte_Torneo =?, Estado_Toneo =? where UUID_Torneo =?")!!
+                val updateTorneo = objConexion?.prepareStatement("update tbTorneos set Nombre_Torneo =?, Ubicacion_Torneo =?, Descripcion_Torneo =?, UUID_Tipo_Deporte =?, Estado_Toneo =? where UUID_Torneo =?")!!
                 updateTorneo.setString(1, nuevoNombre)
                 updateTorneo.setString(2, nuevoUbicacion)
                 updateTorneo.setString(3, nuevoDescripcion)
@@ -164,7 +164,7 @@ class Ver_Torneo : AppCompatActivity() {
                 val ubicacion = txtUbicacion_Torn.text.toString()
                 val tipoDeporte = spTipoDeporte_Torn.selectedItemPosition.toString()
                 val estadoTorneo = spEstado_Torn.selectedItemPosition.toString()
-                editarDatos(nombre, ubicacion, descripcion, estadoTorneo, tipoDeporte, intent.getStringExtra("UUID_Torneo").toString())
+                editarDatos(nombre, ubicacion, descripcion, tipoDeporte, estadoTorneo, intent.getStringExtra("UUID_Torneo").toString())
 
                 alertDialog.dismiss()
             }

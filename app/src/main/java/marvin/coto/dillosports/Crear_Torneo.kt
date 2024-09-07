@@ -30,13 +30,13 @@ import kotlinx.coroutines.CoroutineScope
 import modelos.ClaseConexion
 
 class Crear_Torneo : AppCompatActivity() {
-    val codigo_opcion_galeria = 102
-    val STORAGE_REQUEST_CODE = 1
+    val codigo_opcion_galeria_torn = 102
+    val STORAGE_REQUEST_CODE_TORN = 1
 
-    lateinit var imageView: ImageView
-    lateinit var miPath: String
+    lateinit var imageViewTorn: ImageView
+    lateinit var miPathTorn: String
 
-    val uuid = UUID.randomUUID().toString()
+    val uuidTorn = UUID.randomUUID().toString()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,13 +47,19 @@ class Crear_Torneo : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-        imageView = findViewById(R.id.img_torneo)
+        imageViewTorn = findViewById(R.id.img_torneo)
         val btnSubirImgTorneo = findViewById<Button>(R.id.btnSubirImgTorneo)
         val txtNombreTorneo = findViewById<EditText>(R.id.txtNombreTorneo)
         val txtDescripcionTorneo = findViewById<EditText>(R.id.txtDescripcionTorneo)
         val txtUbicacionTorneo = findViewById<EditText>(R.id.txtUbicacionTorneo)
         val spTipoDeporte = findViewById<Spinner>(R.id.spTipoDeporte)
         val btnCrearTorneo = findViewById<Button>(R.id.btnCrearTorneo)
+        val imgAtras = findViewById<ImageView>(R.id.imgAtraaaaaaas)
+
+        imgAtras.setOnClickListener {
+            val intent = Intent(this, Torneos::class.java)
+            startActivity(intent)
+        }
 
         CoroutineScope(Dispatchers.IO).launch {
             val listaTipoDeporte = arrayOf("Seleccionar Tipo de Deporte","Fútbol","Básquetbol","Voleibol")
@@ -110,19 +116,17 @@ class Crear_Torneo : AppCompatActivity() {
                 if (hayErrores) {
                     Toast.makeText(this@Crear_Torneo, "Datos ingresados incorrectamente", Toast.LENGTH_SHORT).show()
                 } else {
-                    val intent: Intent = Intent(this, Torneos::class.java)
-                    startActivity(intent)
-
+                    val intent = Intent(this, Torneos::class.java)
                     CoroutineScope(Dispatchers.IO).launch {
                         val objConexion = ClaseConexion().cadenaConexion()
 
-                        val addTorneo = objConexion?.prepareStatement("insert into tbTorneos (UUID_Torneo, Nombre_Torneo, Ubicacion_Torneo, Descripcion_Torneo, UUID_Tipo_Deporte, Logo_Torneo) values (?,?,?,?,?,?)")!!
-                        addTorneo.setString(1, uuid)
+                        val addTorneo = objConexion?.prepareStatement("insert into tbTorneos (UUID_Torneo, Nombre_Torneo, Ubicacion_Torneo, Descripcion_Torneo, Logo_Torneo, UUID_Tipo_Deporte) values (?,?,?,?,?,?)")!!
+                        addTorneo.setString(1, uuidTorn)
                         addTorneo.setString(2, txtNombreTorneo.text.toString())
                         addTorneo.setString(3, txtUbicacionTorneo.text.toString())
                         addTorneo.setString(4, txtDescripcionTorneo.text.toString())
-                        addTorneo.setString(5, spTipoDeporte.selectedItemPosition.toString())
-                        addTorneo.setString(6, miPath)
+                        addTorneo.setString(5, miPathTorn)
+                        addTorneo.setString(6, spTipoDeporte.selectedItemPosition.toString())
                         addTorneo.executeUpdate()
 
                         withContext(Dispatchers.Main){
@@ -131,6 +135,7 @@ class Crear_Torneo : AppCompatActivity() {
                             txtDescripcionTorneo.setText("")
                             txtUbicacionTorneo.setText("")
                         }
+                        startActivity(intent)
                     }
                 }
 
@@ -138,15 +143,6 @@ class Crear_Torneo : AppCompatActivity() {
 
             }
     }
-    private fun pedirPermisoAlmacenamiento() {
-        if (ActivityCompat.shouldShowRequestPermissionRationale(this, android.Manifest.permission.READ_EXTERNAL_STORAGE)) {
-
-        }
-        else {
-            ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.READ_EXTERNAL_STORAGE), STORAGE_REQUEST_CODE)
-        }
-    }
-
     private fun checkStoragePermission(){
         if(ContextCompat.checkSelfPermission(this, android.Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED){
             pedirPermisoAlmacenamiento()
@@ -154,7 +150,16 @@ class Crear_Torneo : AppCompatActivity() {
         else{
             val intent = Intent(Intent.ACTION_PICK)
             intent.type = "image/*"
-            startActivityForResult(intent, codigo_opcion_galeria)
+            startActivityForResult(intent, codigo_opcion_galeria_torn)
+        }
+    }
+
+    private fun pedirPermisoAlmacenamiento() {
+        if (ActivityCompat.shouldShowRequestPermissionRationale(this, android.Manifest.permission.READ_EXTERNAL_STORAGE)) {
+
+        }
+        else {
+            ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.READ_EXTERNAL_STORAGE), STORAGE_REQUEST_CODE_TORN)
         }
     }
 
@@ -164,11 +169,11 @@ class Crear_Torneo : AppCompatActivity() {
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         when (requestCode) {
-            STORAGE_REQUEST_CODE -> {
+            STORAGE_REQUEST_CODE_TORN -> {
                 if ((grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
                     val intent = Intent(Intent.ACTION_PICK)
                     intent.type = "image/*"
-                    startActivityForResult(intent, codigo_opcion_galeria)
+                    startActivityForResult(intent, codigo_opcion_galeria_torn)
                 } else {
                    Toast.makeText(this, "Permiso de almacenamiento denegado", Toast.LENGTH_SHORT)
                       .show()
@@ -184,13 +189,13 @@ class Crear_Torneo : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == Activity.RESULT_OK) {
             when (requestCode) {
-                codigo_opcion_galeria -> {
+                codigo_opcion_galeria_torn -> {
                     val imageUri: Uri? = data?.data
                     imageUri?.let {
                         val imageBitmap = MediaStore.Images.Media.getBitmap(contentResolver, it)
                         subirimagenFirebase(imageBitmap) { url ->
-                            miPath = url
-                            imageView.setImageURI(it)
+                            miPathTorn = url
+                            imageViewTorn.setImageURI(it)
                         }
                     }
                 }
@@ -200,7 +205,7 @@ class Crear_Torneo : AppCompatActivity() {
 
     private fun subirimagenFirebase(bitmap: Bitmap, onSucces: (String) -> Unit) {
     val storageRef = Firebase.storage.reference
-    val imageRef = storageRef.child("images/${uuid}.jpg ")
+    val imageRef = storageRef.child("images/${uuidTorn}.jpg ")
     val baos = ByteArrayOutputStream()
     bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)
     val data = baos.toByteArray()

@@ -76,6 +76,9 @@ class activity_iniciar_sesion : AppCompatActivity() {
                 //Si encuentra un resultado
                 if(resultado.next()){
                     startActivity(pantallaPrincipal)
+                    withContext(Dispatchers.Main){
+                        Toast.makeText(this@activity_iniciar_sesion, "Bienenvenido", Toast.LENGTH_SHORT).show()
+                    }
                 } else {
                     withContext(Dispatchers.Main){
                         Toast.makeText(this@activity_iniciar_sesion, "Usuario o contraseña incorrectos", Toast.LENGTH_SHORT).show()

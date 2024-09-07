@@ -29,7 +29,7 @@ class VerEquipo : AppCompatActivity() {
 
         val btnVerJugadores = findViewById<Button>(R.id.btnVerJugadoress)
         btnVerJugadores.setOnClickListener {
-            val intent: Intent = Intent(this, mostrarJugadores::class.java)
+            val intent = Intent(this, mostrarJugadores::class.java)
             startActivity(intent)
         }
 

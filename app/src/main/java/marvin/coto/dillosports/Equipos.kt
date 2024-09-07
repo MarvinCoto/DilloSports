@@ -50,12 +50,9 @@ class Equipos : AppCompatActivity() {
 
         val btnVerCrearEquipo = findViewById<Button>(R.id.btnVerCrearEquipo)
         btnVerCrearEquipo.setOnClickListener {
-            val intent: Intent = Intent(this, inscribir_equipo::class.java)
+            val intent = Intent(this, inscribir_equipo::class.java)
             startActivity(intent)
         }
-
-        val rcvEquipos = findViewById<RecyclerView>(R.id.rcvEquipos)
-        rcvEquipos.layoutManager = LinearLayoutManager(this)
 
         fun obtenerEquipos(): List<tbEquipos> {
             val objConexion = ClaseConexion().cadenaConexion()
@@ -69,14 +66,18 @@ class Equipos : AppCompatActivity() {
                 val Nombre_Equipo = resultSet.getString("Nombre_Equipo")
                 val Descripcion_Equipo = resultSet.getString("Descripcion_Equipo")
                 val Ubicacion_Equipo = resultSet.getString("Ubicacion_Equipo")
-                val Estado_Equipo = resultSet.getString("Estado_Equipo")
                 val Logo_Equipo = resultSet.getString("Logo_Equipo")
+                val UUID_Estado_Equipo = resultSet.getString("UUID_Estado_Equipo")
 
-                val valoresJuntos = tbEquipos(UUID_Equipo, Nombre_Equipo, Descripcion_Equipo, Ubicacion_Equipo, Estado_Equipo, Logo_Equipo)
+                val valoresJuntos = tbEquipos(UUID_Equipo, Nombre_Equipo, Descripcion_Equipo, Ubicacion_Equipo, Logo_Equipo, UUID_Estado_Equipo)
                 listaEquipos.add(valoresJuntos)
             }
             return listaEquipos
         }
+
+        val rcvEquipos = findViewById<RecyclerView>(R.id.rcvEquipos)
+        rcvEquipos.layoutManager = LinearLayoutManager(this)
+
         CoroutineScope(Dispatchers.IO).launch {
             val equiposBD = obtenerEquipos()
             withContext(Dispatchers.Main){
@@ -84,5 +85,6 @@ class Equipos : AppCompatActivity() {
                 rcvEquipos.adapter = adapter
             }
         }
+
     }
 }
