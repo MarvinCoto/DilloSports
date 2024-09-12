@@ -51,7 +51,7 @@ class Torneos : AppCompatActivity() {
             val objConexion = ClaseConexion().cadenaConexion()
 
             val statement = objConexion?.createStatement()
-            val resultSet = statement?.executeQuery("SELECT * FROM tbTorneos")!!
+            val resultSet = statement?.executeQuery("SELECT UUID_Torneo, Nombre_Torneo, Ubicacion_Torneo, Descripcion_Torneo, UUID_Tipo_Deporte, Logo_Torneo FROM tbTorneos")!!
             val listaTorneos = mutableListOf<tbTorneos>()
 
             while(resultSet.next()){
@@ -59,11 +59,10 @@ class Torneos : AppCompatActivity() {
                 val Nombre_Torneo = resultSet.getString("Nombre_Torneo")
                 val Ubicacion_Torneo = resultSet.getString("Ubicacion_Torneo")
                 val Descripcion_Torneo = resultSet.getString("Descripcion_Torneo")
-                val Estado_Toneo = resultSet.getString("Estado_Toneo")
                 val Logo_Torneo = resultSet.getString("Logo_Torneo")
                 val UUID_Tipo_Deporte = resultSet.getString("UUID_Tipo_Deporte")
 
-                val valoresJuntos = tbTorneos(UUID_Torneo, Nombre_Torneo, Ubicacion_Torneo, Descripcion_Torneo, Estado_Toneo, Logo_Torneo, UUID_Tipo_Deporte)
+                val valoresJuntos = tbTorneos(UUID_Torneo, Nombre_Torneo, Ubicacion_Torneo, Descripcion_Torneo, Logo_Torneo, UUID_Tipo_Deporte)
                 listaTorneos.add(valoresJuntos)
             }
             return listaTorneos

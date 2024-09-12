@@ -5,7 +5,6 @@ data class tbTorneos(
     val Nombre_Torneo: String,
     val Ubicacion_Torneo: String,
     val Descripcion_Torneo: String,
-    val Estado_Toneo: String,
     val Logo_Torneo: String,
     val UUID_Tipo_Deporte: String
 )

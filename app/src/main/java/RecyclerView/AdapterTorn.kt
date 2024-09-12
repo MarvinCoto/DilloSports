@@ -35,7 +35,6 @@ class AdapterTorn(var Datos: List<tbTorneos>): RecyclerView.Adapter<ViewHolderTo
             pantallaVer.putExtra("NombreTorneo", item.Nombre_Torneo)
             pantallaVer.putExtra("UbicacionTorneo", item.Ubicacion_Torneo)
             pantallaVer.putExtra("DescripcionTorneo", item.Descripcion_Torneo)
-            pantallaVer.putExtra("EstadoToneo", item.Estado_Toneo)
             pantallaVer.putExtra("LogoTorneo", item.Logo_Torneo)
             pantallaVer.putExtra("DeporteTorneo", item.UUID_Tipo_Deporte)
             context.startActivity(pantallaVer)

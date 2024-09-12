@@ -49,35 +49,7 @@ class Torneos_Usuario : AppCompatActivity() {
         val rcvTorneosUser = findViewById<RecyclerView>(R.id.rcvTorneosUser)
         rcvTorneosUser.layoutManager = LinearLayoutManager(this)
 
-        fun obtenerTorneos(): List<tbTorneos>{
-            val objConexion = ClaseConexion().cadenaConexion()
 
-            val statement = objConexion?.createStatement()
-            val resultSet = statement?.executeQuery("SELECT * FROM tbTorneos")!!
-            val listaTorneos = mutableListOf<tbTorneos>()
-
-            while(resultSet.next()){
-                val UUID_Torneo = resultSet.getString("UUID_Torneo")
-                val Nombre_Torneo = resultSet.getString("Nombre_Torneo")
-                val Ubicacion_Torneo = resultSet.getString("Ubicacion_Torneo")
-                val Descripcion_Torneo = resultSet.getString("Descripcion_Torneo")
-                val Deporte = resultSet.getString("Deporte")
-                val Estado_Toneo = resultSet.getString("Estado_Toneo")
-                val Logo_Torneo = resultSet.getString("Logo_Torneo")
-
-                val valoresJuntos = tbTorneos(UUID_Torneo, Nombre_Torneo, Ubicacion_Torneo, Descripcion_Torneo, Deporte, Estado_Toneo, Logo_Torneo)
-                listaTorneos.add(valoresJuntos)
-            }
-            return listaTorneos
-        }
-
-        CoroutineScope(Dispatchers.IO).launch {
-            val torneosBDD = obtenerTorneos()
-            withContext(Dispatchers.Main){
-                val adapter = AdapterTornUser(torneosBDD)
-                rcvTorneosUser.adapter = adapter
-            }
-        }
 
     }
 }

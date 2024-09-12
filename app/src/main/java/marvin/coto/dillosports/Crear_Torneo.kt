@@ -28,6 +28,8 @@ import android.widget.ArrayAdapter
 import android.widget.Spinner
 import kotlinx.coroutines.CoroutineScope
 import modelos.ClaseConexion
+import modelos.tbDeportes
+import modelos.tbEquipos
 
 class Crear_Torneo : AppCompatActivity() {
     val codigo_opcion_galeria_torn = 102
@@ -61,18 +63,39 @@ class Crear_Torneo : AppCompatActivity() {
             startActivity(intent)
         }
 
+        fun obtenerDeporte(): List<tbDeportes>{
+            val objConexion = ClaseConexion().cadenaConexion()
+
+            val statement = objConexion?.createStatement()
+            val resultSet = statement?.executeQuery("SELECT * FROM tbTipoDeporte")!!
+            val listaDeportes = mutableListOf<tbDeportes>()
+
+            while (resultSet.next()) {
+                val uuidDeporte = resultSet.getString("UUID_Tipo_Deporte")
+                val nombreDeporte = resultSet.getString("Nombre_Tipo_Deporte")
+                val unDeporte = tbDeportes(uuidDeporte, nombreDeporte)
+                listaDeportes.add(unDeporte)
+            }
+            return listaDeportes
+        }
+
         CoroutineScope(Dispatchers.IO).launch {
-            val listaTipoDeporte = arrayOf("Seleccionar Tipo de Deporte","Fútbol","Básquetbol","Voleibol")
+            val listaDeportes = obtenerDeporte()
+            val nombreDeporte = listaDeportes.map { it.Nombre_Tipo_Deporte }
 
             withContext(Dispatchers.Main){
-                val miAdaptador = ArrayAdapter(this@Crear_Torneo, android.R.layout.simple_spinner_dropdown_item, listaTipoDeporte)
+                val miAdaptador = ArrayAdapter(this@Crear_Torneo, android.R.layout.simple_spinner_dropdown_item, nombreDeporte)
                 spTipoDeporte.adapter = miAdaptador
             }
         }
 
 
         btnSubirImgTorneo.setOnClickListener {
-            checkStoragePermission()
+            println("le dieron clic al subir imagen")
+            val intent = Intent(Intent.ACTION_PICK)
+            intent.type = "image/*"
+            startActivityForResult(intent, codigo_opcion_galeria_torn)
+          //  checkStoragePermission()
         }
 
         btnCrearTorneo.setOnClickListener {
@@ -119,6 +142,7 @@ class Crear_Torneo : AppCompatActivity() {
                     val intent = Intent(this, Torneos::class.java)
                     CoroutineScope(Dispatchers.IO).launch {
                         val objConexion = ClaseConexion().cadenaConexion()
+                        val deporte = obtenerDeporte()
 
                         val addTorneo = objConexion?.prepareStatement("insert into tbTorneos (UUID_Torneo, Nombre_Torneo, Ubicacion_Torneo, Descripcion_Torneo, Logo_Torneo, UUID_Tipo_Deporte) values (?,?,?,?,?,?)")!!
                         addTorneo.setString(1, uuidTorn)
@@ -126,7 +150,7 @@ class Crear_Torneo : AppCompatActivity() {
                         addTorneo.setString(3, txtUbicacionTorneo.text.toString())
                         addTorneo.setString(4, txtDescripcionTorneo.text.toString())
                         addTorneo.setString(5, miPathTorn)
-                        addTorneo.setString(6, spTipoDeporte.selectedItemPosition.toString())
+                        addTorneo.setString(6, deporte[spTipoDeporte.selectedItemPosition].UUID_Tipo_Deporte)
                         addTorneo.executeUpdate()
 
                         withContext(Dispatchers.Main){
