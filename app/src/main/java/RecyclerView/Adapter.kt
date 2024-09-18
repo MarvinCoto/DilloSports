@@ -20,8 +20,25 @@ import kotlinx.coroutines.withContext
 import marvin.coto.dillosports.R
 import marvin.coto.dillosports.VerJugadores
 import modelos.ClaseConexion
+import modelos.tbEstadoJugador
 
 class Adapter(var Datos: List<tbJugadores>): RecyclerView.Adapter<ViewHolder>() {
+
+    fun obtenerEstado(): List<tbEstadoJugador>{
+        val objConexion = ClaseConexion().cadenaConexion()
+
+        val statement = objConexion?.createStatement()
+        val resultSet = statement?.executeQuery("SELECT * FROM tbEstadoJugador")!!
+        val listaEstadoJugador = mutableListOf<tbEstadoJugador>()
+
+        while (resultSet.next()) {
+            val UUID_Estado = resultSet.getString("UUID_Estado_Jugador")
+            val Nombre_Estado = resultSet.getString("Estado_Jugador")
+            val unEstado = tbEstadoJugador(UUID_Estado, Nombre_Estado)
+            listaEstadoJugador.add(unEstado)
+        }
+        return listaEstadoJugador
+    }
 
     //Eliminar
     fun eliminarDatos(Nombre_Jugador: String, Posicion_Jugador: String, Numero_Jugador: Int, posicion: Int){
@@ -116,13 +133,15 @@ class Adapter(var Datos: List<tbJugadores>): RecyclerView.Adapter<ViewHolder>() 
             val spEstado_Jugad = dialogLayout.findViewById<Spinner>(R.id.spEstado_Jugad)
 
                 CoroutineScope(Dispatchers.IO).launch {
-                    val listaEstadoJugador = arrayOf("Seleccionar Estado", "Activo", "Inactivo", "Expulsado", "Lesionado")
+                    val listaEstadoJugador = obtenerEstado()
+                    val nombreEstado = listaEstadoJugador.map { it.Estado_Jugador }
 
                     withContext(Dispatchers.Main){
-                        val miAdaptador = ArrayAdapter(context, android.R.layout.simple_spinner_dropdown_item, listaEstadoJugador)
+                        val miAdaptador = ArrayAdapter(context, android.R.layout.simple_spinner_dropdown_item, nombreEstado)
                         spEstado_Jugad.adapter = miAdaptador
                     }
                 }
+
 
             builder.setView(dialogLayout)
             val alertDialog = builder.create()
@@ -131,11 +150,13 @@ class Adapter(var Datos: List<tbJugadores>): RecyclerView.Adapter<ViewHolder>() 
                 alertDialog.dismiss()
             }
             dialogLayout.findViewById<Button>(R.id.btnCancelarEditarJugad).setOnClickListener {
+                val estados = obtenerEstado()
+
                 val nombre = txtEditar_Nombre_Jugad.text.toString()
                 val apellido = txtApellido_Jugad.text.toString()
                 val dorsal = txtNumDorsal_Jugad.text.toString().toInt()
                 val posicion = txtPosicion_Jugad.text.toString()
-                val estado = spEstado_Jugad.selectedItemPosition.toString()
+                val estado = estados[spEstado_Jugad.selectedItemPosition].UUID_Estado_Jugador
                 editarDatos(nombre, apellido, dorsal, posicion, estado, item.UUID_Jugador)
 
                 alertDialog.dismiss()

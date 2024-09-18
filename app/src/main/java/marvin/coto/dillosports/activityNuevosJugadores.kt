@@ -29,6 +29,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import modelos.ClaseConexion
+import modelos.tbEstadoJugador
 import java.io.ByteArrayOutputStream
 import java.util.Calendar
 import java.util.UUID
@@ -60,19 +61,38 @@ class activityNuevosJugadores : AppCompatActivity() {
         val spEstadoJugador = findViewById<Spinner>(R.id.spEstadoJugador)
         val btnInscribirJugador = findViewById<Button>(R.id.btnInscribirJugador)
 
-        spEstadoJugador.setOnClickListener {
+        fun obtenerEstado(): List<tbEstadoJugador>{
+            val objConexion = ClaseConexion().cadenaConexion()
+
+            val statement = objConexion?.createStatement()
+            val resultSet = statement?.executeQuery("SELECT * FROM tbEstadoJugador")!!
+            val listaEstadoJugador = mutableListOf<tbEstadoJugador>()
+
+            while(resultSet.next()){
+                val UUID_Estado = resultSet.getString("UUID_Estado_Jugador")
+                val Nombre_Estado = resultSet.getString("Estado_Jugador")
+                val unEstado = tbEstadoJugador(UUID_Estado, Nombre_Estado)
+                listaEstadoJugador.add(unEstado)
+            }
+            return listaEstadoJugador
+        }
+
             CoroutineScope(Dispatchers.IO).launch {
-                val listaEstadoJugador = arrayOf("Seleccionar Estado del Jugador", "Activo", "Inactivo", "Expulsado", "Lesionado")
+                val listaEstadoJugador = obtenerEstado()
+                val nombreEstado = listaEstadoJugador.map { it.Estado_Jugador }
 
                 withContext(Dispatchers.Main){
-                    val miAdaptador = ArrayAdapter(this@activityNuevosJugadores, android.R.layout.simple_spinner_dropdown_item, listaEstadoJugador)
+                    val miAdaptador = ArrayAdapter(this@activityNuevosJugadores, android.R.layout.simple_spinner_dropdown_item, nombreEstado)
                     spEstadoJugador.adapter = miAdaptador
                 }
             }
-        }
+
 
 
         btnSubirImgJugador.setOnClickListener {
+            val intent = Intent(Intent.ACTION_PICK)
+            intent.type = "image/*"
+            startActivityForResult(intent, codigo_opcion_galeria_jug)
             checkStoragePermission()
         }
 
@@ -150,6 +170,7 @@ class activityNuevosJugadores : AppCompatActivity() {
 
                     CoroutineScope(Dispatchers.IO).launch {
                         val objConexion = ClaseConexion().cadenaConexion()
+                        val estado = obtenerEstado()
 
                         val addJugadores = objConexion?.prepareStatement("insert into tbJugadores (UUID_Jugador, Nombre_Jugador, Apellido_Jugador, FNacimiento_Jugador, Numero_Jugador, Posicion_Jugador, Foto_Jugador, UUID_Estado_Jugador) values (?,?,?,?,?,?,?,?)")!!
                         addJugadores.setString(1, uuidJug)
@@ -159,7 +180,7 @@ class activityNuevosJugadores : AppCompatActivity() {
                         addJugadores.setInt(5, txtNumJugador.text.toString().toInt())
                         addJugadores.setString(6, txtPosicionJugador.text.toString())
                         addJugadores.setString(7, miPathJug)
-                        addJugadores.setString(8, spEstadoJugador.selectedItemPosition.toString())
+                        addJugadores.setString(8, estado[spEstadoJugador.selectedItemPosition].UUID_Estado_Jugador)
                         addJugadores.executeUpdate()
 
                         withContext(Dispatchers.Main){

@@ -20,6 +20,7 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import modelos.ClaseConexion
+import modelos.tbDeportes
 import modelos.tbTorneos
 
 class Ver_Torneo : AppCompatActivity() {
@@ -100,22 +101,37 @@ class Ver_Torneo : AppCompatActivity() {
             return listaDatos.toList()
         }
 
-        fun editarDatos(nuevoNombre: String, nuevoUbicacion: String, nuevoDescripcion: String, nuevoEstado: String, nuevoTipoDeporte: String, UUID_Torneo: String){
+        fun editarDatos(nuevoNombre: String, nuevoUbicacion: String, nuevoDescripcion: String, nuevoTipoDeporte: String, UUID_Torneo: String){
             GlobalScope.launch(Dispatchers.IO){
                 val objConexion = ClaseConexion().cadenaConexion()
 
-                val updateTorneo = objConexion?.prepareStatement("update tbTorneos set Nombre_Torneo =?, Ubicacion_Torneo =?, Descripcion_Torneo =?, UUID_Tipo_Deporte =?, Estado_Toneo =? where UUID_Torneo =?")!!
+                val updateTorneo = objConexion?.prepareStatement("update tbTorneos set Nombre_Torneo =?, Ubicacion_Torneo =?, Descripcion_Torneo =?, UUID_Tipo_Deporte =? where UUID_Torneo =?")!!
                 updateTorneo.setString(1, nuevoNombre)
                 updateTorneo.setString(2, nuevoUbicacion)
                 updateTorneo.setString(3, nuevoDescripcion)
                 updateTorneo.setString(4, nuevoTipoDeporte)
-                updateTorneo.setString(5, nuevoEstado)
                 updateTorneo.setString(6, UUID_Torneo)
                 updateTorneo.executeUpdate()
 
                 val commit = objConexion.prepareStatement("commit")
                 commit?.executeUpdate()
             }
+        }
+
+        fun obtenerDeporte(): List<tbDeportes>{
+            val objConexion = ClaseConexion().cadenaConexion()
+
+            val statement = objConexion?.createStatement()
+            val resultSet = statement?.executeQuery("SELECT * FROM tbTipoDeporte")!!
+            val listaDeportes = mutableListOf<tbDeportes>()
+
+            while (resultSet.next()) {
+                val uuidDeporte = resultSet.getString("UUID_Tipo_Deporte")
+                val nombreDeporte = resultSet.getString("Nombre_Tipo_Deporte")
+                val unDeporte = tbDeportes(uuidDeporte, nombreDeporte)
+                listaDeportes.add(unDeporte)
+            }
+            return listaDeportes
         }
 
 
@@ -129,27 +145,16 @@ class Ver_Torneo : AppCompatActivity() {
             val txtDescripcion_Torn = dialogLayout.findViewById<EditText>(R.id.txtDescripcion_Torn)
             val txtUbicacion_Torn = dialogLayout.findViewById<EditText>(R.id.txtUbicacion_Torn)
             val spTipoDeporte_Torn = dialogLayout.findViewById<Spinner>(R.id.spTipoDeporte_Torn)
-            val spEstado_Torn = dialogLayout.findViewById<Spinner>(R.id.spEstado_Torn)
 
-                CoroutineScope(Dispatchers.IO).launch {
-                    val listaTipoDeporte = arrayOf("Seleccionar Tipo de Deporte","Fútbol","Básquetbol","Voleibol")
+            CoroutineScope(Dispatchers.IO).launch {
+                val listaDeportes = obtenerDeporte()
+                val nombreDeporte = listaDeportes.map { it.Nombre_Tipo_Deporte }
 
-                    withContext(Dispatchers.Main){
-                        val miAdaptador = ArrayAdapter(this@Ver_Torneo, android.R.layout.simple_spinner_dropdown_item, listaTipoDeporte)
-                        spTipoDeporte_Torn.adapter = miAdaptador
-                    }
+                withContext(Dispatchers.Main){
+                    val miAdaptador = ArrayAdapter(this@Ver_Torneo, android.R.layout.simple_spinner_dropdown_item, nombreDeporte)
+                    spTipoDeporte_Torn.adapter = miAdaptador
                 }
-
-
-                CoroutineScope(Dispatchers.IO).launch {
-                    val listaEstados = arrayOf("Seleccionar Estado del Torneo","Activo","Finalizado")
-
-                    withContext(Dispatchers.Main){
-                        val miAdaptador = ArrayAdapter(this@Ver_Torneo, android.R.layout.simple_spinner_dropdown_item, listaEstados)
-                        spEstado_Torn.adapter = miAdaptador
-                    }
-                }
-
+            }
 
             builder.setView(dialogLayout)
             val alertDialog = builder.create()
@@ -159,12 +164,13 @@ class Ver_Torneo : AppCompatActivity() {
             }
 
             dialogLayout.findViewById<Button>(R.id.btnActualizarEditarTorn).setOnClickListener {
+                val deporte = obtenerDeporte()
+
                 val nombre = txtEditar_Nombre_Torn.text.toString()
                 val descripcion = txtDescripcion_Torn.text.toString()
                 val ubicacion = txtUbicacion_Torn.text.toString()
-                val tipoDeporte = spTipoDeporte_Torn.selectedItemPosition.toString()
-                val estadoTorneo = spEstado_Torn.selectedItemPosition.toString()
-                editarDatos(nombre, ubicacion, descripcion, tipoDeporte, estadoTorneo, intent.getStringExtra("UUID_Torneo").toString())
+                val tipoDeporte = deporte[spTipoDeporte_Torn.selectedItemPosition].UUID_Tipo_Deporte
+                editarDatos(nombre, ubicacion, descripcion, tipoDeporte, intent.getStringExtra("UUID_Torneo").toString())
 
                 alertDialog.dismiss()
             }

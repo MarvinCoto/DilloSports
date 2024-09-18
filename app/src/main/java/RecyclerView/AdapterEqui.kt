@@ -18,9 +18,26 @@ import marvin.coto.dillosports.R
 import marvin.coto.dillosports.VerEquipo
 import modelos.ClaseConexion
 import modelos.tbEquipos
+import modelos.tbEstadoEquipos
 
 
 class AdapterEqui(var Datos: List<tbEquipos>): RecyclerView.Adapter<ViewHolderEquip>() {
+
+    fun obtenerEstado(): List<tbEstadoEquipos>{
+        val objConexion = ClaseConexion().cadenaConexion()
+
+        val statement = objConexion?.createStatement()
+        val resultSet = statement?.executeQuery("SELECT * FROM tbEstadoEquipo")!!
+        val listaEstadoEquipo = mutableListOf<tbEstadoEquipos>()
+
+        while (resultSet.next()){
+            val uuidEstadoEquipo = resultSet.getString("UUID_Estado_Equipo")
+            val estadoEquipo = resultSet.getString("Estado_Equipo")
+            val unEstadoEquipo = tbEstadoEquipos(uuidEstadoEquipo, estadoEquipo)
+            listaEstadoEquipo.add(unEstadoEquipo)
+        }
+        return listaEstadoEquipo
+    }
 
     //Eliminar
     fun eliminarDatos(Nombre_Equipo: String, posicion: Int){
@@ -108,14 +125,15 @@ class AdapterEqui(var Datos: List<tbEquipos>): RecyclerView.Adapter<ViewHolderEq
             val txtUbicacion_Equip = dialogLayout.findViewById<EditText>(R.id.txtUbicacion_Equip)
             val spEstado_Equip = dialogLayout.findViewById<Spinner>(R.id.spEstado_Equip)
 
-                CoroutineScope(Dispatchers.IO).launch {
-                    val listaEstado = arrayOf("Seleccionar Estado", "Activo", "Inactivo", "Penalizado")
+            CoroutineScope(Dispatchers.IO).launch {
+                val listaEstadoEquipo = obtenerEstado()
+                val nombreEstadoEquipo = listaEstadoEquipo.map { it.Estado_Equipo }
 
-                    withContext(Dispatchers.Main){
-                        val miAdaptador = ArrayAdapter(context, android.R.layout.simple_spinner_dropdown_item, listaEstado)
-                        spEstado_Equip.adapter = miAdaptador
-                    }
+                withContext(Dispatchers.Main){
+                    val miAdaptador = ArrayAdapter(context, android.R.layout.simple_spinner_dropdown_item, nombreEstadoEquipo)
+                    spEstado_Equip.adapter = miAdaptador
                 }
+            }
 
             builder.setView(dialogLayout)
             val alertDialog = builder.create()
@@ -124,11 +142,13 @@ class AdapterEqui(var Datos: List<tbEquipos>): RecyclerView.Adapter<ViewHolderEq
                 alertDialog.dismiss()
             }
             dialogLayout.findViewById<Button>(R.id.btnActualizarEditarEquip).setOnClickListener {
+                val estado = obtenerEstado()
+
                 val nombre = txtEditar_Nombre_Equip.text.toString()
                 val descripcion = txtDescripcion_Equip.text.toString()
                 val ubicacion = txtUbicacion_Equip.text.toString()
-                val estado = spEstado_Equip.selectedItemPosition.toString()
-                editarDatos(nombre, descripcion, ubicacion, estado, item.UUID_Equipo)
+                val estados = estado[spEstado_Equip.selectedItemPosition].UUID_Estado_Equipo
+                editarDatos(nombre, descripcion, ubicacion, estados, item.UUID_Equipo)
 
                 alertDialog.dismiss()
             }

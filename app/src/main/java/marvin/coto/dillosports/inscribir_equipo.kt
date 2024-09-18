@@ -27,6 +27,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import modelos.ClaseConexion
+import modelos.tbEstadoEquipos
 import java.io.ByteArrayOutputStream
 import java.util.UUID
 
@@ -55,16 +56,36 @@ class inscribir_equipo : AppCompatActivity() {
         val spEstadoEquipo = findViewById<Spinner>(R.id.spEstadoEquipo)
         val btnInscribirEquipo = findViewById<Button>(R.id.btnInscribirEquipo)
 
-        CoroutineScope(Dispatchers.IO).launch {
-            val listaEstadoEquipo = arrayOf("Seleccionar Estado del Equipo", "Activo", "Inactivo", "Penalizado")
+        fun obtenerEstado(): List<tbEstadoEquipos>{
+            val objConexion = ClaseConexion().cadenaConexion()
 
-            withContext(Dispatchers.Main) {
-                val miAdaptador = ArrayAdapter(this@inscribir_equipo, android.R.layout.simple_spinner_dropdown_item, listaEstadoEquipo)
+            val statement = objConexion?.createStatement()
+            val resultSet = statement?.executeQuery("SELECT * FROM tbEstadoEquipo")!!
+            val listaEstadoEquipo = mutableListOf<tbEstadoEquipos>()
+
+            while (resultSet.next()) {
+                val uuidEstadoEquipo = resultSet.getString("UUID_Estado_Equipo")
+                val estadoEquipo = resultSet.getString("Estado_Equipo")
+                val unEstadoEquipo = tbEstadoEquipos(uuidEstadoEquipo, estadoEquipo)
+                listaEstadoEquipo.add(unEstadoEquipo)
+            }
+            return listaEstadoEquipo
+        }
+
+        CoroutineScope(Dispatchers.IO).launch {
+            val listaEstadoEquipo = obtenerEstado()
+            val nombreEstadoEquipo = listaEstadoEquipo.map { it.Estado_Equipo }
+
+            withContext(Dispatchers.Main){
+                val miAdaptador = ArrayAdapter(this@inscribir_equipo, android.R.layout.simple_spinner_dropdown_item, nombreEstadoEquipo)
                 spEstadoEquipo.adapter = miAdaptador
             }
         }
 
         btnSubirImgEquipo.setOnClickListener {
+            val intent = Intent(Intent.ACTION_PICK)
+            intent.type = "image/*"
+            startActivityForResult(intent, codigo_opcion_galeria_equi)
             checkStoragePermission()
         }
 
@@ -115,6 +136,7 @@ class inscribir_equipo : AppCompatActivity() {
 
                     CoroutineScope(Dispatchers.IO).launch {
                         val objConexion = ClaseConexion().cadenaConexion()
+                        val estado = obtenerEstado()
 
                         val addEquipo = objConexion?.prepareStatement("insert into tbEquipos (UUID_Equipo, Nombre_Equipo, Descripcion_Equipo, Ubicacion_Equipo, Logo_Equipo, UUID_Estado_Equipo) values (?,?,?,?,?,?)")!!
                         addEquipo.setString(1, uuidEqui)
@@ -122,7 +144,7 @@ class inscribir_equipo : AppCompatActivity() {
                         addEquipo.setString(3, txtDescripcionEquipo.text.toString())
                         addEquipo.setString(4, txtUbicacionEquipo.text.toString())
                         addEquipo.setString(5, miPathEqui)
-                        addEquipo.setString(6, spEstadoEquipo.selectedItemPosition.toString())
+                        addEquipo.setString(6, estado[spEstadoEquipo.selectedItemPosition].UUID_Estado_Equipo)
                         addEquipo.executeUpdate()
 
                         withContext(Dispatchers.Main) {

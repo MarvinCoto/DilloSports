@@ -194,13 +194,16 @@ class AdapterPart(var Datos: List<tbPartidos>): RecyclerView.Adapter<ViewHolderP
                 alertDialog.dismiss()
             }
             dialogLayout.findViewById<Button>(R.id.btnActualizarEditarPart).setOnClickListener {
+                val equipo = obtenerEquipo()
+                val arbitros = obtenerArbitro()
+
                 val lugar = txtEditar_Lugar_Part.text.toString()
                 val tipo = txtTipo_Part.text.toString()
                 val marcador1 = txtMarcador1.text.toString().toInt()
                 val marcador2 = txtMarcador2.text.toString().toInt()
-                val arbitro = spArbitros_Editar.selectedItemPosition.toString()
-                val equipo1 = spEdit_Equipo1.selectedItemPosition.toString()
-                val equipo2 = spEdit_Equipo2.selectedItemPosition.toString()
+                val arbitro = arbitros[spArbitros_Editar.selectedItemPosition].UUID_Arbitro
+                val equipo1 = equipo[spEdit_Equipo1.selectedItemPosition].UUID_Equipo
+                val equipo2 = equipo[spEdit_Equipo2.selectedItemPosition].UUID_Equipo
                 editarDatos(marcador1, marcador2, tipo, lugar, arbitro, equipo1, equipo2, item.UUID_Partido)
 
                 alertDialog.dismiss()

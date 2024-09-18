@@ -32,8 +32,8 @@ import modelos.tbDeportes
 import modelos.tbEquipos
 
 class Crear_Torneo : AppCompatActivity() {
-    val codigo_opcion_galeria_torn = 102
-    val STORAGE_REQUEST_CODE_TORN = 1
+    val codigo_opcion_galeria_torn = 101
+    val STORAGE_REQUEST_CODE_TORN = 2
 
     lateinit var imageViewTorn: ImageView
     lateinit var miPathTorn: String
@@ -159,8 +159,9 @@ class Crear_Torneo : AppCompatActivity() {
                             txtDescripcionTorneo.setText("")
                             txtUbicacionTorneo.setText("")
                         }
-                        startActivity(intent)
+
                     }
+                    startActivity(intent)
                 }
 
 
