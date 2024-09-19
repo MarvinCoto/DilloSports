@@ -60,7 +60,7 @@ class Ver_Torneo : AppCompatActivity() {
 
 
         val UUIDRecibido = intent.getStringExtra("UUID_Torneo")
-        val nombreRecibido = intent.getStringExtra("NombreTorneo")
+        val nombreRecibido = intent.getStringExtra("Nombre_Torneo")
         val ubicacionRecibido = intent.getStringExtra("UbicacionTorneo")
         val descripcionRecibido = intent.getStringExtra("DescripcionTorneo")
         val deporteRecibido = intent.getStringExtra("DeporteTorneo")
@@ -84,9 +84,9 @@ class Ver_Torneo : AppCompatActivity() {
         val btnEliminarTorneo = findViewById<TextView>(R.id.btnEliminarTorneo)
         val btnEditarTorneo = findViewById<TextView>(R.id.btnEditarTorneo)
 
-        fun eliminarDatos(Nombre_Torneo: String, posicion: Int): List<tbTorneos>{
-            val listaDatos = mutableListOf<tbTorneos>()
-            listaDatos.removeAt(posicion)
+        fun eliminarDatos(Nombre_Torneo: String){
+            //val listaDatos = mutableListOf<tbTorneos>()
+            //listaDatos.removeAt(posicion)
 
             GlobalScope.launch(Dispatchers.IO){
                 val objConexion = ClaseConexion().cadenaConexion()
@@ -98,7 +98,7 @@ class Ver_Torneo : AppCompatActivity() {
                 val commit = objConexion.prepareStatement("commit")
                 commit?.executeUpdate()
             }
-            return listaDatos.toList()
+           // return listaDatos.toList()
         }
 
         fun editarDatos(nuevoNombre: String, nuevoUbicacion: String, nuevoDescripcion: String, nuevoTipoDeporte: String, UUID_Torneo: String){
@@ -110,7 +110,7 @@ class Ver_Torneo : AppCompatActivity() {
                 updateTorneo.setString(2, nuevoUbicacion)
                 updateTorneo.setString(3, nuevoDescripcion)
                 updateTorneo.setString(4, nuevoTipoDeporte)
-                updateTorneo.setString(6, UUID_Torneo)
+                updateTorneo.setString(5, UUID_Torneo)
                 updateTorneo.executeUpdate()
 
                 val commit = objConexion.prepareStatement("commit")
@@ -118,20 +118,26 @@ class Ver_Torneo : AppCompatActivity() {
             }
         }
 
-        fun obtenerDeporte(): List<tbDeportes>{
+        suspend fun obtenerDeporte(): List<tbDeportes>{
+            return withContext(Dispatchers.IO) {
             val objConexion = ClaseConexion().cadenaConexion()
 
             val statement = objConexion?.createStatement()
             val resultSet = statement?.executeQuery("SELECT * FROM tbTipoDeporte")!!
             val listaDeportes = mutableListOf<tbDeportes>()
 
-            while (resultSet.next()) {
+            while (resultSet.next() == true) {
                 val uuidDeporte = resultSet.getString("UUID_Tipo_Deporte")
                 val nombreDeporte = resultSet.getString("Nombre_Tipo_Deporte")
                 val unDeporte = tbDeportes(uuidDeporte, nombreDeporte)
                 listaDeportes.add(unDeporte)
             }
-            return listaDeportes
+                resultSet?.close()
+                statement?.close()
+                objConexion?.close()
+
+                listaDeportes
+            }
         }
 
 
@@ -164,8 +170,9 @@ class Ver_Torneo : AppCompatActivity() {
             }
 
             dialogLayout.findViewById<Button>(R.id.btnActualizarEditarTorn).setOnClickListener {
-                val deporte = obtenerDeporte()
 
+                GlobalScope.launch(Dispatchers.Main){
+                val deporte = obtenerDeporte()
                 val nombre = txtEditar_Nombre_Torn.text.toString()
                 val descripcion = txtDescripcion_Torn.text.toString()
                 val ubicacion = txtUbicacion_Torn.text.toString()
@@ -173,6 +180,7 @@ class Ver_Torneo : AppCompatActivity() {
                 editarDatos(nombre, ubicacion, descripcion, tipoDeporte, intent.getStringExtra("UUID_Torneo").toString())
 
                 alertDialog.dismiss()
+                }
             }
 
             alertDialog.show()
@@ -191,8 +199,10 @@ class Ver_Torneo : AppCompatActivity() {
             }
 
             dialogLayout.findViewById<Button>(R.id.btnEliminarTorn).setOnClickListener {
-                eliminarDatos(intent.getStringExtra("Nombre_Torneo").toString(), 0)
+                val nombrequequieroeliminar = intent.getStringExtra("Nombre_Torneo").toString()
+                eliminarDatos(nombrequequieroeliminar)
                 alertDialog.dismiss()
+                finish()
             }
 
             alertDialog.show()

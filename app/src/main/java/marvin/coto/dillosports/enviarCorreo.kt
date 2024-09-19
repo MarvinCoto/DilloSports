@@ -31,7 +31,7 @@ suspend fun enviarCorreo(receptor: String, asunto: String, mensaje: String) = wi
             setFrom(InternetAddress("oficial.dillo.sports@gmail.com"))
             addRecipient(Message.RecipientType.TO, InternetAddress(receptor))
             subject = asunto
-            setText(mensaje)
+            setContent(mensaje, "text/html; charset=utf-8")
         }
         Transport.send(message)
         println("Correo enviado satisfactoriamente")

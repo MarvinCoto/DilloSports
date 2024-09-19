@@ -23,20 +23,27 @@ import modelos.tbEstadoEquipos
 
 class AdapterEqui(var Datos: List<tbEquipos>): RecyclerView.Adapter<ViewHolderEquip>() {
 
-    fun obtenerEstado(): List<tbEstadoEquipos>{
-        val objConexion = ClaseConexion().cadenaConexion()
+    suspend fun obtenerEstado(): List<tbEstadoEquipos>{
+        return withContext(Dispatchers.IO) {
+            val objConexion = ClaseConexion().cadenaConexion()
+            val statement = objConexion?.createStatement()
+            val resultSet = statement?.executeQuery("SELECT * FROM tbEstadoEquipo")
+            val listaEstadoEquipo = mutableListOf<tbEstadoEquipos>()
 
-        val statement = objConexion?.createStatement()
-        val resultSet = statement?.executeQuery("SELECT * FROM tbEstadoEquipo")!!
-        val listaEstadoEquipo = mutableListOf<tbEstadoEquipos>()
+            while (resultSet?.next() == true) {
+                val uuidEstadoEquipo = resultSet.getString("UUID_Estado_Equipo")
+                val estadoEquipo = resultSet.getString("Estado_Equipo")
+                val unEstadoEquipo = tbEstadoEquipos(uuidEstadoEquipo, estadoEquipo)
+                listaEstadoEquipo.add(unEstadoEquipo)
+            }
 
-        while (resultSet.next()){
-            val uuidEstadoEquipo = resultSet.getString("UUID_Estado_Equipo")
-            val estadoEquipo = resultSet.getString("Estado_Equipo")
-            val unEstadoEquipo = tbEstadoEquipos(uuidEstadoEquipo, estadoEquipo)
-            listaEstadoEquipo.add(unEstadoEquipo)
+            // Cerrar recursos
+            resultSet?.close()
+            statement?.close()
+            objConexion?.close()
+
+            listaEstadoEquipo
         }
-        return listaEstadoEquipo
     }
 
     //Eliminar
@@ -64,7 +71,7 @@ class AdapterEqui(var Datos: List<tbEquipos>): RecyclerView.Adapter<ViewHolderEq
         GlobalScope.launch(Dispatchers.IO){
             val objConexion = ClaseConexion().cadenaConexion()
 
-            val updateEquipo = objConexion?.prepareStatement("update tbEquipos set Nombre_Equipo =?, Descripcion_Equipo =?, Ubicacion_Equipo =?, Estado_Equipo =? where UUID_Equipo =?")!!
+            val updateEquipo = objConexion?.prepareStatement("update tbEquipos set Nombre_Equipo =?, Descripcion_Equipo =?, Ubicacion_Equipo =?, UUID_Estado_Equipo =? where UUID_Equipo =?")!!
             updateEquipo.setString(1, nuevoNombre)
             updateEquipo.setString(2, nuevoDescripcion)
             updateEquipo.setString(3, nuevoUbicacion)
@@ -142,15 +149,19 @@ class AdapterEqui(var Datos: List<tbEquipos>): RecyclerView.Adapter<ViewHolderEq
                 alertDialog.dismiss()
             }
             dialogLayout.findViewById<Button>(R.id.btnActualizarEditarEquip).setOnClickListener {
+
+                GlobalScope.launch(Dispatchers.Main){
                 val estado = obtenerEstado()
+                    val nombre = txtEditar_Nombre_Equip.text.toString()
+                    val descripcion = txtDescripcion_Equip.text.toString()
+                    val ubicacion = txtUbicacion_Equip.text.toString()
+                    val estados = estado[spEstado_Equip.selectedItemPosition].UUID_Estado_Equipo
+                    editarDatos(nombre, descripcion, ubicacion, estados, item.UUID_Equipo)
 
-                val nombre = txtEditar_Nombre_Equip.text.toString()
-                val descripcion = txtDescripcion_Equip.text.toString()
-                val ubicacion = txtUbicacion_Equip.text.toString()
-                val estados = estado[spEstado_Equip.selectedItemPosition].UUID_Estado_Equipo
-                editarDatos(nombre, descripcion, ubicacion, estados, item.UUID_Equipo)
+                    alertDialog.dismiss()
+                }
 
-                alertDialog.dismiss()
+
             }
             alertDialog.show()
         }

@@ -32,7 +32,7 @@ class AdapterTorn(var Datos: List<tbTorneos>): RecyclerView.Adapter<ViewHolderTo
 
             val pantallaVer = Intent(context, Ver_Torneo::class.java)
             pantallaVer.putExtra("UUID_Torneo", item.UUID_Torneo)
-            pantallaVer.putExtra("NombreTorneo", item.Nombre_Torneo)
+            pantallaVer.putExtra("Nombre_Torneo", item.Nombre_Torneo)
             pantallaVer.putExtra("UbicacionTorneo", item.Ubicacion_Torneo)
             pantallaVer.putExtra("DescripcionTorneo", item.Descripcion_Torneo)
             pantallaVer.putExtra("LogoTorneo", item.Logo_Torneo)

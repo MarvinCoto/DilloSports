@@ -12,13 +12,13 @@
         android:id="@+id/textView27"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="532dp"
+        android:layout_marginTop="504dp"
         android:text="DILLOSPORTS"
         android:textColor="#FFFFFF"
         android:textSize="22sp"
         android:textStyle="bold|italic"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -26,13 +26,12 @@
         android:id="@+id/btnIrAIniciarSesionBienvenida"
         android:layout_width="350dp"
         android:layout_height="48dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="36dp"
         android:backgroundTint="#1C1C1C"
         android:text="Iniciar Sesión"
         android:textStyle="bold"
         app:cornerRadius="5dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView27" />
 
@@ -40,7 +39,7 @@
         android:id="@+id/btnIrAlRegistroBienvenida"
         android:layout_width="350dp"
         android:layout_height="48dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
         android:backgroundTint="#1C1C1C"
         android:text="Registrarse"
         android:textStyle="bold"
@@ -50,62 +49,15 @@
         app:layout_constraintTop_toBottomOf="@+id/btnIrAIniciarSesionBienvenida" />
 
     <TextView
-        android:id="@+id/textView28"
+        android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="43dp"
-        android:text="or"
-        android:textColor="#FFFFFF"
-        android:textSize="18sp"
-        android:textStyle="bold|italic"
+        android:layout_marginTop="16dp"
+        android:text="2024 PTC | DilloSports"
+        android:textColor="#A0E66F"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnIrAlRegistroBienvenida" />
 
-    <ImageView
-        android:id="@+id/imageView13"
-        android:layout_width="190dp"
-        android:layout_height="3dp"
-        android:layout_marginTop="56dp"
-        app:layout_constraintEnd_toStartOf="@+id/textView28"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnIrAlRegistroBienvenida"
-        app:srcCompat="@drawable/linea_uno" />
-
-    <ImageView
-        android:id="@+id/imageView15"
-        android:layout_width="195dp"
-        android:layout_height="3dp"
-        android:layout_marginTop="56dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/textView28"
-        app:layout_constraintTop_toBottomOf="@+id/btnIrAlRegistroBienvenida"
-        app:srcCompat="@drawable/linea_uno" />
-
-    <Button
-        android:id="@+id/button3"
-        android:layout_width="350dp"
-        android:layout_height="48dp"
-        android:layout_marginTop="20dp"
-        android:backgroundTint="#FFFFFF"
-        android:text="Continuar con Google"
-        android:textColor="#1C1C1C"
-        android:textStyle="bold"
-        app:cornerRadius="5dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView28" />
-
-    <ImageView
-        android:id="@+id/imageView16"
-        android:layout_width="30dp"
-        android:layout_height="31dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintStart_toStartOf="@+id/button3"
-        app:layout_constraintTop_toTopOf="@+id/button3"
-        app:srcCompat="@drawable/icon_goog" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -54,6 +54,9 @@ class InscribirArbitro : AppCompatActivity() {
         val btnInscribirArbitro = findViewById<Button>(R.id.btnInscribirArbitro)
 
         btnSubirImgArbitro.setOnClickListener {
+            val intent = Intent(Intent.ACTION_PICK)
+            intent.type = "image/*"
+            startActivityForResult(intent, codigo_opcion_galeria_arb)
             checkStoragePermission()
         }
 
