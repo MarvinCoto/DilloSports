@@ -15,7 +15,7 @@
 
         <ImageView
             android:id="@+id/imgCardArbi"
-            android:background="@drawable/perfil"
+            android:background="@drawable/images"
             android:layout_width="125dp"
             android:layout_height="125dp" />
 
@@ -27,7 +27,7 @@
             android:background="@drawable/element_grafic_1" />
 
         <LinearLayout
-            android:layout_width="165dp"
+            android:layout_width="155dp"
             android:layout_height="125dp"
             android:orientation="vertical">
 
@@ -67,7 +67,7 @@
             android:orientation="vertical">
 
             <LinearLayout
-                android:layout_width="85dp"
+                android:layout_width="75dp"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:padding="8dp"
@@ -81,7 +81,7 @@
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="85dp"
+                android:layout_width="75dp"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:padding="8dp">

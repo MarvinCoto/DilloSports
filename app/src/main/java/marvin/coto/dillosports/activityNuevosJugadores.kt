@@ -61,6 +61,12 @@ class activityNuevosJugadores : AppCompatActivity() {
         val spEstadoJugador = findViewById<Spinner>(R.id.spEstadoJugador)
         val btnInscribirJugador = findViewById<Button>(R.id.btnInscribirJugador)
 
+        val imgAtrasdeJugadoresjsjs = findViewById<ImageView>(R.id.imgAtrasdeJugadoresjsjs)
+        imgAtrasdeJugadoresjsjs.setOnClickListener {
+            val intent = Intent(this, mostrarJugadores::class.java)
+            startActivity(intent)
+        }
+
         fun obtenerEstado(): List<tbEstadoJugador>{
             val objConexion = ClaseConexion().cadenaConexion()
 

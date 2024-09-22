@@ -95,7 +95,19 @@ class Crear_Torneo : AppCompatActivity() {
             val intent = Intent(Intent.ACTION_PICK)
             intent.type = "image/*"
             startActivityForResult(intent, codigo_opcion_galeria_torn)
-          //  checkStoragePermission()
+            checkStoragePermission()
+        }
+
+        fun editarID(id: String, UUID_Usuario: String){
+            CoroutineScope(Dispatchers.IO).launch {
+                val objConexion = ClaseConexion().cadenaConexion()
+
+                val updateTorneo = objConexion?.prepareStatement("update tbUsuarios set UUID_Tipo_Usuario = 2 where UUID_Usuario = ?")!!
+                updateTorneo.setString(1, id)
+                updateTorneo.setString(2, UUID_Usuario)
+
+
+            }
         }
 
         btnCrearTorneo.setOnClickListener {
@@ -161,6 +173,7 @@ class Crear_Torneo : AppCompatActivity() {
                         }
 
                     }
+
                     startActivity(intent)
                 }
 

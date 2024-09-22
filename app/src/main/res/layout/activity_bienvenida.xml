@@ -12,7 +12,7 @@
         android:id="@+id/textView27"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="504dp"
+        android:layout_marginTop="492dp"
         android:text="DILLOSPORTS"
         android:textColor="#FFFFFF"
         android:textSize="22sp"

@@ -29,6 +29,7 @@ class Pantalla_recuDos : AppCompatActivity() {
         btnIniciarSesionRecu.setOnClickListener {
             if (txtRecu.text.toString() == recuGlobal.toString()){
                 val intent = Intent(this, Home::class.java)
+                Toast.makeText(this@Pantalla_recuDos, "Codigo Correcto, Bienvenido", Toast.LENGTH_SHORT).show()
                 startActivity(intent)
             }
             else{

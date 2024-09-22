@@ -55,6 +55,11 @@ class inscribir_equipo : AppCompatActivity() {
         val txtUbicacionEquipo = findViewById<EditText>(R.id.txtUbicacionEquipo)
         val spEstadoEquipo = findViewById<Spinner>(R.id.spEstadoEquipo)
         val btnInscribirEquipo = findViewById<Button>(R.id.btnInscribirEquipo)
+        val imgAtrasDeInsEquip = findViewById<ImageView>(R.id.imgAtrasCrearTorneo)
+        imgAtrasDeInsEquip.setOnClickListener {
+            val intent = Intent(this, Equipos::class.java)
+            startActivity(intent)
+        }
 
         fun obtenerEstado(): List<tbEstadoEquipos>{
             val objConexion = ClaseConexion().cadenaConexion()

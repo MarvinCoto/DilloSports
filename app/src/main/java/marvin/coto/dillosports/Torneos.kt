@@ -46,6 +46,12 @@ class Torneos : AppCompatActivity() {
             startActivity(intent)
         }
 
+        val imgirCrearTorn = findViewById<ImageView>(R.id.imgirCrearTorn)
+        imgirCrearTorn.setOnClickListener {
+            val intent = Intent(this, Crear_Torneo::class.java)
+            startActivity(intent)
+        }
+
 
         fun obtenerTorneos(): List<tbTorneos>{
             val objConexion = ClaseConexion().cadenaConexion()

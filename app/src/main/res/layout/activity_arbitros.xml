@@ -9,7 +9,7 @@
     tools:context=".Arbitros">
 
     <ImageView
-        android:id="@+id/imgirCrearTorn2"
+        android:id="@+id/imgVerInsArbi"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginTop="36dp"

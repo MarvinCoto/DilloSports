@@ -53,6 +53,12 @@ class InscribirArbitro : AppCompatActivity() {
         val txtTelefonoArbitro = findViewById<EditText>(R.id.txtTelefonoArbitro)
         val btnInscribirArbitro = findViewById<Button>(R.id.btnInscribirArbitro)
 
+        val imgAtrasdeArbitro = findViewById<ImageView>(R.id.imgAtrasCrearTorneo)
+        imgAtrasdeArbitro.setOnClickListener {
+            val intent = Intent(this, Arbitros::class.java)
+            startActivity(intent)
+        }
+
         btnSubirImgArbitro.setOnClickListener {
             val intent = Intent(Intent.ACTION_PICK)
             intent.type = "image/*"

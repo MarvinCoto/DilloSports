@@ -1,5 +1,6 @@
 package marvin.coto.dillosports
 
+import RecyclerView.AdapterTorn
 import android.content.Intent
 import android.os.Bundle
 import android.widget.ArrayAdapter
@@ -59,14 +60,15 @@ class Ver_Torneo : AppCompatActivity() {
         }
 
 
-        val UUIDRecibido = intent.getStringExtra("UUID_Torneo")
-        val nombreRecibido = intent.getStringExtra("Nombre_Torneo")
-        val ubicacionRecibido = intent.getStringExtra("UbicacionTorneo")
-        val descripcionRecibido = intent.getStringExtra("DescripcionTorneo")
-        val deporteRecibido = intent.getStringExtra("DeporteTorneo")
+        val UUIDRecibido = AdapterTorn.variablesGlobalTorn.UUID_Torneo
+        val nombreRecibido = AdapterTorn.variablesGlobalTorn.Nombre_Torneo
+        val ubicacionRecibido = AdapterTorn.variablesGlobalTorn.Ubicacion_Torneo
+        val descripcionRecibido = AdapterTorn.variablesGlobalTorn.Descripcion_Torneo
+        val deporteRecibido = AdapterTorn.variablesGlobalTorn.UUID_Tipo_Deporte
         val estadoRecibido = intent.getStringExtra("EstadoToneo")
-        val logoRecibido = intent.getStringExtra("LogoTorneo")
+        val logoRecibido = AdapterTorn.variablesGlobalTorn.Logo_Torneo
         val imgTorn = findViewById<ImageView>(R.id.imgTorn)
+        val textViewNombreTorneo2 = findViewById<TextView>(R.id.textViewNombreTorneo2)
         val textViewNombreTorneo = findViewById<TextView>(R.id.textViewNombreTorneo)
         val textViewUbicacionTorneo = findViewById<TextView>(R.id.textViewUbicacionTorneo)
         val textViewDescripcionTorneo = findViewById<TextView>(R.id.textViewDescripcionTorneo)
@@ -76,17 +78,42 @@ class Ver_Torneo : AppCompatActivity() {
             .load(logoRecibido)
             .into(imgTorn)
         textViewNombreTorneo.text = nombreRecibido
+        textViewNombreTorneo2.text = nombreRecibido
         textViewUbicacionTorneo.text = ubicacionRecibido
         textViewDescripcionTorneo.text = descripcionRecibido
-        textViewDeporteTorneo.text = deporteRecibido
         textViewEstadoTorneo.text = estadoRecibido
+
+
+        fun obtenerDatoUUID(UUID_Tipo_Deporte: String): String? {
+            val objConexion = ClaseConexion().cadenaConexion()
+
+            val query = "select Nombre_Tipo_Deporte from tbTipoDeporte where UUID_Tipo_Deporte = ?"
+            val preparedStatement = objConexion?.prepareStatement(query)
+            preparedStatement?.setString(1, UUID_Tipo_Deporte)
+            val resultSet = preparedStatement?.executeQuery()
+
+            var nombreDeporte: String? = null
+
+            if (resultSet?.next() == true) {
+                nombreDeporte = resultSet.getString("Nombre_Tipo_Deporte")
+            }
+
+            return nombreDeporte
+        }
+
+        CoroutineScope(Dispatchers.IO).launch {
+            val resultado = obtenerDatoUUID(deporteRecibido)
+
+            withContext(Dispatchers.Main) {
+                textViewDeporteTorneo.text = resultado ?: "Sin datos"
+            }
+        }
+
 
         val btnEliminarTorneo = findViewById<TextView>(R.id.btnEliminarTorneo)
         val btnEditarTorneo = findViewById<TextView>(R.id.btnEditarTorneo)
 
         fun eliminarDatos(Nombre_Torneo: String){
-            //val listaDatos = mutableListOf<tbTorneos>()
-            //listaDatos.removeAt(posicion)
 
             GlobalScope.launch(Dispatchers.IO){
                 val objConexion = ClaseConexion().cadenaConexion()
@@ -98,7 +125,6 @@ class Ver_Torneo : AppCompatActivity() {
                 val commit = objConexion.prepareStatement("commit")
                 commit?.executeUpdate()
             }
-           // return listaDatos.toList()
         }
 
         fun editarDatos(nuevoNombre: String, nuevoUbicacion: String, nuevoDescripcion: String, nuevoTipoDeporte: String, UUID_Torneo: String){

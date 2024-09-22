@@ -43,6 +43,7 @@ class Perfil : AppCompatActivity() {
         btnCerrarSesion.setOnClickListener {
             val intent = Intent(this, activity_bienvenida::class.java)
             startActivity(intent)
+            finish()
         }
 
         val textViewNombresTitle = findViewById<TextView>(R.id.textViewNombresTitle)

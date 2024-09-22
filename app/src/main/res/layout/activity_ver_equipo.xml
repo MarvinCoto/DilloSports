@@ -39,7 +39,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView46"
+        android:id="@+id/textViewEquienEqui"
         android:layout_width="180dp"
         android:layout_height="23dp"
         android:layout_marginStart="12dp"
@@ -185,12 +185,12 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.521"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView46">
+        app:layout_constraintTop_toBottomOf="@+id/textViewEquienEqui">
 
         <ImageView
             android:id="@+id/imgEquip"
-            android:layout_width="109dp"
-            android:layout_height="94dp"
+            android:layout_width="110dp"
+            android:layout_height="100dp"
             android:layout_marginTop="10dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.501"
@@ -202,7 +202,7 @@
             android:id="@+id/textViewNombreEquipo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="10dp"
             android:text="*Nombre equipo"
             android:textColor="#FFFFFF"
             android:textSize="19sp"

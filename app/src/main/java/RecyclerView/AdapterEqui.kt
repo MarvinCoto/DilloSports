@@ -22,6 +22,14 @@ import modelos.tbEstadoEquipos
 
 
 class AdapterEqui(var Datos: List<tbEquipos>): RecyclerView.Adapter<ViewHolderEquip>() {
+    companion object variablesGlobalEqui{
+        lateinit var UUID_Equipo: String
+        lateinit var Nombre_Equipo: String
+        lateinit var Descripcion_Equipo: String
+        lateinit var Ubicacion_Equipo: String
+        lateinit var UUID_Estado_Equipo: String
+        lateinit var Logo_Equipo: String
+    }
 
     suspend fun obtenerEstado(): List<tbEstadoEquipos>{
         return withContext(Dispatchers.IO) {
@@ -37,7 +45,6 @@ class AdapterEqui(var Datos: List<tbEquipos>): RecyclerView.Adapter<ViewHolderEq
                 listaEstadoEquipo.add(unEstadoEquipo)
             }
 
-            // Cerrar recursos
             resultSet?.close()
             statement?.close()
             objConexion?.close()
@@ -151,7 +158,7 @@ class AdapterEqui(var Datos: List<tbEquipos>): RecyclerView.Adapter<ViewHolderEq
             dialogLayout.findViewById<Button>(R.id.btnActualizarEditarEquip).setOnClickListener {
 
                 GlobalScope.launch(Dispatchers.Main){
-                val estado = obtenerEstado()
+                    val estado = obtenerEstado()
                     val nombre = txtEditar_Nombre_Equip.text.toString()
                     val descripcion = txtDescripcion_Equip.text.toString()
                     val ubicacion = txtUbicacion_Equip.text.toString()
@@ -170,12 +177,12 @@ class AdapterEqui(var Datos: List<tbEquipos>): RecyclerView.Adapter<ViewHolderEq
             val context = holder.itemView.context
 
             val pantallaVer = Intent(context, VerEquipo::class.java)
-            pantallaVer.putExtra("UUID_Equipo", item.UUID_Equipo)
-            pantallaVer.putExtra("NombreEquipo", item.Nombre_Equipo)
-            pantallaVer.putExtra("DescripcionEquipo", item.Descripcion_Equipo)
-            pantallaVer.putExtra("UbicacionEquipo", item.Ubicacion_Equipo)
-            pantallaVer.putExtra("EstadoEquipo", item.UUID_Estado_Equipo)
-            pantallaVer.putExtra("LogoEquipo", item.Logo_Equipo)
+            UUID_Equipo = item.UUID_Equipo
+            Nombre_Equipo = item.Nombre_Equipo
+            Descripcion_Equipo = item.Descripcion_Equipo
+            Ubicacion_Equipo = item.Ubicacion_Equipo
+            UUID_Estado_Equipo = item.UUID_Estado_Equipo
+            Logo_Equipo = item.Logo_Equipo
             context.startActivity(pantallaVer)
         }
     }

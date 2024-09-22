@@ -19,64 +19,87 @@ import marvin.coto.dillosports.VerEquipo
 import marvin.coto.dillosports.Ver_partido
 import modelos.ClaseConexion
 import modelos.tbArbitros
+import modelos.tbEditPartidos
 import modelos.tbEquipos
 import modelos.tbPartidos
 
 class AdapterPart(var Datos: List<tbPartidos>): RecyclerView.Adapter<ViewHolderPart>() {
-
-    fun obtenerArbitro(): List<tbArbitros> {
-        val objConexion = ClaseConexion().cadenaConexion()
-
-        val statement = objConexion?.createStatement()
-        val resultSet = statement?.executeQuery("SELECT * FROM tbArbitros")!!
-        val listaArbitros = mutableListOf<tbArbitros>()
-
-        while (resultSet.next()) {
-            val UUID_Arbitro = resultSet.getString("UUID_Arbitro")
-            val Nombre_Arbitro = resultSet.getString("Nombre_Arbitro")
-            val Apellido_Arbitro = resultSet.getString("Apellido_Arbitro")
-            val Edad_Arbitro = resultSet.getInt("Edad_Arbitro")
-            val Telefono_Arbitro = resultSet.getString("Telefono_Arbitro")
-            val Foto_Arbitro = resultSet.getString("Foto_Arbitro")
-            val unArbitro = tbArbitros(UUID_Arbitro, Nombre_Arbitro, Apellido_Arbitro, Edad_Arbitro, Telefono_Arbitro, Foto_Arbitro)
-            listaArbitros.add(unArbitro)
-        }
-        return listaArbitros
+    companion object variablesGlobalPart{
+        lateinit var UUID_Partido: String
+        lateinit var UUID_Equipo1: String
+        lateinit var UUID_Equipo2: String
+        lateinit var Fecha_Partido: String
+        lateinit var Lugar_Partido: String
+        lateinit var Hora_Partido: String
+        lateinit var UUID_Tipo_Partido: String
+        lateinit var UUID_Arbitro: String
     }
 
-    fun obtenerEquipo(): List<tbEquipos> {
-        val objConexion = ClaseConexion().cadenaConexion()
+    suspend fun obtenerArbitro(): List<tbArbitros> {
+        return withContext(Dispatchers.IO) {
+            val objConexion = ClaseConexion().cadenaConexion()
 
-        val statement = objConexion?.createStatement()
-        val resultSet = statement?.executeQuery("SELECT * FROM tbEquipos")!!
-        val listaEquipos = mutableListOf<tbEquipos>()
+            val statement = objConexion?.createStatement()
+            val resultSet = statement?.executeQuery("SELECT * FROM tbArbitros")!!
+            val listaArbitros = mutableListOf<tbArbitros>()
 
-        while (resultSet.next()) {
-            val UUID_Equipo = resultSet.getString("UUID_Equipo")
-            val Nombre_Equipo = resultSet.getString("Nombre_Equipo")
-            val Descripcion_Equipo = resultSet.getString("Descripcion_Equipo")
-            val Ubicacion_Equipo = resultSet.getString("Ubicacion_Equipo")
-            val Logo_Equipo = resultSet.getString("Logo_Equipo")
-            val UUID_Estado_Equipo = resultSet.getString("UUID_Estado_Equipo")
-            val unEquipo = tbEquipos(UUID_Equipo, Nombre_Equipo, Descripcion_Equipo, Ubicacion_Equipo, Logo_Equipo, UUID_Estado_Equipo)
-            listaEquipos.add(unEquipo)
+            while (resultSet.next() == true) {
+                val UUID_Arbitro = resultSet.getString("UUID_Arbitro")
+                val Nombre_Arbitro = resultSet.getString("Nombre_Arbitro")
+                val Apellido_Arbitro = resultSet.getString("Apellido_Arbitro")
+                val Edad_Arbitro = resultSet.getInt("Edad_Arbitro")
+                val Telefono_Arbitro = resultSet.getString("Telefono_Arbitro")
+                val Foto_Arbitro = resultSet.getString("Foto_Arbitro")
+                val unArbitro = tbArbitros(UUID_Arbitro, Nombre_Arbitro, Apellido_Arbitro, Edad_Arbitro, Telefono_Arbitro, Foto_Arbitro)
+                listaArbitros.add(unArbitro)
+            }
+            resultSet?.close()
+            statement?.close()
+            objConexion?.close()
+
+            listaArbitros
         }
-        return listaEquipos
+    }
+
+    suspend fun obtenerEquipo(): List<tbEquipos> {
+        return withContext(Dispatchers.IO) {
+            val objConexion = ClaseConexion().cadenaConexion()
+
+            val statement = objConexion?.createStatement()
+            val resultSet = statement?.executeQuery("SELECT * FROM tbEquipos")!!
+            val listaEquipos = mutableListOf<tbEquipos>()
+
+            while (resultSet.next() == true) {
+                val UUID_Equipo = resultSet.getString("UUID_Equipo")
+                val Nombre_Equipo = resultSet.getString("Nombre_Equipo")
+                val Descripcion_Equipo = resultSet.getString("Descripcion_Equipo")
+                val Ubicacion_Equipo = resultSet.getString("Ubicacion_Equipo")
+                val Logo_Equipo = resultSet.getString("Logo_Equipo")
+                val UUID_Estado_Equipo = resultSet.getString("UUID_Estado_Equipo")
+                val unEquipo = tbEquipos(UUID_Equipo, Nombre_Equipo, Descripcion_Equipo, Ubicacion_Equipo, Logo_Equipo, UUID_Estado_Equipo)
+                listaEquipos.add(unEquipo)
+            }
+            resultSet?.close()
+            statement?.close()
+            objConexion?.close()
+
+            listaEquipos
+        }
     }
 
     // Eliminar
-    fun eliminarDatos(Marcador_Equipo1: Int, Marcador_Equipo2: Int, Fecha_Partido: String, Tipo_Partido: String, posicion: Int){
+    fun eliminarDatos(/*Marcador_Equipo1: Int, Marcador_Equipo2: Int,*/ Fecha_Partido: String, Tipo_Partido: String, posicion: Int){
         val listaDatos = Datos.toMutableList()
         listaDatos.removeAt(posicion)
 
         GlobalScope.launch(Dispatchers.IO){
             val objConexion = ClaseConexion().cadenaConexion()
 
-            val deletePartido = objConexion?.prepareStatement("delete tbPartidos where Marcador_Equipo1 = ? and Marcador_Equipo2 = ? and Fecha_Partido = ? and UUID_Tipo_Partido = ?")!!
-            deletePartido.setInt(1, Marcador_Equipo1)
-            deletePartido.setInt(2, Marcador_Equipo2)
-            deletePartido.setString(3, Fecha_Partido)
-            deletePartido.setString(4, Tipo_Partido)
+            val deletePartido = objConexion?.prepareStatement("delete tbPartidos where Fecha_Partido = ? and UUID_Tipo_Partido = ?")!!
+            //deletePartido.setInt(1, Marcador_Equipo1)
+            //deletePartido.setInt(2, Marcador_Equipo2)
+            deletePartido.setString(1, Fecha_Partido)
+            deletePartido.setString(2, Tipo_Partido)
             deletePartido.executeUpdate()
 
             val commit = objConexion.prepareStatement("commit")
@@ -116,8 +139,8 @@ class AdapterPart(var Datos: List<tbPartidos>): RecyclerView.Adapter<ViewHolderP
 
     override fun onBindViewHolder(holder: ViewHolderPart, position: Int) {
         val item = Datos[position]
-        holder.txtResultado1.text = item.Marcador_Equipo1.toString()
-        holder.txtResultado2.text = item.Marcador_Equipo2.toString()
+        //holder.txtResultado1.text = item.Marcador_Equipo1.toString()
+        //holder.txtResultado2.text = item.Marcador_Equipo2.toString()
         holder.txtFechaPart.text = item.Fecha_Partido
         holder.txtEspPartido.text = item.UUID_Tipo_Partido
         holder.txtNombreEquipo1.text = item.UUID_Equipo1
@@ -136,7 +159,7 @@ class AdapterPart(var Datos: List<tbPartidos>): RecyclerView.Adapter<ViewHolderP
                 alertDialog.dismiss()
             }
             dialogLayout.findViewById<Button>(R.id.btnEliminarPart).setOnClickListener {
-                eliminarDatos(item.Marcador_Equipo1, item.Marcador_Equipo2, item.Fecha_Partido, item.UUID_Tipo_Partido, position)
+                eliminarDatos(/*item.Marcador_Equipo1, item.Marcador_Equipo2,*/ item.Fecha_Partido, item.UUID_Tipo_Partido, position)
                 alertDialog.dismiss()
             }
             alertDialog.show()
@@ -194,19 +217,21 @@ class AdapterPart(var Datos: List<tbPartidos>): RecyclerView.Adapter<ViewHolderP
                 alertDialog.dismiss()
             }
             dialogLayout.findViewById<Button>(R.id.btnActualizarEditarPart).setOnClickListener {
-                val equipo = obtenerEquipo()
-                val arbitros = obtenerArbitro()
+                GlobalScope.launch(Dispatchers.Main){
+                    val equipo = obtenerEquipo()
+                    val arbitros = obtenerArbitro()
 
-                val lugar = txtEditar_Lugar_Part.text.toString()
-                val tipo = txtTipo_Part.text.toString()
-                val marcador1 = txtMarcador1.text.toString().toInt()
-                val marcador2 = txtMarcador2.text.toString().toInt()
-                val arbitro = arbitros[spArbitros_Editar.selectedItemPosition].UUID_Arbitro
-                val equipo1 = equipo[spEdit_Equipo1.selectedItemPosition].UUID_Equipo
-                val equipo2 = equipo[spEdit_Equipo2.selectedItemPosition].UUID_Equipo
-                editarDatos(marcador1, marcador2, tipo, lugar, arbitro, equipo1, equipo2, item.UUID_Partido)
+                    val lugar = txtEditar_Lugar_Part.text.toString()
+                    val tipo = txtTipo_Part.text.toString()
+                    val marcador1 = txtMarcador1.text.toString().toInt()
+                    val marcador2 = txtMarcador2.text.toString().toInt()
+                    val arbitro = arbitros[spArbitros_Editar.selectedItemPosition].UUID_Arbitro
+                    val equipo1 = equipo[spEdit_Equipo1.selectedItemPosition].UUID_Equipo
+                    val equipo2 = equipo[spEdit_Equipo2.selectedItemPosition].UUID_Equipo
+                    editarDatos(marcador1, marcador2, tipo, lugar, arbitro, equipo1, equipo2, item.UUID_Partido)
 
-                alertDialog.dismiss()
+                    alertDialog.dismiss()
+                }
             }
             alertDialog.show()
         }
@@ -215,16 +240,16 @@ class AdapterPart(var Datos: List<tbPartidos>): RecyclerView.Adapter<ViewHolderP
             val context = holder.itemView.context
 
             val pantallaVer = Intent(context, Ver_partido::class.java)
-            pantallaVer.putExtra("UUID_Partido", item.UUID_Partido)
-            pantallaVer.putExtra("UUID_Equipo1", item.UUID_Equipo1)
-            pantallaVer.putExtra("UUID_Equipo2", item.UUID_Equipo2)
-            pantallaVer.putExtra("Fecha_Partido", item.Fecha_Partido)
-            pantallaVer.putExtra("Lugar_Partido", item.Lugar_Partido)
-            pantallaVer.putExtra("Hora_Partido", item.Hora_Partido)
-            pantallaVer.putExtra("Marcador_Equipo1", item.Marcador_Equipo1)
-            pantallaVer.putExtra("Marcador_Equipo2", item.Marcador_Equipo2)
-            pantallaVer.putExtra("Tipo_Partido", item.UUID_Tipo_Partido)
-            pantallaVer.putExtra("UUID_Arbitro", item.UUID_Arbitro)
+            UUID_Partido = item.UUID_Partido
+            UUID_Equipo1 = item.UUID_Equipo1
+            UUID_Equipo2 = item.UUID_Equipo2
+            Fecha_Partido = item.Fecha_Partido
+            Lugar_Partido = item.Lugar_Partido
+            Hora_Partido = item.Hora_Partido
+            //pantallaVer.putExtra("Marcador_Equipo1", item.Marcador_Equipo1)
+            //pantallaVer.putExtra("Marcador_Equipo2", item.Marcador_Equipo2)
+            UUID_Tipo_Partido = item.UUID_Tipo_Partido
+            UUID_Arbitro = item.UUID_Arbitro
             context.startActivity(pantallaVer)
         }
     }

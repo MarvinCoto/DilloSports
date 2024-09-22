@@ -35,14 +35,14 @@
         android:id="@+id/imageView38"
         android:layout_width="30dp"
         android:layout_height="2dp"
-        android:layout_marginStart="188dp"
         android:layout_marginTop="4dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView2"
         app:srcCompat="@drawable/linea_uno" />
 
     <ImageView
-        android:id="@+id/imgAtrasCrearTorneo"
+        android:id="@+id/imgAtrasdeCalPart"
         android:layout_width="35dp"
         android:layout_height="35dp"
         app:layout_constraintBottom_toBottomOf="@+id/imageView36"

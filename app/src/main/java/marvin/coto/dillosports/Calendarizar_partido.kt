@@ -43,6 +43,12 @@ class Calendarizar_partido : AppCompatActivity() {
         val spArbitro = findViewById<Spinner>(R.id.spArbitro)
         val btnCalendarizarPartido = findViewById<Button>(R.id.btnCalendarizarPartido)
 
+        val imgAtrasdeCalPart = findViewById<ImageView>(R.id.imgAtrasCrearTorneo)
+        imgAtrasdeCalPart.setOnClickListener {
+            val intent = Intent(this, Partidos::class.java)
+            startActivity(intent)
+        }
+
         txtFechaPartido.setOnClickListener {
             val calendario = Calendar.getInstance()
             val anio = calendario.get(Calendar.YEAR)

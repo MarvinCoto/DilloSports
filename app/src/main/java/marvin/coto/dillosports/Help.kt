@@ -28,6 +28,11 @@ class Help : AppCompatActivity() {
             val intent = Intent(this, Redes::class.java)
             startActivity(intent)
         }
+        val imgAtrasdeAyuda = findViewById<ImageView>(R.id.imgAtrasdeAyuda)
+        imgAtrasdeAyuda.setOnClickListener {
+            val intent = Intent(this, Perfil::class.java)
+            startActivity(intent)
+        }
 
     }
 }

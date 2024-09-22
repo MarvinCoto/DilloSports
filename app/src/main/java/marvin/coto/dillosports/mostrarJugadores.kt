@@ -1,10 +1,12 @@
 package marvin.coto.dillosports
 
 import RecyclerView.Adapter
+import RecyclerView.AdapterEqui
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -39,6 +41,17 @@ class mostrarJugadores : AppCompatActivity() {
             val intent = Intent(this, activityNuevosJugadores::class.java)
             startActivity(intent)
         }
+
+        val imgIrAVerunJugador = findViewById<ImageView>(R.id.imgIrAVerunJugador)
+        imgIrAVerunJugador.setOnClickListener {
+            val intent = Intent(this, activityNuevosJugadores::class.java)
+            startActivity(intent)
+        }
+        val recibido = AdapterEqui.variablesGlobalEqui.Nombre_Equipo
+        val textViewEquipBarca = findViewById<TextView>(R.id.textViewEquipBarca)
+        textViewEquipBarca.text = recibido
+
+
 
         fun obtenerJugadores(): List<tbJugadores>{
             val objConexion = ClaseConexion().cadenaConexion()

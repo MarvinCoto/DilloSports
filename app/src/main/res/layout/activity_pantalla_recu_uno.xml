@@ -55,8 +55,8 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout10"
         android:layout_width="388dp"
-        android:layout_height="242dp"
-        android:layout_marginTop="28dp"
+        android:layout_height="400dp"
+        android:layout_marginTop="48dp"
         android:background="@drawable/cards"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.478"
@@ -66,12 +66,12 @@
         <TextView
             android:id="@+id/textViewRecu2"
             android:layout_width="332dp"
-            android:layout_height="64dp"
+            android:layout_height="90dp"
             android:layout_marginStart="28dp"
             android:layout_marginTop="28dp"
             android:text="Introduce tu correo electrónico del que quieres recuperar la cuenta para enviarte un código de recuperación y confirmar si la cuenta es tuya."
             android:textColor="#707070"
-            android:textSize="16sp"
+            android:textSize="17sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -80,7 +80,7 @@
             android:layout_width="236dp"
             android:layout_height="21dp"
             android:layout_marginStart="32dp"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="28dp"
             android:text="Ingrese aquí su correo eletrónico"
             android:textColor="#FFFFFF"
             android:textSize="16sp"
@@ -104,22 +104,22 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textViewRecu3" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        <Button
+            android:id="@+id/btnEnviarCodigo"
+            android:layout_width="243dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="44dp"
+            android:backgroundTint="#00A532"
+            android:text="Enviar Código"
+            android:textColor="#000000"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:cornerRadius="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.503"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtRecuCorreo" />
 
-    <Button
-        android:id="@+id/btnEnviarCodigo"
-        android:layout_width="243dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:backgroundTint="#00A532"
-        android:text="Enviar Código"
-        android:textColor="#000000"
-        android:textSize="14sp"
-        android:textStyle="bold"
-        app:cornerRadius="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.505"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout10" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

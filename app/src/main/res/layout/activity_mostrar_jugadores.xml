@@ -9,7 +9,7 @@
     tools:context=".mostrarJugadores">
 
     <ImageView
-        android:id="@+id/imgirCrearTorn2"
+        android:id="@+id/imgIrAVerunJugador"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginTop="36dp"
@@ -64,7 +64,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView50" />
 
     <TextView
-        android:id="@+id/textView47"
+        android:id="@+id/textViewEquipBarca"
         android:layout_width="119dp"
         android:layout_height="26dp"
         android:layout_marginStart="7dp"

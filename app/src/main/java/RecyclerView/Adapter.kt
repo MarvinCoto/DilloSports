@@ -1,13 +1,12 @@
 package RecyclerView
 
-import android.app.AlertDialog
+
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.EditText
-import android.widget.LinearLayout
 import android.widget.Spinner
 import modelos.tbJugadores
 import androidx.recyclerview.widget.RecyclerView
@@ -23,21 +22,36 @@ import modelos.ClaseConexion
 import modelos.tbEstadoJugador
 
 class Adapter(var Datos: List<tbJugadores>): RecyclerView.Adapter<ViewHolder>() {
+    companion object variablesGlobalJug{
+        lateinit var UUID_Jugador: String
+        lateinit var Nombre_Jugador: String
+        lateinit var Apellido_Jugador: String
+        lateinit var FNacimiento_Jugador: String
+        lateinit var Numero_Jugador: String
+        lateinit var Posicion_Jugador: String
+        lateinit var Foto_Jugador: String
+        lateinit var UUID_Estado_Jugador: String
+    }
 
-    fun obtenerEstado(): List<tbEstadoJugador>{
-        val objConexion = ClaseConexion().cadenaConexion()
+    suspend fun obtenerEstado(): List<tbEstadoJugador>{
+        return withContext(Dispatchers.IO) {
+            val objConexion = ClaseConexion().cadenaConexion()
+            val statement = objConexion?.createStatement()
+            val resultSet = statement?.executeQuery("SELECT * FROM tbEstadoJugador")!!
+            val listaEstadoJugador = mutableListOf<tbEstadoJugador>()
 
-        val statement = objConexion?.createStatement()
-        val resultSet = statement?.executeQuery("SELECT * FROM tbEstadoJugador")!!
-        val listaEstadoJugador = mutableListOf<tbEstadoJugador>()
+            while (resultSet.next() == true) {
+                val UUID_Estado = resultSet.getString("UUID_Estado_Jugador")
+                val Nombre_Estado = resultSet.getString("Estado_Jugador")
+                val unEstado = tbEstadoJugador(UUID_Estado, Nombre_Estado)
+                listaEstadoJugador.add(unEstado)
+            }
+            resultSet?.close()
+            statement?.close()
+            objConexion?.close()
 
-        while (resultSet.next()) {
-            val UUID_Estado = resultSet.getString("UUID_Estado_Jugador")
-            val Nombre_Estado = resultSet.getString("Estado_Jugador")
-            val unEstado = tbEstadoJugador(UUID_Estado, Nombre_Estado)
-            listaEstadoJugador.add(unEstado)
+            listaEstadoJugador
         }
-        return listaEstadoJugador
     }
 
     //Eliminar
@@ -130,7 +144,7 @@ class Adapter(var Datos: List<tbJugadores>): RecyclerView.Adapter<ViewHolder>() 
             val txtApellido_Jugad = dialogLayout.findViewById<EditText>(R.id.txtApellido_Jugad)
             val txtNumDorsal_Jugad = dialogLayout.findViewById<EditText>(R.id.txtNumDorsal_Jugad)
             val txtPosicion_Jugad = dialogLayout.findViewById<EditText>(R.id.txtPosicion_Jugad)
-            val spEstado_Jugad = dialogLayout.findViewById<Spinner>(R.id.spEstado_Jugad)
+            val spEstado_Jugador = dialogLayout.findViewById<Spinner>(R.id.spEstado_Jugad)
 
                 CoroutineScope(Dispatchers.IO).launch {
                     val listaEstadoJugador = obtenerEstado()
@@ -138,7 +152,7 @@ class Adapter(var Datos: List<tbJugadores>): RecyclerView.Adapter<ViewHolder>() 
 
                     withContext(Dispatchers.Main){
                         val miAdaptador = ArrayAdapter(context, android.R.layout.simple_spinner_dropdown_item, nombreEstado)
-                        spEstado_Jugad.adapter = miAdaptador
+                        spEstado_Jugador.adapter = miAdaptador
                     }
                 }
 
@@ -150,16 +164,17 @@ class Adapter(var Datos: List<tbJugadores>): RecyclerView.Adapter<ViewHolder>() 
                 alertDialog.dismiss()
             }
             dialogLayout.findViewById<Button>(R.id.btnCancelarEditarJugad).setOnClickListener {
-                val estados = obtenerEstado()
+                GlobalScope.launch(Dispatchers.Main){
+                    val estados = obtenerEstado()
+                    val nombre = txtEditar_Nombre_Jugad.text.toString()
+                    val apellido = txtApellido_Jugad.text.toString()
+                    val dorsal = txtNumDorsal_Jugad.text.toString().toInt()
+                    val posicion = txtPosicion_Jugad.text.toString()
+                    val estado = estados[spEstado_Jugador.selectedItemPosition].UUID_Estado_Jugador
+                    editarDatos(nombre, apellido, dorsal, posicion, estado, item.UUID_Jugador)
 
-                val nombre = txtEditar_Nombre_Jugad.text.toString()
-                val apellido = txtApellido_Jugad.text.toString()
-                val dorsal = txtNumDorsal_Jugad.text.toString().toInt()
-                val posicion = txtPosicion_Jugad.text.toString()
-                val estado = estados[spEstado_Jugad.selectedItemPosition].UUID_Estado_Jugador
-                editarDatos(nombre, apellido, dorsal, posicion, estado, item.UUID_Jugador)
-
-                alertDialog.dismiss()
+                    alertDialog.dismiss()
+                }
             }
             alertDialog.show()
         }
@@ -168,14 +183,14 @@ class Adapter(var Datos: List<tbJugadores>): RecyclerView.Adapter<ViewHolder>() 
             val context = holder.itemView.context
 
             val pantallaVer = Intent(context, VerJugadores::class.java)
-            pantallaVer.putExtra("UUID_Jugador", item.UUID_Jugador)
-            pantallaVer.putExtra("NombreJugador", item.Nombre_Jugador)
-            pantallaVer.putExtra("ApellidoJugador", item.Apellido_Jugador)
-            pantallaVer.putExtra("FNacimientoJugador", item.FNacimiento_Jugador)
-            pantallaVer.putExtra("NumeroJugador", item.Numero_Jugador)
-            pantallaVer.putExtra("PosicionJugador", item.Posicion_Jugador)
-            pantallaVer.putExtra("FotoJugador", item.Foto_Jugador)
-            pantallaVer.putExtra("EstadoJugador", item.UUID_Estado_Jugador)
+            UUID_Jugador = item.UUID_Jugador
+            Nombre_Jugador = item.Nombre_Jugador
+            Apellido_Jugador = item.Apellido_Jugador
+            FNacimiento_Jugador = item.FNacimiento_Jugador
+            Numero_Jugador = item.Numero_Jugador.toString()
+            Posicion_Jugador = item.Posicion_Jugador
+            Foto_Jugador = item.Foto_Jugador
+            UUID_Estado_Jugador = item.UUID_Estado_Jugador
             context.startActivity(pantallaVer)
         }
 

@@ -50,6 +50,12 @@ class Arbitros : AppCompatActivity() {
             startActivity(intent)
         }
 
+        val imgVerInsArbi = findViewById<ImageView>(R.id.imgVerInsArbi)
+        imgVerInsArbi.setOnClickListener {
+            val intent = Intent(this, InscribirArbitro::class.java)
+            startActivity(intent)
+        }
+
         val rcvArbitros = findViewById<RecyclerView>(R.id.rcvArbitros)
         rcvArbitros.layoutManager = LinearLayoutManager(this)
 

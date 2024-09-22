@@ -54,8 +54,8 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout14"
         android:layout_width="388dp"
-        android:layout_height="230dp"
-        android:layout_marginTop="28dp"
+        android:layout_height="400dp"
+        android:layout_marginTop="48dp"
         android:background="@drawable/cards"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.478"
@@ -65,18 +65,17 @@
         <TextView
             android:id="@+id/textViewRecu12"
             android:layout_width="332dp"
-            android:layout_height="64dp"
+            android:layout_height="92dp"
             android:layout_marginStart="28dp"
-            android:layout_marginTop="28dp"
-            android:text="Compruebe si ha recibido un correo electrónico con un código de 4 dígitos de parte de dillosports para recuperar su cuenta."
+            android:layout_marginTop="24dp"
+            android:text="Compruebe si ha recibido un correo electrónico con un código de 4 dígitos de parte de &quot;oficial.dillo.sports@&quot; para recuperar su cuenta."
             android:textColor="#707070"
-            android:textSize="16sp"
+            android:textSize="17sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
             android:id="@+id/txtRecu"
-            android:maxLength="4"
             android:layout_width="320dp"
             android:layout_height="50dp"
             android:layout_marginTop="8dp"
@@ -85,6 +84,7 @@
             android:hint="XXXX"
             android:inputType="number"
             android:letterSpacing="4"
+            android:maxLength="4"
             android:paddingLeft="10dp"
             android:textColor="#FFFFFF"
             android:textColorHint="#898989"
@@ -99,54 +99,55 @@
             android:layout_width="278dp"
             android:layout_height="25dp"
             android:layout_marginStart="32dp"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="28dp"
             android:text="Introducir el código de recuperación"
             android:textColor="#FFFFFF"
             android:textSize="16sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textViewRecu12" />
 
+        <Button
+            android:id="@+id/btnIniciarSesionRecu"
+            android:layout_width="243dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:backgroundTint="#00A532"
+            android:text="Iniciar Sesión"
+            android:textColor="#000000"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:cornerRadius="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.503"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtRecu" />
+
+        <TextView
+            android:id="@+id/textViewRecu14"
+            android:layout_width="wrap_content"
+            android:layout_height="26dp"
+            android:layout_marginTop="24dp"
+            android:text="¿No recibiste ningun código de recuperación?"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btnIniciarSesionRecu" />
+
+        <TextView
+            android:id="@+id/textViewEnviarCod"
+            android:layout_width="wrap_content"
+            android:layout_height="21dp"
+            android:layout_marginTop="2dp"
+            android:text="Enviar Código de nuevo"
+            android:textColor="#00A532"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewRecu14" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <TextView
-        android:id="@+id/textViewRecu15"
-        android:layout_width="104dp"
-        android:layout_height="21dp"
-        android:layout_marginStart="152dp"
-        android:layout_marginTop="4dp"
-        android:text="Enviar Código."
-        android:textColor="#00A532"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewRecu14" />
-
-    <TextView
-        android:id="@+id/textViewRecu14"
-        android:layout_width="306dp"
-        android:layout_height="26dp"
-        android:layout_marginStart="52dp"
-        android:layout_marginTop="28dp"
-        android:text="Enviar otra vez el código de recuperación."
-        android:textColor="#FFFFFF"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnIniciarSesionRecu" />
-
-    <Button
-        android:id="@+id/btnIniciarSesionRecu"
-        android:layout_width="243dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:backgroundTint="#00A532"
-        android:text="Iniciar Sesión"
-        android:textColor="#000000"
-        android:textSize="14sp"
-        android:textStyle="bold"
-        app:cornerRadius="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.505"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout14" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -2,6 +2,7 @@ package marvin.coto.dillosports
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Button
 import android.widget.ImageView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -27,6 +28,18 @@ class Ajustes : AppCompatActivity() {
         imgAyuda1.setOnClickListener {
             val intent = Intent(this, Help::class.java)
             startActivity(intent)
+        }
+        val btnCerrarSesionReal = findViewById<Button>(R.id.btnCerrarSesionReal)
+        btnCerrarSesionReal.setOnClickListener {
+            val intent = Intent(this, activity_bienvenida::class.java)
+            startActivity(intent)
+            finish()
+        }
+        val imgAtrasdeAjustes = findViewById<ImageView>(R.id.imgAtrasdeAjustes)
+        imgAtrasdeAjustes.setOnClickListener {
+            val intent = Intent(this, Perfil::class.java)
+            startActivity(intent)
+            finish()
         }
     }
 }

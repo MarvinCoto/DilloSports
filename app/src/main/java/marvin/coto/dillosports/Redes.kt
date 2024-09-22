@@ -28,5 +28,11 @@ class Redes : AppCompatActivity() {
             val intent = Intent(this, Help::class.java)
             startActivity(intent)
         }
+        val imgAtrasdeRedes = findViewById<ImageView>(R.id.imgAtrasdeRedes)
+        imgAtrasdeRedes.setOnClickListener {
+            val intent = Intent(this, Perfil::class.java)
+            startActivity(intent)
+        }
+
     }
 }

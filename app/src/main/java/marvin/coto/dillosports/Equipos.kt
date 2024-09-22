@@ -6,6 +6,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -53,6 +54,15 @@ class Equipos : AppCompatActivity() {
             val intent = Intent(this, inscribir_equipo::class.java)
             startActivity(intent)
         }
+
+        val imgIrEquipo2 = findViewById<ImageView>(R.id.imgirCrearTorn2)
+        imgIrEquipo2.setOnClickListener {
+            val intent = Intent(this, inscribir_equipo::class.java)
+            startActivity(intent)
+        }
+        val recibirNameTorn = AdapterTorn.variablesGlobalTorn.Nombre_Torneo
+        val textViewNameTornEquip = findViewById<TextView>(R.id.textViewNameTornEquip)
+        textViewNameTornEquip.text = recibirNameTorn
 
         fun obtenerEquipos(): List<tbEquipos> {
             val objConexion = ClaseConexion().cadenaConexion()

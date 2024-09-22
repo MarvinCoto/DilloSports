@@ -11,6 +11,15 @@ import modelos.tbTorneos
 
 class AdapterTorn(var Datos: List<tbTorneos>): RecyclerView.Adapter<ViewHolderTorn>() {
 
+    companion object variablesGlobalTorn{
+        lateinit var UUID_Torneo: String
+        lateinit var Nombre_Torneo: String
+        lateinit var Ubicacion_Torneo: String
+        lateinit var Descripcion_Torneo: String
+        lateinit var Logo_Torneo: String
+        lateinit var UUID_Tipo_Deporte: String
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolderTorn {
         val vista = LayoutInflater.from(parent.context).inflate(R.layout.activity_item_card_torneos, parent, false)
         return ViewHolderTorn(vista)
@@ -31,12 +40,12 @@ class AdapterTorn(var Datos: List<tbTorneos>): RecyclerView.Adapter<ViewHolderTo
             val context = holder.itemView.context
 
             val pantallaVer = Intent(context, Ver_Torneo::class.java)
-            pantallaVer.putExtra("UUID_Torneo", item.UUID_Torneo)
-            pantallaVer.putExtra("Nombre_Torneo", item.Nombre_Torneo)
-            pantallaVer.putExtra("UbicacionTorneo", item.Ubicacion_Torneo)
-            pantallaVer.putExtra("DescripcionTorneo", item.Descripcion_Torneo)
-            pantallaVer.putExtra("LogoTorneo", item.Logo_Torneo)
-            pantallaVer.putExtra("DeporteTorneo", item.UUID_Tipo_Deporte)
+            UUID_Torneo = item.UUID_Torneo
+            Nombre_Torneo = item.Nombre_Torneo
+            Ubicacion_Torneo = item.Ubicacion_Torneo
+            Descripcion_Torneo = item.Descripcion_Torneo
+            Logo_Torneo = item.Logo_Torneo
+            UUID_Tipo_Deporte = item.UUID_Tipo_Deporte
             context.startActivity(pantallaVer)
         }
     }

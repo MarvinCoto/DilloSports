@@ -1,5 +1,6 @@
 package marvin.coto.dillosports
 
+import RecyclerView.AdapterTorn
 import android.content.Intent
 import android.os.Bundle
 import android.widget.ImageView
@@ -25,6 +26,9 @@ class VerArbitro : AppCompatActivity() {
             val intent = Intent(this, Arbitros::class.java)
             startActivity(intent)
         }
+        val eeeRibido = AdapterTorn.variablesGlobalTorn.Nombre_Torneo
+        val textViewNombredelTornya = findViewById<TextView>(R.id.textViewNombredelTornya)
+        textViewNombredelTornya.text = eeeRibido
 
         val UUIDRecibido = intent.getStringExtra("UUID_Arbitro")
         val nombreRecibido = intent.getStringExtra("NombreArbitro")
