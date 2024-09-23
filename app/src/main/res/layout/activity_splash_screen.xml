@@ -8,13 +8,21 @@
     android:background="#1C1C1C"
     tools:context=".Splash_Screen" >
 
-    <ImageView
-        android:id="@+id/imageView5"
-        android:layout_width="176dp"
-        android:layout_height="233dp"
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/lottie_animation_Splash_Screen"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/logos" />
+        app:lottie_autoPlay="true"
+        app:lottie_rawRes="@raw/splashscreen">
+
+    </com.airbnb.lottie.LottieAnimationView>
+
+
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

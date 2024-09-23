@@ -8,6 +8,22 @@
     android:background="@drawable/fondo_uno"
     tools:context=".activity_bienvenida">
 
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/lottie_animation_Bienvenida"
+        android:layout_width="match_parent"
+        android:layout_height="325dp"
+
+        android:layout_marginTop="64dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:lottie_rawRes="@raw/celdos">
+
+    </com.airbnb.lottie.LottieAnimationView>
+
     <TextView
         android:id="@+id/textView27"
         android:layout_width="wrap_content"

@@ -177,6 +177,21 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout2">
 
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/lottie_animation_Ver_Torn"
+            android:layout_width="190dp"
+            android:layout_height="169dp"
+
+            android:layout_marginEnd="15dp"
+            app:layout_constraintBottom_toTopOf="@+id/btnEditarTorneo"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewDescripcionTorneo"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/trofeodos">
+
+        </com.airbnb.lottie.LottieAnimationView>
+
         <TextView
             android:id="@+id/textView3"
             android:layout_width="147dp"
@@ -293,15 +308,6 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/btnEliminarTorneo" />
 
-        <ImageView
-            android:id="@+id/imageView9"
-            android:layout_width="130dp"
-            android:layout_height="130dp"
-            android:layout_marginTop="24dp"
-            android:layout_marginEnd="32dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textViewDescripcionTorneo"
-            app:srcCompat="@drawable/icon_torneo_2" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <ImageView
