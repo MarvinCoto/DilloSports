@@ -144,7 +144,7 @@ class Adapter(var Datos: List<tbJugadores>): RecyclerView.Adapter<ViewHolder>() 
             val txtApellido_Jugad = dialogLayout.findViewById<EditText>(R.id.txtApellido_Jugad)
             val txtNumDorsal_Jugad = dialogLayout.findViewById<EditText>(R.id.txtNumDorsal_Jugad)
             val txtPosicion_Jugad = dialogLayout.findViewById<EditText>(R.id.txtPosicion_Jugad)
-            val spEstado_Jugador = dialogLayout.findViewById<Spinner>(R.id.spEstado_Jugad)
+            val spEstado_Jugadores = dialogLayout.findViewById<Spinner>(R.id.spEstado_Jugad)
 
                 CoroutineScope(Dispatchers.IO).launch {
                     val listaEstadoJugador = obtenerEstado()
@@ -152,7 +152,7 @@ class Adapter(var Datos: List<tbJugadores>): RecyclerView.Adapter<ViewHolder>() 
 
                     withContext(Dispatchers.Main){
                         val miAdaptador = ArrayAdapter(context, android.R.layout.simple_spinner_dropdown_item, nombreEstado)
-                        spEstado_Jugador.adapter = miAdaptador
+                        spEstado_Jugadores.adapter = miAdaptador
                     }
                 }
 
@@ -170,7 +170,7 @@ class Adapter(var Datos: List<tbJugadores>): RecyclerView.Adapter<ViewHolder>() 
                     val apellido = txtApellido_Jugad.text.toString()
                     val dorsal = txtNumDorsal_Jugad.text.toString().toInt()
                     val posicion = txtPosicion_Jugad.text.toString()
-                    val estado = estados[spEstado_Jugador.selectedItemPosition].UUID_Estado_Jugador
+                    val estado = estados[spEstado_Jugadores.selectedItemPosition].UUID_Estado_Jugador
                     editarDatos(nombre, apellido, dorsal, posicion, estado, item.UUID_Jugador)
 
                     alertDialog.dismiss()

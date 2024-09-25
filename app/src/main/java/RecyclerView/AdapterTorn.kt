@@ -17,6 +17,7 @@ class AdapterTorn(var Datos: List<tbTorneos>): RecyclerView.Adapter<ViewHolderTo
         lateinit var Ubicacion_Torneo: String
         lateinit var Descripcion_Torneo: String
         lateinit var Logo_Torneo: String
+        lateinit var UUID_Estado_Toneo: String
         lateinit var UUID_Tipo_Deporte: String
     }
 
@@ -45,6 +46,7 @@ class AdapterTorn(var Datos: List<tbTorneos>): RecyclerView.Adapter<ViewHolderTo
             Ubicacion_Torneo = item.Ubicacion_Torneo
             Descripcion_Torneo = item.Descripcion_Torneo
             Logo_Torneo = item.Logo_Torneo
+            UUID_Estado_Toneo = item.UUID_Estado_Toneo
             UUID_Tipo_Deporte = item.UUID_Tipo_Deporte
             context.startActivity(pantallaVer)
         }

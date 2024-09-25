@@ -52,12 +52,14 @@ class Torneos : AppCompatActivity() {
             startActivity(intent)
         }
 
+        val rcvTorneos = findViewById<RecyclerView>(R.id.rcvTorneos)
+        rcvTorneos.layoutManager = LinearLayoutManager(this)
 
         fun obtenerTorneos(): List<tbTorneos>{
             val objConexion = ClaseConexion().cadenaConexion()
 
             val statement = objConexion?.createStatement()
-            val resultSet = statement?.executeQuery("SELECT UUID_Torneo, Nombre_Torneo, Ubicacion_Torneo, Descripcion_Torneo, UUID_Tipo_Deporte, Logo_Torneo FROM tbTorneos")!!
+            val resultSet = statement?.executeQuery("SELECT UUID_Torneo, Nombre_Torneo, Ubicacion_Torneo, Descripcion_Torneo, Logo_Torneo, UUID_Estado_Toneo, UUID_Tipo_Deporte FROM tbTorneos")!!
             val listaTorneos = mutableListOf<tbTorneos>()
 
             while(resultSet.next()){
@@ -66,16 +68,14 @@ class Torneos : AppCompatActivity() {
                 val Ubicacion_Torneo = resultSet.getString("Ubicacion_Torneo")
                 val Descripcion_Torneo = resultSet.getString("Descripcion_Torneo")
                 val Logo_Torneo = resultSet.getString("Logo_Torneo")
+                val UUID_Estado_Toneo = resultSet.getString("UUID_Estado_Toneo")
                 val UUID_Tipo_Deporte = resultSet.getString("UUID_Tipo_Deporte")
 
-                val valoresJuntos = tbTorneos(UUID_Torneo, Nombre_Torneo, Ubicacion_Torneo, Descripcion_Torneo, Logo_Torneo, UUID_Tipo_Deporte)
+                val valoresJuntos = tbTorneos(UUID_Torneo, Nombre_Torneo, Ubicacion_Torneo, Descripcion_Torneo, Logo_Torneo, UUID_Estado_Toneo, UUID_Tipo_Deporte)
                 listaTorneos.add(valoresJuntos)
             }
             return listaTorneos
         }
-
-        val rcvTorneos = findViewById<RecyclerView>(R.id.rcvTorneos)
-        rcvTorneos.layoutManager = LinearLayoutManager(this)
 
         CoroutineScope(Dispatchers.IO).launch {
             val torneosBD = obtenerTorneos()

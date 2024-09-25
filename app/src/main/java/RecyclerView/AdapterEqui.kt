@@ -22,17 +22,18 @@ import modelos.tbEstadoEquipos
 
 
 class AdapterEqui(var Datos: List<tbEquipos>): RecyclerView.Adapter<ViewHolderEquip>() {
-    companion object variablesGlobalEqui{
+    companion object variablesGlobalEqui {
         lateinit var UUID_Equipo: String
         lateinit var Nombre_Equipo: String
         lateinit var Descripcion_Equipo: String
         lateinit var Ubicacion_Equipo: String
-        lateinit var UUID_Estado_Equipo: String
         lateinit var Logo_Equipo: String
+        lateinit var UUID_Estado_Equipo: String
     }
 
     suspend fun obtenerEstado(): List<tbEstadoEquipos>{
         return withContext(Dispatchers.IO) {
+
             val objConexion = ClaseConexion().cadenaConexion()
             val statement = objConexion?.createStatement()
             val resultSet = statement?.executeQuery("SELECT * FROM tbEstadoEquipo")

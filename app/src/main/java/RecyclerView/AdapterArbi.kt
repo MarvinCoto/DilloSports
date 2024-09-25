@@ -45,7 +45,7 @@ class AdapterArbi(var Datos: List<tbArbitros>): RecyclerView.Adapter<ViewHolderA
         GlobalScope.launch(Dispatchers.IO){
             val objConexion = ClaseConexion().cadenaConexion()
 
-            val updateArbitro = objConexion?.prepareStatement("update tbArbitros1 set Nombre_Arbitro =?, Apellido_Arbitro =?, Edad_Arbitro =?, Telefono_Arbitro =? where UUID_Arbitro =?")!!
+            val updateArbitro = objConexion?.prepareStatement("update tbArbitros set Nombre_Arbitro =?, Apellido_Arbitro =?, Edad_Arbitro =?, Telefono_Arbitro =? where UUID_Arbitro =?")!!
             updateArbitro.setString(1, nuevoNombre)
             updateArbitro.setString(2, nuevoApellido)
             updateArbitro.setInt(3, nuevoEdad)

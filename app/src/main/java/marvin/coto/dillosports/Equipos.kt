@@ -55,7 +55,7 @@ class Equipos : AppCompatActivity() {
             startActivity(intent)
         }
 
-        val imgIrEquipo2 = findViewById<ImageView>(R.id.imgirCrearTorn2)
+        val imgIrEquipo2 = findViewById<ImageView>(R.id.imgIrEquipo2)
         imgIrEquipo2.setOnClickListener {
             val intent = Intent(this, inscribir_equipo::class.java)
             startActivity(intent)

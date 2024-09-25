@@ -53,7 +53,7 @@ class InscribirArbitro : AppCompatActivity() {
         val txtTelefonoArbitro = findViewById<EditText>(R.id.txtTelefonoArbitro)
         val btnInscribirArbitro = findViewById<Button>(R.id.btnInscribirArbitro)
 
-        val imgAtrasdeArbitro = findViewById<ImageView>(R.id.imgAtrasCrearTorneo)
+        val imgAtrasdeArbitro = findViewById<ImageView>(R.id.imgAtrasdeArbitro)
         imgAtrasdeArbitro.setOnClickListener {
             val intent = Intent(this, Arbitros::class.java)
             startActivity(intent)

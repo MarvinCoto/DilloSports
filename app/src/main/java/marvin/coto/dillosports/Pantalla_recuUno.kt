@@ -4,13 +4,17 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import modelos.ClaseConexion
 
 class Pantalla_recuUno : AppCompatActivity() {
     companion object variableGlobalCodigoRecu{
@@ -32,6 +36,8 @@ class Pantalla_recuUno : AppCompatActivity() {
         val btnEnviarCodigo = findViewById<Button>(R.id.btnEnviarCodigo)
 
         btnEnviarCodigo.setOnClickListener {
+            val pantallaRecudos = Intent(this, Pantalla_recuDos::class.java)
+
             val recu = codigoRecu.toString()
             val codigoHTML = """<!DOCTYPE html>
 <html lang="en">
@@ -97,15 +103,33 @@ class Pantalla_recuUno : AppCompatActivity() {
     </div>
 </body>
 </html>"""
-            CoroutineScope(Dispatchers.Main).launch {
-            enviarCorreo(
-                "${txtRecuCorreo.text}",
-                "Recuperación de cuenta",
-                codigoHTML
-            )
+            GlobalScope.launch(Dispatchers.IO) {
+                val objConexion = ClaseConexion().cadenaConexion()
+
+                val comprobarUsuario = objConexion?.prepareStatement("SELECT * FROM tbUsuarios WHERE Correo_Usuario  = ?")!!
+                comprobarUsuario.setString(1, txtRecuCorreo.text.toString())
+                val resultado = comprobarUsuario.executeQuery()
+
+                if(resultado.next()){
+                    CoroutineScope(Dispatchers.Main).launch {
+                        enviarCorreo(
+                            "${txtRecuCorreo.text}",
+                            "Recuperación de cuenta",
+                            codigoHTML
+                        )
+                    }
+                    startActivity(pantallaRecudos)
+                    withContext(Dispatchers.Main){
+                        Toast.makeText(this@Pantalla_recuUno, "Correo enviado correctamente", Toast.LENGTH_SHORT).show()
+                    }
+                }
+                else {
+                    withContext(Dispatchers.Main){
+                        Toast.makeText(this@Pantalla_recuUno, "Correo no encontrado", Toast.LENGTH_SHORT).show()
+                    }
+                }
             }
-            val intent = Intent(this, Pantalla_recuDos::class.java)
-            startActivity(intent)
+
         }
     }
 }

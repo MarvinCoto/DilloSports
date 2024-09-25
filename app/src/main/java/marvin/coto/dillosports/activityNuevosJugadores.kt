@@ -120,18 +120,12 @@ class activityNuevosJugadores : AppCompatActivity() {
         }
 
         btnInscribirJugador.setOnClickListener {
-
-            // Guardo en una variable los valores que escribió el usuario
-
             val nombre = txtNombreJugador.text.toString()
             val apellido = txtApellidoJugador.text.toString()
             val numJugador = txtNumJugador.text.toString()
             val posicion = txtPosicionJugador.text.toString()
             val fecha = txtFechaJugador.text.toString()
 
-
-            // Variable para verificar si hay errores
-            //La inicializamos en false
             var hayErrores = false
 
             if (nombre.isEmpty()) {

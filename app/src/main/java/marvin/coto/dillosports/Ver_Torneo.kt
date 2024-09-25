@@ -22,6 +22,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import modelos.ClaseConexion
 import modelos.tbDeportes
+import modelos.tbEstadoTorneo
 import modelos.tbTorneos
 
 class Ver_Torneo : AppCompatActivity() {
@@ -65,7 +66,7 @@ class Ver_Torneo : AppCompatActivity() {
         val ubicacionRecibido = AdapterTorn.variablesGlobalTorn.Ubicacion_Torneo
         val descripcionRecibido = AdapterTorn.variablesGlobalTorn.Descripcion_Torneo
         val deporteRecibido = AdapterTorn.variablesGlobalTorn.UUID_Tipo_Deporte
-        val estadoRecibido = intent.getStringExtra("EstadoToneo")
+        val estadoRecibido = AdapterTorn.variablesGlobalTorn.UUID_Estado_Toneo
         val logoRecibido = AdapterTorn.variablesGlobalTorn.Logo_Torneo
         val imgTorn = findViewById<ImageView>(R.id.imgTorn)
         val textViewNombreTorneo2 = findViewById<TextView>(R.id.textViewNombreTorneo2)
@@ -81,10 +82,34 @@ class Ver_Torneo : AppCompatActivity() {
         textViewNombreTorneo2.text = nombreRecibido
         textViewUbicacionTorneo.text = ubicacionRecibido
         textViewDescripcionTorneo.text = descripcionRecibido
-        textViewEstadoTorneo.text = estadoRecibido
+
+        fun DatoUUIDEstado(UUID_Estado_Toneo: String): String? {
+            val objConexion = ClaseConexion().cadenaConexion()
+
+            val query = "select Nombre_Estado from tbEstadoTorneo where UUID_Estado_Toneo = ?"
+            val preparedStatement = objConexion?.prepareStatement(query)
+            preparedStatement?.setString(1, UUID_Estado_Toneo)
+            val resultSet = preparedStatement?.executeQuery()
+
+            var nombreEstado: String? = null
+
+            if (resultSet?.next() == true) {
+                nombreEstado = resultSet.getString("Nombre_Estado")
+            }
+
+            return nombreEstado
+        }
+
+        CoroutineScope(Dispatchers.IO).launch {
+            val resultado = DatoUUIDEstado(estadoRecibido)
+
+            withContext(Dispatchers.Main) {
+                textViewEstadoTorneo.text = resultado ?: "Sin datos"
+            }
+        }
 
 
-        fun obtenerDatoUUID(UUID_Tipo_Deporte: String): String? {
+        fun DatoUUIDDeporte(UUID_Tipo_Deporte: String): String? {
             val objConexion = ClaseConexion().cadenaConexion()
 
             val query = "select Nombre_Tipo_Deporte from tbTipoDeporte where UUID_Tipo_Deporte = ?"
@@ -102,62 +127,27 @@ class Ver_Torneo : AppCompatActivity() {
         }
 
         CoroutineScope(Dispatchers.IO).launch {
-            val resultado = obtenerDatoUUID(deporteRecibido)
+            val resultado = DatoUUIDDeporte(deporteRecibido)
 
             withContext(Dispatchers.Main) {
                 textViewDeporteTorneo.text = resultado ?: "Sin datos"
             }
         }
 
-
-        val btnEliminarTorneo = findViewById<TextView>(R.id.btnEliminarTorneo)
-        val btnEditarTorneo = findViewById<TextView>(R.id.btnEditarTorneo)
-
-        fun eliminarDatos(Nombre_Torneo: String){
-
-            GlobalScope.launch(Dispatchers.IO){
-                val objConexion = ClaseConexion().cadenaConexion()
-
-                val deleteTorneo = objConexion?.prepareStatement("delete tbTorneos where Nombre_Torneo = ?")!!
-                deleteTorneo.setString(1, Nombre_Torneo)
-                deleteTorneo.executeUpdate()
-
-                val commit = objConexion.prepareStatement("commit")
-                commit?.executeUpdate()
-            }
-        }
-
-        fun editarDatos(nuevoNombre: String, nuevoUbicacion: String, nuevoDescripcion: String, nuevoTipoDeporte: String, UUID_Torneo: String){
-            GlobalScope.launch(Dispatchers.IO){
-                val objConexion = ClaseConexion().cadenaConexion()
-
-                val updateTorneo = objConexion?.prepareStatement("update tbTorneos set Nombre_Torneo =?, Ubicacion_Torneo =?, Descripcion_Torneo =?, UUID_Tipo_Deporte =? where UUID_Torneo =?")!!
-                updateTorneo.setString(1, nuevoNombre)
-                updateTorneo.setString(2, nuevoUbicacion)
-                updateTorneo.setString(3, nuevoDescripcion)
-                updateTorneo.setString(4, nuevoTipoDeporte)
-                updateTorneo.setString(5, UUID_Torneo)
-                updateTorneo.executeUpdate()
-
-                val commit = objConexion.prepareStatement("commit")
-                commit?.executeUpdate()
-            }
-        }
-
         suspend fun obtenerDeporte(): List<tbDeportes>{
             return withContext(Dispatchers.IO) {
-            val objConexion = ClaseConexion().cadenaConexion()
+                val objConexion = ClaseConexion().cadenaConexion()
 
-            val statement = objConexion?.createStatement()
-            val resultSet = statement?.executeQuery("SELECT * FROM tbTipoDeporte")!!
-            val listaDeportes = mutableListOf<tbDeportes>()
+                val statement = objConexion?.createStatement()
+                val resultSet = statement?.executeQuery("SELECT * FROM tbTipoDeporte")!!
+                val listaDeportes = mutableListOf<tbDeportes>()
 
-            while (resultSet.next() == true) {
-                val uuidDeporte = resultSet.getString("UUID_Tipo_Deporte")
-                val nombreDeporte = resultSet.getString("Nombre_Tipo_Deporte")
-                val unDeporte = tbDeportes(uuidDeporte, nombreDeporte)
-                listaDeportes.add(unDeporte)
-            }
+                while (resultSet.next() == true) {
+                    val uuidDeporte = resultSet.getString("UUID_Tipo_Deporte")
+                    val nombreDeporte = resultSet.getString("Nombre_Tipo_Deporte")
+                    val unDeporte = tbDeportes(uuidDeporte, nombreDeporte)
+                    listaDeportes.add(unDeporte)
+                }
                 resultSet?.close()
                 statement?.close()
                 objConexion?.close()
@@ -166,6 +156,64 @@ class Ver_Torneo : AppCompatActivity() {
             }
         }
 
+        suspend fun obtenerEstado(): List<tbEstadoTorneo>{
+            return withContext(Dispatchers.IO) {
+                val objConexion = ClaseConexion().cadenaConexion()
+
+                val statement = objConexion?.createStatement()
+                val resultSet = statement?.executeQuery("SELECT * FROM tbEstadoTorneo")!!
+                val listaEstados = mutableListOf<tbEstadoTorneo>()
+
+                while (resultSet.next() == true) {
+                    val uuidEstado = resultSet.getString("UUID_Estado_Torneo")
+                    val nombreEstado = resultSet.getString("Nombre_Estado")
+                    val unEstado = tbEstadoTorneo(uuidEstado, nombreEstado)
+                    listaEstados.add(unEstado)
+                }
+                resultSet?.close()
+                statement?.close()
+                objConexion?.close()
+
+                listaEstados
+            }
+        }
+
+
+        val btnEliminarTorneo = findViewById<TextView>(R.id.btnEliminarTorneo)
+        val btnEditarTorneo = findViewById<TextView>(R.id.btnEditarTorneo)
+
+        fun eliminarDatos(Nombre_Torneo: String, UUID_Torneo: String){
+
+            GlobalScope.launch(Dispatchers.IO){
+                val objConexion = ClaseConexion().cadenaConexion()
+
+                val deleteTorneo = objConexion?.prepareStatement("delete tbTorneos where Nombre_Torneo = ? and UUID_Torneo = ?")!!
+                deleteTorneo.setString(1, Nombre_Torneo)
+                deleteTorneo.setString(2, UUID_Torneo)
+                deleteTorneo.executeUpdate()
+
+                val commit = objConexion.prepareStatement("commit")
+                commit?.executeUpdate()
+            }
+        }
+
+        fun editarDatos(nuevoNombre: String, nuevoUbicacion: String, nuevoDescripcion: String, nuevoEstadoTorneo: String, nuevoTipoDeporte: String, UUID_Torneo: String){
+            GlobalScope.launch(Dispatchers.IO){
+                val objConexion = ClaseConexion().cadenaConexion()
+
+                val updateTorneo = objConexion?.prepareStatement("update tbTorneos set Nombre_Torneo =?, Ubicacion_Torneo =?, Descripcion_Torneo =?, UUID_Estado_Toneo =?, UUID_Tipo_Deporte =? where UUID_Torneo =?")!!
+                updateTorneo.setString(1, nuevoNombre)
+                updateTorneo.setString(2, nuevoUbicacion)
+                updateTorneo.setString(3, nuevoDescripcion)
+                updateTorneo.setString(4, nuevoTipoDeporte)
+                updateTorneo.setString(5, nuevoEstadoTorneo)
+                updateTorneo.setString(6, UUID_Torneo)
+                updateTorneo.executeUpdate()
+
+                val commit = objConexion.prepareStatement("commit")
+                commit?.executeUpdate()
+            }
+        }
 
 
         fun showEditTorneoDialog() {
@@ -177,6 +225,7 @@ class Ver_Torneo : AppCompatActivity() {
             val txtDescripcion_Torn = dialogLayout.findViewById<EditText>(R.id.txtDescripcion_Torn)
             val txtUbicacion_Torn = dialogLayout.findViewById<EditText>(R.id.txtUbicacion_Torn)
             val spTipoDeporte_Torn = dialogLayout.findViewById<Spinner>(R.id.spTipoDeporte_Torn)
+            val spEstado_Torn = dialogLayout.findViewById<Spinner>(R.id.spEstado_Torn)
 
             CoroutineScope(Dispatchers.IO).launch {
                 val listaDeportes = obtenerDeporte()
@@ -188,6 +237,16 @@ class Ver_Torneo : AppCompatActivity() {
                 }
             }
 
+            CoroutineScope(Dispatchers.IO).launch {
+                val listaEstados = obtenerEstado()
+                val nombreEstado = listaEstados.map { it.Nombre_Estado }
+
+                withContext(Dispatchers.Main){
+                    val miAdaptador = ArrayAdapter(this@Ver_Torneo, android.R.layout.simple_spinner_dropdown_item, nombreEstado)
+                    spEstado_Torn.adapter = miAdaptador
+                }
+            }
+
             builder.setView(dialogLayout)
             val alertDialog = builder.create()
 
@@ -196,19 +255,20 @@ class Ver_Torneo : AppCompatActivity() {
             }
 
             dialogLayout.findViewById<Button>(R.id.btnActualizarEditarTorn).setOnClickListener {
-
                 GlobalScope.launch(Dispatchers.Main){
-                val deporte = obtenerDeporte()
-                val nombre = txtEditar_Nombre_Torn.text.toString()
-                val descripcion = txtDescripcion_Torn.text.toString()
-                val ubicacion = txtUbicacion_Torn.text.toString()
-                val tipoDeporte = deporte[spTipoDeporte_Torn.selectedItemPosition].UUID_Tipo_Deporte
-                editarDatos(nombre, ubicacion, descripcion, tipoDeporte, intent.getStringExtra("UUID_Torneo").toString())
+                    val deporte = obtenerDeporte()
+                    val estado = obtenerEstado()
+
+                    val nombre = txtEditar_Nombre_Torn.text.toString()
+                    val ubicacion = txtUbicacion_Torn.text.toString()
+                    val descripcion = txtDescripcion_Torn.text.toString()
+                    val tipoDeporte = deporte[spTipoDeporte_Torn.selectedItemPosition].UUID_Tipo_Deporte
+                    val estadoTorneo = estado[spTipoDeporte_Torn.selectedItemPosition].UUID_Estado_Torneo
+                editarDatos(nombre, ubicacion, descripcion, estadoTorneo, tipoDeporte, intent.getStringExtra("UUID_Torneo").toString())
 
                 alertDialog.dismiss()
                 }
             }
-
             alertDialog.show()
         }
 
@@ -226,7 +286,8 @@ class Ver_Torneo : AppCompatActivity() {
 
             dialogLayout.findViewById<Button>(R.id.btnEliminarTorn).setOnClickListener {
                 val nombrequequieroeliminar = intent.getStringExtra("Nombre_Torneo").toString()
-                eliminarDatos(nombrequequieroeliminar)
+                val torneliminar = intent.getStringExtra("UUID_Torneo").toString()
+                eliminarDatos(nombrequequieroeliminar, torneliminar)
                 alertDialog.dismiss()
                 finish()
             }

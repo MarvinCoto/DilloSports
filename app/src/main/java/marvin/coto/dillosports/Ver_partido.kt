@@ -34,8 +34,8 @@ class Ver_partido : AppCompatActivity() {
 
         val textViewEquipo1 = findViewById<TextView>(R.id.textViewEquipo1)
         val textViewEquipo2 = findViewById<TextView>(R.id.textViewEquipo2)
-        //val textViewMarcador1 = findViewById<TextView>(R.id.textViewMarcador1)
-        //val textViewMarcador2 = findViewById<TextView>(R.id.textViewMarcador2)
+        val textViewMarcador1 = findViewById<TextView>(R.id.textViewMarcador1)
+        val textViewMarcador2 = findViewById<TextView>(R.id.textViewMarcador2)
         val textViewLugarPart = findViewById<TextView>(R.id.textViewLugarPart)
         val textViewTipoPart = findViewById<TextView>(R.id.textViewTipoPart)
         val textViewArbitro = findViewById<TextView>(R.id.textViewArbitro)
@@ -50,11 +50,11 @@ class Ver_partido : AppCompatActivity() {
         val Lugar_Partido = AdapterPart.variablesGlobalPart.Lugar_Partido
         val Hora_Partido = AdapterPart.variablesGlobalPart.Hora_Partido
         val textViewNombreTornxd = findViewById<TextView>(R.id.textViewNombreTornxd)
-        //val Marcador_Equipo1 = intent.getIntExtra("Marcador_Equipo1", 0)
-        //val Marcador_Equipo2 = intent.getIntExtra("Marcador_Equipo2", 0)
-        val Tipo_Partido = AdapterPart.variablesGlobalPart.UUID_Tipo_Partido
-        //textViewMarcador1.text = Marcador_Equipo1.toString()
-        //textViewMarcador2.text = Marcador_Equipo2.toString()
+        val Marcador_Equipo1 = AdapterPart.variablesGlobalPart.Marcador_Equipo1
+        val Marcador_Equipo2 = AdapterPart.variablesGlobalPart.Marcador_Equipo2
+        val Tipo_Partido = AdapterPart.variablesGlobalPart.Tipo_Partido
+        textViewMarcador1.text = Marcador_Equipo1.toString()
+        textViewMarcador2.text = Marcador_Equipo2.toString()
         textViewLugarPart.text = Lugar_Partido
         textViewTipoPart.text = Tipo_Partido
         textViewFechaPart.text = Fecha_Partido

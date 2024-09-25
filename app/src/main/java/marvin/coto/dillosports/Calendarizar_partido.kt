@@ -42,8 +42,8 @@ class Calendarizar_partido : AppCompatActivity() {
         val spEquipoDos = findViewById<Spinner>(R.id.spEquipoDos)
         val spArbitro = findViewById<Spinner>(R.id.spArbitro)
         val btnCalendarizarPartido = findViewById<Button>(R.id.btnCalendarizarPartido)
+        val imgAtrasdeCalPart = findViewById<ImageView>(R.id.imgAtrasdeCalPart)
 
-        val imgAtrasdeCalPart = findViewById<ImageView>(R.id.imgAtrasCrearTorneo)
         imgAtrasdeCalPart.setOnClickListener {
             val intent = Intent(this, Partidos::class.java)
             startActivity(intent)
@@ -74,16 +74,14 @@ class Calendarizar_partido : AppCompatActivity() {
             val timePickerDialog = TimePickerDialog(
                 this,
                 { _, selectedHour, selectedMinute ->
-                    // Formatear la hora seleccionada con AM/PM
                     val amPm = if (selectedHour < 12) "AM" else "PM"
                     val hourIn12Format = if (selectedHour % 12 == 0) 12 else selectedHour % 12
                     val horaSeleccionada = String.format("%02d:%02d %s", hourIn12Format, selectedMinute, amPm)
                     txtHoraPartido.setText(horaSeleccionada)
-                    // Puedes actualizar el TextView o hacer algo más con la hora seleccionada
                 },
                 hour,
                 minute,
-                false // false para formato de 12 horas
+                false
             )
             timePickerDialog.show()
         }
@@ -172,15 +170,17 @@ class Calendarizar_partido : AppCompatActivity() {
                 val equipo2 = obtenerEquipo()
                 val arbitro = obtenerArbitro()
 
-                val addPartido = objConexion?.prepareStatement("insert into tbPartidos (UUID_Partido, UUID_Equipo1, UUID_Equipo2, Fecha_Partido, Lugar_Partido, Hora_Partido, UUID_Tipo_Partido, UUID_Arbitro) values (?,?,?,?,?,?,?,?)")!!
+                val addPartido = objConexion?.prepareStatement("insert into tbPartidos (UUID_Partido, UUID_Equipo1, UUID_Equipo2, Fecha_Partido, Lugar_Partido, Hora_Partido, Marcador_Equipo1, Marcador_Equipo2, Tipo_Partido, UUID_Arbitro) values (?,?,?,?,?,?,?,?,?,?)")!!
                 addPartido.setString(1, UUID.randomUUID().toString())
                 addPartido.setString(2, equipo1[spEquipoUno.selectedItemPosition].UUID_Equipo)
                 addPartido.setString(3, equipo2[spEquipoDos.selectedItemPosition].UUID_Equipo)
                 addPartido.setString(4, txtFechaPartido.text.toString())
                 addPartido.setString(5, txtLugarPartido.text.toString())
                 addPartido.setString(6, txtHoraPartido.text.toString())
-                addPartido.setString(7, txtTipoPartido.text.toString())
-                addPartido.setString(8, arbitro[spArbitro.selectedItemPosition].UUID_Arbitro)
+                addPartido.setInt(7, 0)
+                addPartido.setInt(8, 0)
+                addPartido.setString(9, txtTipoPartido.text.toString())
+                addPartido.setString(10, arbitro[spArbitro.selectedItemPosition].UUID_Arbitro)
                 addPartido.executeUpdate()
 
                 withContext(Dispatchers.Main){

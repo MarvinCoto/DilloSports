@@ -31,7 +31,9 @@ class AdapterPart(var Datos: List<tbPartidos>): RecyclerView.Adapter<ViewHolderP
         lateinit var Fecha_Partido: String
         lateinit var Lugar_Partido: String
         lateinit var Hora_Partido: String
-        lateinit var UUID_Tipo_Partido: String
+        var Marcador_Equipo1: Int? = null
+        var Marcador_Equipo2: Int? = null
+        lateinit var Tipo_Partido: String
         lateinit var UUID_Arbitro: String
     }
 
@@ -88,16 +90,14 @@ class AdapterPart(var Datos: List<tbPartidos>): RecyclerView.Adapter<ViewHolderP
     }
 
     // Eliminar
-    fun eliminarDatos(/*Marcador_Equipo1: Int, Marcador_Equipo2: Int,*/ Fecha_Partido: String, Tipo_Partido: String, posicion: Int){
+    fun eliminarDatos(Fecha_Partido: String, Tipo_Partido: String, posicion: Int){
         val listaDatos = Datos.toMutableList()
         listaDatos.removeAt(posicion)
 
         GlobalScope.launch(Dispatchers.IO){
             val objConexion = ClaseConexion().cadenaConexion()
 
-            val deletePartido = objConexion?.prepareStatement("delete tbPartidos where Fecha_Partido = ? and UUID_Tipo_Partido = ?")!!
-            //deletePartido.setInt(1, Marcador_Equipo1)
-            //deletePartido.setInt(2, Marcador_Equipo2)
+            val deletePartido = objConexion?.prepareStatement("delete tbPartidos where Fecha_Partido = ? and Tipo_Partido = ?")!!
             deletePartido.setString(1, Fecha_Partido)
             deletePartido.setString(2, Tipo_Partido)
             deletePartido.executeUpdate()
@@ -115,7 +115,7 @@ class AdapterPart(var Datos: List<tbPartidos>): RecyclerView.Adapter<ViewHolderP
         GlobalScope.launch(Dispatchers.IO){
             val objConexion = ClaseConexion().cadenaConexion()
 
-            val updatePartido = objConexion?.prepareStatement("update tbPartidos set Marcador_Equipo1 =?, Marcador_Equipo2 =?, UUID_Tipo_Partido =?, Lugar_Partido =?, UUID_Arbitro =?, UUID_Equipo1 =?, UUID_Equipo2 =? where UUID_Partido =?")!!
+            val updatePartido = objConexion?.prepareStatement("update tbPartidos set Marcador_Equipo1 =?, Marcador_Equipo2 =?, Tipo_Partido =?, Lugar_Partido =?, UUID_Arbitro =?, UUID_Equipo1 =?, UUID_Equipo2 =? where UUID_Partido =?")!!
             updatePartido.setInt(1, nuevoMarcadorEquipo1)
             updatePartido.setInt(2, nuevoMarcadorEquipo2)
             updatePartido.setString(3, nuevoTipoPartido)
@@ -139,10 +139,10 @@ class AdapterPart(var Datos: List<tbPartidos>): RecyclerView.Adapter<ViewHolderP
 
     override fun onBindViewHolder(holder: ViewHolderPart, position: Int) {
         val item = Datos[position]
-        //holder.txtResultado1.text = item.Marcador_Equipo1.toString()
-        //holder.txtResultado2.text = item.Marcador_Equipo2.toString()
+        holder.txtResultado1.text = item.Marcador_Equipo1.toString()
+        holder.txtResultado2.text = item.Marcador_Equipo2.toString()
         holder.txtFechaPart.text = item.Fecha_Partido
-        holder.txtEspPartido.text = item.UUID_Tipo_Partido
+        holder.txtEspPartido.text = item.Tipo_Partido
         holder.txtNombreEquipo1.text = item.UUID_Equipo1
         holder.txtNombreEquipo2.text = item.UUID_Equipo2
 
@@ -159,7 +159,7 @@ class AdapterPart(var Datos: List<tbPartidos>): RecyclerView.Adapter<ViewHolderP
                 alertDialog.dismiss()
             }
             dialogLayout.findViewById<Button>(R.id.btnEliminarPart).setOnClickListener {
-                eliminarDatos(/*item.Marcador_Equipo1, item.Marcador_Equipo2,*/ item.Fecha_Partido, item.UUID_Tipo_Partido, position)
+                eliminarDatos(item.Fecha_Partido, item.Tipo_Partido, position)
                 alertDialog.dismiss()
             }
             alertDialog.show()
@@ -221,10 +221,10 @@ class AdapterPart(var Datos: List<tbPartidos>): RecyclerView.Adapter<ViewHolderP
                     val equipo = obtenerEquipo()
                     val arbitros = obtenerArbitro()
 
-                    val lugar = txtEditar_Lugar_Part.text.toString()
-                    val tipo = txtTipo_Part.text.toString()
                     val marcador1 = txtMarcador1.text.toString().toInt()
                     val marcador2 = txtMarcador2.text.toString().toInt()
+                    val tipo = txtTipo_Part.text.toString()
+                    val lugar = txtEditar_Lugar_Part.text.toString()
                     val arbitro = arbitros[spArbitros_Editar.selectedItemPosition].UUID_Arbitro
                     val equipo1 = equipo[spEdit_Equipo1.selectedItemPosition].UUID_Equipo
                     val equipo2 = equipo[spEdit_Equipo2.selectedItemPosition].UUID_Equipo
@@ -246,9 +246,9 @@ class AdapterPart(var Datos: List<tbPartidos>): RecyclerView.Adapter<ViewHolderP
             Fecha_Partido = item.Fecha_Partido
             Lugar_Partido = item.Lugar_Partido
             Hora_Partido = item.Hora_Partido
-            //pantallaVer.putExtra("Marcador_Equipo1", item.Marcador_Equipo1)
-            //pantallaVer.putExtra("Marcador_Equipo2", item.Marcador_Equipo2)
-            UUID_Tipo_Partido = item.UUID_Tipo_Partido
+            Marcador_Equipo1 = item.Marcador_Equipo1
+            Marcador_Equipo2 = item.Marcador_Equipo2
+            Tipo_Partido = item.Tipo_Partido
             UUID_Arbitro = item.UUID_Arbitro
             context.startActivity(pantallaVer)
         }

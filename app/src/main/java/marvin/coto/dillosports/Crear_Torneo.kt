@@ -30,6 +30,7 @@ import kotlinx.coroutines.CoroutineScope
 import modelos.ClaseConexion
 import modelos.tbDeportes
 import modelos.tbEquipos
+import modelos.tbEstadoTorneo
 
 class Crear_Torneo : AppCompatActivity() {
     val codigo_opcion_galeria_torn = 101
@@ -55,6 +56,7 @@ class Crear_Torneo : AppCompatActivity() {
         val txtDescripcionTorneo = findViewById<EditText>(R.id.txtDescripcionTorneo)
         val txtUbicacionTorneo = findViewById<EditText>(R.id.txtUbicacionTorneo)
         val spTipoDeporte = findViewById<Spinner>(R.id.spTipoDeporte)
+        val spEstadoTorneo = findViewById<Spinner>(R.id.spEstadoTorneo)
         val btnCrearTorneo = findViewById<Button>(R.id.btnCrearTorneo)
         val imgAtras = findViewById<ImageView>(R.id.imgAtraaaaaaas)
 
@@ -89,6 +91,32 @@ class Crear_Torneo : AppCompatActivity() {
             }
         }
 
+        fun obtenerEstado(): List<tbEstadoTorneo>{
+            val objConexion = ClaseConexion().cadenaConexion()
+
+            val statement = objConexion?.createStatement()
+            val resultSet = statement?.executeQuery("SELECT * FROM tbEstadoTorneo")!!
+            val listaEstados = mutableListOf<tbEstadoTorneo>()
+
+            while (resultSet.next()) {
+                val uuidEstado = resultSet.getString("UUID_Estado_Torneo")
+                val nombreEstado = resultSet.getString("Nombre_Estado")
+                val unEstado = tbEstadoTorneo(uuidEstado, nombreEstado)
+                listaEstados.add(unEstado)
+            }
+            return listaEstados
+        }
+
+        CoroutineScope(Dispatchers.IO).launch {
+            val listaEstados = obtenerEstado()
+            val nombreEstado = listaEstados.map { it.Nombre_Estado }
+
+            withContext(Dispatchers.Main){
+                val miAdaptador = ArrayAdapter(this@Crear_Torneo, android.R.layout.simple_spinner_dropdown_item, nombreEstado)
+                spEstadoTorneo.adapter = miAdaptador
+            }
+        }
+
 
         btnSubirImgTorneo.setOnClickListener {
             println("le dieron clic al subir imagen")
@@ -98,28 +126,12 @@ class Crear_Torneo : AppCompatActivity() {
             checkStoragePermission()
         }
 
-        fun editarID(id: String, UUID_Usuario: String){
-            CoroutineScope(Dispatchers.IO).launch {
-                val objConexion = ClaseConexion().cadenaConexion()
-
-                val updateTorneo = objConexion?.prepareStatement("update tbUsuarios set UUID_Tipo_Usuario = 2 where UUID_Usuario = ?")!!
-                updateTorneo.setString(1, id)
-                updateTorneo.setString(2, UUID_Usuario)
-
-
-            }
-        }
 
         btnCrearTorneo.setOnClickListener {
-
-            // Guardo en una variable los valores que escribió el usuario
-
             val nombre = txtNombreTorneo.text.toString()
             val descripcion = txtDescripcionTorneo.text.toString()
             val ubicacion = txtUbicacionTorneo.text.toString()
 
-            // Variable para verificar si hay errores
-            //La inicializamos en false
             var hayErrores = false
 
             if (nombre.isEmpty()) {
@@ -155,14 +167,16 @@ class Crear_Torneo : AppCompatActivity() {
                     CoroutineScope(Dispatchers.IO).launch {
                         val objConexion = ClaseConexion().cadenaConexion()
                         val deporte = obtenerDeporte()
+                        val estado = obtenerEstado()
 
-                        val addTorneo = objConexion?.prepareStatement("insert into tbTorneos (UUID_Torneo, Nombre_Torneo, Ubicacion_Torneo, Descripcion_Torneo, Logo_Torneo, UUID_Tipo_Deporte) values (?,?,?,?,?,?)")!!
+                        val addTorneo = objConexion?.prepareStatement("insert into tbTorneos (UUID_Torneo, Nombre_Torneo, Ubicacion_Torneo, Descripcion_Torneo, Logo_Torneo, UUID_Estado_Toneo, UUID_Tipo_Deporte) values (?,?,?,?,?,?,?)")!!
                         addTorneo.setString(1, uuidTorn)
                         addTorneo.setString(2, txtNombreTorneo.text.toString())
                         addTorneo.setString(3, txtUbicacionTorneo.text.toString())
                         addTorneo.setString(4, txtDescripcionTorneo.text.toString())
                         addTorneo.setString(5, miPathTorn)
-                        addTorneo.setString(6, deporte[spTipoDeporte.selectedItemPosition].UUID_Tipo_Deporte)
+                        addTorneo.setString(6, estado[spEstadoTorneo.selectedItemPosition].UUID_Estado_Torneo)
+                        addTorneo.setString(7, deporte[spTipoDeporte.selectedItemPosition].UUID_Tipo_Deporte)
                         addTorneo.executeUpdate()
 
                         withContext(Dispatchers.Main){

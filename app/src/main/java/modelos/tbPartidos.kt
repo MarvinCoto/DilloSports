@@ -7,6 +7,8 @@ data class tbPartidos(
     val Fecha_Partido: String,
     val Lugar_Partido: String,
     val Hora_Partido: String,
-    val UUID_Tipo_Partido: String,
+    val Marcador_Equipo1: Int,
+    val Marcador_Equipo2: Int,
+    val Tipo_Partido: String,
     val UUID_Arbitro: String
 )

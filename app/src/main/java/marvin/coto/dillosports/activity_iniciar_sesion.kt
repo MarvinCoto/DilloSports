@@ -57,23 +57,18 @@ class activity_iniciar_sesion : AppCompatActivity() {
         }
 
         btnIniciarSesion.setOnClickListener {
-            //Preparo un intent para ir a la pantalla principal
             val pantallaPrincipal = Intent(this, Home::class.java)
 
-            //Hago una corrutina para hacer un select a la base de datos
             GlobalScope.launch(Dispatchers.IO) {
-                //1- Creo el objeto de la clase conexion
                 val objConexion = ClaseConexion().cadenaConexion()
 
-                //Encripto la contraseña con la funcion de arriba
                 val contraseniaEncriptada = hashSHA256(txtContraseniaUsuario.text.toString())
 
-                //2- Creo la variable qu tenga un PrepareStatement
-                val comprobarUsuario = objConexion?.prepareStatement("SELECT * FROM tbUsuarios WHERE Correo_Usuario = ? AND Contrasena_Usuario = ?")!!
+                val comprobarUsuario = objConexion?.prepareStatement("SELECT * FROM tbUsuarios WHERE Correo_Usuario  = ? AND Contrasena_Usuario = ?")!!
                 comprobarUsuario.setString(1, txtCorreoUsuario.text.toString())
                 comprobarUsuario.setString(2, contraseniaEncriptada)
                 val resultado = comprobarUsuario.executeQuery()
-                //Si encuentra un resultado
+
                 if(resultado.next()){
                     startActivity(pantallaPrincipal)
                     withContext(Dispatchers.Main){

@@ -1,8 +1,13 @@
 package marvin.coto.dillosports
 
+import android.app.Activity
 import android.app.DatePickerDialog
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.graphics.Bitmap
+import android.net.Uri
 import android.os.Bundle
+import android.provider.MediaStore
 import android.text.InputType
 import android.widget.ArrayAdapter
 import android.widget.Button
@@ -13,19 +18,33 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.google.firebase.Firebase
+import com.google.firebase.storage.storage
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import modelos.ClaseConexion
+import modelos.tbDeportes
+import modelos.tbGeneroUsuario
+import java.io.ByteArrayOutputStream
 import java.security.MessageDigest
 import java.util.Calendar
 import java.util.UUID
 
 class activity_login : AppCompatActivity() {
+    val codigo_opcion_galeria_user = 101
+    val STORAGE_REQUEST_CODE_USER = 2
+
+    lateinit var imageViewUser: ImageView
+    lateinit var miPathUser: String
+
+    val uuidUser = UUID.randomUUID().toString()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -36,7 +55,7 @@ class activity_login : AppCompatActivity() {
             insets
         }
 
-        //1- Mando a llamar a los elementos de la vista
+        imageViewUser = findViewById(R.id.imgUser1)
         val txtNombreRegistro = findViewById<EditText>(R.id.txtNombreRegistro)
         val txtApellidoRegistro = findViewById<EditText>(R.id.txtApellidoRegistro)
         val txtUsernameRegistro = findViewById<EditText>(R.id.txtUsernameRegistro)
@@ -47,6 +66,42 @@ class activity_login : AppCompatActivity() {
         val spGenero = findViewById<Spinner>(R.id.spGenero)
         val IrALogin = findViewById<TextView>(R.id.textViewIrALogin)
         val imgVerPassword = findViewById<ImageView>(R.id.imgVerContraseñaR)
+        val btnSubirImgUser = findViewById<Button>(R.id.btnSubirImgUser1)
+
+        fun obtenerGenero(): List<tbGeneroUsuario>{
+            val objConexion = ClaseConexion().cadenaConexion()
+
+            val statement = objConexion?.createStatement()
+            val resultSet = statement?.executeQuery("SELECT * FROM tbGeneroUsuario")!!
+            val listaGenero = mutableListOf<tbGeneroUsuario>()
+
+            while (resultSet.next()) {
+                val uuidGenero = resultSet.getString("UUID_Genero")
+                val nombreGenero = resultSet.getString("Nombre_Genero")
+                val unGenero = tbGeneroUsuario(uuidGenero, nombreGenero)
+                listaGenero.add(unGenero)
+            }
+            return listaGenero
+        }
+
+        CoroutineScope(Dispatchers.IO).launch {
+            val listaGenero = obtenerGenero()
+            val nombreGenero = listaGenero.map { it.Nombre_Genero }
+
+            withContext(Dispatchers.Main){
+                val miAdaptador = ArrayAdapter(this@activity_login, android.R.layout.simple_spinner_dropdown_item, nombreGenero)
+                spGenero.adapter = miAdaptador
+            }
+        }
+
+        btnSubirImgUser.setOnClickListener {
+            println("le dieron clic al subir imagen")
+            val intent = Intent(Intent.ACTION_PICK)
+            intent.type = "image/*"
+            startActivityForResult(intent, codigo_opcion_galeria_user)
+            checkStoragePermission()
+        }
+
 
         imgVerPassword.setOnClickListener {
             if (txtContraseniaRegistro.inputType == InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD) {
@@ -54,15 +109,6 @@ class activity_login : AppCompatActivity() {
             }
             else {
                 txtContraseniaRegistro.inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
-            }
-        }
-
-        CoroutineScope(Dispatchers.IO).launch {
-            val listaGenero = arrayOf("Seleccionar genero","Masculino", "Femenino")
-
-            withContext(Dispatchers.Main){
-                val miAdaptador = ArrayAdapter(this@activity_login, android.R.layout.simple_spinner_dropdown_item, listaGenero)
-                spGenero.adapter = miAdaptador
             }
         }
 
@@ -85,7 +131,6 @@ class activity_login : AppCompatActivity() {
         }
 
 
-        //Creo la función para encriptar la contraseña
         fun hashSHA256(contraseniaEscrita: String): String {
             val bytes =
                 MessageDigest.getInstance("SHA-256").digest(contraseniaEscrita.toByteArray())
@@ -95,8 +140,6 @@ class activity_login : AppCompatActivity() {
         btnCrearCuenta.setOnClickListener {
             val intent = Intent(this, Home::class.java)
 
-            //Guardo en una variable los valores que escribió el usuario
-
             val nombre = txtNombreRegistro.text.toString()
             val apellido = txtApellidoRegistro.text.toString()
             val username = txtUsernameRegistro.text.toString()
@@ -104,12 +147,7 @@ class activity_login : AppCompatActivity() {
             val correo = txtCorreoRegistro.text.toString()
             val fecha = txtNacimientoRegistro.text.toString()
 
-            //Creo la variable para verificar que no hay errores
-            //Se inicializa en false
             var hayErrores = false
-
-            //1-
-            //Validar que los campos no estén vacios
 
             if (nombre.isEmpty()) {
                 txtNombreRegistro.error = "El nombre es obligatorio"
@@ -161,8 +199,6 @@ class activity_login : AppCompatActivity() {
                 txtCorreoRegistro.error = null
             }
 
-            //Validar los caracteres de la contraseña
-
             if (contrasenia.length <= 7) {
                 txtContraseniaRegistro.error = "La contraseña debe tener más de 7 caracteres"
                 hayErrores = true
@@ -173,34 +209,28 @@ class activity_login : AppCompatActivity() {
                 if (hayErrores) {
                     Toast.makeText(this@activity_login, "Datos ingresados incorrectamente", Toast.LENGTH_SHORT).show()
                 } else {
-                    // Si todas las validaciones son correctas, procede a guardar los datos
                     GlobalScope.launch(Dispatchers.IO) {
-                        //Creo un objeto de la clase conexion
                         val objConexion = ClaseConexion().cadenaConexion()
+                        val genero = obtenerGenero()
 
-                        //Encripto la contraseña
                         val contraseniaEncriptada = hashSHA256(txtContraseniaRegistro.text.toString())
 
-                        //Creo una variable que contenga el PrepareStatement
-                        val crearUsuario =
-                            objConexion?.prepareStatement("INSERT INTO tbUsuarios (UUID_Usuario, Nombre_Usuario, Apellido_Usuario, User_name, Contrasena_Usuario, Correo_Usuario, Genero_Usuario, FNacimiento_Usuario, UUID_Tipo_Usuario) VALUES (?,?,?,?,?,?,?,?,?)")!!
-                        crearUsuario.setString(1, UUID.randomUUID().toString())
+                        val crearUsuario = objConexion?.prepareStatement("INSERT INTO tbUsuarios (UUID_Usuario, Nombre_Usuario, Apellido_Usuario, User_name, Contrasena_Usuario, Correo_Usuario, FNacimiento_Usuario, Foto_Usuario, UUID_Tipo_Usuario, UUID_Genero) VALUES (?,?,?,?,?,?,?,?,?,?)")!!
+                        crearUsuario.setString(1, uuidUser)
                         crearUsuario.setString(2, txtNombreRegistro.text.toString())
                         crearUsuario.setString(3, txtApellidoRegistro.text.toString())
                         crearUsuario.setString(4, txtUsernameRegistro.text.toString())
                         crearUsuario.setString(5, contraseniaEncriptada)
                         crearUsuario.setString(6, txtCorreoRegistro.text.toString())
-                        crearUsuario.setString(7, spGenero.selectedItemPosition.toString())
-                        crearUsuario.setString(8, txtNacimientoRegistro.text.toString())
+                        crearUsuario.setString(7, txtNacimientoRegistro.text.toString())
+                        crearUsuario.setString(8, miPathUser)
                         crearUsuario.setInt(9, 1)
+                        crearUsuario.setString(10, genero[spGenero.selectedItemPosition].UUID_Genero)
                         crearUsuario.executeUpdate()
+
                         withContext(Dispatchers.Main) {
-                            //Abro otra corrutiana para mostrar el mensaje y limpiar campos
-                            Toast.makeText(
-                                this@activity_login,
-                                "Usuario creado con éxito",
-                                Toast.LENGTH_SHORT
-                            ).show()
+                            Toast.makeText(this@activity_login, "Usuario creado con éxito", Toast.LENGTH_SHORT).show()
+
                             txtNombreRegistro.setText("")
                             txtApellidoRegistro.setText("")
                             txtUsernameRegistro.setText("")
@@ -213,13 +243,88 @@ class activity_login : AppCompatActivity() {
                 }
         }
 
-
         IrALogin.setOnClickListener{
             val pantallaLogin = Intent(this, activity_iniciar_sesion::class.java)
             startActivity(pantallaLogin)
         }
 
+    }
 
+    private fun checkStoragePermission(){
+        if(ContextCompat.checkSelfPermission(this, android.Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED){
+            pedirPermisoAlmacenamiento()
+        }
+        else{
+            val intent = Intent(Intent.ACTION_PICK)
+            intent.type = "image/*"
+            startActivityForResult(intent, codigo_opcion_galeria_user)
+        }
+    }
+
+    private fun pedirPermisoAlmacenamiento() {
+        if (ActivityCompat.shouldShowRequestPermissionRationale(this, android.Manifest.permission.READ_EXTERNAL_STORAGE)) {
+
+        }
+        else {
+            ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.READ_EXTERNAL_STORAGE), STORAGE_REQUEST_CODE_USER)
+        }
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<String>, grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        when (requestCode) {
+            STORAGE_REQUEST_CODE_USER -> {
+                if ((grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
+                    val intent = Intent(Intent.ACTION_PICK)
+                    intent.type = "image/*"
+                    startActivityForResult(intent, codigo_opcion_galeria_user)
+                } else {
+                    Toast.makeText(this, "Permiso de almacenamiento denegado", Toast.LENGTH_SHORT)
+                        .show()
+                }
+            }
+            else -> {
+
+            }
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (resultCode == Activity.RESULT_OK) {
+            when (requestCode) {
+                codigo_opcion_galeria_user -> {
+                    val imageUri: Uri? = data?.data
+                    imageUri?.let {
+                        val imageBitmap = MediaStore.Images.Media.getBitmap(contentResolver, it)
+                        subirimagenFirebase(imageBitmap) { url ->
+                            miPathUser = url
+                            imageViewUser.setImageURI(it)
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    private fun subirimagenFirebase(bitmap: Bitmap, onSucces: (String) -> Unit) {
+        val storageRef = Firebase.storage.reference
+        val imageRef = storageRef.child("images/${uuidUser}.jpg ")
+        val baos = ByteArrayOutputStream()
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)
+        val data = baos.toByteArray()
+        val uploadTask = imageRef.putBytes(data)
+
+        uploadTask.addOnFailureListener {
+            Toast.makeText(this, "Error al subir la imagen", Toast.LENGTH_SHORT).show()
+        }.addOnSuccessListener { taskSnapshot ->
+            imageRef.downloadUrl.addOnSuccessListener { uri ->
+                onSucces(uri.toString())
+            }
+        }
 
     }
 }
