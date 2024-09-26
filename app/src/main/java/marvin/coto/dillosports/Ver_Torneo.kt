@@ -262,8 +262,8 @@ class Ver_Torneo : AppCompatActivity() {
                     val nombre = txtEditar_Nombre_Torn.text.toString()
                     val ubicacion = txtUbicacion_Torn.text.toString()
                     val descripcion = txtDescripcion_Torn.text.toString()
-                    val tipoDeporte = deporte[spTipoDeporte_Torn.selectedItemPosition].UUID_Tipo_Deporte
                     val estadoTorneo = estado[spTipoDeporte_Torn.selectedItemPosition].UUID_Estado_Torneo
+                    val tipoDeporte = deporte[spTipoDeporte_Torn.selectedItemPosition].UUID_Tipo_Deporte
                 editarDatos(nombre, ubicacion, descripcion, estadoTorneo, tipoDeporte, intent.getStringExtra("UUID_Torneo").toString())
 
                 alertDialog.dismiss()

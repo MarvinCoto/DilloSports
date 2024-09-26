@@ -37,6 +37,23 @@ class AdapterPart(var Datos: List<tbPartidos>): RecyclerView.Adapter<ViewHolderP
         lateinit var UUID_Arbitro: String
     }
 
+    fun obtenerDatoUUID(UUID_Equipo: String): String? {
+        val objConexion = ClaseConexion().cadenaConexion()
+
+        val query = "select Nombre_Equipo from tbEquipos where UUID_Equipo = ?"
+        val preparedStatement = objConexion?.prepareStatement(query)
+        preparedStatement?.setString(1, UUID_Equipo)
+        val resultSet = preparedStatement?.executeQuery()
+
+        var nombreEquipo: String? = null
+
+        if (resultSet?.next() == true) {
+            nombreEquipo = resultSet.getString("Nombre_Equipo")
+        }
+
+        return nombreEquipo
+    }
+
     suspend fun obtenerArbitro(): List<tbArbitros> {
         return withContext(Dispatchers.IO) {
             val objConexion = ClaseConexion().cadenaConexion()
@@ -139,14 +156,16 @@ class AdapterPart(var Datos: List<tbPartidos>): RecyclerView.Adapter<ViewHolderP
 
     override fun onBindViewHolder(holder: ViewHolderPart, position: Int) {
         val item = Datos[position]
+        val resultado1 = obtenerDatoUUID(item.UUID_Equipo1)
+        val resultado2 = obtenerDatoUUID(item.UUID_Equipo2)
         holder.txtResultado1.text = item.Marcador_Equipo1.toString()
         holder.txtResultado2.text = item.Marcador_Equipo2.toString()
         holder.txtFechaPart.text = item.Fecha_Partido
         holder.txtEspPartido.text = item.Tipo_Partido
-        holder.txtNombreEquipo1.text = item.UUID_Equipo1
-        holder.txtNombreEquipo2.text = item.UUID_Equipo2
+        holder.txtNombreEquipo1.text = resultado1
+        holder.txtNombreEquipo2.text = resultado2
 
-        holder.imgEditarPartido.setOnClickListener {
+        holder.imgEliminarPartido.setOnClickListener {
             val context = holder.itemView.context
             val builder = AlertDialog.Builder(context)
             val inflater = LayoutInflater.from(holder.itemView.context)
@@ -165,7 +184,7 @@ class AdapterPart(var Datos: List<tbPartidos>): RecyclerView.Adapter<ViewHolderP
             alertDialog.show()
         }
 
-        holder.imgEliminarPartido.setOnClickListener {
+        holder.imgEditarPartido.setOnClickListener {
             val context = holder.itemView.context
             val builder = AlertDialog.Builder(context)
             val inflater = LayoutInflater.from(holder.itemView.context)

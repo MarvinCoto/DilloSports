@@ -34,7 +34,7 @@ class VerJugadores : AppCompatActivity() {
             startActivity(intent)
         }
         val nombreRecibidoxd = AdapterEqui.variablesGlobalEqui.Nombre_Equipo
-        val textViewEquipxd = findViewById<TextView>(R.id.textView46)
+        val textViewEquipxd = findViewById<TextView>(R.id.textViewEquipxd)
         textViewEquipxd.text = nombreRecibidoxd
 
         val UUIDRecibido = Adapter.variablesGlobalJug.UUID_Jugador
