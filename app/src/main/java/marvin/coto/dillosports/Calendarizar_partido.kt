@@ -9,6 +9,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.Spinner
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -184,7 +185,17 @@ class Calendarizar_partido : AppCompatActivity() {
                 addPartido.executeUpdate()
 
                 withContext(Dispatchers.Main){
-                    Toast.makeText(this@Calendarizar_partido, "Partido Programdo", Toast.LENGTH_SHORT).show()
+                    val inflater = layoutInflater
+                    val layout = inflater.inflate(R.layout.toast_good, null)
+
+                    val toast = Toast(applicationContext)
+                    toast.duration = Toast.LENGTH_LONG
+                    toast.view = layout
+
+                    val text = layout.findViewById<TextView>(R.id.text)
+                    text.text = "Partido programado"
+
+                    toast.show()
                     txtFechaPartido.setText("")
                     txtLugarPartido.setText("")
                     txtHoraPartido.setText("")

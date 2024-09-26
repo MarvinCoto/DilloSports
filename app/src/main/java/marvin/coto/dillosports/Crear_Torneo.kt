@@ -26,6 +26,7 @@ import java.io.ByteArrayOutputStream
 import java.util.UUID
 import android.widget.ArrayAdapter
 import android.widget.Spinner
+import android.widget.TextView
 import kotlinx.coroutines.CoroutineScope
 import modelos.ClaseConexion
 import modelos.tbDeportes
@@ -161,7 +162,17 @@ class Crear_Torneo : AppCompatActivity() {
 
 
                 if (hayErrores) {
-                    Toast.makeText(this@Crear_Torneo, "Datos ingresados incorrectamente", Toast.LENGTH_SHORT).show()
+                    val inflater = layoutInflater
+                    val layout = inflater.inflate(R.layout.toast_bad, null)
+
+                    val toast = Toast(applicationContext)
+                    toast.duration = Toast.LENGTH_LONG
+                    toast.view = layout
+
+                    val text = layout.findViewById<TextView>(R.id.text2)
+                    text.text = "Datos ingresados incorrectamente"
+
+                    toast.show()
                 } else {
                     val intent = Intent(this, Torneos::class.java)
                     CoroutineScope(Dispatchers.IO).launch {
@@ -180,7 +191,17 @@ class Crear_Torneo : AppCompatActivity() {
                         addTorneo.executeUpdate()
 
                         withContext(Dispatchers.Main){
-                            Toast.makeText(this@Crear_Torneo, "Torneo Creado", Toast.LENGTH_SHORT).show()
+                            val inflater = layoutInflater
+                            val layout = inflater.inflate(R.layout.toast_good, null)
+
+                            val toast = Toast(applicationContext)
+                            toast.duration = Toast.LENGTH_LONG
+                            toast.view = layout
+
+                            val text = layout.findViewById<TextView>(R.id.text)
+                            text.text = "Torneo Creado"
+
+                            toast.show()
                             txtNombreTorneo.setText("")
                             txtDescripcionTorneo.setText("")
                             txtUbicacionTorneo.setText("")

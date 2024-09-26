@@ -164,7 +164,17 @@ class activityNuevosJugadores : AppCompatActivity() {
 
 
                 if (hayErrores) {
-                    Toast.makeText(this@activityNuevosJugadores, "Datos ingresados incorrectamente", Toast.LENGTH_SHORT).show()
+                    val inflater = layoutInflater
+                    val layout = inflater.inflate(R.layout.toast_bad, null)
+
+                    val toast = Toast(applicationContext)
+                    toast.duration = Toast.LENGTH_LONG
+                    toast.view = layout
+
+                    val text = layout.findViewById<TextView>(R.id.text2)
+                    text.text = "Datos ingresados incorrectamente"
+
+                    toast.show()
                 } else {
                     val intent = Intent(this, mostrarJugadores::class.java)
 
@@ -184,7 +194,17 @@ class activityNuevosJugadores : AppCompatActivity() {
                         addJugadores.executeUpdate()
 
                         withContext(Dispatchers.Main){
-                            Toast.makeText(this@activityNuevosJugadores, "Jugador Inscrito", Toast.LENGTH_SHORT).show()
+                            val inflater = layoutInflater
+                            val layout = inflater.inflate(R.layout.toast_good, null)
+
+                            val toast = Toast(applicationContext)
+                            toast.duration = Toast.LENGTH_LONG
+                            toast.view = layout
+
+                            val text = layout.findViewById<TextView>(R.id.text)
+                            text.text = "Jugador Inscrito"
+
+                            toast.show()
                             txtNombreJugador.setText("")
                             txtApellidoJugador.setText("")
                             txtNumJugador.setText("")

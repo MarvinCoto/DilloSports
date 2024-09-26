@@ -72,11 +72,31 @@ class activity_iniciar_sesion : AppCompatActivity() {
                 if(resultado.next()){
                     startActivity(pantallaPrincipal)
                     withContext(Dispatchers.Main){
-                        Toast.makeText(this@activity_iniciar_sesion, "Bienenvenido", Toast.LENGTH_SHORT).show()
+                        val inflater = layoutInflater
+                        val layout = inflater.inflate(R.layout.toast_normal, null)
+
+                        val toast = Toast(applicationContext)
+                        toast.duration = Toast.LENGTH_LONG
+                        toast.view = layout
+
+                        val text = layout.findViewById<TextView>(R.id.text3)
+                        text.text = "Bienvenido"
+
+                        toast.show()
                     }
                 } else {
                     withContext(Dispatchers.Main){
-                        Toast.makeText(this@activity_iniciar_sesion, "Usuario o contraseña incorrectos", Toast.LENGTH_SHORT).show()
+                        val inflater = layoutInflater
+                        val layout = inflater.inflate(R.layout.toast_bad, null)
+
+                        val toast = Toast(applicationContext)
+                        toast.duration = Toast.LENGTH_LONG
+                        toast.view = layout
+
+                        val text = layout.findViewById<TextView>(R.id.text2)
+                        text.text = "Usuario o contraseña incorrectos"
+
+                        toast.show()
                     }
                 }
             }

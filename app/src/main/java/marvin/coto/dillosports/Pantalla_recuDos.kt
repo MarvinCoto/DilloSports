@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -29,11 +30,31 @@ class Pantalla_recuDos : AppCompatActivity() {
         btnIniciarSesionRecu.setOnClickListener {
             if (txtRecu.text.toString() == recuGlobal.toString()){
                 val intent = Intent(this, Home::class.java)
-                Toast.makeText(this@Pantalla_recuDos, "Codigo Correcto, Bienvenido", Toast.LENGTH_SHORT).show()
+                val inflater = layoutInflater
+                val layout = inflater.inflate(R.layout.toast_normal, null)
+
+                val toast = Toast(applicationContext)
+                toast.duration = Toast.LENGTH_LONG
+                toast.view = layout
+
+                val text = layout.findViewById<TextView>(R.id.text3)
+                text.text = "Código correcto, Bienvenido"
+
+                toast.show()
                 startActivity(intent)
             }
             else{
-                Toast.makeText(this@Pantalla_recuDos, "Codigo Incorrecto", Toast.LENGTH_SHORT).show()
+                val inflater = layoutInflater
+                val layout = inflater.inflate(R.layout.toast_bad, null)
+
+                val toast = Toast(applicationContext)
+                toast.duration = Toast.LENGTH_LONG
+                toast.view = layout
+
+                val text = layout.findViewById<TextView>(R.id.text2)
+                text.text = "Código incorrecto"
+
+                toast.show()
             }
         }
     }

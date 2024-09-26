@@ -189,7 +189,17 @@ class activity_login : AppCompatActivity() {
             }
 
                 if (hayErrores) {
-                    Toast.makeText(this@activity_login, "Datos ingresados incorrectamente", Toast.LENGTH_SHORT).show()
+                    val inflater = layoutInflater
+                    val layout = inflater.inflate(R.layout.toast_bad, null)
+
+                    val toast = Toast(applicationContext)
+                    toast.duration = Toast.LENGTH_LONG
+                    toast.view = layout
+
+                    val text = layout.findViewById<TextView>(R.id.text2)
+                    text.text = "Datos ingresados incorrectamente"
+
+                    toast.show()
                 } else {
                     GlobalScope.launch(Dispatchers.IO) {
                         val objConexion = ClaseConexion().cadenaConexion()
@@ -210,7 +220,17 @@ class activity_login : AppCompatActivity() {
                         crearUsuario.executeUpdate()
 
                         withContext(Dispatchers.Main) {
-                            Toast.makeText(this@activity_login, "Usuario creado con éxito", Toast.LENGTH_SHORT).show()
+                            val inflater = layoutInflater
+                            val layout = inflater.inflate(R.layout.toast_normal, null)
+
+                            val toast = Toast(applicationContext)
+                            toast.duration = Toast.LENGTH_LONG
+                            toast.view = layout
+
+                            val text = layout.findViewById<TextView>(R.id.text3)
+                            text.text = "Usuario creado con exito"
+
+                            toast.show()
 
                             txtNombreRegistro.setText("")
                             txtApellidoRegistro.setText("")

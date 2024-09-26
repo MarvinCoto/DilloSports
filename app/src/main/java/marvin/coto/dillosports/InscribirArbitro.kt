@@ -112,7 +112,17 @@ class InscribirArbitro : AppCompatActivity() {
             }
 
                 if (hayErrores) {
-                    Toast.makeText(this@InscribirArbitro, "Datos ingresados incorrectamente", Toast.LENGTH_SHORT).show()
+                    val inflater = layoutInflater
+                    val layout = inflater.inflate(R.layout.toast_bad, null)
+
+                    val toast = Toast(applicationContext)
+                    toast.duration = Toast.LENGTH_LONG
+                    toast.view = layout
+
+                    val text = layout.findViewById<TextView>(R.id.text2)
+                    text.text = "Datos ingresados incorrectamente"
+
+                    toast.show()
                 } else {
                     val intent= Intent(this, Arbitros::class.java)
 
@@ -129,7 +139,17 @@ class InscribirArbitro : AppCompatActivity() {
                         addArbitro.executeUpdate()
 
                         withContext(Dispatchers.Main) {
-                            Toast.makeText(this@InscribirArbitro, "Arbitro Inscrito", Toast.LENGTH_SHORT).show()
+                            val inflater = layoutInflater
+                            val layout = inflater.inflate(R.layout.toast_good, null)
+
+                            val toast = Toast(applicationContext)
+                            toast.duration = Toast.LENGTH_LONG
+                            toast.view = layout
+
+                            val text = layout.findViewById<TextView>(R.id.text)
+                            text.text = "Arbitro Inscrito"
+
+                            toast.show()
                             txtNombreArbitro.setText("")
                             txtApellidoArbitro.setText("")
                             txtEdadArbitro.setText("")

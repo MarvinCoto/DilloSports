@@ -136,7 +136,17 @@ class inscribir_equipo : AppCompatActivity() {
 
 
                 if (hayErrores) {
-                    Toast.makeText(this@inscribir_equipo, "Datos ingresados incorrectamente", Toast.LENGTH_SHORT).show()
+                    val inflater = layoutInflater
+                    val layout = inflater.inflate(R.layout.toast_bad, null)
+
+                    val toast = Toast(applicationContext)
+                    toast.duration = Toast.LENGTH_LONG
+                    toast.view = layout
+
+                    val text = layout.findViewById<TextView>(R.id.text2)
+                    text.text = "Datos ingresados incorrectamente"
+
+                    toast.show()
                 } else {
                     val intent = Intent(this, Equipos::class.java)
 
@@ -154,7 +164,17 @@ class inscribir_equipo : AppCompatActivity() {
                         addEquipo.executeUpdate()
 
                         withContext(Dispatchers.Main) {
-                            Toast.makeText(this@inscribir_equipo, "Equipo Inscrito", Toast.LENGTH_SHORT).show()
+                            val inflater = layoutInflater
+                            val layout = inflater.inflate(R.layout.toast_good, null)
+
+                            val toast = Toast(applicationContext)
+                            toast.duration = Toast.LENGTH_LONG
+                            toast.view = layout
+
+                            val text = layout.findViewById<TextView>(R.id.text)
+                            text.text = "Equipo inscrito"
+
+                            toast.show()
                             txtNombreEquipo.setText("")
                             txtDescripcionEquipo.setText("")
                             txtUbicacionEquipo.setText("")

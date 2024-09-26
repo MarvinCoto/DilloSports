@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -120,12 +121,32 @@ class Pantalla_recuUno : AppCompatActivity() {
                     }
                     startActivity(pantallaRecudos)
                     withContext(Dispatchers.Main){
-                        Toast.makeText(this@Pantalla_recuUno, "Correo enviado correctamente", Toast.LENGTH_SHORT).show()
+                        val inflater = layoutInflater
+                        val layout = inflater.inflate(R.layout.toast_good, null)
+
+                        val toast = Toast(applicationContext)
+                        toast.duration = Toast.LENGTH_LONG
+                        toast.view = layout
+
+                        val text = layout.findViewById<TextView>(R.id.text)
+                        text.text = "Código enviado correctamente"
+
+                        toast.show()
                     }
                 }
                 else {
                     withContext(Dispatchers.Main){
-                        Toast.makeText(this@Pantalla_recuUno, "Correo no encontrado", Toast.LENGTH_SHORT).show()
+                        val inflater = layoutInflater
+                        val layout = inflater.inflate(R.layout.toast_normal, null)
+
+                        val toast = Toast(applicationContext)
+                        toast.duration = Toast.LENGTH_LONG
+                        toast.view = layout
+
+                        val text = layout.findViewById<TextView>(R.id.text3)
+                        text.text = "Correo no encontrado"
+
+                        toast.show()
                     }
                 }
             }
