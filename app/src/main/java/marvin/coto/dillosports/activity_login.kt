@@ -68,30 +68,12 @@ class activity_login : AppCompatActivity() {
         val imgVerPassword = findViewById<ImageView>(R.id.imgVerContraseñaR)
         val btnSubirImgUser = findViewById<Button>(R.id.btnSubirImgUser1)
 
-        fun obtenerGenero(): List<tbGeneroUsuario>{
-            val objConexion = ClaseConexion().cadenaConexion()
-
-            val statement = objConexion?.createStatement()
-            val resultSet = statement?.executeQuery("SELECT * FROM tbGeneroUsuario")!!
-            val listaGenero = mutableListOf<tbGeneroUsuario>()
-
-            while (resultSet.next()) {
-                val uuidGenero = resultSet.getString("UUID_Genero")
-                val nombreGenero = resultSet.getString("Nombre_Genero")
-                val unGenero = tbGeneroUsuario(uuidGenero, nombreGenero)
-                listaGenero.add(unGenero)
-            }
-            return listaGenero
-        }
 
         CoroutineScope(Dispatchers.IO).launch {
-            val listaGenero = obtenerGenero()
-            val nombreGenero = listaGenero.map { it.Nombre_Genero }
+            val listaGenero = arrayOf("Masculino", "Femenino")
 
-            withContext(Dispatchers.Main){
-                val miAdaptador = ArrayAdapter(this@activity_login, android.R.layout.simple_spinner_dropdown_item, nombreGenero)
-                spGenero.adapter = miAdaptador
-            }
+            val miAdaptador = ArrayAdapter(this@activity_login, android.R.layout.simple_spinner_dropdown_item, listaGenero)
+            spGenero.adapter = miAdaptador
         }
 
         btnSubirImgUser.setOnClickListener {
@@ -211,11 +193,10 @@ class activity_login : AppCompatActivity() {
                 } else {
                     GlobalScope.launch(Dispatchers.IO) {
                         val objConexion = ClaseConexion().cadenaConexion()
-                        val genero = obtenerGenero()
 
                         val contraseniaEncriptada = hashSHA256(txtContraseniaRegistro.text.toString())
 
-                        val crearUsuario = objConexion?.prepareStatement("INSERT INTO tbUsuarios (UUID_Usuario, Nombre_Usuario, Apellido_Usuario, User_name, Contrasena_Usuario, Correo_Usuario, FNacimiento_Usuario, Foto_Usuario, UUID_Tipo_Usuario, UUID_Genero) VALUES (?,?,?,?,?,?,?,?,?,?)")!!
+                        val crearUsuario = objConexion?.prepareStatement("INSERT INTO tbUsuarios (UUID_Usuario, Nombre_Usuario, Apellido_Usuario, User_name, Contrasena_Usuario, Correo_Usuario, FNacimiento_Usuario, Foto_Usuario, UUID_Tipo_Usuario, Genero) VALUES (?,?,?,?,?,?,?,?,?,?)")!!
                         crearUsuario.setString(1, uuidUser)
                         crearUsuario.setString(2, txtNombreRegistro.text.toString())
                         crearUsuario.setString(3, txtApellidoRegistro.text.toString())
@@ -225,7 +206,7 @@ class activity_login : AppCompatActivity() {
                         crearUsuario.setString(7, txtNacimientoRegistro.text.toString())
                         crearUsuario.setString(8, miPathUser)
                         crearUsuario.setInt(9, 1)
-                        crearUsuario.setString(10, genero[spGenero.selectedItemPosition].UUID_Genero)
+                        crearUsuario.setString(10, spGenero.selectedItemPosition.toString())
                         crearUsuario.executeUpdate()
 
                         withContext(Dispatchers.Main) {
