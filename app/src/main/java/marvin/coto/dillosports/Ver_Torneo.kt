@@ -66,7 +66,7 @@ class Ver_Torneo : AppCompatActivity() {
         val ubicacionRecibido = AdapterTorn.variablesGlobalTorn.Ubicacion_Torneo
         val descripcionRecibido = AdapterTorn.variablesGlobalTorn.Descripcion_Torneo
         val deporteRecibido = AdapterTorn.variablesGlobalTorn.UUID_Tipo_Deporte
-        val estadoRecibido = AdapterTorn.variablesGlobalTorn.UUID_Estado_Toneo
+        val estadoRecibido = AdapterTorn.variablesGlobalTorn.UUID_Estado_Torneo
         val logoRecibido = AdapterTorn.variablesGlobalTorn.Logo_Torneo
         val imgTorn = findViewById<ImageView>(R.id.imgTorn)
         val textViewNombreTorneo2 = findViewById<TextView>(R.id.textViewNombreTorneo2)
@@ -83,12 +83,12 @@ class Ver_Torneo : AppCompatActivity() {
         textViewUbicacionTorneo.text = ubicacionRecibido
         textViewDescripcionTorneo.text = descripcionRecibido
 
-        fun DatoUUIDEstado(UUID_Estado_Toneo: String): String? {
+        fun DatoUUIDEstado(UUID_Estado_Torneo: String): String? {
             val objConexion = ClaseConexion().cadenaConexion()
 
-            val query = "select Nombre_Estado from tbEstadoTorneo where UUID_Estado_Toneo = ?"
+            val query = "select Nombre_Estado from tbEstadoTorneo where UUID_Estado_Torneo = ?"
             val preparedStatement = objConexion?.prepareStatement(query)
-            preparedStatement?.setString(1, UUID_Estado_Toneo)
+            preparedStatement?.setString(1, UUID_Estado_Torneo)
             val resultSet = preparedStatement?.executeQuery()
 
             var nombreEstado: String? = null
@@ -201,7 +201,7 @@ class Ver_Torneo : AppCompatActivity() {
             GlobalScope.launch(Dispatchers.IO){
                 val objConexion = ClaseConexion().cadenaConexion()
 
-                val updateTorneo = objConexion?.prepareStatement("update tbTorneos set Nombre_Torneo =?, Ubicacion_Torneo =?, Descripcion_Torneo =?, UUID_Estado_Toneo =?, UUID_Tipo_Deporte =? where UUID_Torneo =?")!!
+                val updateTorneo = objConexion?.prepareStatement("update tbTorneos set Nombre_Torneo =?, Ubicacion_Torneo =?, Descripcion_Torneo =?, UUID_Estado_Torneo =?, UUID_Tipo_Deporte =? where UUID_Torneo =?")!!
                 updateTorneo.setString(1, nuevoNombre)
                 updateTorneo.setString(2, nuevoUbicacion)
                 updateTorneo.setString(3, nuevoDescripcion)

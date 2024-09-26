@@ -169,7 +169,7 @@ class Crear_Torneo : AppCompatActivity() {
                         val deporte = obtenerDeporte()
                         val estado = obtenerEstado()
 
-                        val addTorneo = objConexion?.prepareStatement("insert into tbTorneos (UUID_Torneo, Nombre_Torneo, Ubicacion_Torneo, Descripcion_Torneo, Logo_Torneo, UUID_Estado_Toneo, UUID_Tipo_Deporte) values (?,?,?,?,?,?,?)")!!
+                        val addTorneo = objConexion?.prepareStatement("insert into tbTorneos (UUID_Torneo, Nombre_Torneo, Ubicacion_Torneo, Descripcion_Torneo, Logo_Torneo, UUID_Estado_Torneo, UUID_Tipo_Deporte) values (?,?,?,?,?,?,?)")!!
                         addTorneo.setString(1, uuidTorn)
                         addTorneo.setString(2, txtNombreTorneo.text.toString())
                         addTorneo.setString(3, txtUbicacionTorneo.text.toString())
