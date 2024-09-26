@@ -137,9 +137,10 @@ class AdapterPart(var Datos: List<tbPartidos>): RecyclerView.Adapter<ViewHolderP
             updatePartido.setInt(2, nuevoMarcadorEquipo2)
             updatePartido.setString(3, nuevoTipoPartido)
             updatePartido.setString(4, nuevoLugarPartido)
-            updatePartido.setString(6, nuevoEquipo1)
-            updatePartido.setString(7, nuevoEquipo2)
-            updatePartido.setString(8, nuevoArbitro)
+            updatePartido.setString(5, nuevoEquipo1)
+            updatePartido.setString(6, nuevoEquipo2)
+            updatePartido.setString(7, nuevoArbitro)
+            updatePartido.setString(8, UUID_Partido)
             updatePartido.executeUpdate()
 
             val commit = objConexion.prepareStatement("commit")
