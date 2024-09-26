@@ -12,14 +12,14 @@
         android:id="@+id/textView44"
         android:layout_width="67dp"
         android:layout_height="47dp"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="16dp"
         android:fontFamily="@font/jaldi_bold"
         android:text="Dillo"
         android:textColor="#FFFFFF"
         android:textSize="34sp"
         android:textStyle="italic"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.194"
+        app:layout_constraintHorizontal_bias="0.188"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -27,28 +27,16 @@
         android:id="@+id/textView45"
         android:layout_width="88dp"
         android:layout_height="47dp"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="16dp"
         android:fontFamily="@font/jaldi_bold"
         android:text="Sports"
         android:textColor="#00A532"
         android:textSize="34sp"
         android:textStyle="italic"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.409"
+        app:layout_constraintHorizontal_bias="0.402"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/textViewNombreTornxd"
-        android:layout_width="180dp"
-        android:layout_height="23dp"
-        android:layout_marginStart="12dp"
-        android:text="*nombre del torneo"
-        android:textColor="#C3C3C3"
-        android:textSize="18sp"
-        android:textStyle="bold|italic"
-        app:layout_constraintStart_toEndOf="@+id/imageView36"
-        app:layout_constraintTop_toBottomOf="@+id/textView44" />
 
     <ImageView
         android:id="@+id/imageView36"
@@ -82,12 +70,12 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="388dp"
         android:layout_height="350dp"
-        android:layout_marginTop="92dp"
+        android:layout_marginTop="68dp"
         android:background="@drawable/cards_cuatro"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.478"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewNombreTornxd">
+        app:layout_constraintTop_toBottomOf="@+id/textView45">
 
         <TextView
             android:id="@+id/textViewGmail2"

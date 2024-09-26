@@ -41,7 +41,6 @@ class Ver_partido : AppCompatActivity() {
         val textViewArbitro = findViewById<TextView>(R.id.textViewArbitro)
         val textViewFechaPart = findViewById<TextView>(R.id.textViewFechaPart)
         val textHoraPart =  findViewById<TextView>(R.id.textHoraPart)
-        val nombreRecibido = AdapterTorn.variablesGlobalTorn.Nombre_Torneo
         val UUIDrecibido = AdapterPart.variablesGlobalPart.UUID_Partido
         val UUID_Equipo1 = AdapterPart.variablesGlobalPart.UUID_Equipo1
         val UUID_Equipo2 = AdapterPart.variablesGlobalPart.UUID_Equipo2
@@ -49,7 +48,6 @@ class Ver_partido : AppCompatActivity() {
         val Fecha_Partido = AdapterPart.variablesGlobalPart.Fecha_Partido
         val Lugar_Partido = AdapterPart.variablesGlobalPart.Lugar_Partido
         val Hora_Partido = AdapterPart.variablesGlobalPart.Hora_Partido
-        val textViewNombreTornxd = findViewById<TextView>(R.id.textViewNombreTornxd)
         val Marcador_Equipo1 = AdapterPart.variablesGlobalPart.Marcador_Equipo1
         val Marcador_Equipo2 = AdapterPart.variablesGlobalPart.Marcador_Equipo2
         val Tipo_Partido = AdapterPart.variablesGlobalPart.Tipo_Partido
@@ -59,7 +57,6 @@ class Ver_partido : AppCompatActivity() {
         textViewTipoPart.text = Tipo_Partido
         textViewFechaPart.text = Fecha_Partido
         textHoraPart.text = Hora_Partido
-        textViewNombreTornxd.text = nombreRecibido
 
         imgAtrasola.setOnClickListener {
             val intent = Intent(this, Partidos::class.java)
