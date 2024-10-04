@@ -9,6 +9,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import modelos.tbUsuarios
 
 class Perfil : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -46,12 +47,18 @@ class Perfil : AppCompatActivity() {
             finish()
         }
 
-        val textViewNombresTitle = findViewById<TextView>(R.id.textViewNombresTitle)
-        val textViewNombres = findViewById<TextView>(R.id.textViewNombres)
-        val textViewApellidos = findViewById<TextView>(R.id.textViewApellidos)
-        val textViewEdad = findViewById<TextView>(R.id.textViewEdad)
-        val textViewTelefono = findViewById<TextView>(R.id.textViewTelefono)
-        val textViewGenero = findViewById<TextView>(R.id.textViewGenero)
-        val textViewGmail = findViewById<TextView>(R.id.textViewGmail)
+        //2-Prueba del companion
+        val usuario = tbUsuarios.currentUser
+        if (usuario != null) {
+            findViewById<TextView>(R.id.textViewNombresTitle).text = usuario.User_name
+            findViewById<TextView>(R.id.textViewNombres).text = usuario.Nombre_Usuario
+            findViewById<TextView>(R.id.textViewApellidos).text = usuario.Apellido_Usuario
+            findViewById<TextView>(R.id.textViewEdad).text = usuario.FNacimiento_Usuario
+            findViewById<TextView>(R.id.textViewTelefono).text = usuario.User_name
+            findViewById<TextView>(R.id.textViewGenero).text = usuario.Genero
+            findViewById<TextView>(R.id.textViewGmail).text = usuario.Correo_Usuario
+        } else {
+            println("Usuario no encontrado")
+        }
     }
 }

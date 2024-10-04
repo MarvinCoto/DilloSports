@@ -32,6 +32,7 @@ import kotlinx.coroutines.withContext
 import modelos.ClaseConexion
 import modelos.tbDeportes
 import modelos.tbGeneroUsuario
+import modelos.tbUsuarios
 import java.io.ByteArrayOutputStream
 import java.security.MessageDigest
 import java.util.Calendar
@@ -218,6 +219,19 @@ class activity_login : AppCompatActivity() {
                         crearUsuario.setInt(9, 1)
                         crearUsuario.setString(10, spGenero.selectedItemPosition.toString())
                         crearUsuario.executeUpdate()
+
+                        //1-Pruebas de companion
+                        tbUsuarios.currentUser = tbUsuarios(
+                            UUID_Usuario = uuidUser,
+                            Nombre_Usuario = txtNombreRegistro.text.toString(),
+                            Apellido_Usuario = txtApellidoRegistro.text.toString(),
+                            User_name = txtUsernameRegistro.text.toString(),
+                            Contrasena_Usuario = contraseniaEncriptada,
+                            Correo_Usuario = txtCorreoRegistro.text.toString(),
+                            FNacimiento_Usuario = txtNacimientoRegistro.text.toString(),
+                            Foto_Usuario = miPathUser,
+                            Genero = spGenero.selectedItem.toString()
+                        )
 
                         withContext(Dispatchers.Main) {
                             val inflater = layoutInflater

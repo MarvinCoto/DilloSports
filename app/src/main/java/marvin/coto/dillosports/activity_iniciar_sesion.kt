@@ -17,6 +17,7 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import modelos.ClaseConexion
+import modelos.tbUsuarios
 import java.security.MessageDigest
 
 class activity_iniciar_sesion : AppCompatActivity() {
@@ -70,6 +71,20 @@ class activity_iniciar_sesion : AppCompatActivity() {
                 val resultado = comprobarUsuario.executeQuery()
 
                 if(resultado.next()){
+
+                    //3-Prueba del companion
+                    tbUsuarios.currentUser = tbUsuarios(
+                        UUID_Usuario = resultado.getString("UUID_Usuario"),
+                        Nombre_Usuario = resultado.getString("Nombre_Usuario"),
+                        Apellido_Usuario = resultado.getString("Apellido_Usuario"),
+                        User_name = resultado.getString("User_name"),
+                        Contrasena_Usuario = resultado.getString("Contrasena_Usuario"),
+                        Correo_Usuario = resultado.getString("Correo_Usuario"),
+                        FNacimiento_Usuario = resultado.getString("FNacimiento_Usuario"),
+                        Genero = resultado.getString("Genero"),
+                        Foto_Usuario = resultado.getString("Foto_Usuario")
+                    )
+
                     startActivity(pantallaPrincipal)
                     withContext(Dispatchers.Main){
                         val inflater = layoutInflater
