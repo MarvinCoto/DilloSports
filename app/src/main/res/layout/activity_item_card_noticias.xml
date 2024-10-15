@@ -98,7 +98,7 @@
                     android:textColor="#949494"
                     android:textSize="17sp"
                     android:layout_marginTop="4dp"
-                    android:layout_marginLeft="57dp"/>
+                    android:layout_marginLeft="40dp"/>
 
 
             </LinearLayout>

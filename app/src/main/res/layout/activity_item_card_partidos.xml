@@ -127,7 +127,7 @@
                         android:textColor="#FFFFFF"
                         android:textSize="17sp"
                         android:layout_marginTop="26dp"
-                        android:layout_marginLeft="20dp"/>
+                        android:layout_marginLeft="10dp"/>
                 </LinearLayout>
 
 
@@ -143,11 +143,11 @@
                     android:id="@+id/txtFechaPart"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="fecha///"
-                    android:textColor="#FFFFFF"
-                    android:textSize="17sp"
+                    android:layout_marginLeft="80dp"
                     android:layout_marginTop="4dp"
-                    android:layout_marginLeft="100dp"/>
+                    android:text="fecha//"
+                    android:textColor="#FFFFFF"
+                    android:textSize="17sp" />
 
                 <LinearLayout
                     android:background="@drawable/card_partidos"

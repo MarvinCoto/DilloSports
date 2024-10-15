@@ -3,6 +3,7 @@ package RecyclerView
 
 import android.content.Intent
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Button
@@ -20,6 +21,7 @@ import marvin.coto.dillosports.R
 import marvin.coto.dillosports.VerJugadores
 import modelos.ClaseConexion
 import modelos.tbEstadoJugador
+import modelos.tbUsuarios
 
 class Adapter(var Datos: List<tbJugadores>): RecyclerView.Adapter<ViewHolder>() {
     companion object variablesGlobalJug{
@@ -177,6 +179,16 @@ class Adapter(var Datos: List<tbJugadores>): RecyclerView.Adapter<ViewHolder>() 
                 }
             }
             alertDialog.show()
+        }
+
+        val usuario = tbUsuarios.currentUser
+        val uuidReference = AdapterTorn.variablesGlobalTorn.UUID_Usuario
+        if (usuario!!.UUID_Usuario == uuidReference || usuario!!.UUID_Tipo_Usuario == 3) {
+            holder.imgEditarJugador.visibility = View.VISIBLE
+            holder.imgEliminarJugador.visibility = View.VISIBLE
+        } else {
+            holder.imgEditarJugador.visibility = View.GONE
+            holder.imgEliminarJugador.visibility = View.GONE
         }
 
         holder.itemView.setOnClickListener {

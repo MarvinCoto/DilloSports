@@ -3,6 +3,7 @@ package RecyclerView
 import android.app.AlertDialog
 import android.content.Intent
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
@@ -16,6 +17,7 @@ import marvin.coto.dillosports.R
 import marvin.coto.dillosports.VerArbitro
 import modelos.ClaseConexion
 import modelos.tbArbitros
+import modelos.tbUsuarios
 
 
 class AdapterArbi(var Datos: List<tbArbitros>): RecyclerView.Adapter<ViewHolderArbi>() {
@@ -119,6 +121,16 @@ class AdapterArbi(var Datos: List<tbArbitros>): RecyclerView.Adapter<ViewHolderA
                 alertDialog.dismiss()
             }
             alertDialog.show()
+        }
+
+        val usuario = tbUsuarios.currentUser
+        val uuidReference = AdapterTorn.variablesGlobalTorn.UUID_Usuario
+        if (usuario!!.UUID_Usuario == uuidReference || usuario!!.UUID_Tipo_Usuario == 3) {
+            holder.imgEditarArbitro.visibility = View.VISIBLE
+            holder.imgEliminarArbitro.visibility = View.VISIBLE
+        } else {
+            holder.imgEditarArbitro.visibility = View.GONE
+            holder.imgEliminarArbitro.visibility = View.GONE
         }
 
         holder.itemView.setOnClickListener {

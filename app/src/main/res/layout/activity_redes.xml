@@ -38,34 +38,13 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/constraintLayout25"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:layout_marginTop="1dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/constraintLayout24">
-
-            <ImageView
-                android:id="@+id/imgAjustes2"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/vector_asset_ajustes_cuenta" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayout28"
             android:layout_width="70dp"
             android:layout_height="70dp"
-            android:layout_marginTop="1dp"
             android:background="#00A532"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/constraintLayout25">
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout24">
 
             <ImageView
                 android:id="@+id/imgRedes2"

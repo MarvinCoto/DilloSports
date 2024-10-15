@@ -18,11 +18,6 @@ class Help : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-        val imgAjustes3 = findViewById<ImageView>(R.id.imgAjustes3)
-        imgAjustes3.setOnClickListener {
-            val intent = Intent(this, Ajustes::class.java)
-            startActivity(intent)
-        }
         val imgRedes3 = findViewById<ImageView>(R.id.imgRedes3)
         imgRedes3.setOnClickListener {
             val intent = Intent(this, Redes::class.java)

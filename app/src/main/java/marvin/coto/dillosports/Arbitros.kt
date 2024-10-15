@@ -1,8 +1,10 @@
 package marvin.coto.dillosports
 
 import RecyclerView.AdapterArbi
+import RecyclerView.AdapterTorn
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
 import android.widget.ImageView
 import androidx.activity.enableEdgeToEdge
@@ -17,6 +19,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import modelos.ClaseConexion
 import modelos.tbArbitros
+import modelos.tbUsuarios
 
 class Arbitros : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -54,6 +57,17 @@ class Arbitros : AppCompatActivity() {
         imgVerInsArbi.setOnClickListener {
             val intent = Intent(this, InscribirArbitro::class.java)
             startActivity(intent)
+        }
+
+        val uuidReference = AdapterTorn.variablesGlobalTorn.UUID_Usuario
+        val usuario = tbUsuarios.currentUser
+
+        if (usuario!!.UUID_Usuario == uuidReference || usuario!!.UUID_Tipo_Usuario == 3) {
+            btnVerCrearArbitros.visibility = View.VISIBLE
+            imgVerInsArbi.visibility = View.VISIBLE
+        } else {
+            btnVerCrearArbitros.visibility = View.GONE
+            imgVerInsArbi.visibility = View.GONE
         }
 
         val rcvArbitros = findViewById<RecyclerView>(R.id.rcvArbitros)

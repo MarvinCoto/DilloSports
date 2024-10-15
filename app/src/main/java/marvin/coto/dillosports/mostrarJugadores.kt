@@ -2,8 +2,10 @@ package marvin.coto.dillosports
 
 import RecyclerView.Adapter
 import RecyclerView.AdapterEqui
+import RecyclerView.AdapterTorn
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
@@ -19,6 +21,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import modelos.ClaseConexion
 import modelos.tbJugadores
+import modelos.tbUsuarios
 
 class mostrarJugadores : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -50,6 +53,17 @@ class mostrarJugadores : AppCompatActivity() {
         val recibido = AdapterEqui.variablesGlobalEqui.Nombre_Equipo
         val textViewEquipBarca = findViewById<TextView>(R.id.textViewEquipBarca)
         textViewEquipBarca.text = recibido
+
+        val uuidReference = AdapterTorn.variablesGlobalTorn.UUID_Usuario
+        val usuario = tbUsuarios.currentUser
+
+        if (usuario!!.UUID_Usuario == uuidReference || usuario!!.UUID_Tipo_Usuario == 3) {
+            btnVerCrearJugador.visibility = View.VISIBLE
+            imgIrAVerunJugador.visibility = View.VISIBLE
+        } else {
+            btnVerCrearJugador.visibility = View.GONE
+            imgIrAVerunJugador.visibility = View.GONE
+        }
 
 
 

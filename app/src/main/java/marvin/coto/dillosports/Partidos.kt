@@ -1,8 +1,10 @@
 package marvin.coto.dillosports
 
 import RecyclerView.AdapterPart
+import RecyclerView.AdapterTorn
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
 import android.widget.ImageView
 import androidx.activity.enableEdgeToEdge
@@ -17,6 +19,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import modelos.ClaseConexion
 import modelos.tbPartidos
+import modelos.tbUsuarios
 
 class Partidos : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -56,6 +59,17 @@ class Partidos : AppCompatActivity() {
         imgIrVerCpart.setOnClickListener {
             val intent = Intent(this, Calendarizar_partido::class.java)
             startActivity(intent)
+        }
+
+        val uuidReference = AdapterTorn.variablesGlobalTorn.UUID_Usuario
+        val usuario = tbUsuarios.currentUser
+
+        if (usuario!!.UUID_Usuario == uuidReference || usuario!!.UUID_Tipo_Usuario == 3) {
+            btnVerCrearPartido.visibility = View.VISIBLE
+            imgIrVerCpart.visibility = View.VISIBLE
+        } else {
+            btnVerCrearPartido.visibility = View.GONE
+            imgIrVerCpart.visibility = View.GONE
         }
 
         fun obtenerPartidos(): List<tbPartidos>{

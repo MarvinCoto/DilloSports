@@ -4,6 +4,7 @@ import RecyclerView.AdapterEqui
 import RecyclerView.AdapterTorn
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
@@ -20,6 +21,7 @@ import kotlinx.coroutines.withContext
 import modelos.ClaseConexion
 import modelos.tbEquipos
 import modelos.tbTorneos
+import modelos.tbUsuarios
 
 class Equipos : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -60,6 +62,18 @@ class Equipos : AppCompatActivity() {
             val intent = Intent(this, inscribir_equipo::class.java)
             startActivity(intent)
         }
+        val uuidReference = AdapterTorn.variablesGlobalTorn.UUID_Usuario
+        val usuario = tbUsuarios.currentUser
+
+        if (usuario!!.UUID_Usuario == uuidReference || usuario!!.UUID_Tipo_Usuario == 3) {
+            btnVerCrearEquipo.visibility = View.VISIBLE
+            imgIrEquipo2.visibility = View.VISIBLE
+        } else {
+            btnVerCrearEquipo.visibility = View.GONE
+            imgIrEquipo2.visibility = View.GONE
+        }
+
+
         val recibirNameTorn = AdapterTorn.variablesGlobalTorn.Nombre_Torneo
         val textViewNameTornEquip = findViewById<TextView>(R.id.textViewNameTornEquip)
         textViewNameTornEquip.text = recibirNameTorn

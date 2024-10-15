@@ -166,42 +166,97 @@ class Calendarizar_partido : AppCompatActivity() {
         }
 
         btnCalendarizarPartido.setOnClickListener {
-            val intent = Intent(this, Partidos::class.java)
-            CoroutineScope(Dispatchers.IO).launch {
-                val objConexion = ClaseConexion().cadenaConexion()
-                val equipo1 = obtenerEquipo()
-                val equipo2 = obtenerEquipo()
-                val arbitro = obtenerArbitro()
+            val lugar = txtLugarPartido.text.toString()
+            val tipo = txtTipoPartido.text.toString()
+            val fecha = txtFechaPartido.text.toString()
+            val hora = txtHoraPartido.text.toString()
 
-                val addPartido = objConexion?.prepareStatement("insert into tbPartidos (UUID_Partido, UUID_Equipo1, UUID_Equipo2, Fecha_Partido, Lugar_Partido, Hora_Partido, Marcador_Equipo1, Marcador_Equipo2, Tipo_Partido, UUID_Arbitro) values (?,?,?,?,?,?,?,?,?,?)")!!
-                addPartido.setString(1, UUID.randomUUID().toString())
-                addPartido.setString(2, equipo1[spEquipoUno.selectedItemPosition].UUID_Equipo)
-                addPartido.setString(3, equipo2[spEquipoDos.selectedItemPosition].UUID_Equipo)
-                addPartido.setString(4, txtFechaPartido.text.toString())
-                addPartido.setString(5, txtLugarPartido.text.toString())
-                addPartido.setString(6, txtHoraPartido.text.toString())
-                addPartido.setInt(7, 0)
-                addPartido.setInt(8, 0)
-                addPartido.setString(9, txtTipoPartido.text.toString())
-                addPartido.setString(10, arbitro[spArbitro.selectedItemPosition].UUID_Arbitro)
-                addPartido.executeUpdate()
+            var hayErrores = false
 
-                withContext(Dispatchers.Main){
-                    val inflater = layoutInflater
-                    val layout = inflater.inflate(R.layout.toast_good, null)
+            if (lugar.isEmpty()) {
+                txtLugarPartido.error = "Este campo es obligatorio"
+                hayErrores = true
+            }
+            else {
+                txtLugarPartido.error = null
+            }
 
-                    val toast = Toast(applicationContext)
-                    toast.duration = Toast.LENGTH_LONG
-                    toast.view = layout
+            if (tipo.isEmpty()) {
+                txtTipoPartido.error = "Este campo es obligatorio"
+                hayErrores = true
+            }
+            else {
+                txtTipoPartido.error = null
+            }
 
-                    val text = layout.findViewById<TextView>(R.id.text)
-                    text.text = "Partido programado"
+            if (fecha.isEmpty()) {
+                txtFechaPartido.error = "Este campo es obligatorio"
+                hayErrores = true
+            }
+            else {
+                txtFechaPartido.error = null
+            }
 
-                    toast.show()
-                    txtFechaPartido.setText("")
-                    txtLugarPartido.setText("")
-                    txtHoraPartido.setText("")
-                    txtTipoPartido.setText("")
+            if (hora.isEmpty()) {
+                txtHoraPartido.error = "Este campo es obligatorio"
+                hayErrores = true
+            }
+            else {
+                txtHoraPartido.error = null
+            }
+
+            if (hayErrores) {
+                val inflater = layoutInflater
+                val layout = inflater.inflate(R.layout.toast_bad, null)
+
+                val toast = Toast(applicationContext)
+                toast.duration = Toast.LENGTH_LONG
+                toast.view = layout
+
+                val text = layout.findViewById<TextView>(R.id.text2)
+                text.text = "Datos ingresados incorrectamente"
+
+                toast.show()
+            }
+
+            else {
+                val intent = Intent(this, Partidos::class.java)
+                CoroutineScope(Dispatchers.IO).launch {
+                    val objConexion = ClaseConexion().cadenaConexion()
+                    val equipo1 = obtenerEquipo()
+                    val equipo2 = obtenerEquipo()
+                    val arbitro = obtenerArbitro()
+
+                    val addPartido = objConexion?.prepareStatement("insert into tbPartidos (UUID_Partido, UUID_Equipo1, UUID_Equipo2, Fecha_Partido, Lugar_Partido, Hora_Partido, Marcador_Equipo1, Marcador_Equipo2, Tipo_Partido, UUID_Arbitro) values (?,?,?,?,?,?,?,?,?,?)")!!
+                    addPartido.setString(1, UUID.randomUUID().toString())
+                    addPartido.setString(2, equipo1[spEquipoUno.selectedItemPosition].UUID_Equipo)
+                    addPartido.setString(3, equipo2[spEquipoDos.selectedItemPosition].UUID_Equipo)
+                    addPartido.setString(4, txtFechaPartido.text.toString())
+                    addPartido.setString(5, txtLugarPartido.text.toString())
+                    addPartido.setString(6, txtHoraPartido.text.toString())
+                    addPartido.setInt(7, 0)
+                    addPartido.setInt(8, 0)
+                    addPartido.setString(9, txtTipoPartido.text.toString())
+                    addPartido.setString(10, arbitro[spArbitro.selectedItemPosition].UUID_Arbitro)
+                    addPartido.executeUpdate()
+
+                    withContext(Dispatchers.Main){
+                        val inflater = layoutInflater
+                        val layout = inflater.inflate(R.layout.toast_good, null)
+
+                        val toast = Toast(applicationContext)
+                        toast.duration = Toast.LENGTH_LONG
+                        toast.view = layout
+
+                        val text = layout.findViewById<TextView>(R.id.text)
+                        text.text = "Partido programado"
+
+                        toast.show()
+                        txtFechaPartido.setText("")
+                        txtLugarPartido.setText("")
+                        txtHoraPartido.setText("")
+                        txtTipoPartido.setText("")
+                    }
                 }
                 startActivity(intent)
             }

@@ -3,6 +3,7 @@ package RecyclerView
 import android.app.AlertDialog
 import android.content.Intent
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Button
@@ -23,6 +24,7 @@ import modelos.tbArbitros
 import modelos.tbEditPartidos
 import modelos.tbEquipos
 import modelos.tbPartidos
+import modelos.tbUsuarios
 
 class AdapterPart(var Datos: List<tbPartidos>): RecyclerView.Adapter<ViewHolderPart>() {
     companion object variablesGlobalPart{
@@ -264,6 +266,16 @@ class AdapterPart(var Datos: List<tbPartidos>): RecyclerView.Adapter<ViewHolderP
                 }
             }
             alertDialog.show()
+        }
+
+        val usuario = tbUsuarios.currentUser
+        val uuidReference = AdapterTorn.variablesGlobalTorn.UUID_Usuario
+        if (usuario!!.UUID_Usuario == uuidReference || usuario!!.UUID_Tipo_Usuario == 3) {
+            holder.imgEditarPartido.visibility = View.VISIBLE
+            holder.imgEliminarPartido.visibility = View.VISIBLE
+        } else {
+            holder.imgEditarPartido.visibility = View.GONE
+            holder.imgEliminarPartido.visibility = View.GONE
         }
 
         holder.itemView.setOnClickListener {
