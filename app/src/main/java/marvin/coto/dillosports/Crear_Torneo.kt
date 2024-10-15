@@ -180,6 +180,7 @@ class Crear_Torneo : AppCompatActivity() {
                         val objConexion = ClaseConexion().cadenaConexion()
                         val deporte = obtenerDeporte()
                         val estado = obtenerEstado()
+                        val usuario = tbUsuarios.currentUser
 
                         val addTorneo = objConexion?.prepareStatement("insert into tbTorneos (UUID_Torneo, Nombre_Torneo, Ubicacion_Torneo, Descripcion_Torneo, Logo_Torneo, UUID_Estado_Torneo, UUID_Tipo_Deporte, UUID_Usuario) values (?,?,?,?,?,?,?,?)")!!
                         addTorneo.setString(1, uuidTorn)
@@ -189,7 +190,7 @@ class Crear_Torneo : AppCompatActivity() {
                         addTorneo.setString(5, miPathTorn)
                         addTorneo.setString(6, estado[spEstadoTorneo.selectedItemPosition].UUID_Estado_Torneo)
                         addTorneo.setString(7, deporte[spTipoDeporte.selectedItemPosition].UUID_Tipo_Deporte)
-                        addTorneo.setString(8, tbUsuarios.currentUser?.UUID_Usuario)
+                        addTorneo.setString(8, usuario!!.UUID_Usuario)
                         addTorneo.executeUpdate()
 
                         withContext(Dispatchers.Main){

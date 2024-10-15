@@ -184,8 +184,9 @@ class Ver_Torneo : AppCompatActivity() {
 
         val btnEliminarTorneo = findViewById<TextView>(R.id.btnEliminarTorneo)
         val btnEditarTorneo = findViewById<TextView>(R.id.btnEditarTorneo)
+        val usuario = tbUsuarios.currentUser
 
-        if (tbUsuarios.currentUser?.UUID_Usuario == uuidReference || tbUsuarios.currentUser?.UUID_Tipo_Usuario == 3) {
+        if (usuario!!.UUID_Usuario == uuidReference || usuario!!.UUID_Tipo_Usuario == 3) {
             btnEditarTorneo.visibility = View.VISIBLE
             btnEliminarTorneo.visibility = View.VISIBLE
         } else {
