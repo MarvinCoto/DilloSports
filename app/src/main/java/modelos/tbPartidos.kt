@@ -10,5 +10,7 @@ data class tbPartidos(
     val Marcador_Equipo1: Int,
     val Marcador_Equipo2: Int,
     val Tipo_Partido: String,
-    val UUID_Arbitro: String
+    val UUID_Arbitro: String,
+    val imagen1: String,
+    val imagen2: String
 )

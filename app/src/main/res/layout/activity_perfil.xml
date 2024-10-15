@@ -85,7 +85,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="358dp"
-        android:layout_height="310dp"
+        android:layout_height="370dp"
         android:layout_marginTop="20dp"
         android:background="@drawable/cards_claras"
         app:layout_constraintEnd_toEndOf="parent"
@@ -207,6 +207,19 @@
             app:layout_constraintTop_toBottomOf="@+id/textView16" />
 
         <TextView
+            android:id="@+id/textView18"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="28dp"
+            android:text="Correo electrónico:"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView17" />
+
+        <TextView
             android:id="@+id/textViewGenero"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -223,25 +236,25 @@
             android:layout_width="135dp"
             android:layout_height="48dp"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="16dp"
             android:backgroundTint="#4F0000"
             android:text="Cerrar Sesión"
             android:textSize="12sp"
             app:cornerRadius="5dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView17" />
+            app:layout_constraintTop_toBottomOf="@+id/textView18" />
 
         <TextView
             android:id="@+id/textViewGmail"
-            android:layout_width="wrap_content"
+            android:layout_width="180dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="16dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="266dp"
             android:text="*gmail"
             android:textColor="#BFBFBF"
             android:textSize="16sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintStart_toEndOf="@+id/textView18"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

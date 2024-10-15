@@ -103,6 +103,7 @@ class activity_login : AppCompatActivity() {
             val dia = calendario.get(Calendar.DAY_OF_MONTH)
             val datePickerDialog = DatePickerDialog(
                 this,
+                R.style.CustomDatePickerDialog,
                 { view, anioSeleccionado, mesSeleccionado, diaSeleccionado ->
                     val fechaSeleccionada =
                         "$diaSeleccionado/${mesSeleccionado + 1}/$anioSeleccionado"
@@ -230,7 +231,8 @@ class activity_login : AppCompatActivity() {
                             Correo_Usuario = txtCorreoRegistro.text.toString(),
                             FNacimiento_Usuario = txtNacimientoRegistro.text.toString(),
                             Foto_Usuario = miPathUser,
-                            Genero = spGenero.selectedItem.toString()
+                            UUID_Tipo_Usuario = 1,
+                            Genero = spGenero.selectedItemPosition.toString()
                         )
 
                         withContext(Dispatchers.Main) {

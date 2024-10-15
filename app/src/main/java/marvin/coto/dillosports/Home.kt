@@ -81,7 +81,7 @@ class Home : AppCompatActivity() {
             val objConexion = ClaseConexion().cadenaConexion()
 
             val statement = objConexion?.createStatement()
-            val resultSet = statement?.executeQuery("SELECT * FROM tbPartidos")!!
+            val resultSet = statement?.executeQuery("SELECT p.UUID_Partido, e1.Nombre_Equipo AS Equipo1, e1.Logo_Equipo AS Logo_Equipo1, e2.Nombre_Equipo AS Equipo2, e2.Logo_Equipo AS Logo_Equipo2, p.Fecha_Partido, p.Lugar_Partido, p.Hora_Partido, p.Marcador_Equipo1, p.Marcador_Equipo2, p.Tipo_Partido, p.UUID_Arbitro FROM tbPartidos p INNER JOIN tbEquipos e1 ON p.UUID_Equipo1 = e1.UUID_Equipo INNER JOIN tbEquipos e2 ON p.UUID_Equipo2 = e2.UUID_Equipo")!!
             val listaPartidos = mutableListOf<tbPartidos>()
 
             while(resultSet.next()){
@@ -95,8 +95,10 @@ class Home : AppCompatActivity() {
                 val Marcador_Equipo2 = resultSet.getInt("Marcador_Equipo2")
                 val Tipo_Partido = resultSet.getString("Tipo_Partido")
                 val UUID_Arbitro = resultSet.getString("UUID_Arbitro")
+                val imagen1 = resultSet.getString("imagen1")
+                val imagen2 = resultSet.getString("imagen2")
 
-                val valoresJuntos = tbPartidos(UUID_Partido, UUID_Equipo1, UUID_Equipo2, Fecha_Partido, Lugar_Partido, Hora_Partido, Marcador_Equipo1, Marcador_Equipo2, Tipo_Partido, UUID_Arbitro)
+                val valoresJuntos = tbPartidos(UUID_Partido, UUID_Equipo1, UUID_Equipo2, Fecha_Partido, Lugar_Partido, Hora_Partido, Marcador_Equipo1, Marcador_Equipo2, Tipo_Partido, UUID_Arbitro, imagen1, imagen2)
                 listaPartidos.add(valoresJuntos)
             }
             return listaPartidos

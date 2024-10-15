@@ -7,8 +7,8 @@ import androidx.recyclerview.widget.RecyclerView
 import marvin.coto.dillosports.R
 
 class ViewHolderPart(view: View): RecyclerView.ViewHolder(view) {
-    //val imgEquipo1 = view.findViewById<ImageView>(R.id.imgEquipo1)
-    //val imgEquipo2 = view.findViewById<ImageView>(R.id.imgEquipo2)
+    val imgEquipo1 = view.findViewById<ImageView>(R.id.imgEquipo1)
+    val imgEquipo2 = view.findViewById<ImageView>(R.id.imgEquipo2)
     val txtNombreEquipo1 = view.findViewById<TextView>(R.id.txtNombreEquipo1)
     val txtNombreEquipo2 = view.findViewById<TextView>(R.id.txtNombreEquipo2)
     val txtResultado1 = view.findViewById<TextView>(R.id.txtResultado1)

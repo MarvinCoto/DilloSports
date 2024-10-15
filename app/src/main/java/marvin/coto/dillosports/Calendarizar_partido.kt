@@ -57,6 +57,7 @@ class Calendarizar_partido : AppCompatActivity() {
             val dia = calendario.get(Calendar.DAY_OF_MONTH)
             val datePickerDialog = DatePickerDialog(
                 this,
+                R.style.CustomDatePickerDialog,
                 { view, anioSeleccionado, mesSeleccionado, diaSeleccionado ->
                     val fechaSeleccionada =
                         "$diaSeleccionado/${mesSeleccionado + 1}/$anioSeleccionado"
@@ -74,6 +75,7 @@ class Calendarizar_partido : AppCompatActivity() {
 
             val timePickerDialog = TimePickerDialog(
                 this,
+                R.style.CustomTimePickerDialog,
                 { _, selectedHour, selectedMinute ->
                     val amPm = if (selectedHour < 12) "AM" else "PM"
                     val hourIn12Format = if (selectedHour % 12 == 0) 12 else selectedHour % 12

@@ -9,6 +9,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.bumptech.glide.Glide
 import modelos.tbUsuarios
 
 class Perfil : AppCompatActivity() {
@@ -50,6 +51,10 @@ class Perfil : AppCompatActivity() {
         //2-Prueba del companion
         val usuario = tbUsuarios.currentUser
         if (usuario != null) {
+            val imageViewPerfil = findViewById<ImageView>(R.id.imageViewPerfil)
+            Glide.with(imageViewPerfil.context)
+                .load(usuario.Foto_Usuario)
+                .into(imageViewPerfil)
             findViewById<TextView>(R.id.textViewNombresTitle).text = usuario.User_name
             findViewById<TextView>(R.id.textViewNombres).text = usuario.Nombre_Usuario
             findViewById<TextView>(R.id.textViewApellidos).text = usuario.Apellido_Usuario

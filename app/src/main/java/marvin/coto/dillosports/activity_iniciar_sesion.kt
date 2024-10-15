@@ -82,6 +82,7 @@ class activity_iniciar_sesion : AppCompatActivity() {
                         Correo_Usuario = resultado.getString("Correo_Usuario"),
                         FNacimiento_Usuario = resultado.getString("FNacimiento_Usuario"),
                         Genero = resultado.getString("Genero"),
+                        UUID_Tipo_Usuario = resultado.getInt("UUID_Tipo_Usuario"),
                         Foto_Usuario = resultado.getString("Foto_Usuario")
                     )
 

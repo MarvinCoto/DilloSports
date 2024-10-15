@@ -3,6 +3,7 @@ package marvin.coto.dillosports
 import RecyclerView.AdapterTorn
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.EditText
@@ -24,6 +25,7 @@ import modelos.ClaseConexion
 import modelos.tbDeportes
 import modelos.tbEstadoTorneo
 import modelos.tbTorneos
+import modelos.tbUsuarios
 
 class Ver_Torneo : AppCompatActivity() {
 
@@ -75,6 +77,7 @@ class Ver_Torneo : AppCompatActivity() {
         val textViewDescripcionTorneo = findViewById<TextView>(R.id.textViewDescripcionTorneo)
         val textViewDeporteTorneo = findViewById<TextView>(R.id.textViewDeporteTorneo)
         val textViewEstadoTorneo = findViewById<TextView>(R.id.textViewEstadoTorneo)
+        val uuidReference = AdapterTorn.variablesGlobalTorn.UUID_Usuario
         Glide.with(imgTorn.context)
             .load(logoRecibido)
             .into(imgTorn)
@@ -181,6 +184,14 @@ class Ver_Torneo : AppCompatActivity() {
 
         val btnEliminarTorneo = findViewById<TextView>(R.id.btnEliminarTorneo)
         val btnEditarTorneo = findViewById<TextView>(R.id.btnEditarTorneo)
+
+        if (tbUsuarios.currentUser?.UUID_Usuario == uuidReference || tbUsuarios.currentUser?.UUID_Tipo_Usuario == 3) {
+            btnEditarTorneo.visibility = View.VISIBLE
+            btnEliminarTorneo.visibility = View.VISIBLE
+        } else {
+            btnEditarTorneo.visibility = View.GONE
+            btnEliminarTorneo.visibility = View.GONE
+        }
 
         fun eliminarDatos(Nombre_Torneo: String, UUID_Torneo: String){
 

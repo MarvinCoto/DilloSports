@@ -32,6 +32,7 @@ import modelos.ClaseConexion
 import modelos.tbDeportes
 import modelos.tbEquipos
 import modelos.tbEstadoTorneo
+import modelos.tbUsuarios
 
 class Crear_Torneo : AppCompatActivity() {
     val codigo_opcion_galeria_torn = 101
@@ -180,7 +181,7 @@ class Crear_Torneo : AppCompatActivity() {
                         val deporte = obtenerDeporte()
                         val estado = obtenerEstado()
 
-                        val addTorneo = objConexion?.prepareStatement("insert into tbTorneos (UUID_Torneo, Nombre_Torneo, Ubicacion_Torneo, Descripcion_Torneo, Logo_Torneo, UUID_Estado_Torneo, UUID_Tipo_Deporte) values (?,?,?,?,?,?,?)")!!
+                        val addTorneo = objConexion?.prepareStatement("insert into tbTorneos (UUID_Torneo, Nombre_Torneo, Ubicacion_Torneo, Descripcion_Torneo, Logo_Torneo, UUID_Estado_Torneo, UUID_Tipo_Deporte, UUID_Usuario) values (?,?,?,?,?,?,?,?)")!!
                         addTorneo.setString(1, uuidTorn)
                         addTorneo.setString(2, txtNombreTorneo.text.toString())
                         addTorneo.setString(3, txtUbicacionTorneo.text.toString())
@@ -188,6 +189,7 @@ class Crear_Torneo : AppCompatActivity() {
                         addTorneo.setString(5, miPathTorn)
                         addTorneo.setString(6, estado[spEstadoTorneo.selectedItemPosition].UUID_Estado_Torneo)
                         addTorneo.setString(7, deporte[spTipoDeporte.selectedItemPosition].UUID_Tipo_Deporte)
+                        addTorneo.setString(8, tbUsuarios.currentUser?.UUID_Usuario)
                         addTorneo.executeUpdate()
 
                         withContext(Dispatchers.Main){

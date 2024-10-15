@@ -9,6 +9,7 @@ data class tbUsuarios(
     val Correo_Usuario: String,
     val FNacimiento_Usuario: String,
     val Foto_Usuario: String,
+    val UUID_Tipo_Usuario: Int,
     val Genero: String
 )
 { companion object {

@@ -109,6 +109,7 @@ class activityNuevosJugadores : AppCompatActivity() {
             val dia = calendario.get(Calendar.DAY_OF_MONTH)
             val datePickerDialog = DatePickerDialog(
                 this,
+                R.style.CustomDatePickerDialog,
                 { view, anioSeleccionado, mesSeleccionado, diaSeleccionado ->
                     val fechaSeleccionada =
                         "$diaSeleccionado/${mesSeleccionado + 1}/$anioSeleccionado"

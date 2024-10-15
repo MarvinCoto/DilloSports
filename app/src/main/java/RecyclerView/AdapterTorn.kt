@@ -19,6 +19,7 @@ class AdapterTorn(var Datos: List<tbTorneos>): RecyclerView.Adapter<ViewHolderTo
         lateinit var Logo_Torneo: String
         lateinit var UUID_Estado_Torneo: String
         lateinit var UUID_Tipo_Deporte: String
+        lateinit var UUID_Usuario: String
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolderTorn {
@@ -48,6 +49,7 @@ class AdapterTorn(var Datos: List<tbTorneos>): RecyclerView.Adapter<ViewHolderTo
             Logo_Torneo = item.Logo_Torneo
             UUID_Estado_Torneo = item.UUID_Estado_Torneo
             UUID_Tipo_Deporte = item.UUID_Tipo_Deporte
+            UUID_Usuario = item.UUID_Usuario
             context.startActivity(pantallaVer)
         }
     }

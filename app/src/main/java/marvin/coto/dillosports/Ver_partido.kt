@@ -10,6 +10,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.bumptech.glide.Glide
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -41,6 +42,8 @@ class Ver_partido : AppCompatActivity() {
         val textViewArbitro = findViewById<TextView>(R.id.textViewArbitro)
         val textViewFechaPart = findViewById<TextView>(R.id.textViewFechaPart)
         val textHoraPart =  findViewById<TextView>(R.id.textHoraPart)
+        val imagenEquipo1si = findViewById<ImageView>(R.id.imagenEquipo1si)
+        val imagenEquipo2si = findViewById<ImageView>(R.id.imagenEquipo2si)
         val UUIDrecibido = AdapterPart.variablesGlobalPart.UUID_Partido
         val UUID_Equipo1 = AdapterPart.variablesGlobalPart.UUID_Equipo1
         val UUID_Equipo2 = AdapterPart.variablesGlobalPart.UUID_Equipo2
@@ -51,12 +54,21 @@ class Ver_partido : AppCompatActivity() {
         val Marcador_Equipo1 = AdapterPart.variablesGlobalPart.Marcador_Equipo1
         val Marcador_Equipo2 = AdapterPart.variablesGlobalPart.Marcador_Equipo2
         val Tipo_Partido = AdapterPart.variablesGlobalPart.Tipo_Partido
+        val imagen1Recibido = AdapterPart.variablesGlobalPart.imagen1
+        val imagen2Recibido = AdapterPart.variablesGlobalPart.imagen2
         textViewMarcador1.text = Marcador_Equipo1.toString()
         textViewMarcador2.text = Marcador_Equipo2.toString()
         textViewLugarPart.text = Lugar_Partido
         textViewTipoPart.text = Tipo_Partido
         textViewFechaPart.text = Fecha_Partido
         textHoraPart.text = Hora_Partido
+        Glide.with(imagenEquipo1si.context)
+            .load(imagen1Recibido)
+            .into(imagenEquipo1si)
+
+        Glide.with(imagenEquipo2si.context)
+            .load(imagen2Recibido)
+            .into(imagenEquipo2si)
 
         imgAtrasola.setOnClickListener {
             val intent = Intent(this, Partidos::class.java)

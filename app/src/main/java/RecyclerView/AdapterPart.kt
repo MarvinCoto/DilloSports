@@ -9,6 +9,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Spinner
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -35,6 +36,8 @@ class AdapterPart(var Datos: List<tbPartidos>): RecyclerView.Adapter<ViewHolderP
         var Marcador_Equipo2: Int? = null
         lateinit var Tipo_Partido: String
         lateinit var UUID_Arbitro: String
+        lateinit var imagen1: String
+        lateinit var imagen2: String
     }
 
     fun obtenerDatoUUID(UUID_Equipo: String): String? {
@@ -165,6 +168,13 @@ class AdapterPart(var Datos: List<tbPartidos>): RecyclerView.Adapter<ViewHolderP
         holder.txtEspPartido.text = item.Tipo_Partido
         holder.txtNombreEquipo1.text = resultado1
         holder.txtNombreEquipo2.text = resultado2
+        Glide.with(holder.imgEquipo1.context)
+            .load(item.imagen1)
+            .into(holder.imgEquipo1)
+
+        Glide.with(holder.imgEquipo2.context)
+            .load(item.imagen2)
+            .into(holder.imgEquipo2)
 
         holder.imgEliminarPartido.setOnClickListener {
             val context = holder.itemView.context
@@ -270,6 +280,8 @@ class AdapterPart(var Datos: List<tbPartidos>): RecyclerView.Adapter<ViewHolderP
             Marcador_Equipo2 = item.Marcador_Equipo2
             Tipo_Partido = item.Tipo_Partido
             UUID_Arbitro = item.UUID_Arbitro
+            imagen1 = item.imagen1
+            imagen2 = item.imagen2
             context.startActivity(pantallaVer)
         }
     }

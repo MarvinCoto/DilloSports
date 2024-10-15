@@ -251,7 +251,7 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
-                android:id="@+id/imageView"
+                android:id="@+id/imagenEquipo1si"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:layout_marginStart="72dp"
@@ -261,7 +261,7 @@
                 app:srcCompat="@drawable/icon_equipo_2" />
 
             <ImageView
-                android:id="@+id/imageView4"
+                android:id="@+id/imagenEquipo2si"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:layout_marginTop="32dp"
