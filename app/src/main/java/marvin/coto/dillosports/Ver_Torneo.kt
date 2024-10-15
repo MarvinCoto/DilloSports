@@ -71,6 +71,7 @@ class Ver_Torneo : AppCompatActivity() {
         val estadoRecibido = AdapterTorn.variablesGlobalTorn.UUID_Estado_Torneo
         val logoRecibido = AdapterTorn.variablesGlobalTorn.Logo_Torneo
         val imgTorn = findViewById<ImageView>(R.id.imgTorn)
+        val textViewIdentificador = findViewById<TextView>(R.id.textViewIdentificador)
         val textViewNombreTorneo2 = findViewById<TextView>(R.id.textViewNombreTorneo2)
         val textViewNombreTorneo = findViewById<TextView>(R.id.textViewNombreTorneo)
         val textViewUbicacionTorneo = findViewById<TextView>(R.id.textViewUbicacionTorneo)
@@ -78,6 +79,7 @@ class Ver_Torneo : AppCompatActivity() {
         val textViewDeporteTorneo = findViewById<TextView>(R.id.textViewDeporteTorneo)
         val textViewEstadoTorneo = findViewById<TextView>(R.id.textViewEstadoTorneo)
         val uuidReference = AdapterTorn.variablesGlobalTorn.UUID_Usuario
+        textViewIdentificador.text = UUIDRecibido
         Glide.with(imgTorn.context)
             .load(logoRecibido)
             .into(imgTorn)

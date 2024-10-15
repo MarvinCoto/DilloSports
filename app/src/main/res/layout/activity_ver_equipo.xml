@@ -114,7 +114,18 @@
             app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
         <TextView
-            android:id="@+id/textViewGmail"
+            android:id="@+id/textViewIdentificadorr"
+            android:layout_width="120dp"
+            android:layout_height="83dp"
+            android:layout_marginStart="44dp"
+            android:layout_marginTop="8dp"
+            android:text="TextView"
+            android:textColor="#C3C3C3"
+            app:layout_constraintStart_toEndOf="@+id/textViewDescripcionEquipo"
+            app:layout_constraintTop_toBottomOf="@+id/ola" />
+
+        <TextView
+            android:id="@+id/textViewSiy"
             android:layout_width="176dp"
             android:layout_height="21dp"
             android:layout_marginStart="16dp"
@@ -126,15 +137,27 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
+            android:id="@+id/ola"
+            android:layout_width="110dp"
+            android:layout_height="21dp"
+            android:layout_marginStart="60dp"
+            android:layout_marginTop="16dp"
+            android:text="Identificador:"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/textViewSiy"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
             android:id="@+id/textViewDescripcionEquipo"
-            android:layout_width="338dp"
+            android:layout_width="190dp"
             android:layout_height="83dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
             android:text="TextView"
             android:textColor="#C3C3C3"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textViewGmail" />
+            app:layout_constraintTop_toBottomOf="@+id/textViewSiy" />
 
         <TextView
             android:id="@+id/textView26"

@@ -2,6 +2,7 @@ package RecyclerView
 
 import android.content.Intent
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Button
@@ -19,6 +20,7 @@ import marvin.coto.dillosports.VerEquipo
 import modelos.ClaseConexion
 import modelos.tbEquipos
 import modelos.tbEstadoEquipos
+import modelos.tbUsuarios
 
 
 class AdapterEqui(var Datos: List<tbEquipos>): RecyclerView.Adapter<ViewHolderEquip>() {
@@ -172,6 +174,16 @@ class AdapterEqui(var Datos: List<tbEquipos>): RecyclerView.Adapter<ViewHolderEq
 
             }
             alertDialog.show()
+        }
+
+        val usuario = tbUsuarios.currentUser
+        val uuidReference = AdapterTorn.variablesGlobalTorn.UUID_Usuario
+        if (usuario!!.UUID_Usuario == uuidReference || usuario!!.UUID_Tipo_Usuario == 3) {
+            holder.imgEditarEquipo.visibility = View.VISIBLE
+            holder.imgEliminarEquipo.visibility = View.VISIBLE
+        } else {
+            holder.imgEditarEquipo.visibility = View.GONE
+            holder.imgEliminarEquipo.visibility = View.GONE
         }
 
         holder.itemView.setOnClickListener {

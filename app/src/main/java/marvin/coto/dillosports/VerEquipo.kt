@@ -49,11 +49,13 @@ class VerEquipo : AppCompatActivity() {
         val estadoRecibido = AdapterEqui.variablesGlobalEqui.UUID_Estado_Equipo
         val logoRecibido = AdapterEqui.variablesGlobalEqui.Logo_Equipo
         val imgEquipo = findViewById<ImageView>(R.id.imgEquip)
+        val textViewIdentificadorr = findViewById<TextView>(R.id.textViewIdentificadorr)
         val txtNombreEquipo = findViewById<TextView>(R.id.textViewNombreEquipo)
         val txtUbicacionEquipo = findViewById<TextView>(R.id.textViewUbicacionEquipo)
         val txtDescripcionEquipo = findViewById<TextView>(R.id.textViewDescripcionEquipo)
         val txtEstadoEquipo = findViewById<TextView>(R.id.textViewEstadoEquipo)
         val textViewEquienEqui = findViewById<TextView>(R.id.textViewEquienEqui)
+        textViewIdentificadorr.text = UUIDRecibido
         textViewEquienEqui.text = nombreRecibido
         Glide.with(imgEquipo.context)
             .load(logoRecibido)

@@ -5,6 +5,7 @@ import RecyclerView.AdapterPart
 import android.content.Intent
 import android.os.Bundle
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -20,6 +21,7 @@ import kotlinx.coroutines.withContext
 import modelos.ClaseConexion
 import modelos.tbNoticias
 import modelos.tbPartidos
+import modelos.tbUsuarios
 
 class Home : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -42,6 +44,10 @@ class Home : AppCompatActivity() {
             val intent = Intent(this, Perfil::class.java)
             startActivity(intent)
         }
+        val usuario = tbUsuarios.currentUser
+        val textViewNombreInicio = findViewById<TextView>(R.id.textViewNombreInicio)
+        val nombreRecibido = usuario!!.Nombre_Usuario
+        textViewNombreInicio.text = nombreRecibido
 
         val rcvNoticias = findViewById<RecyclerView>(R.id.rcvNoticias)
         rcvNoticias.layoutManager = LinearLayoutManager(this)

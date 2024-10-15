@@ -216,6 +216,17 @@
             app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
         <TextView
+            android:id="@+id/textViewIdentificador"
+            android:layout_width="150dp"
+            android:layout_height="80dp"
+            android:layout_marginStart="18dp"
+            android:layout_marginTop="8dp"
+            android:text="TextView"
+            android:textColor="#C3C3C3"
+            app:layout_constraintStart_toEndOf="@+id/textViewDescripcionTorneo"
+            app:layout_constraintTop_toBottomOf="@+id/textViewIdentifier" />
+
+        <TextView
             android:id="@+id/textView16"
             android:layout_width="176dp"
             android:layout_height="21dp"
@@ -228,8 +239,20 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
+            android:id="@+id/textViewIdentifier"
+            android:layout_width="136dp"
+            android:layout_height="21dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="16dp"
+            android:text="Identificador:"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/textView16"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
             android:id="@+id/textViewDescripcionTorneo"
-            android:layout_width="280dp"
+            android:layout_width="190dp"
             android:layout_height="80dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
